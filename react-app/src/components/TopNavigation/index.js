@@ -1,11 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react';
+import { logout } from '../../store/session';
+import { useDispatch, useSelector } from 'react-redux';
 import './TopNavigation.css';
 import logo from '../../assets/Robinhood-logo.png'
 
 function TopNaviagtion() {
 
+    const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch()
+    const onLogout = async (e) => {
+        await dispatch(logout());
+    };
     const [menuOpen, setMenuOpen] = useState(false);
     const handleMenuOpen = () => {
         const menuTop = document.getElementById('top-menu-bar');
@@ -50,7 +57,10 @@ function TopNaviagtion() {
                 <span className='buttons-nav'>Cash Card</span>
                 <span className='buttons-nav'>Learn</span>
                 <span className='buttons-nav'>Snacks</span>
-                <span className='buttons-nav'>Support</span>
+                {!user && <span className='buttons-nav'>Support</span>}
+                {user && <span className='buttons-nav'
+                onClick={onLogout}
+                >Logout</span>}
                 </div>
             </div>
             <div className='login-signup-wrapper'>
