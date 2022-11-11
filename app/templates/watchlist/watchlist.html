@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watchlist Template</title>
+  <link rel="stylesheet" href="watchlist.css">
+</head>
+<body>
+  <div class="main-container">
+    <div class="watchlist">
+      <div class="picture-holder" >
+        <img class="picture" src="0AYKASp - Imgur.png">
+      </div>
+      <div class="watchlist-title">
+        <h3>Watchlist Template</h3>
+      </div>
+      <div class="item-count">
+        <!-- the number will be the actual number of items -->
+        <p>5 items</p>
+      </div>
+      <div class="watchlist-table">
+        <div class="watchlist-header">
+          <div class="name-column">Name</div>
+          <div class="symbol-column">Symbol</div>
+          <div class="price-column">Price</div>
+        </div>
+        <div class="watchlist-data">
+        <!-- this section gets for looped to include all stocks in watchlist -->
+          <div class="name-column">Tesla</div>
+          <div class="symbol-column">TSLA</div>
+          <div class="price-column">$177.00</div>
+        <!-- button will delete the stock from the watchlist -->
+          <button class="delete-button">X</button>
+        </div>
+      </div>
+    </div>
+    <div class="watchlist-select">
+      <div class="watchlist-list-header">
+        <h2 class="list-title">Lists</h2>
+        <button class="add-button">+</button>
+        <!-- button will create a list -->
+      </div>
+      <!-- this section will be looped to create different lists  -->
+      <div class="list-container">
+        <div class="watchlist-picture-holder">
+          <img class="small-picture" src="0AYKASp - Imgur.png">
+        </div>
+        <div class="list-name">Watchlist Template</div>
+        <button class="options-button">...</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
