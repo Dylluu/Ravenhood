@@ -1,0 +1,550 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    visibility: hidden;
+    z-index: -1;
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 34px;
+    height: 16px;
+    width: 30px;
+    transition: transform 0.5s;
+    /* border: solid 1px red; */
+}
+
+.menu-shift {
+    transform: translate(-150px, 0px);
+}
+
+/* .menu-shift2 {
+    transform: translate(20px, 0px);
+} */
+
+.menu-bar {
+    background-color: black;
+    height: 3px;
+    width: 30px;
+}
+
+#top-menu-bar {
+    /* transform: rotate(-45deg);
+    transform-origin: center; */
+    position: fixed;
+    transition: transform 0.5s;
+}
+
+.top-transition {
+    transform: rotate(-45deg) translate(0px, 9.25px);
+}
+
+.top-transition2 {
+    transform: rotate(0deg) translate(0px, 0px);
+}
+
+#bottom-menu-bar {
+    /* transform: rotate(45deg);
+    transform-origin: center; */
+    margin-top: 13px;
+    position: fixed;
+    transition: transform 0.5s;
+}
+
+.bottom-transition {
+    transform: rotate(45deg) translate(0px, -9.25px);
+}
+
+.bottom-transition2 {
+    transform: rotate(0deg) translate(0px, 0px);
+}
+
+.splash-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 63px;
+    /* padding-top: 20px; */
+    /* max-height: 650px; */
+    /* border: solid 1px red; */
+    box-sizing: border-box;
+}
+
+.vertical-slime-green {
+    /* position: fixed; */
+    /* border: solid 1px red; */
+    height: 100;
+    width: 3%;
+    background-color: #c3f53c;
+}
+
+.slime-green {
+    display: flex;
+    background-color: #c3f53c;
+    width: 100%;
+    height: 22px;
+}
+
+.splash-first {
+    display: flex;
+    flex-direction: row;
+    /* padding-left: 3%; */
+    /* background-color: #c3f53c; */
+    /* z-index: -3; */
+    /* height: 645px; */
+}
+
+.splash-left {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    /* height: 95vh; */
+    /* border: solid 1px red; */
+}
+
+/* .vertical-slime-green {
+    height: 100%;
+    min-width: 7%;
+    border: solid 1px red;
+    background-color: #c3f53c;
+} */
+
+.splash-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: solid 1px blue; */
+    width: 52vw;
+    background-color: #c3f53c;
+}
+
+.first-right-mid {
+    font-size: 40px;
+}
+
+.first-right-middle-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: -35px;
+    font-size: 20px;
+}
+
+#on-your-terms {
+    font-size: 20px;
+}
+
+.get-started {
+    display: flex;
+    height: 47px;
+    width: 170px;
+    justify-content: center;
+    align-items: center;
+    border: solid 1.5px black;
+    border-radius: 24px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.splash-popout {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 63px;
+    right: -162px;
+    width: 160px;
+    height: 100vh;
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    /* border: solid 1px red; */
+    background-color: white;
+    border-left: solid 1px black;
+}
+
+.splash-pop-transition {
+    transform: translate3d(-160px, 0, 0);
+}
+
+.popout-nav {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 15px;
+    height: 20px;
+    cursor: pointer;
+    /* border: solid 1px blue; */
+}
+
+.popout-nav:hover {
+    color: rgb(0, 180, 5);
+}
+
+#splash-img {
+    display: flex;
+    /* position: absolute; */
+    /* padding-left: 5%; */
+    width: 48vw;
+    z-index: 2;
+    object-fit: contain;
+}
+
+#inside-vid {
+    width: 100%;
+    position: absolute;
+    /* left: 22px; */
+    z-index: -1;
+    object-fit: contain;
+    clip-path: inset(5px 5px 5px 5px);
+}
+
+.meet-the-team-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 98.52vw; */
+    height: 700px;
+    /* border: solid 1px red; */
+    background-color: rgb(240, 235, 230);
+}
+
+.meet-team-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    height: 80%;
+    /* border: solid 1px red; */
+}
+
+.meet-team-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    /* border: solid 1px blue; */
+}
+
+#meet-team {
+    font-size: 40px
+}
+
+.scroll-fraction-and-buttons {
+    display: flex;
+    align-items: center;
+}
+
+#scroll-back, #scroll-forward {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100%; */
+    height: 47px;
+    width: 47px;
+    background-color: transparent;
+    border: solid 1px black;
+    border-radius: 75%;
+    margin-left: 8px;
+    font-size: 20px;
+}
+
+#scroll-forward {
+    color: white;
+    background-color: black;
+}
+
+#scroll-fraction {
+    font-size: 17px;
+    margin-right: 10px;
+}
+
+.team-scroll {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    height: 80%;
+    margin-bottom: 15px;
+    /* border: solid 1px blue; */
+    /* scroll-snap-points-x: repeat(300px); */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overflow: auto;
+}
+
+.team-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 99%;
+    min-width: 760px;
+    margin-right: 30px;
+    scroll-snap-align: center;
+    background-color: white;
+    /* border: solid 1px black; */
+    border-radius: 25px;
+}
+
+.card1-inner {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    height: 65%;
+    width: 86%;
+    font-size: 30px;
+    /* border: solid 1px red; */
+    /* border-bottom: solid 1px black; */
+}
+
+/* #team-card1 {
+    background-image: url('../../assets/stockBlocksGreen.png');
+    background-repeat: no-repeat;
+    background-color: rgb(126, 232, 99);
+    background-position: 0% 270%;
+} */
+
+#team-card1 {
+    /* background-color: #0093E9; */
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    /* background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%); */
+}
+
+#repo-button {
+    display: flex;
+    height: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+
+}
+
+#repo-button:hover {
+    transform: scale(1.03);
+}
+
+#repo-button:active {
+    transform: scale(1.02);
+}
+
+#gitLogo {
+    margin-bottom: 23%;
+    font-size: 40px;
+    color: white;
+}
+
+#project-repository {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    max-width: 30%;
+    font-size: 35px;
+    color: white;
+    /* border: solid 1px red; */
+}
+
+#team-card2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.team-card2-inner {
+    display: flex;
+    height: 45%;
+    width: 100%;
+    /* border: solid 1px red; */
+}
+
+.team-card2-inner-bottom {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    /* border: solid 1px red; */
+}
+
+.api-card-title {
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    width: 50%;
+    font-size: 40px;
+    /* border: solid 1px green; */
+}
+
+.api-card-title2 {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    padding-bottom: 25px;
+    height: 80%;
+    width: 45%;
+    font-size: 16px;
+    line-height: 23px;
+    /* border: solid 1px green; */
+}
+
+.api-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    height: 50px;
+    width: 250px;
+    margin-top: 10px;
+    margin-right: 20px;
+    border-radius: 30px;
+    background-color: rgb(195, 245, 60);
+    /* border: solid 1px black; */
+}
+
+.bottom-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* width: 100%; */
+    height: 400px;
+    overflow: hidden;
+    /* border: solid 1px red; */
+}
+
+.bottom-nav-inner {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    /* border: solid 1px green; */
+}
+
+.bottom-inner-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 80%;
+    /* border: solid 1px pink; */
+}
+
+.bottom-text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    height: 90%;
+    min-width: 150px;
+    /* border: solid 1px lightblue; */
+}
+
+.bottom-link-titles {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.bottom-link-list {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    font-weight: 250;
+    margin-top: 15px;
+    color: gray;
+    line-height: 30px;
+    /* border: solid 1px red; */
+}
+
+.linked {
+    width: 14px;
+    margin-right: 7px;
+}
+
+.git {
+    width: 15px;
+    margin-right: 7px;
+}
+
+.bottom-copyright {
+    display: flex;
+    justify-content: center;
+    height: 20%;
+    /* border: solid 1px blue; */
+}
+
+@media (max-width: 1000px) {
+    .first-right-mid{
+        font-size: 30px;
+    }
+    .first-right-middle-bottom {
+        font-size: 15px;
+        margin-top: -5px;
+        margin-bottom: -28px;
+    }
+    #on-your-terms {
+        font-size: 15px;
+    }
+    .get-started {
+        font-size: 13px;
+        height: 37px;
+        width: 130px;
+    }
+    .middleTopWrapper, .login-signup-wrapper {
+        visibility: hidden;
+    }
+    .menu {
+        visibility: visible;
+        z-index: 1;
+    }
+    .logo-wrapper {
+        border-right: none;
+    }
+}
+@media (min-width: 1000px) {
+    .splash-popout {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@media (max-width: 810px) {
+    .team-scroll {
+        overflow-y: hidden;
+    }
+    .team-card {
+        min-width: 400px;
+    }
+    .card1-inner {
+        flex-direction: column;
+        height: 80%;
+    }
+    #project-repository {
+        padding-bottom: 20px;
+    }
+    #repo-button {
+        height: 22%;
+    }
+    .team-card2-inner-bottom {
+        width: 90%;
+        margin-top: -10px;
+    }
+    .api-button {
+        width: 130px;
+        border-radius: 24px;
+        margin-top: -5px;
+    }
+}
+
+.team-scroll::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+body {
+    scroll-behavior: smooth;
+}
+
+a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.hover-underline:hover {
+    text-decoration: underline;
+}
