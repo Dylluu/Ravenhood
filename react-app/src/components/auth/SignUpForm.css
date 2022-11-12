@@ -1,0 +1,33 @@
+.signup-form-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.signup-form-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    background-color: rgb(126, 232, 99);
+    border-right: solid 1px black;
+    /* border: solid 1px red; */
+}
+
+#robinHoodLogo {
+    position: absolute;
+    height: 80px;
+    left: 65px;
+    top: 25px;
+    /* border: solid 1px red; */
+}
+
+.signup-form-left-text {
+    display: flex;
+    font-size: 75px;
+    font-weight: 400;
+    width: 75%;
+    margin-top: 160px;
+    /* border: solid 1px red; */
+}
