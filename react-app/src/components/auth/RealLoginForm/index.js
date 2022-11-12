@@ -22,6 +22,10 @@ function RealLoginForm() {
         }
       };
 
+    // const demoLogin = async () => {
+    //     const data = await dispatch(login(email, password));
+    // }
+
       const updateEmail = (e) => {
         setEmail(e.target.value);
       };
