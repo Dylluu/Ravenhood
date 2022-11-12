@@ -1,18 +1,21 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, Watchlist, environment, SCHEMA
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+def seed_watchlist():
+    w1 = Watchlist(
+        name='First Watchlist', user_id=1 )
+    w2 = Watchlist(
+        name='STONKS', user_id=2 )
+    w3 = Watchlist(
+        name='High Risk High Reward', user_id=1 )
+    w4 = Watchlist(
+        name='Money Moves', user_id=2 )
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add(w1)
+    db.session.add(w2)
+    db.session.add(w3)
+    db.session.add(w4)
     db.session.commit()
 
 
@@ -22,10 +25,10 @@ def seed_users():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
+def undo_watchlist():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.watchlists RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM users")
+        db.session.execute("DELETE FROM watchlists")
 
     db.session.commit()
