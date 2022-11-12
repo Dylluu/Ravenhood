@@ -63,8 +63,8 @@ function Splash() {
             <div className='splash-first'>
                 <div className='vertical-slime-green'></div>
                 <div className='splash-left'>
-                    <img id='splash-img' alt='phone-splash' src='https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/splash-phone.png' />
-                    <video src='https://sparrowhood-dev.s3.us-west-1.amazonaws.com/videos/splash-video.mp4'
+                    <img id='splash-img' alt='phone-splash' src='https://cdn.robinhood.com/assets/robinhood/brand/_next/static/images/2x__ff9c36e27d7018cf707b95d8675793a3.png' />
+                    <video src='https://cdn.robinhood.com/assets/robinhood/brand/_next/static/images/3x__327bf4cc768a323497d5aaa7416319c2.mp4'
                         autoPlay
                         muted
                         loop
