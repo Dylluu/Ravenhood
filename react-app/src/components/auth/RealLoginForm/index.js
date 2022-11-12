@@ -22,9 +22,12 @@ function RealLoginForm() {
         }
       };
 
-    // const demoLogin = async () => {
-    //     const data = await dispatch(login(email, password));
-    // }
+    const demoLogin = async (e) => {
+        e.preventDefault()
+        // console.log('demologin')
+        await dispatch(login('demo@aa.io', 'password'));
+        return <Redirect to='/' />
+    }
 
       const updateEmail = (e) => {
         setEmail(e.target.value);
@@ -112,7 +115,9 @@ function RealLoginForm() {
                     />
                     </div>
                     </div>
-                    <span className='demo-user-login'>Demo user login</span>
+                    <span className='demo-user-login'
+                    onClick={demoLogin}
+                    >Demo user login</span>
                     <div onClick={onLogin} id="log-in-form-button">Log in</div>
                     <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <span className="demo-user-login">Create an account</span></span>
                 </div>
