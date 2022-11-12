@@ -12,6 +12,7 @@ import TopNaviagtion from './components/TopNavigation';
 import RealLoginForm from './components/auth/RealLoginForm';
 import Splash from './components/Splash';
 import MainStockGraph from './components/MainStockGraph';
+import SmallStockGraph from './components/SmallStockGraph';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -44,6 +45,9 @@ function App() {
 				</Route>
 				<Route path="/nhut">
 					<MainStockGraph />
+				</Route>
+				<Route path="/linh">
+					<SmallStockGraph />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
