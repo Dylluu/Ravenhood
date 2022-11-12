@@ -25,7 +25,7 @@ def get_one_watchlist(id):
 
 @watchlist_routes.route('/', methods=["POST"])
 
-def watchlist():
+def create_watchlist():
   """
   Allows user to create a watchlist and add it to their watchlists
   """
@@ -41,4 +41,26 @@ def watchlist():
     db.session.commit()
     return new_watchlist.to_dict()
 
+@watchlist_routes.route('/<int:id>', methods=["PUT"])
 
+def update_watchlist(id):
+  """
+  Allows user to update a watchlist with a different name
+  """
+  data = request.get_json()
+  watchlist = Watchlist.query.get(id)
+  watchlist.name = data['name']
+  db.session.commit()
+  return watchlist.to_dict()
+
+
+@watchlist_routes.route('/<int:id>', methods=['DELETE'])
+
+def delete_watchlist(id):
+  """
+  Allows user to delete a watchlist that they have created
+  """
+  watchlist = Watchlist.query.get(id)
+  db.session.delete(watchlist)
+  db.session.commit()
+  return dict(message= "Deleted a watchlist")
