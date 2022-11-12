@@ -70,7 +70,7 @@ function TopNaviagtion() {
                 className='logsign-butt'>
                     Log in
                 </NavLink>
-                    <div id='sign-up' className='logsign-butt'>Sign up</div>
+                    <NavLink to='/signup' id='sign-up' className='logsign-butt'>Sign up</NavLink>
             </div>
             <div className='menu'
             onClick={() => handleMenuOpen()}

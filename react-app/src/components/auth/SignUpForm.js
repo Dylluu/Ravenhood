@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import './SignUpForm.css';
+import robinHoodLogo from '../../assets/Robinhood-logo.png';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -43,6 +45,11 @@ const SignUpForm = () => {
   }
 
   return (
+    <div className='signup-form-wrapper'>
+      <div className='signup-form-left'>
+        <NavLink to='/'><img alt='robinHoodLogo' src={robinHoodLogo} id='robinHoodLogo'/></NavLink>
+        <p className='signup-form-left-text'>Get started with free stock on us</p>
+      </div>
     <form onSubmit={onSignUp}>
       <div>
         {errors.map((error, ind) => (
@@ -88,6 +95,7 @@ const SignUpForm = () => {
       </div>
       <button type='submit'>Sign Up</button>
     </form>
+    </div>
   );
 };
 
