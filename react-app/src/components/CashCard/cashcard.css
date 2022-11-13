@@ -1,0 +1,132 @@
+.cashcard-wrapper {
+    margin-top: 63px;
+}
+
+.introducing-new-card-wrapper {
+    background-color: #966DE6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 378px;
+    height: 25vh;
+}
+
+.introducing-new-card-wrapper-left {
+    display: flex;
+    height: 100%;
+    width: 324px;
+    min-width: 324px;
+    /* border: 1px solid blue; */
+    flex-direction: column;
+}
+
+.introducing-new-card-title {
+    font-size: 32px;
+    font-weight: 500;
+    /* border: green 3px solid; */
+    height: 40%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.introducing-new-card-detail {
+    font-size: 18px;
+    height: 25%;
+    display: flex;
+    align-items: flex-end;
+    /* border: yellow 3px solid; */
+}
+
+.introducing-new-card-disclosure {
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+    height: 5%;
+    /* border: green 1px solid; */
+    display: flex;
+    align-items: flex-start;
+}
+
+.introducing-new-card-button {
+    height: 30%;
+    /* border: orange 1px solid; */
+    display: flex;
+    align-items: center;
+}
+
+.introducing-new-card-button:hover {
+    opacity: 75%;
+}
+
+.join-waitlist-button {
+    box-sizing: border-box;
+    width: 167px;
+    height: 44px;
+    background: black;
+    cursor: pointer;
+    border-radius: 30px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.introducing-new-card-wrapper-right {
+    /* border: 1px solid red; */
+    margin-left: 25px;
+}
+
+.cash-card-detail-wrapper {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44vh;
+    min-height: 541px;
+    /* border: 10px solid blue; */
+}
+
+.cash-card-detail-left {
+    display: flex;
+    justify-content: flex-end;
+    /* border: 3px solid red; */
+}
+
+.cash-card-detail-logo {
+    /* border: 1px solid blue; */
+    min-width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    /* margin-top: 100px;
+    margin-right: 20px; */
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
+.cash-card-detail-wrapper-right {
+    /* border: 3px solid green; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.cash-card-detail-title {
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.cash-card-detail-body {
+    margin-left: 5px;
+    font-size: 15px;
+}
+
+.cash-card-detail-card {
+    /* border: 1px solid red; */
+    display: flex;
+    width: 400px;
+    height: 75px;
+    align-items: center;
+}
