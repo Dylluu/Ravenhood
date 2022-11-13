@@ -13,6 +13,7 @@ import RealLoginForm from './components/auth/RealLoginForm';
 import Splash from './components/Splash';
 import MainStockGraph from './components/MainStockGraph';
 import SmallStockGraph from './components/SmallStockGraph';
+import CashCard from './components/CashCard';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -48,6 +49,10 @@ function App() {
 				</Route>
 				<Route path="/linh">
 					<SmallStockGraph />
+				</Route>
+				<Route path="/cash">
+					<TopNaviagtion />
+					<CashCard />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
