@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import { login } from "../../../store/session";
 import './RealLoginForm.css';
 import loginFormImage from '../../../assets/loginFormImage.jpeg';
@@ -131,7 +131,7 @@ function RealLoginForm() {
                       </div>
                     )}
                     <button type='submit' id="log-in-form-button">Log in</button>
-                    <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <span className="demo-user-login">Create an account</span></span>
+                    <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <NavLink to='/signup' className="demo-user-login">Create an account</NavLink></span>
                 </div>
             </form>
         </div>

@@ -53,7 +53,7 @@
     align-items: center;
     justify-content: center;
     margin-left: 50%;
-    min-height: 700px;
+    min-height: 630px;
     overflow-y: auto;
     width: 50%;
     box-sizing: border-box;
@@ -63,6 +63,8 @@
 .signup-form-right-inner {
     display: flex;
     width: 80%;
+    margin-top: -30px;
+    padding-bottom: 10px;
     /* border: solid 1px red; */
 }
 
