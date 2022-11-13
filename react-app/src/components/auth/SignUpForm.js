@@ -155,6 +155,7 @@ function removePasswordBorder() {
         />
         </div>
       </div>
+      <span className='starting-buying-power'>* New users will start with a buying power of $100,000 on signup</span>
       {/* <button type='submit'>Sign Up</button> */}
     </form>
     </div>
