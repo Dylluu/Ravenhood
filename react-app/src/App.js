@@ -63,4 +63,6 @@ function App() {
 	);
 }
 
+// Jarrod needs to add watchlist routes to the app
+
 export default App;
