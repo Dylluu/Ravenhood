@@ -5,7 +5,7 @@ from app.models import Watchlist
 watchlist_routes = Blueprint('watchlists', __name__)
 
 
-@watchlist_routes.route('/')
+@watchlist_routes.route('')
 
 def get_all_watchlists():
   """
@@ -23,7 +23,7 @@ def get_one_watchlist(id):
   watchlist = Watchlist.query.get(id)
   return watchlist.todict()
 
-@watchlist_routes.route('/', methods=["POST"])
+@watchlist_routes.route('', methods=["POST"])
 
 def create_watchlist():
   """

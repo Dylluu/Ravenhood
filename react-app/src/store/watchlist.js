@@ -48,13 +48,62 @@ const deleteStocks = (id) => ({
 })
 
 export const thunkGetAllWatchlist = () => async dispatch => {
-  const response = await csrfFetch('/api/watch/')
-  // don't remember if i need that last "/" or not
+  const response = await csrfFetch('/api/watchlists')
   if(response.ok) {
     const list = await response.json()
     dispatch(getAllWatchlist(normalizeArr(list)))
   }
 }
+
+export const thunkGetOneWatchlist = (id) => async dispatch => {
+  const response = await csrfFetch(`/api/watchlists/${id}`)
+  if(response.ok) {
+    const watchlist = await response.json()
+    dispatch(getOneWatchlist(watchlist))
+  }
+}
+
+export const thunkPostWatchlist = (data) => async dispatch => {
+  const response = await csrfFetch(`/api/watchlists`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  if(response.ok) {
+    const event = await response.json()
+    dispatch(postWatchlist())
+  }
+}
+
+export const thunkUpdateWatchlist = (data) => async dispatch => {
+  const response = await csrfFetch(`/api/watchlists/${data.id}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+
+  if (response.ok) {
+    const watchlist = await response.json();
+    dispatch(updateWatchlist(watchlist))
+    return watchlist
+  }
+}
+
+export const thunkDeleteWatchlist= (id) => async dispatch => {
+  const response = await csrfFetch(`/api/watchlists/${id}`, {
+    method: 'delete'
+  })
+  if (response.ok) {
+    const watchlist = await response.json()
+    dispatch(deleteWatchlist(id))
+    return watchlist
+  }
+}
+
 
 const initialState = {}
 
