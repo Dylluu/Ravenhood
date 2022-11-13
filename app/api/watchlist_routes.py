@@ -29,17 +29,16 @@ def create_watchlist():
   """
   Allows user to create a watchlist and add it to their watchlists
   """
-  def post_watchlist():
-    data = request.get_json()
-    new_watchlist = Watchlist(
-      name=data[name]
-      user_id= session.user_id
-      # either session.user_id or is it stored in data somewhere?
-    )
+  data = request.get_json()
+  new_watchlist = Watchlist(
+    name=data[name]
+    user_id= session.user_id
+    # either session.user_id or is it stored in data somewhere?
+  )
 
-    db.session.add(new_watchlist)
-    db.session.commit()
-    return new_watchlist.to_dict()
+  db.session.add(new_watchlist)
+  db.session.commit()
+  return new_watchlist.to_dict()
 
 @watchlist_routes.route('/<int:id>', methods=["PUT"])
 
@@ -64,3 +63,30 @@ def delete_watchlist(id):
   db.session.delete(watchlist)
   db.session.commit()
   return dict(message= "Deleted a watchlist")
+
+
+@watchlist_routes_route('/<int:id>/stocks')
+
+def get_all_watchlist_stocks(id):
+  """
+  Allows user to get all stocks on a watchlist
+  """
+  stocks = session.query(WatchlistStocks).filter(WatchlistStocks.id == id)
+  return {"stocks": [stock.to_dict() for stock in stocks]}
+
+
+@watchlist_routes.route('/<int:id>/stocks', methods=['POST'])
+
+def add_watchlist_stock(id):
+  """
+  Allows user to add one stock to the watchlist that they created
+  """
+  data = request.get_json()
+  new_stock = WatchlistStocks(
+    symbol=data[symbol]
+    watchlist_id=id
+  )
+
+  db.session.add(new_stock)
+  db.session.commit()
+  return new_stock.to_dict()
