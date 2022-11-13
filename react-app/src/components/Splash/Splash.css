@@ -149,39 +149,6 @@
     cursor: pointer;
 }
 
-.splash-popout {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 63px;
-    right: -162px;
-    width: 160px;
-    height: 100vh;
-    transition: transform .3s cubic-bezier(0, .52, 0, 1);
-    /* border: solid 1px red; */
-    background-color: white;
-    border-left: solid 1px black;
-}
-
-.splash-pop-transition {
-    transform: translate3d(-160px, 0, 0);
-}
-
-.popout-nav {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    margin-top: 20px;
-    margin-left: 15px;
-    height: 20px;
-    cursor: pointer;
-    /* border: solid 1px blue; */
-}
-
-.popout-nav:hover {
-    color: rgb(0, 180, 5);
-}
-
 #splash-img {
     display: flex;
     /* position: absolute; */

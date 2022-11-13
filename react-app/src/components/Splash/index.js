@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useHistory, NavLink } from 'react-router-dom';
 import './Splash.css';
 import repoImage from '../../assets/repo.png';
 import linkedInLogo from '../../assets/linkedinLogo.png';
@@ -8,7 +9,9 @@ import stockBlocks from '../../assets/stockBlocks.png';
 
 function Splash() {
     const [scrollNum, setScrollNum] = useState(1);
+    const [menuOpen, setMenuOpen] = useState(true);
     const [locked, setLocked] = useState(false);
+    const history = useHistory();
     function unlock() {
         setLocked(false)
     }
@@ -56,7 +59,6 @@ function Splash() {
         }
     }
 
-
     return (
         <div className='splash-wrapper'>
             <div className='slime-green'></div>
@@ -82,15 +84,17 @@ function Splash() {
                     <p
                         id='on-your-terms'
                     >on your terms.</p>
-                    <div className='get-started'>Get Started</div>
-                    <div className='splash-popout'>
+                    <NavLink to='/signup' className='get-started'>Get Started</NavLink>
+                    {/* <div className='splash-popout'>
                         <span className='popout-nav'>Invest</span>
                         <span className='popout-nav'>Crypto</span>
-                        <span className='popout-nav'>Cash Card</span>
+                        <span className='popout-nav'
+                        onClick={() => history.push('/cash')}
+                        >Cash Card</span>
                         <span className='popout-nav'>Learn</span>
                         <span className='popout-nav'>Snacks</span>
                         <span className='popout-nav'>Support</span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className='slime-green'></div>

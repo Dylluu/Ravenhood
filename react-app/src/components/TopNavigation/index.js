@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import logo from '../../assets/Robinhood-logo.png'
 function TopNaviagtion() {
 
     const user = useSelector(state => state.session.user);
+    const history = useHistory();
     const dispatch = useDispatch()
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -45,7 +46,10 @@ function TopNaviagtion() {
         <div className='nav-wrapper'>
             <div className='logo-wrapper'>
                 <div className='robinhood'
-                onClick={() => console.log('Robinhood')}
+                onClick={() => {
+                    if(menuOpen) handleMenuOpen()
+                    history.push('/')
+                }}
                 >
                     <img id='logo' src={logo}/>
                 </div>
@@ -54,7 +58,9 @@ function TopNaviagtion() {
                 <div className='middleTopWrapper'>
                 <span className='buttons-nav'>Invest</span>
                 <span className='buttons-nav'>Crypto</span>
-                <span className='buttons-nav'>Cash Card</span>
+                <span className='buttons-nav'
+                onClick={() => history.push('/cash')}
+                >Cash Card</span>
                 <span className='buttons-nav'>Learn</span>
                 <span className='buttons-nav'>Snacks</span>
                 {!user && <span className='buttons-nav'>Support</span>}
@@ -78,6 +84,19 @@ function TopNaviagtion() {
                 <div id='top-menu-bar' className='menu-bar'></div>
                 <div id='bottom-menu-bar' className='menu-bar'></div>
             </div>
+            <div className='splash-popout'>
+                        <span className='popout-nav'>Invest</span>
+                        <span className='popout-nav'>Crypto</span>
+                        <span className='popout-nav'
+                        onClick={() => {
+                            handleMenuOpen()
+                            history.push('/cash')
+                        }}
+                        >Cash Card</span>
+                        <span className='popout-nav'>Learn</span>
+                        <span className='popout-nav'>Snacks</span>
+                        <span className='popout-nav'>Support</span>
+                    </div>
         </div>
     )
 }

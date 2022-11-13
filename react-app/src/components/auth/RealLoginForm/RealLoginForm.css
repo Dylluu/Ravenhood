@@ -23,9 +23,9 @@
 .login-form-right-inner {
     display: flex;
     flex-direction: column;
-    width: 82%;
+    width: 83.5%;
     height: 50%;
-    min-height: 400px;
+    min-height: 460px;
     min-width: 300px;
     /* border: solid 1px turquoise; */
 }
@@ -132,6 +132,38 @@
     color: rgb(0, 180, 5);
 }
 
+.login-form-error {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 25px;
+    width: 100%;
+    max-width: 420px;
+    height: 45px;
+    background-color: rgb(245, 248, 250);
+    border-radius: 5px;
+    /* border: solid 1px red; */
+    box-sizing: border-box;
+}
+
+#circle-i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    border: solid 2px black;
+    border-radius: 75%;
+    width: 15px;
+    height: 14px;
+    padding-bottom: 1px;
+    margin-left: 12px;
+}
+
+.unable-to-login {
+    font-size: 13px;
+    margin-left: 12px;
+}
+
 #log-in-form-button {
     display: flex;
     align-items: center;
@@ -151,6 +183,16 @@
 
 #not-on-robinhood {
     margin-top: 40px;
+}
+
+button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
 
 @media (max-width: 775px) {
