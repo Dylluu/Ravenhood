@@ -31,8 +31,8 @@ def create_watchlist():
   """
   data = request.get_json()
   new_watchlist = Watchlist(
-    name=data[name]
-    user_id= current_user.id
+    data[name],
+    current_user.id
   )
 
   db.session.add(new_watchlist)
@@ -64,7 +64,7 @@ def delete_watchlist(id):
   return dict(message= "Deleted a watchlist")
 
 
-@watchlist_routes_route('/<int:id>/stocks')
+@watchlist_routes.route('/<int:id>/stocks')
 
 def get_all_watchlist_stocks(id):
   """
@@ -82,8 +82,8 @@ def add_watchlist_stock(id):
   """
   data = request.get_json()
   new_stock = WatchlistStocks(
-    symbol=data[symbol]
-    watchlist_id=id
+    data[symbol],
+    id
   )
 
   db.session.add(new_stock)
