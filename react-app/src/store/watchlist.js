@@ -47,25 +47,29 @@ const deleteStocks = (stock) => ({
   stock
 })
 
-export const thunkGetAllWatchlist = () => async dispatch => {
-  const response = await fetch('/api/watchlists')
+export const thunkGetAllWatchlist = (user_id) => async dispatch => {
+  const response = await fetch('/api/watchlist')
+  // console.log('hihihi', response)
   if(response.ok) {
     const list = await response.json()
-    dispatch(getAllWatchlist(normalizeArr(list)))
+    // console.log("response", list)
+    dispatch(getAllWatchlist(normalizeArrUser(list.watchlists, user_id)))
     // this might be actually no normalizeArr and instead just list
   }
 }
 
 export const thunkGetOneWatchlist = (id) => async dispatch => {
-  const response = await fetch(`/api/watchlists/${id}`)
+  const response = await fetch(`/api/watchlist/${id}`)
+  console.log('tester', response)
   if(response.ok) {
     const watchlist = await response.json()
+    console.log("response", watchlist)
     dispatch(getOneWatchlist(watchlist))
   }
 }
 
 export const thunkPostWatchlist = (data) => async dispatch => {
-  const response = await fetch(`/api/watchlists`, {
+  const response = await fetch(`/api/watchlist`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
@@ -79,7 +83,7 @@ export const thunkPostWatchlist = (data) => async dispatch => {
 }
 
 export const thunkUpdateWatchlist = (data) => async dispatch => {
-  const response = await fetch(`/api/watchlists/${data.id}`, {
+  const response = await fetch(`/api/watchlist/${data.id}`, {
     method: 'put',
     headers: {
       'Content-Type': 'application/json'
@@ -95,7 +99,7 @@ export const thunkUpdateWatchlist = (data) => async dispatch => {
 }
 
 export const thunkDeleteWatchlist = (id) => async dispatch => {
-  const response = await fetch(`/api/watchlists/${id}`, {
+  const response = await fetch(`/api/watchlist/${id}`, {
     method: 'delete'
   })
   if (response.ok) {
@@ -106,16 +110,16 @@ export const thunkDeleteWatchlist = (id) => async dispatch => {
 }
 
 export const thunkGetAllStocks = (id) => async dispatch => {
-  const response = await fetch(`/api/watchlists/${id}/stocks`)
+  const response = await fetch(`/api/watchlist/${id}/stocks`)
   if(response.ok) {
     const list = await response.json()
-    dispatch(getAllStocks(normalizeArr(list)))
+    dispatch(getAllStocks(normalizeArr(list.stocks)))
     // this might be actually no normalizeArr and instead just list
   }
 }
 
 export const thunkPostStocks = (data) => async dispatch => {
-  const response = await fetch(`/api/watchlists/${data.watchlist_id}/stocks`, {
+  const response = await fetch(`/api/watchlist/${data.watchlist_id}/stocks`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
@@ -130,7 +134,7 @@ export const thunkPostStocks = (data) => async dispatch => {
 }
 
 export const thunkDeleteStocks = (stock) => async dispatch => {
-  const response = await fetch(`/api/watchlists/${stock.watchlist_id}/stocks/${stock.symbol}`, {
+  const response = await fetch(`/api/watchlist/${stock.watchlist_id}/stocks/${stock.symbol}`, {
     method: 'delete'
   })
   if (response.ok) {
@@ -147,11 +151,11 @@ export default function watchlist(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_WATCHLIST:
       let newStateGetAll = {...state}
-      newStateGetAll.allWatchlist = {...action.payload}
+      newStateGetAll.allWatchlists = {...action.payload}
       return newStateGetAll;
     case GET_ONE_WATCHLIST:
       let newStateGetOne = {...state}
-      newStateGetOne.watchlist = {...action.payload}
+      newStateGetOne.oneWatchlist = {...action.payload}
       return newStateGetOne;
     case GET_ALL_STOCKS:
       let newStateGetStocks = {...state}
@@ -189,6 +193,16 @@ const normalizeArr = (arr) => {
   let obj = {}
   arr.forEach(el => {
     obj[el.id] = el
+  })
+  return obj
+}
+
+const normalizeArrUser = (arr, user_id) => {
+  if (!(arr instanceof Array)) throw new Error ("Invalid Data Type: Not an Array")
+  let obj = {}
+  arr.forEach(el => {
+    if (el.user_id == user_id)
+      obj[el.id] = el
   })
   return obj
 }
