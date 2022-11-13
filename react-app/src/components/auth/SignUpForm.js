@@ -88,6 +88,7 @@ function removePasswordBorder() {
       <div className='signup-form-left'>
         <NavLink to='/'><img alt='robinHoodLogo' src={robinHoodLogo} id='robinHoodLogo'/></NavLink>
         <p className='signup-form-left-text'>Get started with free stock on us</p>
+        <span className='starting-buying-power'>New users will start with a buying power of $100,000 on signup. *</span>
         <img id='signup-form-stockblocks' alt='stockBlocks' src={stockBlocks}/>
       </div>
       <div className='signup-form-right'>
@@ -150,11 +151,15 @@ function removePasswordBorder() {
         />
         </div>
       </div>
-      <span className='starting-buying-power'>* New users will start with a buying power of $100,000 on signup</span>
       {/* <button type='submit' className='signup-form-submit'>Sign Up</button> */}
     </form>
     </div>
-    {/* <div className='signup-form-right-bottom'></div> */}
+    <div className='signup-form-right-bottom'>
+      <div className='signup-form-button-wrapper'>
+      <div className='signup-form-submit'>Confirm</div>
+      <div className='signup-form-submit-hover'></div>
+      </div>
+    </div>
     </div>
     </div>
   );
