@@ -1,21 +1,21 @@
-/* .apexcharts-xaxistooltip {
+#chart .apexcharts-xaxistooltip {
     background: transparent;
     border: none;
-    margin-top: 4px;
     padding-bottom: 0;
     font-weight: bold;
 }
 
-.apexcharts-xaxistooltip-bottom:before {
+#chart .apexcharts-xaxistooltip-bottom:before {
     opacity: 0
 }
 
-.apexcharts-xaxistooltip-bottom:after {
+#chart .apexcharts-xaxistooltip-bottom:after {
     opacity: 0
-} */
+}
 
 
-  .apexcharts-tooltip {
-      background: transparent;
-      color: orange;
-  }
+#chart{
+    border: 1px solid red;
+    height: 300px;
+    width: 900px;
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import Chart from 'react-apexcharts';
-// import './MainStockGraph.css';
+import './MainStockGraph.css';
 
 const directionEmojis = {
 	up: '🔥',
@@ -87,6 +87,7 @@ function MainStockGraph({ ticker }) {
 		[prevPrice, price]
 	);
 
+	let yo;
 	return (
 		<div>
 			<div className="ticker">{ticker}</div>
@@ -98,73 +99,74 @@ function MainStockGraph({ ticker }) {
 					${priceDifference} ({percentDifference}%)
 				</div>
 			</div>
-			<Chart
-				options={{
-					chart: {
-						type: 'line',
-						height: 350,
-						toolbar: {
-							show: false
-						},
-						events: {
-							mouseMove: function (event, chartContext, config) {
-								const points = series[0].data[config.dataPointIndex]?.y;
-								setHoverPrice(points?.toFixed(2));
+			<div id="chart">
+				<Chart
+					options={{
+						chart: {
+							type: 'line',
+							toolbar: {
+								show: false
 							},
-							mouseLeave: function () {
-								setHoverPrice(null);
+							events: {
+								mouseMove: function (event, chartContext, config) {
+									const points = series[0].data[config.dataPointIndex]?.y;
+									setHoverPrice(points?.toFixed(2));
+								},
+								mouseLeave: function () {
+									setHoverPrice(null);
+								}
+							},
+							zoom: {
+								enabled: false
 							}
 						},
-						zoom: {
-							enabled: false
-						}
-					},
-					xaxis: {
-						type: 'datetime',
-						labels: {
+						xaxis: {
+							type: 'datetime',
+							labels: {
+								show: false
+							},
+							tooltip: {
+								offsetY: -200,
+								formatter: function (val, opts) {
+									let time = new Date(val);
+									return time.toLocaleTimeString([], {
+										hour: '2-digit',
+										minute: '2-digit'
+									});
+								}
+							}
+						},
+						yaxis: {
 							show: false
 						},
+						grid: {
+							show: false
+						},
+						stroke: {
+							width: [2, 2],
+							dashArray: [0, 10]
+						},
+						colors: chartColor,
 						tooltip: {
 							enabled: true,
-							formatter: function (val, opts) {
-								let time = new Date(val);
-								return time.toLocaleTimeString([], {
-									hour: '2-digit',
-									minute: '2-digit'
-								});
+							shared: true,
+							items: {
+								display: 'none'
+							},
+							x: {
+								show: false
 							}
-						}
-					},
-					yaxis: {
-						show: false
-					},
-					grid: {
-						show: false
-					},
-					stroke: {
-						width: [2, 2],
-						dashArray: [0, 10]
-					},
-					colors: chartColor,
-					tooltip: {
-						enabled: true,
-						shared: false,
-						items: {
-							display: 'none'
 						},
-						x: {
+						legend: {
 							show: false
 						}
-					},
-					legend: {
-						show: false
-					}
-				}}
-				series={series}
-				type="line"
-				width="50%"
-				height={420}
-			/>
+					}}
+					series={series}
+					type="line"
+					width="100%"
+					height="100%"
+				/>
+			</div>
 		</div>
 	);
 }
