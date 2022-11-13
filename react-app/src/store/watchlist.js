@@ -47,6 +47,15 @@ const deleteStocks = (id) => ({
   id
 })
 
+export const thunkGetAllWatchlist = () => async dispatch => {
+  const response = await csrfFetch('/api/watch/')
+  // don't remember if i need that last "/" or not
+  if(response.ok) {
+    const list = await response.json()
+    dispatch(getAllWatchlist(normalizeArr(list)))
+  }
+}
+
 const initialState = {}
 
 export default function watchlist(state = initialState, action) {
@@ -88,4 +97,13 @@ export default function watchlist(state = initialState, action) {
     default:
       return state;
   }
+}
+
+const normalizeArr = (arr) => {
+  if (!(arr instanceof Array)) throw new Error ("Invalid Data Type: Not an Array")
+  let obj = {}
+  arr.forEach(el => {
+    obj[el.id] = el
+  })
+  return obj
 }
