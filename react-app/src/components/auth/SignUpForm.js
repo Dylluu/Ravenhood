@@ -8,17 +8,20 @@ import stockBlocks from '../../assets/stockBlocksGreen.png';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [buy_power, setBuyPower] = useState(100000);
   const [pwVisible, setPwVisible] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
-      const data = await dispatch(signUp(firstName, lastName, email, password));
+    console.log(first_name, last_name)
+      const data = await dispatch(signUp(first_name, last_name, email, password, buy_power));
+      console.log(data, '---------------------')
       if (data) {
         setErrors(data)
       }
@@ -96,24 +99,22 @@ function removePasswordBorder() {
     <form onSubmit={onSignUp}>
       <div className='signup-form-right-header'>Enter your first and last name as they appear on your government ID.</div>
       <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+        {Object.values(errors)}
       </div>
       <div id='signup-first-and-last'>
         <input
           type='text'
-          name='firstName'
+          name='first_name'
           onChange={updateFirstName}
-          value={firstName}
+          value={first_name}
           className='first-and-last-input'
           placeholder='First name'
         ></input>
         <input
           type='text'
-          name='lastName'
+          name='last_name'
           onChange={updateLastName}
-          value={lastName}
+          value={last_name}
           className='first-and-last-input'
           placeholder='Last name'
         ></input>
@@ -157,7 +158,9 @@ function removePasswordBorder() {
     <div className='signup-form-right-bottom'>
       <div className='signup-form-button-wrapper'>
       <div className='signup-form-submit'>Confirm</div>
-      <div className='signup-form-submit-hover'></div>
+      <div className='signup-form-submit-hover'
+      onClick={onSignUp}
+      ></div>
       </div>
     </div>
     </div>
