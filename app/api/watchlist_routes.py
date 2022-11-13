@@ -33,7 +33,6 @@ def create_watchlist():
   new_watchlist = Watchlist(
     name=data[name]
     user_id= current_user.id
-    # either session.user_id or is it stored in data somewhere?
   )
 
   db.session.add(new_watchlist)
