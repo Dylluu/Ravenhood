@@ -14,6 +14,7 @@ import Splash from './components/Splash';
 import MainStockGraph from './components/MainStockGraph';
 import SmallStockGraph from './components/SmallStockGraph';
 import CashCard from './components/CashCard';
+import Watchlist from './components/Watchlist';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -53,6 +54,10 @@ function App() {
 				<Route path="/cash">
 					<TopNaviagtion />
 					<CashCard />
+				</Route>
+				<Route path="/watchlists/::watchlistId">
+					<TopNaviagtion />
+					<Watchlist />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
