@@ -8,8 +8,9 @@
 .signup-form-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     width: 50%;
+    overflow: hidden;
     background-color: rgb(126, 232, 99);
     border-right: solid 1px black;
     /* border: solid 1px red; */
@@ -25,9 +26,136 @@
 
 .signup-form-left-text {
     display: flex;
-    font-size: 75px;
+    margin-left: 65px;
+    font-size: 70px;
     font-weight: 400;
     width: 75%;
     margin-top: 160px;
     /* border: solid 1px red; */
+}
+
+#signup-form-stockblocks {
+    width: 100%;
+    margin-top: 85px;
+}
+
+.signup-form-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    box-sizing: border-box;
+    /* border: solid 1px blue; */
+}
+
+.signup-form-right-inner {
+    display: flex;
+    width: 80%;
+    /* border: solid 1px red; */
+}
+
+.signup-form-right-header {
+    font-size: 20px;
+    font-weight: 450;
+    margin-bottom: 45px;
+}
+
+#signup-first-and-last {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    /* border: solid 1px blue; */
+}
+
+.first-and-last-input {
+    width: 47%;
+    height: 60px;
+    font-size: 18px;
+    text-indent: 8px;
+    border-radius: 0;
+    box-sizing: border-box;
+    border: solid 1px lightgray;
+    transition : border 150ms ease-out;
+}
+
+.first-and-last-input:hover {
+    border: solid 1px #A9A9A9;
+}
+
+.first-and-last-input:focus {
+    border: solid 1px black;
+    border-radius: 0;
+    outline: none;
+}
+
+.signup-form-inputs {
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+    margin-bottom: 25px;
+    text-indent: 8px;
+    border-radius: 0;
+    box-sizing: border-box;
+    border: solid 1px lightgray;
+    transition : border 150ms ease-out;
+}
+
+.signup-form-inputs:hover {
+    border: solid 1px #A9A9A9;
+}
+
+.signup-form-inputs:focus {
+    border: solid 1px black;
+    border-radius: 0;
+    outline: none;
+}
+
+.signup-form-password-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    font-size: 18px;
+    margin-bottom: 25px;
+    border-radius: 0;
+    box-sizing: border-box;
+    border: solid 1px lightgray;
+    transition : border 150ms ease-out;
+}
+
+#signup-form-password-input:hover {
+    border: solid 1px #A9A9A9;
+}
+
+.signup-form-password-input-focus {
+    border: solid 1px black;
+}
+
+#signup-form-password {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    text-indent: 8px;
+    font-size: 18px;
+    border: none;
+}
+
+#signup-form-password:focus {
+    outline: none;
+}
+
+#signup-closed-eye {
+    display: none;
+    z-index: -1;
+}
+
+@media (max-width: 775px) {
+    .signup-form-left {
+        display: none;
+        z-index: -1;
+    }
+    .signup-form-right {
+        width: 100%;
+    }
 }
