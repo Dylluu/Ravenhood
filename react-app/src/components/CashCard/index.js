@@ -1,5 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+import "./cashcard.css"
+import robinhoodCashCardLogo2 from "../../assets/robinhood-cash-card-logo-2.JPG"
+import robinhoodCashCardLogo3 from "../../assets/cash-card-logo-3.JPG"
+import robinhoodCashCardLogo4 from "../../assets/cash-card-logo-4.JPG"
+import robinhoodCashCardLogo5 from "../../assets/cash-card-logo-5.JPG"
+import robinhoodCashCardLogo6 from "../../assets/cash-card-logo-6.JPG"
 
 function CashCard() {
     return (
@@ -7,14 +13,12 @@ function CashCard() {
             <div className="introducing-new-card-wrapper">
                 <div className='introducing-new-card-wrapper-left'>
                     <div className="introducing-new-card-title">
-                        <p>
-                            Introducing the new Robinhood Cash Card
-                        </p>
+                        Introducing the new Robinhood Cash Card
                     </div>
                     <div className="introducing-new-card-detail">
-                        <p>
-                            The debit card with weekly rewards that help you build investing habits. Offered by Robinhood Money, LLC.
-                        </p>
+
+                        The debit card with weekly rewards that help you build investing habits. Offered by Robinhood Money, LLC.
+
                     </div>
                     <div className="introducing-new-card-disclosure">
                         <span>
@@ -22,83 +26,79 @@ function CashCard() {
                         </span>
                     </div>
                     <div className="introducing-new-card-button">
-                        <button>Join waitlist</button>
+                        <button className='join-waitlist-button'>Join waitlist</button>
                     </div>
                 </div>
                 <div className='introducing-new-card-wrapper-right'>
-                    <div className="introducing-new-card-logo"></div>
+                    <div className="introducing-new-card-logo">
+                        <img src="https://media.giphy.com/media/pzgCEsq8mYtKKI7aLj/giphy.gif"></img>
+                    </div>
                 </div>
             </div>
             <div className='cash-card-detail-wrapper'>
                 <div className='cash-card-detail-left'>
-                    <div className="cash-card-detail-logo"></div>
+                    <div className="cash-card-detail-logo">
+                        <img src={robinhoodCashCardLogo2} />
+                    </div>
                 </div>
                 <div className='cash-card-detail-wrapper-right'>
-                    <div className='cash-card-detail-1'>
+                    <div className='cash-card-detail-1 cash-card-detail-card'>
                         <div className='cash-card-detail-1-left'>
-                            <div className="cash-card-detail-1-logo"></div>
+                            <div className="cash-card-detail-1-logo">
+                                <img src={robinhoodCashCardLogo3} />
+                            </div>
                         </div>
                         <div className='cash-card-detail-1-right'>
-                            <div className='cash-card-detail-1-right-title'>
-                                <p>
-                                    Earn rewards as you spend and round up
-                                </p>
+                            <div className='cash-card-detail-1-right-title cash-card-detail-title'>
+                                Earn rewards as you spend and round up
                             </div>
-                            <div className='cash-card-detail-1-right-body'>
-                                <p>
-                                    Spend, round up, invest your change, and earn a 25% bonus each week.
-                                </p>
+                            <div className='cash-card-detail-1-right-body cash-card-detail-body'>
+                                Spend, round up, invest your change, and earn a 25% bonus each week.
                             </div>
                         </div>
                     </div>
-                    <div className='cash-card-detail-2'>
+                    <div className='cash-card-detail-2 cash-card-detail-card'>
                         <div className='cash-card-detail-2-left'>
-                            <div className="cash-card-detail-2-logo"></div>
+                            <div className="cash-card-detail-2-logo">
+                                <img src={robinhoodCashCardLogo4} />
+                            </div>
                         </div>
                         <div className='cash-card-detail-2-right'>
-                            <div className='cash-card-detail-2-right-title'>
-                                <p>
-                                    Invest a part of every paycheck
-                                </p>
+                            <div className='cash-card-detail-2-right-title cash-card-detail-title'>
+                                Invest a part of every paycheck
                             </div>
-                            <div className='cash-card-detail-2-right-body'>
-                                <p>
-                                    Automatically invest a percent or dollar amount of every paycheck. Plus, get paid up to 2 days early.
-                                </p>
+                            <div className='cash-card-detail-2-right-body cash-card-detail-body'>
+                                Automatically invest a percent or dollar amount of every paycheck. Plus, get paid up to 2 days early.
                             </div>
                         </div>
                     </div>
-                    <div className='cash-card-detail-3'>
+                    <div className='cash-card-detail-3 cash-card-detail-card'>
                         <div className='cash-card-detail-3-left'>
-                            <div className="cash-card-detail-3-logo"></div>
+                            <div className="cash-card-detail-3-logo">
+                                <img src={robinhoodCashCardLogo5} />
+                            </div>
                         </div>
                         <div className='cash-card-detail-3-right'>
-                            <div className='cash-card-detail-3-right-title'>
-                                <p>
-                                    No hidden fees
-                                </p>
+                            <div className='cash-card-detail-3-right-title cash-card-detail-title'>
+                                No hidden fees
                             </div>
-                            <div className='cash-card-detail-3-right-body'>
-                                <p>
-                                    No monthly fees, in-network ATM fees, overdraft fees, or account minimums.
-                                </p>
+                            <div className='cash-card-detail-3-right-body cash-card-detail-body'>
+                                No monthly fees, in-network ATM fees, overdraft fees, or account minimums.
                             </div>
                         </div>
                     </div>
-                    <div className='cash-card-detail-4'>
+                    <div className='cash-card-detail-4 cash-card-detail-card'>
                         <div className='cash-card-detail-4-left'>
-                            <div className="cash-card-detail-4-logo"></div>
+                            <div className="cash-card-detail-4-logo">
+                                <img src={robinhoodCashCardLogo6} />
+                            </div>
                         </div>
                         <div className='cash-card-detail-4-right'>
-                            <div className='cash-card-detail-4-right-title'>
-                                <p>
-                                    Coming soon: cash back when you spend
-                                </p>
+                            <div className='cash-card-detail-4-right-title cash-card-detail-title'>
+                                Coming soon: cash back when you spend
                             </div>
-                            <div className='cash-card-detail-4-right-body'>
-                                <p>
-                                    Save money at your favorite everyday brands, no activation required.
-                                </p>
+                            <div className='cash-card-detail-4-right-body cash-card-detail-body'>
+                                Save money at your favorite everyday brands, no activation required.
                             </div>
                         </div>
                     </div>
