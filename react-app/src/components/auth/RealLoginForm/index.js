@@ -120,6 +120,16 @@ function RealLoginForm() {
                     <span className='demo-user-login'
                     onClick={demoLogin}
                     >Demo user login</span>
+                    {Object.values(errors).length > 0 && (
+                      <div className="login-form-error">
+                        <i className="fa-solid fa-info"
+                        id="circle-i"
+                        ></i>
+                        <span
+                        className="unable-to-login"
+                        >Unable to login with provided credentials.</span>
+                      </div>
+                    )}
                     <button type='submit' id="log-in-form-button">Log in</button>
                     <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <span className="demo-user-login">Create an account</span></span>
                 </div>
