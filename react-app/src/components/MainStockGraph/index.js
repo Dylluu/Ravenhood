@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Chart from 'react-apexcharts';
-import { getStonkData } from '../../store/stocks';
 import './MainStockGraph.css';
 
 const directionEmojis = {
@@ -27,9 +26,9 @@ function MainStockGraph() {
 	const [ticker, setTicker] = useState(`AMZN`);
 	const [hoverPrice, setHoverPrice] = useState(null);
 
-	useEffect(() => {
-		dispatch(getStonkData(ticker));
-	}, [ticker]);
+	// useEffect(() => {
+	// 	dispatch(getStonkData(ticker));
+	// }, [ticker]);
 
 	// set color depending on the current price
 	const currPrice = hoverPrice ? hoverPrice : price;

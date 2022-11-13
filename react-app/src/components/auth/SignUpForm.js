@@ -19,9 +19,9 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    console.log(first_name, last_name)
+    // console.log(first_name, last_name)
       const data = await dispatch(signUp(first_name, last_name, email, password, buy_power));
-      console.log(data, '---------------------')
+      // console.log(data, '---------------------')
       if (data) {
         setErrors(data)
       }
