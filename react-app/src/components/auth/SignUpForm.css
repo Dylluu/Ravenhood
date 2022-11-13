@@ -51,7 +51,7 @@
 .signup-form-right-inner {
     display: flex;
     width: 80%;
-    /* border: solid 1px red; */
+    border: solid 1px red;
 }
 
 .signup-form-right-header {
@@ -156,6 +156,17 @@
     font-size: 14px;
     margin-top: 40px;
     /* border: solid 1px green; */
+}
+
+.signup-form-right-bottom {
+    display: flex;
+    position: fixed;
+    width: 50%;
+    height: 120px;
+    bottom: 0px;
+    box-sizing: border-box;
+    background-color: white;
+    border: solid 1px red;
 }
 
 @media (max-width: 775px) {

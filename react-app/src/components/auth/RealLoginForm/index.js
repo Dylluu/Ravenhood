@@ -93,6 +93,7 @@ function RealLoginForm() {
                     value={email}
                     onChange={updateEmail}
                     name='email'
+                    required
                     ></input>
                     <span className="login-form-labels">Password</span>
                     <div className="password-div"
@@ -103,6 +104,7 @@ function RealLoginForm() {
                     value={password}
                     onChange={updatePassword}
                     name='password'
+                    required
                     ></input>
                     <div className="password-visibility"
                     onClick={() => handlePasswordIcon()}
@@ -118,7 +120,7 @@ function RealLoginForm() {
                     <span className='demo-user-login'
                     onClick={demoLogin}
                     >Demo user login</span>
-                    <div onClick={onLogin} id="log-in-form-button">Log in</div>
+                    <button type='submit' id="log-in-form-button">Log in</button>
                     <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <span className="demo-user-login">Create an account</span></span>
                 </div>
             </form>

@@ -12,7 +12,6 @@ const SignUpForm = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
   const [pwVisible, setPwVisible] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -39,10 +38,6 @@ const SignUpForm = () => {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
-  };
-
-  const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
   };
 
   if (user) {
@@ -156,9 +151,10 @@ function removePasswordBorder() {
         </div>
       </div>
       <span className='starting-buying-power'>* New users will start with a buying power of $100,000 on signup</span>
-      {/* <button type='submit'>Sign Up</button> */}
+      {/* <button type='submit' className='signup-form-submit'>Sign Up</button> */}
     </form>
     </div>
+    {/* <div className='signup-form-right-bottom'></div> */}
     </div>
     </div>
   );
