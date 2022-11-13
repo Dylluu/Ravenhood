@@ -42,21 +42,22 @@ const postStocks = (payload) => ({
   payload
 })
 
-const deleteStocks = (id) => ({
+const deleteStocks = (stock) => ({
   type: DELETE_STOCKS,
-  id
+  stock
 })
 
 export const thunkGetAllWatchlist = () => async dispatch => {
-  const response = await csrfFetch('/api/watchlists')
+  const response = await fetch('/api/watchlists')
   if(response.ok) {
     const list = await response.json()
     dispatch(getAllWatchlist(normalizeArr(list)))
+    // this might be actually no normalizeArr and instead just list
   }
 }
 
 export const thunkGetOneWatchlist = (id) => async dispatch => {
-  const response = await csrfFetch(`/api/watchlists/${id}`)
+  const response = await fetch(`/api/watchlists/${id}`)
   if(response.ok) {
     const watchlist = await response.json()
     dispatch(getOneWatchlist(watchlist))
@@ -64,7 +65,7 @@ export const thunkGetOneWatchlist = (id) => async dispatch => {
 }
 
 export const thunkPostWatchlist = (data) => async dispatch => {
-  const response = await csrfFetch(`/api/watchlists`, {
+  const response = await fetch(`/api/watchlists`, {
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
@@ -73,12 +74,12 @@ export const thunkPostWatchlist = (data) => async dispatch => {
   })
   if(response.ok) {
     const event = await response.json()
-    dispatch(postWatchlist())
+    dispatch(postWatchlist(event))
   }
 }
 
 export const thunkUpdateWatchlist = (data) => async dispatch => {
-  const response = await csrfFetch(`/api/watchlists/${data.id}`, {
+  const response = await fetch(`/api/watchlists/${data.id}`, {
     method: 'put',
     headers: {
       'Content-Type': 'application/json'
@@ -93,8 +94,8 @@ export const thunkUpdateWatchlist = (data) => async dispatch => {
   }
 }
 
-export const thunkDeleteWatchlist= (id) => async dispatch => {
-  const response = await csrfFetch(`/api/watchlists/${id}`, {
+export const thunkDeleteWatchlist = (id) => async dispatch => {
+  const response = await fetch(`/api/watchlists/${id}`, {
     method: 'delete'
   })
   if (response.ok) {
@@ -104,6 +105,41 @@ export const thunkDeleteWatchlist= (id) => async dispatch => {
   }
 }
 
+export const thunkGetAllStocks = (id) => async dispatch => {
+  const response = await fetch(`/api/watchlists/${id}/stocks`)
+  if(response.ok) {
+    const list = await response.json()
+    dispatch(getAllStocks(normalizeArr(list)))
+    // this might be actually no normalizeArr and instead just list
+  }
+}
+
+export const thunkPostStocks = (data) => async dispatch => {
+  const response = await fetch(`/api/watchlists/${data.watchlist_id}/stocks`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  if(response.ok) {
+    const stock = await response.json()
+    dispatch(postStocks(stock))
+    return stock
+  }
+}
+
+export const thunkDeleteStocks = (stock) => async dispatch => {
+  const response = await fetch(`/api/watchlists/${stock.watchlist_id}/stocks/${stock.symbol}`, {
+    method: 'delete'
+  })
+  if (response.ok) {
+    const stock = await response.json()
+    dispatch(deleteStocks(stock))
+    return stock
+  }
+  // this one may not work
+}
 
 const initialState = {}
 
