@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import logo from '../../assets/Robinhood-logo.png'
 function TopNaviagtion() {
 
     const user = useSelector(state => state.session.user);
+    const history = useHistory();
     const dispatch = useDispatch()
     const onLogout = async (e) => {
         await dispatch(logout());
@@ -54,7 +55,9 @@ function TopNaviagtion() {
                 <div className='middleTopWrapper'>
                 <span className='buttons-nav'>Invest</span>
                 <span className='buttons-nav'>Crypto</span>
-                <span className='buttons-nav'>Cash Card</span>
+                <span className='buttons-nav'
+                onClick={() => history.push('/cash')}
+                >Cash Card</span>
                 <span className='buttons-nav'>Learn</span>
                 <span className='buttons-nav'>Snacks</span>
                 {!user && <span className='buttons-nav'>Support</span>}
