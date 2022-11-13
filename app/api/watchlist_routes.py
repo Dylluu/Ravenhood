@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from app.models import Watchlist
+from app.models import Watchlist, WatchlistStocks
 
 watchlist_routes = Blueprint('watchlists', __name__)
 
@@ -15,13 +15,13 @@ def get_all_watchlists():
   return {"watchlists": [watchlist.to_dict() for watchlist in watchlists]}
 
 
-@watchlist_routes.route('/<id>')
+@watchlist_routes.route('/<int:id>')
 def get_one_watchlist(id):
   """
   Query to get one single watchlist and return it as a dictionary
   """
   watchlist = Watchlist.query.get(id)
-  return watchlist.todict()
+  return watchlist.to_dict()
 
 @watchlist_routes.route('', methods=["POST"])
 
@@ -70,7 +70,7 @@ def get_all_watchlist_stocks(id):
   """
   Allows user to get all stocks on a watchlist
   """
-  stocks = session.query(WatchlistStocks).filter(WatchlistStocks.id == id)
+  stocks = WatchlistStocks.query.filter(WatchlistStocks.watchlist_id == id)
   return {"stocks": [stock.to_dict() for stock in stocks]}
 
 
