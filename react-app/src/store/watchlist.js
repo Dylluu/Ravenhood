@@ -4,44 +4,56 @@ const POST_WATCHLIST = 'watchlist/POST_WATCHLIST';
 const UPDATE_WATCHLIST = 'watchlist/UPDATE_WATCHLIST';
 const DELETE_WATCHLIST = 'watchlist/DELETE_WATCHLIST';
 
-const getAllWatchlist = (watchlist) => ({
+const getAllWatchlist = (payload) => ({
   type: GET_ALL_WATCHLIST,
-  watchlist
+  payload
 });
 
-const getOneWatchlist = (watchlist) => ({
+const getOneWatchlist = (payload) => ({
   type: GET_ONE_WATCHLIST,
-  watchlist
+  payload
 })
 
-const postWatchlist = (watchlist) => ({
+const postWatchlist = (payload) => ({
   type: POST_WATCHLIST,
-  watchlist
+  payload
 })
 
-const updateWatchlist = (watchlist) => ({
+const updateWatchlist = (payload) => ({
   type: UPDATE_WATCHLIST,
-  watchlist
+  payload
 })
 
-const deleteWatchlist = (watchlist) => ({
+const deleteWatchlist = (id) => ({
   type: DELETE_WATCHLIST,
-  watchlist
+  id
 })
 
 
 
-const initialState = { watchlist: null}
+const initialState = {}
 
 export default function watchlist(state = initialState, action) {
-  const newState = {...state};
   switch (action.type) {
     case GET_ALL_WATCHLIST:
-      newState.watchlist = action.watchlist;
-      return newState;
+      let newStateGetAll = {...state}
+      newStateGetAll.allWatchlist = {...action.payload}
+      return newStateGetAll;
     case GET_ONE_WATCHLIST:
-      newState.watchlist = action.watchlist;
-      return newState;
+      let newStateGetOne = {...state}
+      newStateGetOne.watchlist = {...action.payload}
+      return newStateGetOne;
+    case POST_WATCHLIST:
+      // WIP
+      return 'hi'
+    case UPDATE_WATCHLIST:
+      let newStateUpdate = {...state}
+      newStateUpdate[action.payload.id] = action.payload
+      return newStateUpdate
+    case DELETE_WATCHLIST:
+      let newStateDelete = {...state}
+      delete newStateDelete[action.id]
+      return newStateDelete
     default:
       return state;
   }
