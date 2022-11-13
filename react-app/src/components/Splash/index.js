@@ -85,7 +85,7 @@ function Splash() {
                         id='on-your-terms'
                     >on your terms.</p>
                     <div className='get-started'>Get Started</div>
-                    <div className='splash-popout'>
+                    {/* <div className='splash-popout'>
                         <span className='popout-nav'>Invest</span>
                         <span className='popout-nav'>Crypto</span>
                         <span className='popout-nav'
@@ -94,7 +94,7 @@ function Splash() {
                         <span className='popout-nav'>Learn</span>
                         <span className='popout-nav'>Snacks</span>
                         <span className='popout-nav'>Support</span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className='slime-green'></div>

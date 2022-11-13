@@ -46,7 +46,7 @@ function TopNaviagtion() {
         <div className='nav-wrapper'>
             <div className='logo-wrapper'>
                 <div className='robinhood'
-                onClick={() => console.log('Robinhood')}
+                onClick={() => history.push('/')}
                 >
                     <img id='logo' src={logo}/>
                 </div>
@@ -81,6 +81,19 @@ function TopNaviagtion() {
                 <div id='top-menu-bar' className='menu-bar'></div>
                 <div id='bottom-menu-bar' className='menu-bar'></div>
             </div>
+            <div className='splash-popout'>
+                        <span className='popout-nav'>Invest</span>
+                        <span className='popout-nav'>Crypto</span>
+                        <span className='popout-nav'
+                        onClick={() => {
+                            handleMenuOpen()
+                            history.push('/cash')
+                        }}
+                        >Cash Card</span>
+                        <span className='popout-nav'>Learn</span>
+                        <span className='popout-nav'>Snacks</span>
+                        <span className='popout-nav'>Support</span>
+                    </div>
         </div>
     )
 }
