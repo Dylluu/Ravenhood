@@ -11,8 +11,8 @@ import { authenticate } from './store/session';
 import TopNaviagtion from './components/TopNavigation';
 import RealLoginForm from './components/auth/RealLoginForm';
 import Splash from './components/Splash';
-import MainStockGraph from './components/MainStockGraph';
-import SmallStockGraph from './components/SmallStockGraph';
+import MainStockPage from './components/MainStockPage';
+import MainStockHistoricalGraph from './components/MainStockHistoricalGraph';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -43,11 +43,11 @@ function App() {
 				<Route path="/signup" exact={true}>
 					<SignUpForm />
 				</Route>
-				<Route path="/nhut">
-					<MainStockGraph ticker={'AMD'} />
+				<Route path="/stocks/:ticker">
+					<MainStockPage />
 				</Route>
 				<Route path="/linh">
-					<SmallStockGraph ticker={'AMZN'} />
+					<MainStockHistoricalGraph />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
