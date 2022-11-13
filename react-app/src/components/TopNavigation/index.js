@@ -46,7 +46,10 @@ function TopNaviagtion() {
         <div className='nav-wrapper'>
             <div className='logo-wrapper'>
                 <div className='robinhood'
-                onClick={() => history.push('/')}
+                onClick={() => {
+                    if(menuOpen) handleMenuOpen()
+                    history.push('/')
+                }}
                 >
                     <img id='logo' src={logo}/>
                 </div>
