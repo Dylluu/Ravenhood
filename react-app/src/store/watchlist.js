@@ -44,8 +44,10 @@ export default function watchlist(state = initialState, action) {
       newStateGetOne.watchlist = {...action.payload}
       return newStateGetOne;
     case POST_WATCHLIST:
-      // WIP
-      return 'hi'
+      let newStateCreate = {...state}
+      let id = action.payload.id
+      newStateCreate.allWatchlist[id] = action.payload
+      return newStateCreate
     case UPDATE_WATCHLIST:
       let newStateUpdate = {...state}
       newStateUpdate[action.payload.id] = action.payload
