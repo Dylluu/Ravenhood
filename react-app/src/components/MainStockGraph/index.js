@@ -1,8 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Chart from 'react-apexcharts';
-import { getStonkData } from '../../store/stocks';
-import './MainStockGraph.css';
+// import './MainStockGraph.css';
 
 const directionEmojis = {
 	up: '🔥',
@@ -10,9 +8,14 @@ const directionEmojis = {
 	'': ''
 };
 
-function MainStockGraph() {
-	const stock = useSelector((state) => state.stock);
-	const dispatch = useDispatch();
+async function getStonks(ticker) {
+	const response = await fetch(
+		`https://yahoo-finance-api.vercel.app/${ticker}`
+	);
+	return response.json();
+}
+
+function MainStockGraph({ ticker }) {
 	const [series, setSeries] = useState([
 		{
 			data: []
@@ -21,15 +24,9 @@ function MainStockGraph() {
 	const [price, setPrice] = useState(-1);
 	const [startPrice, setStartPrice] = useState(-1);
 	const [prevPrice, setPrevPrice] = useState(-1);
-	const [chartColor, setChartColor] = useState(['#30642E']);
-	const [priceColor, setPriceColor] = useState('#30642E');
-	const [newticker, setNewTicker] = useState('');
-	const [ticker, setTicker] = useState(`AMZN`);
+	const [chartColor, setChartColor] = useState(['#5AC53B']);
+	const [priceColor, setPriceColor] = useState('#5AC53B');
 	const [hoverPrice, setHoverPrice] = useState(null);
-
-	useEffect(() => {
-		dispatch(getStonkData(ticker));
-	}, [ticker]);
 
 	// set color depending on the current price
 	const currPrice = hoverPrice ? hoverPrice : price;
@@ -41,15 +38,15 @@ function MainStockGraph() {
 
 	useEffect(() => {
 		// getting the price/percentage different from open price
-		if (percentDifference > 0) setPriceColor('#30642E');
+		if (percentDifference > 0) setPriceColor('#5AC53B');
 		else setPriceColor('#fd5240');
 	}, [chartColor, hoverPrice]);
+
 	useEffect(() => {
 		let timeoutId;
 		async function getLatestPrice() {
 			try {
-				const data = stock.stock;
-				console.log('data', data);
+				const data = await getStonks(ticker);
 				const stonk = data.chart.result[0];
 				setPrevPrice(price);
 				setPrice(stonk.meta.regularMarketPrice.toFixed(2));
@@ -70,7 +67,7 @@ function MainStockGraph() {
 				setStartPrice(startPrice);
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
-					setChartColor(['#30642E', 'gray']);
+					setChartColor(['#5AC53B', 'gray']);
 				} else setChartColor(['#fd5240', 'gray']);
 			} catch (error) {
 				console.log(error);
@@ -78,33 +75,20 @@ function MainStockGraph() {
 			timeoutId = setTimeout(getLatestPrice, 6000);
 		}
 
-		if (stock.stock) getLatestPrice();
+		getLatestPrice();
 
 		return () => {
 			clearTimeout(timeoutId);
 		};
-	}, [stock]);
+	}, []);
+
 	const direction = useMemo(
 		() => (prevPrice < price ? 'up' : prevPrice > price ? 'down' : ''),
 		[prevPrice, price]
 	);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setTicker(newticker);
-	};
-
-	// if (!stock.stock) return 'YOOO DYLAN GET THIS LOADING PAGE';
 	return (
 		<div>
-			<form onSubmit={handleSubmit}>
-				<input
-					type="text"
-					value={newticker}
-					onChange={(e) => setNewTicker(e.target.value)}
-				/>
-				<button type="submit"> Submit</button>
-			</form>
 			<div className="ticker">{ticker}</div>
 			<div className={['price', direction].join(' ')}>
 				${hoverPrice ? hoverPrice : price} {directionEmojis[direction]}
@@ -141,7 +125,7 @@ function MainStockGraph() {
 							show: false
 						},
 						tooltip: {
-							enabled: [true, false],
+							enabled: true,
 							formatter: function (val, opts) {
 								let time = new Date(val);
 								return time.toLocaleTimeString([], {
@@ -158,13 +142,13 @@ function MainStockGraph() {
 						show: false
 					},
 					stroke: {
-						width: [3, 2],
+						width: [2, 2],
 						dashArray: [0, 10]
 					},
 					colors: chartColor,
 					tooltip: {
 						enabled: true,
-						shared: true,
+						shared: false,
 						items: {
 							display: 'none'
 						},

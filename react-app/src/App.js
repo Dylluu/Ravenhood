@@ -44,10 +44,10 @@ function App() {
 					<SignUpForm />
 				</Route>
 				<Route path="/nhut">
-					<MainStockGraph />
+					<MainStockGraph ticker={'AMD'} />
 				</Route>
 				<Route path="/linh">
-					<SmallStockGraph />
+					<SmallStockGraph ticker={'AMZN'} />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
