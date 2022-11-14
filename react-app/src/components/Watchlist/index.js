@@ -7,6 +7,7 @@ import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDel
 import testBird from '../../assets/testbird.png'
 // import User from '../User';
 import WatchlistForm from './watchlistForm';
+import WatchlistUpdate from './watchlistUpdate'
 import { TickerSymbols } from '../../utils/stocksSymbols';
 
 function Watchlist(){
@@ -23,7 +24,7 @@ function Watchlist(){
     dispatch(thunkGetAllWatchlist(user_id))
     dispatch(thunkGetOneWatchlist(watchlistId))
     dispatch(thunkGetAllStocks(watchlistId))
-  }, [dispatch], watchlistId)
+  }, [dispatch, watchlistId], watchlistId)
 
   if (watchlist.allStocks) {
     stocks = Object.values(watchlist.allStocks)
@@ -89,8 +90,9 @@ function Watchlist(){
               <div class="watchlist-picture-holder">
                 <img class="small-picture" src={testBird}/>
               </div>
-              <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true}>
+              <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true} onClick={() => console.log('hi')}>
                 {list.name}
+                {/* <button onClick={async () => await dispatch(thunkGetAllWatchlist(user_id))}>{list.name}</button> */}
               </NavLink>
               {/* need to fix navlink */}
               <button class="options-button" onClick={() => deleteWatchlist(list)}>...</button>
@@ -98,6 +100,7 @@ function Watchlist(){
           })}
           {/* temporary stuff */}
           <WatchlistForm/>
+          <WatchlistUpdate/>
           {/* <div>
             <form onSubmit={submitHandler}>
             <input

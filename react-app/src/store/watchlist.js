@@ -80,7 +80,7 @@ export const thunkPostWatchlist = (data) => async dispatch => {
 }
 
 export const thunkUpdateWatchlist = (data) => async dispatch => {
-  const response = await fetch(`/api/watchlist/${data.id}`, {
+  const response = await fetch(`/api/watchlist/${data.watchlistId}`, {
     method: 'put',
     headers: {
       'Content-Type': 'application/json'
