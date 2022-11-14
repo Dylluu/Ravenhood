@@ -1,8 +1,8 @@
 """create packages table
 
-Revision ID: e17d6e90196d
-Revises:
-Create Date: 2022-11-13 21:35:17.571754
+Revision ID: 3e3ec5c00068
+Revises: 
+Create Date: 2022-11-14 02:16:51.436192
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e17d6e90196d'
+revision = '3e3ec5c00068'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,7 +24,7 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('first_name', sa.String(length=255), nullable=False),
     sa.Column('last_name', sa.String(length=255), nullable=False),
-    sa.Column('buy_power', sa.Numeric(precision=100000000, scale=2), nullable=False),
+    sa.Column('buy_power', sa.Float(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
@@ -35,8 +35,8 @@ def upgrade():
     sa.Column('symbol', sa.String(length=6), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('is_purchase', sa.Boolean(), nullable=False),
-    sa.Column('num_shares', sa.Numeric(precision=100000000000, scale=0), nullable=False),
-    sa.Column('transaction_price', sa.Numeric(precision=100000000000, scale=0), nullable=False),
+    sa.Column('num_shares', sa.Integer(), nullable=False),
+    sa.Column('transaction_price', sa.Float(), nullable=False),
     sa.Column('transaction_date', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
