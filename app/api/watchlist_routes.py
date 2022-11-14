@@ -2,7 +2,8 @@ from flask import Blueprint, render_template, request
 
 from app.models import Watchlist, WatchlistStocks, db
 
-
+from app.forms import WatchlistForm
+from app.forms import SignUpForm
 
 watchlist_routes = Blueprint('watchlists', __name__)
 
@@ -26,7 +27,6 @@ def get_one_watchlist(id):
   return watchlist.to_dict()
 
 @watchlist_routes.route('', methods=["POST"])
-
 def create_watchlist():
   """
   Allows user to create a watchlist and add it to their watchlists

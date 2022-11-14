@@ -43,7 +43,7 @@ function Watchlist(){
     await dispatch(thunkGetAllStocks(watchlistId))
     history.push(`/watchlists/${watchlistId}`)
   }
-  
+
   return (
     <div class="main-container">
       <div class="watchlist">
@@ -97,7 +97,7 @@ function Watchlist(){
           </div>
           })}
           {/* temporary stuff */}
-          <WatchlistForm/>
+          {/* <WatchlistForm/> */}
           {/* <div>
             <form onSubmit={submitHandler}>
             <input
