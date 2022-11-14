@@ -6,6 +6,7 @@ import './watchlist.css'
 import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist, thunkPostWatchlist } from '../../store/watchlist';
 import testBird from '../../assets/testbird.png'
 // import User from '../User';
+import WatchlistForm from './watchlistForm';
 import { TickerSymbols } from '../../utils/stocksSymbols';
 
 function Watchlist(){
@@ -42,23 +43,7 @@ function Watchlist(){
     await dispatch(thunkGetAllStocks(watchlistId))
     history.push(`/watchlists/${watchlistId}`)
   }
-
-  const submitHandler = async (e) => {
-    e.preventDefault()
-    let submitList= Object.values(watchlist.allWatchlists)
-    let count = Object.values(submitList).length
-
-    let list = {
-      id: count+1,
-      name,
-      user_id
-    }
-
-    await dispatch(thunkPostWatchlist(list))
-    history.push(`/watchlists/${watchlistId}`)
-  }
-
-
+  
   return (
     <div class="main-container">
       <div class="watchlist">
@@ -112,8 +97,8 @@ function Watchlist(){
           </div>
           })}
           {/* temporary stuff */}
-
-          <div>
+          <WatchlistForm/>
+          {/* <div>
             <form onSubmit={submitHandler}>
             <input
             type="text"
@@ -123,7 +108,7 @@ function Watchlist(){
             />
             <button type="submit">Add List</button>
             </form>
-          </div>
+          </div> */}
         {/* <!-- this section will be looped to create different lists  --> */}
 
       </div>

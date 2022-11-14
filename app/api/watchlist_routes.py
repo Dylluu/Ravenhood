@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, request
 
 from app.models import Watchlist, WatchlistStocks, db
 
+
+
 watchlist_routes = Blueprint('watchlists', __name__)
 
 
@@ -23,22 +25,23 @@ def get_one_watchlist(id):
   watchlist = Watchlist.query.get(id)
   return watchlist.to_dict()
 
-# @watchlist_routes.route('', methods=["POST"])
+@watchlist_routes.route('', methods=["POST"])
 
-# def create_watchlist():
-#   """
-#   Allows user to create a watchlist and add it to their watchlists
-#   """
-#   form = WatchlistForm()
-#   data = request.get_json()
-#   new_watchlist = Watchlist(
-#     name =data[name],
-#     current_user.id
-#   )
+def create_watchlist():
+  """
+  Allows user to create a watchlist and add it to their watchlists
+  """
+  form = WatchlistForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    new_watchlist = Watchlist(
+      name = form.data[name],
+      user_id = current_user.id
+    )
 
-#   db.session.add(new_watchlist)
-#   db.session.commit()
-#   return new_watchlist.to_dict()
+  db.session.add(new_watchlist)
+  db.session.commit()
+  return new_watchlist.to_dict()
 
 @watchlist_routes.route('/<int:id>', methods=["PUT"])
 
