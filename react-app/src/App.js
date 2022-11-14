@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -15,9 +15,12 @@ import MainStockGraph from './components/MainStockGraph';
 import SmallStockGraph from './components/SmallStockGraph';
 import CashCard from './components/CashCard';
 import Watchlist from './components/Watchlist';
+import LoggedInNav from './components/LoggedInNav';
+import Dashboard from './components/Dashboard';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
+	const user = useSelector(state => state.session.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -36,8 +39,17 @@ function App() {
 			{/* <NavBar /> */}
 			<Switch>
 				<Route exact path="/">
+					{!user && (
+					<>
 					<TopNaviagtion />
 					<Splash />
+					</>)}
+					{user && (
+					<>
+					<LoggedInNav />
+					<Dashboard />
+					</>
+					)}
 				</Route>
 				<Route path="/login" exact={true}>
 					<RealLoginForm />
