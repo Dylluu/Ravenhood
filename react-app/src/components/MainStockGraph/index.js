@@ -1,5 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import Chart from 'react-apexcharts';
+import MainStockPage from '../MainStockPage';
 import './MainStockGraph.css';
 
 const directionEmojis = {
@@ -15,21 +17,33 @@ async function getStonks(ticker) {
 	return response.json();
 }
 
-function MainStockGraph({ ticker }) {
+function MainStockGraph() {
+	const { ticker } = useParams();
+
+	// Data variables
 	const [series, setSeries] = useState({
 		data: []
 	});
-	const [price, setPrice] = useState(-1);
-	const [startPrice, setStartPrice] = useState(-1);
-	const [prevPrice, setPrevPrice] = useState(-1);
-	const [chartColor, setChartColor] = useState(['#5AC53B']);
-	const [priceColor, setPriceColor] = useState('#5AC53B');
-	const [hoverPrice, setHoverPrice] = useState(null);
-	const [tradingPeriods, setTradingPeriods] = useState({});
-	const [openPrice, setOpenPrice] = useState(null);
 	const [openPriceData, setOpenPriceData] = useState({
 		data: []
 	});
+
+	// Display variable, to render graph depending on selection
+	const [showOneDay, setShowOneDay] = useState(true);
+
+	// Price variables
+	const [price, setPrice] = useState(-1);
+	const [startPrice, setStartPrice] = useState(-1);
+	const [prevPrice, setPrevPrice] = useState(-1);
+	const [hoverPrice, setHoverPrice] = useState(null);
+	const [openPrice, setOpenPrice] = useState(null);
+
+	// chart and price display color variables
+	const [chartColor, setChartColor] = useState(['#5AC53B']);
+	const [priceColor, setPriceColor] = useState('#5AC53B');
+
+	// trading period variable for graphing full day
+	const [tradingPeriods, setTradingPeriods] = useState({});
 
 	// set color depending on the current price
 	const currPrice = hoverPrice ? hoverPrice : price;
@@ -60,15 +74,13 @@ function MainStockGraph({ ticker }) {
 					x: new Date(timestamp * 1000),
 					y: quote.open[index]
 				}));
-				// so we use open price to sure this part of the code does not run everytime we fetch for new data
-				if (!openPrice) {
-					// get trading period data for dashed open price
-					const startTime = stonk.meta.tradingPeriods[0][0].start;
-					const endTime = stonk.meta.tradingPeriods[0][0].end;
-					setTradingPeriods({ startTime, endTime });
-					setOpenPrice(quote.open[0]);
-					console.log('Hello');
-				}
+
+				// get trading period data for dashed open price
+				const startTime = stonk.meta.tradingPeriods[0][0].start;
+				const endTime = stonk.meta.tradingPeriods[0][0].end;
+				setTradingPeriods({ startTime, endTime });
+				setOpenPrice(quote.open[0]);
+
 				setSeries({ data: prices });
 				// Change chart color based on open and current price
 				let startPrice = quote.open[0];
@@ -105,6 +117,7 @@ function MainStockGraph({ ticker }) {
 			};
 			dashedData.push(data);
 		}
+		console.log('yooooooo');
 		setOpenPriceData({ data: dashedData });
 	}, [openPrice]);
 
@@ -115,7 +128,7 @@ function MainStockGraph({ ticker }) {
 
 	if (!series.data.length && !openPrice) return null;
 	return (
-		<div>
+		<div className="main-stock-page-wrapper">
 			<div className="ticker">{ticker}</div>
 			<div className={['price', direction].join(' ')}>
 				${hoverPrice ? hoverPrice : price} {directionEmojis[direction]}
@@ -126,71 +139,76 @@ function MainStockGraph({ ticker }) {
 				</div>
 			</div>
 			<div id="chart">
-				<Chart
-					options={{
-						chart: {
-							type: 'line',
-							toolbar: {
-								show: false
-							},
-							events: {
-								mouseMove: function (event, chartContext, config) {
-									const points = series.data[config.dataPointIndex]?.y;
-									setHoverPrice(points?.toFixed(2));
+				{showOneDay && (
+					<Chart
+						options={{
+							chart: {
+								type: 'line',
+								toolbar: {
+									show: false
 								},
-								mouseLeave: function () {
-									setHoverPrice(null);
+								events: {
+									mouseMove: function (event, chartContext, config) {
+										const points = series.data[config.dataPointIndex]?.y;
+										setHoverPrice(points?.toFixed(2));
+									},
+									mouseLeave: function () {
+										setHoverPrice(null);
+									}
+								},
+								zoom: {
+									enabled: false
 								}
 							},
-							zoom: {
-								enabled: false
-							}
-						},
-						xaxis: {
-							type: 'datetime',
-							labels: {
+							xaxis: {
+								type: 'datetime',
+								labels: {
+									show: false
+								},
+								tooltip: {
+									offsetY: -200,
+									formatter: function (val, opts) {
+										let time = new Date(val);
+										return time.toLocaleTimeString([], {
+											hour: '2-digit',
+											minute: '2-digit'
+										});
+									}
+								}
+							},
+							yaxis: {
 								show: false
 							},
+							grid: {
+								show: false
+							},
+							stroke: {
+								width: [2, 2],
+								dashArray: [0, 10]
+							},
+							colors: chartColor,
 							tooltip: {
-								offsetY: -200,
-								formatter: function (val, opts) {
-									let time = new Date(val);
-									return time.toLocaleTimeString([], {
-										hour: '2-digit',
-										minute: '2-digit'
-									});
+								enabled: true,
+								items: {
+									display: 'none'
+								},
+								x: {
+									show: false
 								}
-							}
-						},
-						yaxis: {
-							show: false
-						},
-						grid: {
-							show: false
-						},
-						stroke: {
-							width: [2, 2],
-							dashArray: [0, 10]
-						},
-						colors: chartColor,
-						tooltip: {
-							enabled: true,
-							shared: true,
-							items: {
-								display: 'none'
 							},
-							x: {
+							legend: {
 								show: false
 							}
-						},
-						legend: {
-							show: false
-						}
-					}}
-					series={[series, openPriceData]}
-					type="line"
-					width="100%"
-					height="100%"
+						}}
+						series={[series, openPriceData]}
+						type="line"
+						width="100%"
+						height="100%"
+					/>
+				)}
+				<MainStockPage
+					setShowOneDay={setShowOneDay}
+					setHoverPrice={setHoverPrice}
 				/>
 			</div>
 		</div>

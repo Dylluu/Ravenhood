@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import Chart from 'react-apexcharts';
+import { useParams } from 'react-router-dom';
 import './MainStockHistoricalGraph.css';
 const apiKeys = [
 	'3MO65OQ6CPMMNJTQ',
@@ -9,17 +10,6 @@ const apiKeys = [
 	'UDCCY4YOYH87SG5E'
 ];
 const apiKeysStockInfo = ['LHU9QYGE8G6XZO0T', '03A3G6JU0R69U3TN'];
-
-// 1 week
-// use Intraday interval 15min, outputsize=full, 7am - 1pm
-// 1 month
-// use IntraDay interval 60min from 8am to 1pm
-// 3 months
-// use Daily outputsize=compact, everyday
-// 1 year
-//  use daily outputsize=full, everyday 260days
-// 5 year
-// use weekly
 
 async function getStonks(range, ticker) {
 	let rangeFunction, apiKey;
@@ -57,7 +47,9 @@ async function getStonks(range, ticker) {
 	return response.json();
 }
 
-function MainStockHistoricalGraph() {
+function MainStockHistoricalGraph({ setHoverPrice, range }) {
+	const { ticker } = useParams();
+
 	const [series, setSeries] = useState([
 		{
 			data: []
@@ -65,24 +57,30 @@ function MainStockHistoricalGraph() {
 	]);
 	const [chartColor, setChartColor] = useState(['#5AC53B']);
 	const [priceColor, setPriceColor] = useState('#5AC53B');
-	const [hoverPrice, setHoverPrice] = useState(null);
 
 	useEffect(() => {
 		async function getStockHistoricalData() {
-			const data = await getStonks('3m', 'AMZN');
-			const stonk = data['Time Series (Daily)'];
-			const timeSeries = Object.keys(data['Time Series (Daily)']);
-			const date = new Date(timeSeries[0].replace(/-/g, '/'));
-			const threeMonth = date.setMonth(date.getMonth() - 3);
-			const threeMonthDate = timeSeries.filter(
-				(date) => new Date(date.replace(/-/g, '/')).getTime() >= threeMonth
-			);
-			const prices = threeMonthDate.map((date) => ({
-				x: date,
-				y: stonk[date]['4. close']
-			}));
-			setSeries([{ data: prices }]);
+			const data = await getStonks(range, ticker);
+			switch (range) {
+				case '1w':
+					break;
+				case '3m':
+					const stonk = data['Time Series (Daily)'];
+					const timeSeries = Object.keys(data['Time Series (Daily)']);
+					const date = new Date(timeSeries[0].replace(/-/g, '/'));
+					const threeMonth = date.setMonth(date.getMonth() - 3);
+					const threeMonthDate = timeSeries.filter(
+						(date) => new Date(date.replace(/-/g, '/')).getTime() >= threeMonth
+					);
+					const prices = threeMonthDate.map((date) => ({
+						x: date,
+						y: stonk[date]['4. close']
+					}));
+					setSeries([{ data: prices }]);
+					break;
+			}
 		}
+
 		getStockHistoricalData();
 	}, []);
 
@@ -115,7 +113,7 @@ function MainStockHistoricalGraph() {
 							show: false
 						},
 						tooltip: {
-							offsetY: -290,
+							offsetY: -200,
 							formatter: function (val, opts) {
 								let time = new Date(val);
 								return time.toLocaleDateString();

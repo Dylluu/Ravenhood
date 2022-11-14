@@ -19,3 +19,9 @@
     height: 300px;
     width: 900px;
 }
+.main-stock-page-wrapper {
+    border: 5px solid pink;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
+}

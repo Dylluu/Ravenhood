@@ -13,7 +13,7 @@ import RealLoginForm from './components/auth/RealLoginForm';
 import Splash from './components/Splash';
 import MainStockPage from './components/MainStockPage';
 import MainStockHistoricalGraph from './components/MainStockHistoricalGraph';
-import SmallStockGraph from './components/SmallStockGraph';
+import MainStockGraph from './components/MainStockGraph';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -45,13 +45,7 @@ function App() {
 					<SignUpForm />
 				</Route>
 				<Route path="/stocks/:ticker">
-					<MainStockPage />
-				</Route>
-				<Route path="/linh">
-					<MainStockHistoricalGraph />
-				</Route>
-				<Route path="/nhut">
-					<SmallStockGraph ticker={'AMZN'} />
+					<MainStockGraph />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />

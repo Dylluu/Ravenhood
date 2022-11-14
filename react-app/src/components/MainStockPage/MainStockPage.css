@@ -1,10 +1,8 @@
-.main-stock-page-wrapper{
-    border: 5px solid pink;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100vh;
-}
-
-.graph-wrapper{
-    border: 1px solid green;
+.range-options{
+    display: flex;
+    border: 1px solid red;
+    gap: 2rem;
+    font-weight: bold;
+    padding: 1rem 0 0.7rem 0;
+    font-size: 0.8rem;
 }
