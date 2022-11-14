@@ -7,7 +7,6 @@ from app.forms import SignUpForm
 
 watchlist_routes = Blueprint('watchlists', __name__)
 
-
 @watchlist_routes.route('')
 
 def get_all_watchlists():
@@ -31,17 +30,17 @@ def create_watchlist():
   """
   Allows user to create a watchlist and add it to their watchlists
   """
+  totalWatchlist = Watchlist.query.all()
   form = WatchlistForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     new_watchlist = Watchlist(
-      name = form.data[name],
-      user_id = current_user.id
+      name = form.data['name'],
+      user_id = form.data['user_id']
     )
-
-  db.session.add(new_watchlist)
-  db.session.commit()
-  return new_watchlist.to_dict()
+    db.session.add(new_watchlist)
+    db.session.commit()
+    return new_watchlist.to_dict()
 
 @watchlist_routes.route('/<int:id>', methods=["PUT"])
 

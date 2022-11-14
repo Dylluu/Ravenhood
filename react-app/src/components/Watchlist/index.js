@@ -97,7 +97,7 @@ function Watchlist(){
           </div>
           })}
           {/* temporary stuff */}
-          {/* <WatchlistForm/> */}
+          <WatchlistForm/>
           {/* <div>
             <form onSubmit={submitHandler}>
             <input

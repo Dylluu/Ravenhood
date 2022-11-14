@@ -65,6 +65,7 @@ export const thunkGetOneWatchlist = (id) => async dispatch => {
 }
 
 export const thunkPostWatchlist = (data) => async dispatch => {
+  console.log(data)
   const response = await fetch(`/api/watchlist`, {
     method: 'post',
     headers: {
@@ -161,7 +162,7 @@ export default function watchlist(state = initialState, action) {
     case POST_WATCHLIST:
       let newStateCreate = {...state}
       let id = action.payload.id
-      newStateCreate.allWatchlist[id] = action.payload
+      newStateCreate.allWatchlists[id] = action.payload
       return newStateCreate
     case POST_STOCKS:
       let newStateCreateStocks = {...state}

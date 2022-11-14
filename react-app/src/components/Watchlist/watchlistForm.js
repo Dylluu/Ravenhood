@@ -22,7 +22,7 @@ const WatchlistForm = () => {
     let count = Object.values(submitList).length
 
     let list = {
-      id: count+1,
+      // id: count+1,
       name,
       user_id
     }
