@@ -56,7 +56,6 @@ function App() {
 					<CashCard />
 				</Route>
 				<Route path="/watchlists/:watchlistId">
-					<TopNaviagtion/>
 					<Watchlist/>
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>

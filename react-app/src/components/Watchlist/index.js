@@ -16,7 +16,6 @@ function Watchlist(){
   const { watchlistId } = useParams()
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
-  const [name, setName] = useState("")
   let stocks
   let lists
 
@@ -83,24 +82,35 @@ function Watchlist(){
         <div class="watchlist-list-header">
           <h2 class="list-title">Lists</h2>
           <button class="add-button">+</button>
-          {/* <!-- button will create a list --> */}
         </div>
         {lists && lists.map( list=> {
             return <div class="list-container">
               <div class="watchlist-picture-holder">
                 <img class="small-picture" src={testBird}/>
               </div>
-              <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true} onClick={() => console.log('hi')}>
+              <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true}>
                 {list.name}
-                {/* <button onClick={async () => await dispatch(thunkGetAllWatchlist(user_id))}>{list.name}</button> */}
+
               </NavLink>
               {/* need to fix navlink */}
-              <button class="options-button" onClick={() => deleteWatchlist(list)}>...</button>
+              <div>
+                <button class="options-button" onClick={() => deleteWatchlist(list)}>...</button>
+                <div class="options-menu">
+                  <div> <button class="options-button">Edit Watchlist</button> </div>
+                  <div> <button class="options-button" onClick={() => deleteWatchlist(list)}>Delete Watchlist</button> </div>
+                </div>
+              </div>
+
+
           </div>
           })}
           {/* temporary stuff */}
-          <WatchlistForm/>
-          <WatchlistUpdate/>
+          <div>
+           Add Form<WatchlistForm/>
+           Update Form<WatchlistUpdate/>
+          </div>
+
+
           {/* <div>
             <form onSubmit={submitHandler}>
             <input

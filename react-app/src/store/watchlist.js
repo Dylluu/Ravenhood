@@ -52,7 +52,7 @@ export const thunkGetAllWatchlist = (user_id) => async dispatch => {
   if(response.ok) {
     const list = await response.json()
     dispatch(getAllWatchlist(normalizeArrUser(list.watchlists, user_id)))
-    // this might be actually no normalizeArr and instead just list
+    // this might be actually no normalizeArr and  instead just list
   }
 }
 

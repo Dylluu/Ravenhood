@@ -3,6 +3,7 @@
   display: flex;
   flex-direction:row;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  left: 100px
 }
 
 
@@ -48,6 +49,9 @@
   padding-bottom: 4px;
   border-bottom: 1px solid silver;
   justify-content: space-between;
+  padding-left: 7px;
+  padding-right: 20px;
+  padding-top: 10px;
 }
 
 .watchlist-data {
@@ -91,11 +95,36 @@
 .list-title {
   color: rgb(0,0,0);
   font-weight: 700;
+  border-left: 5px;
 }
+
+.delete-button:hover, .options-button:hover, .add-button:hover {
+  color: lime;
+}
+
+.add-button {
+  font-size: 24px;
+}
+
+.options-menu {
+  border: 1px solid rgb(227,233,237);
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+  right: 10px;
+  width: 100px
+}
+
+.options-button {
+  font-size: 12px;
+  padding-right: 20px;
+}
+
 
 h3 {
   font-weight: 400;
   font-size: 24px;
+
 }
 
 button {
