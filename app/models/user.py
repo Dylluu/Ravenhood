@@ -15,9 +15,14 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
-    buy_power = db.Column(db.Float, nullable=False, default=1000) #default buying power
+    buy_power = db.Column(db.Numeric(100000000, 2), nullable=False, default=100000) #default buying power
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+
+    # relationship attributes
+    user_transactions = db.relationship("UserTransactions", back_populates="user")
 
 
 

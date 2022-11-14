@@ -2,6 +2,7 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .watchlist import seed_watchlist, undo_watchlist
 from .watchlistStocks import seed_watchlist_stocks, undo_watchlist_stocks
+from .userTransactions import seed_transactions, undo_user_transactions
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,9 +22,11 @@ def seed():
         undo_users()
         undo_watchlist()
         undo_watchlist_stocks()
+        undo_user_transactions()
     seed_users()
     seed_watchlist()
     seed_watchlist_stocks()
+    seed_transactions()
     # Add other seed functions here
 
 
@@ -33,4 +36,5 @@ def undo():
     undo_users()
     undo_watchlist()
     undo_watchlist_stocks()
+    undo_user_transactions()
     # Add other undo functions here
