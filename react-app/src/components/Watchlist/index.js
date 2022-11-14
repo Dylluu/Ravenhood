@@ -6,6 +6,7 @@ import './watchlist.css'
 import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks } from '../../store/watchlist';
 import testBird from '../../assets/testbird.png'
 import User from '../User';
+import { TickerSymbols } from '../../utils/stocksSymbols';
 
 function Watchlist(){
   const dispatch = useDispatch()
@@ -50,7 +51,7 @@ function Watchlist(){
           {/* <!-- this section gets for looped to include all stocks in watchlist --> */}
           {stocks.map(stock => {
             return <div class="watchlist-data">
-            <div class="name-column">filler name</div>
+            <div class="name-column">{TickerSymbols[stock.symbol].name}</div>
             <div class="symbol-column">{stock.symbol}</div>
             <div class="price-column">temp price</div>
             <button class="delete-button">X</button>
