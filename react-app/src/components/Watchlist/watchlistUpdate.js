@@ -7,10 +7,10 @@ import { thunkGetAllWatchlist, thunkUpdateWatchlist } from '../../store/watchlis
 // import testBird from '../../assets/testbird.png'
 // import User from '../User';
 // import { TickerSymbols } from '../../utils/stocksSymbols';
-const WatchlistForm = () => {
+const WatchlistForm = ({id}) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const { watchlistId } = useParams()
+  const  watchlistId  = id
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
   const [name, setName] = useState("")

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
 import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist, thunkPostWatchlist } from '../../store/watchlist';
 import testBird from '../../assets/testbird.png'
-// import User from '../User';
+import { Modal } from '../../context/Modal';
 import Options from './options-menu';
 import WatchlistForm from './watchlistForm';
 import WatchlistUpdate from './watchlistUpdate'
@@ -87,12 +87,15 @@ function Watchlist(){
           <button class="add-button">+</button>
         </div>
         {lists && lists.map( list=> (
-          <Options list = {list} deleteWatchlist = {deleteWatchlist}/>
+          <div>
+            {list.id}
+            <Options list = {list} deleteWatchlist = {deleteWatchlist} id = {list.id}/>
+          </div>
         ))}
           {/* temporary stuff */}
           <div>
            Add Form<WatchlistForm/>
-           Update Form<WatchlistUpdate/>
+           Update Form<WatchlistUpdate />
           </div>
 
 

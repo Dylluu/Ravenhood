@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
 import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist, thunkPostWatchlist } from '../../store/watchlist';
 import testBird from '../../assets/testbird.png'
+import { Modal, ModalProvide } from '../../context/Modal';
+import WatchlistFromModal from './edit-watchlist-model';
 // import User from '../User';
 import WatchlistForm from './watchlistForm';
 import WatchlistUpdate from './watchlistUpdate'
 import { TickerSymbols } from '../../utils/stocksSymbols';
 
-function Options ({list}, {deleteWatchlist})  {
+function Options ({list, deleteWatchlist, id})  {
   const [options, setOptions] = useState(false)
 
 
@@ -29,8 +31,8 @@ function Options ({list}, {deleteWatchlist})  {
       options==false ? setOptions(true):setOptions(false)
     }}>...</button>
     {options &&<div class="options-menu">
-      <div> <button class={"options-button"}>Edit Watchlist</button> </div>
-      <div> <button class="options-button" onClick={() => deleteWatchlist(list)}>Delete Watchlist</button> </div>
+      <WatchlistFromModal id = {id}/>
+      <div> <button class="options-button" onClick={() => deleteWatchlist(list)}>Delete Watchlist </button> </div>
     </div>}
   </div>
   </div>
