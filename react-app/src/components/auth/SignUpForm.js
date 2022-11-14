@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -27,20 +27,69 @@ const SignUpForm = () => {
       }
   };
 
+  useEffect(() => {
+      if(errors.first_name){
+        const firstName = document.getElementById('firstName')
+        firstName.classList.add('red-border')
+      }
+      if(!errors.first_name) {
+        const firstName = document.getElementById('firstName')
+        firstName.classList.remove('red-border')
+      }
+  }, [errors.first_name])
+
+  useEffect(() => {
+    if(errors.last_name){
+      const lastName = document.getElementById('lastName')
+      lastName.classList.add('red-border')
+    }
+    if(!errors.last_name) {
+      const lastName = document.getElementById('lastName')
+      lastName.classList.remove('red-border')
+    }
+}, [errors.last_name])
+
+useEffect(() => {
+  if(errors.email){
+    const emailInput = document.getElementById('email')
+    emailInput.classList.add('red-border')
+  }
+  if(!errors.email) {
+    const emailInput = document.getElementById('email')
+    emailInput.classList.remove('red-border')
+  }
+}, [errors.email])
+
+useEffect(() => {
+  if(errors.password){
+    const passwordDiv = document.getElementsByClassName('signup-form-password-input')
+    passwordDiv[0].classList.add('red-border')
+    passwordDiv[0].removeAttribute('id')
+  }
+  if(!errors.password) {
+    const passwordDiv = document.getElementsByClassName('signup-form-password-input')
+    passwordDiv[0].classList.remove('red-border')
+  }
+}, [errors.password])
+
   const updateFirstName = (e) => {
     setFirstName(e.target.value);
+    errors.first_name = null;
   };
 
   const updateLastName = (e) => {
     setLastName(e.target.value);
+    errors.last_name = null;
   };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+    errors.email = null;
   };
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+    errors.password = null;
   };
 
   if (user) {
@@ -98,9 +147,9 @@ function removePasswordBorder() {
         <div className='signup-form-right-inner'>
     <form onSubmit={onSignUp}>
       <div className='signup-form-right-header'>Enter your first and last name as they appear on your government ID.</div>
-      <div>
+      {/* <div>
         {Object.values(errors)}
-      </div>
+      </div> */}
       <div id='signup-first-and-last'>
         <input
           type='text'
@@ -109,6 +158,7 @@ function removePasswordBorder() {
           value={first_name}
           className='first-and-last-input'
           placeholder='First name'
+          id='firstName'
         ></input>
         <input
           type='text'
@@ -117,8 +167,24 @@ function removePasswordBorder() {
           value={last_name}
           className='first-and-last-input'
           placeholder='Last name'
+          id='lastName'
         ></input>
       </div>
+      {errors.first_name && errors.last_name && (
+        <div className='signup-error-message-first-and-last'>
+          <span id='please-enter-first-name'>Please enter your first name.</span>
+          <span id='please-enter-last-name'>Please enter your last name.</span>
+        </div>
+      )}
+      {errors.first_name && !errors.last_name && (
+        <div className='signup-error-message'>Please enter your first name.</div>
+      )}
+      {!errors.first_name && errors.last_name && (
+        <div className='signup-error-message-first-and-last'>
+          <span id='please-enter-first-name'></span>
+          <span id='please-enter-last-name'>Please enter your last name.</span>
+        </div>
+      )}
       <div>
         <input
           type='text'
@@ -127,8 +193,12 @@ function removePasswordBorder() {
           value={email}
           placeholder='Email address'
           className='signup-form-inputs'
+          id='email'
         ></input>
       </div>
+      {errors.email && (
+        <div className='signup-error-message'>Please enter your email.</div>
+      )}
       <div className='signup-form-password-input'
       id='signup-form-password-input'
       >
@@ -152,12 +222,15 @@ function removePasswordBorder() {
         />
         </div>
       </div>
+      {errors.password && (
+        <div className='signup-error-message'>Please enter your password.</div>
+      )}
       {/* <button type='submit' className='signup-form-submit'>Sign Up</button> */}
     </form>
     </div>
     <div className='signup-form-right-bottom'>
       <div className='signup-form-button-wrapper'>
-      <div className='signup-form-submit'>Confirm</div>
+      <button className='signup-form-submit'>Confirm</button>
       <div className='signup-form-submit-hover'
       onClick={onSignUp}
       ></div>

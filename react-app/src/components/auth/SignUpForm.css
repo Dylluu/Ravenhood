@@ -230,6 +230,53 @@
     background-color: rgba(180, 180, 180, 0.22);
 }
 
+button {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.signup-error-message {
+    display: flex;
+    font-size: 13px;
+    color: rgb(255, 80, 0);
+    margin-top: -17px;
+    margin-bottom: 20px;
+    /* border: solid 1px red; */
+}
+
+.signup-error-message-first-and-last {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: 13px;
+    color: rgb(255, 80, 0);
+    margin-top: -17px;
+    margin-bottom: 20px;
+    /* border: solid 1px red; */
+}
+
+#please-enter-first-name, #please-enter-last-name {
+    width: 47%;
+    /* border: solid 1px blue; */
+}
+
+.red-border {
+    border: solid 1px rgb(255, 80, 0);
+}
+
+.red-border:hover {
+    border: solid 1px rgb(255, 80, 0);
+}
+
+.red-border:focus {
+    border: solid 1px rgb(255, 80, 0);
+}
+
 @media (max-width: 775px) {
     .signup-form-left {
         display: none;
