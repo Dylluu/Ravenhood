@@ -1,0 +1,96 @@
+.logged-in-nav-wrapper {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 65px;
+    box-sizing: border-box;
+    /* border: solid 1px red; */
+}
+
+.logged-in-feather {
+    height: 35px;
+    position: fixed;
+    top: 14px;
+    left: 53px;
+    filter: brightness(0%);
+    cursor: pointer;
+}
+
+.logged-in-feather:hover {
+    filter: none;
+}
+
+.logged-in-inner-wrapper {
+    display: flex;
+    align-items: center;
+    height: 60%;
+    width: 80%;
+    /* border: solid 1px red; */
+}
+
+.logged-in-search-bar-div {
+    display: flex;
+    height: 36px;
+    width: 478px;
+    align-items: center;
+    margin-left: 5%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: solid 1px rgb(232,232,240);
+    transition: box-shadow 300ms;
+}
+
+.logged-in-search-bar-div:hover {
+    border: solid 1px white;
+    box-shadow: 0 13px 20px 	#F0F0F0;
+}
+
+.logged-in-search-bar-div-focus {
+    border: solid 1px white;
+    box-shadow: 0 13px 20px 	#F0F0F0;
+}
+
+#magnifying-glass {
+    font-size: 17px;
+    color: rgb(106, 114, 120);
+    margin-left: 13px;
+    margin-right: 8px;
+    /* border: solid 1px blue; */
+}
+
+#search-stock {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+}
+
+#search-stock:focus {
+    outline: none;
+}
+
+.logged-in-nav-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    box-sizing: border-box;
+    right: 55px;
+    height: 23px;
+    width: 55px;
+    /* border: solid 1px blue; */
+    cursor: pointer;
+}
+
+#account {
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.logged-in-nav-buttons:hover {
+    color: rgb(0, 200, 5);
+}
