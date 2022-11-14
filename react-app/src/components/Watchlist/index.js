@@ -6,6 +6,7 @@ import './watchlist.css'
 import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist, thunkPostWatchlist } from '../../store/watchlist';
 import testBird from '../../assets/testbird.png'
 // import User from '../User';
+import Options from './options-menu';
 import WatchlistForm from './watchlistForm';
 import WatchlistUpdate from './watchlistUpdate'
 import { TickerSymbols } from '../../utils/stocksSymbols';
@@ -13,6 +14,7 @@ import { TickerSymbols } from '../../utils/stocksSymbols';
 function Watchlist(){
   const dispatch = useDispatch()
   const history = useHistory()
+  const [options, setOptions] = useState(false)
   const { watchlistId } = useParams()
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
@@ -43,6 +45,7 @@ function Watchlist(){
     await dispatch(thunkGetAllStocks(watchlistId))
     history.push(`/watchlists/${watchlistId}`)
   }
+
 
   return (
     <div class="main-container">
@@ -83,27 +86,9 @@ function Watchlist(){
           <h2 class="list-title">Lists</h2>
           <button class="add-button">+</button>
         </div>
-        {lists && lists.map( list=> {
-            return <div class="list-container">
-              <div class="watchlist-picture-holder">
-                <img class="small-picture" src={testBird}/>
-              </div>
-              <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true}>
-                {list.name}
-
-              </NavLink>
-              {/* need to fix navlink */}
-              <div>
-                <button class="options-button" onClick={() => deleteWatchlist(list)}>...</button>
-                <div class="options-menu">
-                  <div> <button class="options-button">Edit Watchlist</button> </div>
-                  <div> <button class="options-button" onClick={() => deleteWatchlist(list)}>Delete Watchlist</button> </div>
-                </div>
-              </div>
-
-
-          </div>
-          })}
+        {lists && lists.map( list=> (
+          <Options list = {list} deleteWatchlist = {deleteWatchlist}/>
+        ))}
           {/* temporary stuff */}
           <div>
            Add Form<WatchlistForm/>

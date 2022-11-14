@@ -199,7 +199,7 @@ const normalizeArrUser = (arr, user_id) => {
   if (!(arr instanceof Array)) throw new Error ("Invalid Data Type: Not an Array")
   let obj = {}
   arr.forEach(el => {
-    if (el.user_id == user_id)
+    if (el.user_id === user_id)
       obj[el.id] = el
   })
   return obj
