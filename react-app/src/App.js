@@ -16,6 +16,7 @@ import SmallStockGraph from './components/SmallStockGraph';
 import CashCard from './components/CashCard';
 import Watchlist from './components/Watchlist';
 import LoggedInNav from './components/LoggedInNav';
+import Dashboard from './components/Dashboard';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -46,6 +47,7 @@ function App() {
 					{user && (
 					<>
 					<LoggedInNav />
+					<Dashboard />
 					</>
 					)}
 				</Route>

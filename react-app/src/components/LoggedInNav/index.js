@@ -21,7 +21,11 @@ function LoggedInNav () {
 
     return (
         <div className='logged-in-nav-wrapper'>
-            <img alt='feather' src={logoGreen} className='logged-in-feather'/>
+            <img alt='feather' src={logoGreen} className='logged-in-feather'
+            onClick={() => {
+                console.log('logging out')
+                dispatch(logout())}}
+            />
             <div className='logged-in-inner-wrapper'>
                 <div className='logged-in-search-bar-div'>
                 <i className="fa-solid fa-magnifying-glass" id='magnifying-glass'/>
@@ -30,11 +34,7 @@ function LoggedInNav () {
                 onClick={() => handleSearchInputShadow()}
                 ></input>
                 </div>
-            <div className='logged-in-nav-buttons'
-            onClick={() => {
-                console.log('logging out')
-                dispatch(logout())}}
-            >
+            <div className='logged-in-nav-buttons'>
                 <span id='account'>Account</span>
             </div>
             </div>
