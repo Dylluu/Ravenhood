@@ -16,17 +16,20 @@ async function getStonks(ticker) {
 }
 
 function MainStockGraph({ ticker }) {
-	const [series, setSeries] = useState([
-		{
-			data: []
-		}
-	]);
+	const [series, setSeries] = useState({
+		data: []
+	});
 	const [price, setPrice] = useState(-1);
 	const [startPrice, setStartPrice] = useState(-1);
 	const [prevPrice, setPrevPrice] = useState(-1);
 	const [chartColor, setChartColor] = useState(['#5AC53B']);
 	const [priceColor, setPriceColor] = useState('#5AC53B');
 	const [hoverPrice, setHoverPrice] = useState(null);
+	const [tradingPeriods, setTradingPeriods] = useState({});
+	const [openPrice, setOpenPrice] = useState(null);
+	const [openPriceData, setOpenPriceData] = useState({
+		data: []
+	});
 
 	// set color depending on the current price
 	const currPrice = hoverPrice ? hoverPrice : price;
@@ -57,18 +60,23 @@ function MainStockGraph({ ticker }) {
 					x: new Date(timestamp * 1000),
 					y: quote.open[index]
 				}));
-				const openPrice = stonk.timestamp.map((timestamp, index) => ({
-					x: new Date(timestamp * 1000),
-					y: quote.open[0]
-				}));
-				setSeries([{ data: prices }, { data: openPrice }]);
+				// so we use open price to sure this part of the code does not run everytime we fetch for new data
+				if (!openPrice) {
+					// get trading period data for dashed open price
+					const startTime = stonk.meta.tradingPeriods[0][0].start;
+					const endTime = stonk.meta.tradingPeriods[0][0].end;
+					setTradingPeriods({ startTime, endTime });
+					setOpenPrice(quote.open[0]);
+					console.log('Hello');
+				}
+				setSeries({ data: prices });
 				// Change chart color based on open and current price
 				let startPrice = quote.open[0];
 				setStartPrice(startPrice);
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
-					setChartColor(['#5AC53B', 'gray']);
-				} else setChartColor(['#fd5240', 'gray']);
+					setChartColor(['#5AC53B', 'black']);
+				} else setChartColor(['#fd5240', 'black']);
 			} catch (error) {
 				console.log(error);
 			}
@@ -82,12 +90,30 @@ function MainStockGraph({ ticker }) {
 		};
 	}, []);
 
+	// generate graph data point for open price,
+	// will trigger once open price has been set
+	useEffect(() => {
+		const dashedData = [];
+		for (
+			let i = tradingPeriods.startTime;
+			i <= tradingPeriods.endTime;
+			i += 60
+		) {
+			const data = {
+				x: i * 1000,
+				y: openPrice
+			};
+			dashedData.push(data);
+		}
+		setOpenPriceData({ data: dashedData });
+	}, [openPrice]);
+
 	const direction = useMemo(
 		() => (prevPrice < price ? 'up' : prevPrice > price ? 'down' : ''),
 		[prevPrice, price]
 	);
 
-	let yo;
+	if (!series.data.length && !openPrice) return null;
 	return (
 		<div>
 			<div className="ticker">{ticker}</div>
@@ -109,7 +135,7 @@ function MainStockGraph({ ticker }) {
 							},
 							events: {
 								mouseMove: function (event, chartContext, config) {
-									const points = series[0].data[config.dataPointIndex]?.y;
+									const points = series.data[config.dataPointIndex]?.y;
 									setHoverPrice(points?.toFixed(2));
 								},
 								mouseLeave: function () {
@@ -161,7 +187,7 @@ function MainStockGraph({ ticker }) {
 							show: false
 						}
 					}}
-					series={series}
+					series={[series, openPriceData]}
 					type="line"
 					width="100%"
 					height="100%"

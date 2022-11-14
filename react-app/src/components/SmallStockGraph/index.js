@@ -26,6 +26,7 @@ export default function SmallStockGraph({ ticker }) {
 			try {
 				// fetch stock data
 				const data = await getStonks(ticker);
+				console.log(data);
 				const stonk = data.chart.result[0];
 				// Setting prices values for graphs
 				const quote = stonk.indicators.quote[0];
@@ -58,7 +59,7 @@ export default function SmallStockGraph({ ticker }) {
 
 			// get new stock price every minute
 			// 1000000
-			timeoutId = setTimeout(getLatestPrice, 1000000);
+			timeoutId = setTimeout(getLatestPrice, 60000);
 		}
 
 		getLatestPrice();
