@@ -59,8 +59,8 @@ def delete_watchlist(id):
   Allows user to delete a watchlist that they have created
   """
   watchlist = Watchlist.query.get(id)
-  # db.session.delete(watchlist)
-  # db.session.commit()
+  db.session.delete(watchlist)
+  db.session.commit()
   return dict(message= "Deleted a watchlist")
 
 
@@ -89,8 +89,6 @@ def add_watchlist_stock(id):
   db.session.add(new_stock)
   db.session.commit()
   return new_stock.to_dict()
-
-@watchlist_routes.route('/<int:id>/stocks/<string:symbol>')
 
 
 @watchlist_routes.route('/<int:id>/stocks/<string:symbol>', methods=['DELETE'])
