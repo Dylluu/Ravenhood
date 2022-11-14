@@ -3,6 +3,7 @@
     flex-direction: row;
     height: 100vh;
     box-sizing: border-box;
+    /* background-color: rgb(126, 232, 99); */
 }
 
 .signup-form-left {
@@ -10,7 +11,8 @@
     position: fixed;
     flex-direction: column;
     /* align-items: center; */
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
+    height: 100%;
     width: 50%;
     background-color: rgb(126, 232, 99);
     border-right: solid 1px black;
