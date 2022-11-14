@@ -77,7 +77,6 @@ function Watchlist(){
             <button class="options-button">...</button>
           </div>
           })}
-        {/* <!-- this section will be looped to create different lists  --> */}
 
       </div>
   </div>
