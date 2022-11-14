@@ -40,9 +40,10 @@
 .starting-buying-power {
     display: flex;
     font-size: 14px;
+    width: 75%;
     margin-left: 65px;
     margin-top: -20px;
-    /* border: solid 1px green; */
+    /* border: solid 1px red; */
 }
 
 #signup-form-stockblocks {
@@ -66,7 +67,7 @@
     display: flex;
     width: 80%;
     margin-top: -30px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     /* border: solid 1px red; */
 }
 
