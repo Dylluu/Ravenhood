@@ -49,10 +49,8 @@ const deleteStocks = (stock) => ({
 
 export const thunkGetAllWatchlist = (user_id) => async dispatch => {
   const response = await fetch('/api/watchlist')
-  // console.log('hihihi', response)
   if(response.ok) {
     const list = await response.json()
-    // console.log("response", list)
     dispatch(getAllWatchlist(normalizeArrUser(list.watchlists, user_id)))
     // this might be actually no normalizeArr and instead just list
   }
@@ -60,10 +58,8 @@ export const thunkGetAllWatchlist = (user_id) => async dispatch => {
 
 export const thunkGetOneWatchlist = (id) => async dispatch => {
   const response = await fetch(`/api/watchlist/${id}`)
-  console.log('tester', response)
   if(response.ok) {
     const watchlist = await response.json()
-    console.log("response", watchlist)
     dispatch(getOneWatchlist(watchlist))
   }
 }
@@ -103,7 +99,8 @@ export const thunkDeleteWatchlist = (id) => async dispatch => {
     method: 'delete'
   })
   if (response.ok) {
-    // const watchlist = await response.json()
+    const watchlist = await response.json()
+    console.log(watchlist)
     dispatch(deleteWatchlist(id))
     // return watchlist
   }
@@ -134,12 +131,12 @@ export const thunkPostStocks = (data) => async dispatch => {
 }
 
 export const thunkDeleteStocks = (stock) => async dispatch => {
-  const response = await fetch(`/api/watchlist/${stock.watchlist_id}/stocks/${stock.symbol}`, {
+  const response = await fetch(`/api/watchlist/stocks/${stock.id}`, {
     method: 'delete'
   })
   if (response.ok) {
     const stock = await response.json()
-    dispatch(deleteStocks(stock))
+    // dispatch(deleteStocks(stock))
     return stock
   }
   // this one may not work

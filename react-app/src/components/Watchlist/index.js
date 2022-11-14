@@ -3,9 +3,9 @@ import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
-import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist } from '../../store/watchlist';
+import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist, thunkPostWatchlist } from '../../store/watchlist';
 import testBird from '../../assets/testbird.png'
-import User from '../User';
+// import User from '../User';
 import { TickerSymbols } from '../../utils/stocksSymbols';
 
 function Watchlist(){
@@ -14,6 +14,7 @@ function Watchlist(){
   const { watchlistId } = useParams()
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
+  const [name, setName] = useState("")
   let stocks
   let lists
 
@@ -30,16 +31,39 @@ function Watchlist(){
     lists = Object.values(watchlist.allWatchlists)
   }
 
-  const deleteStock = async (stock) => {
-    await dispatch(thunkDeleteStocks(stock))
+  const deleteWatchlist = async(list) => {
+    await dispatch(thunkDeleteWatchlist(list.id))
+    await dispatch(thunkGetAllWatchlist(user_id))
     history.push(`/watchlists/${watchlistId}`)
   }
+
+  const deleteStock = async (stock) => {
+    await dispatch(thunkDeleteStocks(stock))
+    await dispatch(thunkGetAllStocks(watchlistId))
+    history.push(`/watchlists/${watchlistId}`)
+  }
+
+  const submitHandler = async (e) => {
+    e.preventDefault()
+    let submitList= Object.values(watchlist.allWatchlists)
+    let count = Object.values(submitList).length
+
+    let list = {
+      id: count+1,
+      name,
+      user_id
+    }
+
+    await dispatch(thunkPostWatchlist(list))
+    history.push(`/watchlists/${watchlistId}`)
+  }
+
 
   return (
     <div class="main-container">
       <div class="watchlist">
         <div class="picture-holder" >
-          {/* <img class="picture" src={testBird}> </img> */}
+          <img class="picture" src={testBird}/>
         </div>
         <div class="watchlist-title">
           <h3>Watchlist Template</h3>
@@ -78,15 +102,28 @@ function Watchlist(){
         {lists && lists.map( list=> {
             return <div class="list-container">
               <div class="watchlist-picture-holder">
-                {/* <img class="small-picture" src={testBird}> </img> */}
+                <img class="small-picture" src={testBird}/>
               </div>
               <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true}>
                 {list.name}
               </NavLink>
               {/* need to fix navlink */}
-              <button class="options-button" onClick={() => dispatch(thunkDeleteWatchlist(list.id))}>...</button>
+              <button class="options-button" onClick={() => deleteWatchlist(list)}>...</button>
           </div>
           })}
+          {/* temporary stuff */}
+
+          <div>
+            <form onSubmit={submitHandler}>
+            <input
+            type="text"
+            name="name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            />
+            <button type="submit">Add List</button>
+            </form>
+          </div>
         {/* <!-- this section will be looped to create different lists  --> */}
 
       </div>

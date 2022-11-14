@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
-from app.models import Watchlist, WatchlistStocks
+from app.models import Watchlist, WatchlistStocks, db
 
 watchlist_routes = Blueprint('watchlists', __name__)
 
@@ -23,21 +23,22 @@ def get_one_watchlist(id):
   watchlist = Watchlist.query.get(id)
   return watchlist.to_dict()
 
-@watchlist_routes.route('', methods=["POST"])
+# @watchlist_routes.route('', methods=["POST"])
 
-def create_watchlist():
-  """
-  Allows user to create a watchlist and add it to their watchlists
-  """
-  data = request.get_json()
-  new_watchlist = Watchlist(
-    data[name],
-    current_user.id
-  )
+# def create_watchlist():
+#   """
+#   Allows user to create a watchlist and add it to their watchlists
+#   """
+#   form = WatchlistForm()
+#   data = request.get_json()
+#   new_watchlist = Watchlist(
+#     name =data[name],
+#     current_user.id
+#   )
 
-  db.session.add(new_watchlist)
-  db.session.commit()
-  return new_watchlist.to_dict()
+#   db.session.add(new_watchlist)
+#   db.session.commit()
+#   return new_watchlist.to_dict()
 
 @watchlist_routes.route('/<int:id>', methods=["PUT"])
 
@@ -91,13 +92,13 @@ def add_watchlist_stock(id):
   return new_stock.to_dict()
 
 
-@watchlist_routes.route('/<int:id>/stocks/<string:symbol>', methods=['DELETE'])
+@watchlist_routes.route('/stocks/<int:stockId>', methods=['DELETE'])
 
-def delete_watchlist_stock(id, symbol):
+def delete_watchlist_stock(stockId):
   """
   Allows user to delete a stock from their watchlist to remove it from the list
   """
-  stock = WatchlistStocks.query.filter(WatchlistStocks.id==id).filter(WatchlistStocks.symbol==symbol)
+  stock = WatchlistStocks.query.get(stockId)
   db.session.delete(stock)
   db.session.commit()
   return dict(message= "Deleted a stock")
