@@ -1,15 +1,16 @@
 import React from 'react';
-import { useParams, NavLink } from 'react-router-dom';
+import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
-import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks } from '../../store/watchlist';
+import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist } from '../../store/watchlist';
 import testBird from '../../assets/testbird.png'
 import User from '../User';
 import { TickerSymbols } from '../../utils/stocksSymbols';
 
 function Watchlist(){
   const dispatch = useDispatch()
+  const history = useHistory()
   const { watchlistId } = useParams()
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
@@ -27,6 +28,11 @@ function Watchlist(){
   }
   if (watchlist.allWatchlists) {
     lists = Object.values(watchlist.allWatchlists)
+  }
+
+  const deleteStock = async (stock) => {
+    await dispatch(thunkDeleteStocks(stock))
+    history.push(`/watchlists/${watchlistId}`)
   }
 
   return (
@@ -50,11 +56,12 @@ function Watchlist(){
 
           {/* <!-- this section gets for looped to include all stocks in watchlist --> */}
           {stocks && stocks.map(stock => {
+            // eventually put name-column/symbol column in a navlink together
             return <div class="watchlist-data">
             <div class="name-column">{TickerSymbols[stock.symbol].name}</div>
             <div class="symbol-column">{stock.symbol}</div>
             <div class="price-column">temp price</div>
-            <button class="delete-button">X</button>
+            <button class="delete-button" onClick={() =>deleteStock(stock)}>X</button>
             </div>
           })}
           {/* <!-- button will delete the stock from the watchlist --> */}
@@ -70,13 +77,17 @@ function Watchlist(){
         </div>
         {lists && lists.map( list=> {
             return <div class="list-container">
-            <div class="watchlist-picture-holder">
-              {/* <img class="small-picture" src={testBird}> </img> */}
-            </div>
-            <div class="list-name">{list.name}</div>
-            <button class="options-button">...</button>
+              <div class="watchlist-picture-holder">
+                {/* <img class="small-picture" src={testBird}> </img> */}
+              </div>
+              <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true}>
+                {list.name}
+              </NavLink>
+              {/* need to fix navlink */}
+              <button class="options-button" onClick={() => dispatch(thunkDeleteWatchlist(list.id))}>...</button>
           </div>
           })}
+        {/* <!-- this section will be looped to create different lists  --> */}
 
       </div>
   </div>

@@ -103,9 +103,9 @@ export const thunkDeleteWatchlist = (id) => async dispatch => {
     method: 'delete'
   })
   if (response.ok) {
-    const watchlist = await response.json()
+    // const watchlist = await response.json()
     dispatch(deleteWatchlist(id))
-    return watchlist
+    // return watchlist
   }
 }
 
