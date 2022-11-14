@@ -49,7 +49,7 @@ function Watchlist(){
           </div>
 
           {/* <!-- this section gets for looped to include all stocks in watchlist --> */}
-          {stocks.map(stock => {
+          {stocks && stocks.map(stock => {
             return <div class="watchlist-data">
             <div class="name-column">{TickerSymbols[stock.symbol].name}</div>
             <div class="symbol-column">{stock.symbol}</div>
@@ -68,7 +68,7 @@ function Watchlist(){
           <button class="add-button">+</button>
           {/* <!-- button will create a list --> */}
         </div>
-        {lists.map( list=> {
+        {lists && lists.map( list=> {
             return <div class="list-container">
             <div class="watchlist-picture-holder">
               {/* <img class="small-picture" src={testBird}> </img> */}
