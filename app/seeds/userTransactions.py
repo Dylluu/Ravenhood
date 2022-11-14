@@ -49,7 +49,7 @@ def seed_transactions():
         user_id='3',
         is_purchase=True,
         num_shares="400",
-        transaction_price=11.56,)
+        transaction_price=11.56)
     t9 = UserTransactions(
         symbol='FSR',
         user_id='3',

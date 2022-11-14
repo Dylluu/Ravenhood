@@ -12,8 +12,8 @@ class UserTransactions(db.Model):
     symbol = db.Column(db.String(6), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     is_purchase = db.Column(db.Boolean, nullable=False)
-    num_shares = db.Column(db.Numeric(100000000000, 0), nullable=False) #(integer places, decimal places)
-    transaction_price = db.Column(db.Numeric(100000000000, 0), nullable=False)
+    num_shares = db.Column(db.Integer, nullable=False) #(integer places, decimal places)
+    transaction_price = db.Column(db.Float, nullable=False)
     transaction_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
