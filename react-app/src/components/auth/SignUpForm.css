@@ -3,6 +3,7 @@
     flex-direction: row;
     height: 100vh;
     box-sizing: border-box;
+    /* background-color: rgb(126, 232, 99); */
 }
 
 .signup-form-left {
@@ -10,7 +11,8 @@
     position: fixed;
     flex-direction: column;
     /* align-items: center; */
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
+    height: 100%;
     width: 50%;
     background-color: rgb(126, 232, 99);
     border-right: solid 1px black;
@@ -38,9 +40,10 @@
 .starting-buying-power {
     display: flex;
     font-size: 14px;
+    width: 75%;
     margin-left: 65px;
     margin-top: -20px;
-    /* border: solid 1px green; */
+    /* border: solid 1px red; */
 }
 
 #signup-form-stockblocks {
@@ -64,7 +67,7 @@
     display: flex;
     width: 80%;
     margin-top: -30px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     /* border: solid 1px red; */
 }
 
