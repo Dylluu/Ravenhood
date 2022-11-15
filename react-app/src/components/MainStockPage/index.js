@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import MainStockHistoricalGraph from '../MainStockHistoricalGraph';
 import './MainStockPage.css';
 
-function MainStockPage({ setShowOneDay, setHoverPrice }) {
+function MainStockPage({ setShowOneDay, setHoverPrice, showOneDay }) {
 	const { ticker } = useParams();
 	const [showOneWeek, setShowOneWeek] = useState(false);
 	const [showOneMonth, setShowOneMonth] = useState(false);
@@ -12,11 +12,14 @@ function MainStockPage({ setShowOneDay, setHoverPrice }) {
 	const [showOneYear, setShowOneYear] = useState(false);
 	const [showFiveYear, setShowFiveYear] = useState(false);
 	const [range, setRange] = useState(null);
-	const [showHistoricalGraph, setShowHistoricalGraph] = useState(false);
 
 	const showGraph = (range) => {
 		setShowOneDay(false);
-		setShowHistoricalGraph(false);
+		setShowOneWeek(false);
+		setShowOneMonth(false);
+		setShowThreeMonth(false);
+		setShowOneYear(false);
+		setShowFiveYear(false);
 		switch (range) {
 			case '1d':
 				setRange('1d');
@@ -24,28 +27,50 @@ function MainStockPage({ setShowOneDay, setHoverPrice }) {
 				break;
 			case '1w':
 				setRange('1w');
-				setShowHistoricalGraph(true);
+				setShowOneWeek(true);
 				break;
 			case '1m':
 				setRange('1w');
-				setShowHistoricalGraph(true);
+				setShowOneMonth(true);
 				break;
 			case '3m':
 				setRange('3m');
-				setShowHistoricalGraph(true);
+				setShowThreeMonth(true);
 				break;
 			case '1y':
 				setRange('1y');
-				setShowHistoricalGraph(true);
+				setShowOneYear(true);
 				break;
 			case '5y':
 				setRange('5y');
-				setShowHistoricalGraph(true);
+				setShowFiveYear(true);
+				break;
 		}
 	};
 	return (
 		<>
-			{showHistoricalGraph && (
+			{showOneWeek && (
+				<MainStockHistoricalGraph
+					setHoverPrice={setHoverPrice}
+					range={range}
+					tikcer={ticker}
+				/>
+			)}
+			{showThreeMonth && (
+				<MainStockHistoricalGraph
+					setHoverPrice={setHoverPrice}
+					range={range}
+					tikcer={ticker}
+				/>
+			)}
+			{showOneYear && (
+				<MainStockHistoricalGraph
+					setHoverPrice={setHoverPrice}
+					range={range}
+					tikcer={ticker}
+				/>
+			)}
+			{showFiveYear && (
 				<MainStockHistoricalGraph
 					setHoverPrice={setHoverPrice}
 					range={range}
@@ -53,11 +78,36 @@ function MainStockPage({ setShowOneDay, setHoverPrice }) {
 				/>
 			)}
 			<div className="range-options">
-				<p onClick={() => showGraph('1d')}>1D</p>
-				<p onClick={() => showGraph('1w')}>1W</p>
-				<p onClick={() => showGraph('3m')}>3M</p>
-				<p onClick={() => showGraph('1y')}>1Y</p>
-				<p onClick={() => showGraph('5y')}>5Y</p>
+				<div
+					className={`range-select ${showOneDay ? 'selected' : ''}`}
+					onClick={() => showGraph('1d')}
+				>
+					1D
+				</div>
+				<div
+					className={`range-select ${showOneWeek ? 'selected' : ''}`}
+					onClick={() => showGraph('1w')}
+				>
+					1W
+				</div>
+				<div
+					className={`range-select ${showThreeMonth ? 'selected' : ''}`}
+					onClick={() => showGraph('3m')}
+				>
+					3M
+				</div>
+				<div
+					className={`range-select ${showOneYear ? 'selected' : ''}`}
+					onClick={() => showGraph('1y')}
+				>
+					1Y
+				</div>
+				<div
+					className={`range-select ${showFiveYear ? 'selected' : ''}`}
+					onClick={() => showGraph('5y')}
+				>
+					5Y
+				</div>
 			</div>
 		</>
 	);

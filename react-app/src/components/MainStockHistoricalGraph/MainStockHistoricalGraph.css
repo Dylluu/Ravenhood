@@ -16,3 +16,12 @@
 #chart-historical  .apexcharts-xaxistooltip-bottom:after {
     opacity: 0
 }
+
+
+.graph-loading-screen{
+    height: 300px;
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

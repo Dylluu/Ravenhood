@@ -1,8 +1,20 @@
 .range-options{
     display: flex;
-    border: 1px solid red;
-    gap: 2rem;
+    border-bottom: 2px solid lightgray;
+    gap: 1rem;
     font-weight: bold;
-    padding: 1rem 0 0.7rem 0;
-    font-size: 0.8rem;
+    font-size: 1rem;
+}
+
+.range-select{
+    cursor: pointer;
+    padding: 1rem 0.5rem;
+}
+
+.range-select:hover{
+    color: red;
+}
+
+.selected{
+    color: green;
 }

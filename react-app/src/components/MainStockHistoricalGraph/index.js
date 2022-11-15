@@ -2,13 +2,14 @@ import { useEffect, useState, useMemo } from 'react';
 import Chart from 'react-apexcharts';
 import { useParams } from 'react-router-dom';
 import './MainStockHistoricalGraph.css';
-const apiKeys = [
-	'3MO65OQ6CPMMNJTQ',
-	'39IUG3VMDLMFIEX0',
-	'4GDMAT3E0KC2FFZU',
-	'G7J7RWW57SHS3FGR',
-	'UDCCY4YOYH87SG5E'
-];
+// const apiKeys = [
+// 	'3MO65OQ6CPMMNJTQ',
+// 	'39IUG3VMDLMFIEX0',
+// 	'4GDMAT3E0KC2FFZU',
+// 	'G7J7RWW57SHS3FGR',
+// 	'UDCCY4YOYH87SG5E'
+// ];
+const apiKeys = '3MO65OQ6CPMMNJTQ';
 const apiKeysStockInfo = ['LHU9QYGE8G6XZO0T', '03A3G6JU0R69U3TN'];
 
 async function getStonks(range, ticker) {
@@ -18,28 +19,28 @@ async function getStonks(range, ticker) {
 	switch (range) {
 		case '1w':
 			rangeFunction = 'TIME_SERIES_INTRADAY';
-			apiKey = apiKeys[0];
+			apiKey = apiKeys;
 			outputsize = '&outputsize=full';
 			interval = '&interval=15min';
 			break;
 		case '1m':
 			rangeFunction = 'TIME_SERIES_INTRADAY';
 			interval = '&interval=60min';
-			apiKey = apiKeys[1];
+			apiKey = apiKeys;
 			break;
 		case '3m':
 			rangeFunction = 'TIME_SERIES_DAILY_ADJUSTED';
 			outputsize = '&outputsize=compact';
-			apiKey = apiKeys[2];
+			apiKey = apiKeys;
 			break;
 		case '1y':
 			rangeFunction = 'TIME_SERIES_DAILY_ADJUSTED';
 			outputsize = '&outputsize=full';
-			apiKey = apiKeys[3];
+			apiKey = apiKeys;
 			break;
 		case '5y':
 			rangeFunction = 'TIME_SERIES_WEEKLY';
-			apiKey = apiKeys[4];
+			apiKey = apiKeys;
 			break;
 	}
 	console.log(apiKey);
@@ -146,7 +147,6 @@ function MainStockHistoricalGraph({ setHoverPrice, range }) {
 							y: stonk[date]['4. close']
 						}));
 						setType('datetime');
-						console.log(fiveYearPrices);
 						setSeries([{ data: fiveYearPrices.reverse() }]);
 						break;
 				}
@@ -158,9 +158,15 @@ function MainStockHistoricalGraph({ setHoverPrice, range }) {
 		getStockHistoricalData();
 	}, [range]);
 
-	if (!series[0].data.length) return <h1>HELLOOOO</h1>;
+	if (APILimit)
+		return (
+			<div className="graph-loading-screen">
+				OOPS WE BROKE AND ONLY GOT 5 api request/minute
+			</div>
+		);
+	if (!series[0].data.length)
+		return <div className="graph-loading-screen">Loading...</div>;
 
-	if (APILimit) return <h1>OOPS WE BROKE AND ONLY GOT 5 api request/minute</h1>;
 	return (
 		<div id="chart-historical">
 			<Chart

@@ -209,6 +209,7 @@ function MainStockGraph() {
 				<MainStockPage
 					setShowOneDay={setShowOneDay}
 					setHoverPrice={setHoverPrice}
+					showOneDay={showOneDay}
 				/>
 			</div>
 		</div>
