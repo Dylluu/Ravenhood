@@ -5,14 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
 import { thunkGetAllWatchlist, thunkPostWatchlist } from '../../store/watchlist';
 
-const WatchlistForm = () => {
+const WatchlistForm = ({add, setAdd}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { watchlistId } = useParams()
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
   const [name, setName] = useState("")
-  const [add, setAdd] = useState(true)
   let stocks
   let lists
   const submitHandler = async (e) => {

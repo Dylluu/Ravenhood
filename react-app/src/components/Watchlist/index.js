@@ -91,7 +91,7 @@ function Watchlist(){
           }}>+</button>
         </div>
         {add && <div>
-           <WatchlistForm add = {add}/>
+           <WatchlistForm add = {add} setAdd= {setAdd}/>
           </div>}
         {lists && lists.map( list=> (
           <div>
