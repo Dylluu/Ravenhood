@@ -12,10 +12,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 96%;
+    width: 100%;
     max-width: 1367px;
+    min-width: 1020px;
     height: 100%;
     margin-left: 12px;
+    /* margin-right: 20px; */
     box-sizing: border-box;
     /* border: solid 1px blue; */
 }
@@ -31,7 +33,7 @@
 
 .dashboard-graph-wrapper {
     display: flex;
-    height: 374px;
+    height: 353px;
     width: 100%;
     box-sizing: border-box;
     border: solid 1px turquoise;

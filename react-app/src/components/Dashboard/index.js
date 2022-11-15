@@ -27,6 +27,12 @@ function Dashboard () {
     if (watchlist.allWatchlists) {
         lists = Object.values(watchlist.allWatchlists)
       }
+    // useEffect(() => {window.addEventListener('scroll', () => {
+    //         const dashboardWatchlist = document.getElementsByClassName('dashboard-watchlists-wrapper');
+    //         dashboardWatchlist[0].style.paddingTop = `${window.scrollY}`
+    //     })
+    // }, [])
+
     return (
         <div className='dashboard-wrapper'>
             <div className='dashboard-inner-wrapper'>

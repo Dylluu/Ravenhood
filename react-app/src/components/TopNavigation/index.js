@@ -85,17 +85,27 @@ function TopNaviagtion() {
                 <div id='bottom-menu-bar' className='menu-bar'></div>
             </div>
             <div className='splash-popout'>
-                        <span className='popout-nav'>Invest</span>
-                        <span className='popout-nav'>Crypto</span>
+                        {/* <span className='popout-nav'>Invest</span>
+                        <span className='popout-nav'>Crypto</span> */}
                         <span className='popout-nav'
                         onClick={() => {
                             handleMenuOpen()
                             history.push('/cash')
                         }}
                         >Cash Card</span>
-                        <span className='popout-nav'>Learn</span>
-                        <span className='popout-nav'>Snacks</span>
-                        <span className='popout-nav'>Support</span>
+                        <span className='popout-nav'
+                        onClick={() => {
+                            handleMenuOpen()
+                            history.push('/login')
+                        }}
+                        >Login</span>
+                        <span className='popout-nav'
+                        onClick={() => {
+                            handleMenuOpen()
+                            history.push('/signup')
+                        }}
+                        >Sign Up</span>
+                        {/* <span className='popout-nav'>Support</span> */}
                     </div>
         </div>
     )
