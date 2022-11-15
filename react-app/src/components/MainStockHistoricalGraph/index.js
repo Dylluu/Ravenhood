@@ -2,56 +2,26 @@ import { useEffect, useState, useMemo } from 'react';
 import Chart from 'react-apexcharts';
 import { useParams } from 'react-router-dom';
 import './MainStockHistoricalGraph.css';
-// const apiKeys = [
-// 	'3MO65OQ6CPMMNJTQ',
-// 	'39IUG3VMDLMFIEX0',
-// 	'4GDMAT3E0KC2FFZU',
-// 	'G7J7RWW57SHS3FGR',
-// 	'UDCCY4YOYH87SG5E'
-// ];
-const apiKeys = '3MO65OQ6CPMMNJTQ';
-const apiKeysStockInfo = ['LHU9QYGE8G6XZO0T', '03A3G6JU0R69U3TN'];
+import * as stockFunctions from '../../utils/fetchStockFunctions';
+import * as stockActions from '../../store/stocks';
+import { useDispatch, useSelector } from 'react-redux';
 
-async function getStonks(range, ticker) {
-	let rangeFunction, apiKey;
-	let outputsize = '';
-	let interval = '';
+const getRangePeriod = (range) => {
 	switch (range) {
 		case '1w':
-			rangeFunction = 'TIME_SERIES_INTRADAY';
-			apiKey = apiKeys;
-			outputsize = '&outputsize=full';
-			interval = '&interval=15min';
-			break;
-		case '1m':
-			rangeFunction = 'TIME_SERIES_INTRADAY';
-			interval = '&interval=60min';
-			apiKey = apiKeys;
-			break;
+			return 'past week';
 		case '3m':
-			rangeFunction = 'TIME_SERIES_DAILY_ADJUSTED';
-			outputsize = '&outputsize=compact';
-			apiKey = apiKeys;
-			break;
+			return 'past 3 months';
 		case '1y':
-			rangeFunction = 'TIME_SERIES_DAILY_ADJUSTED';
-			outputsize = '&outputsize=full';
-			apiKey = apiKeys;
-			break;
+			return 'past year';
 		case '5y':
-			rangeFunction = 'TIME_SERIES_WEEKLY';
-			apiKey = apiKeys;
-			break;
+			return 'past 5 years';
 	}
-	console.log(apiKey);
-	const baseURl = `https://www.alphavantage.co/query?function=${rangeFunction}&symbol=${ticker}${outputsize}${interval}&apikey=${apiKey}`;
-	const response = await fetch(baseURl);
-	return response.json();
-}
-
-function MainStockHistoricalGraph({ setHoverPrice, range }) {
+};
+function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 	const { ticker } = useParams();
-
+	const dispatch = useDispatch();
+	const stockData = useSelector((state) => state.stockData);
 	const [series, setSeries] = useState([
 		{
 			data: []
@@ -61,184 +31,189 @@ function MainStockHistoricalGraph({ setHoverPrice, range }) {
 	const [priceColor, setPriceColor] = useState('#5AC53B');
 	const [type, setType] = useState('datetime');
 	const [APILimit, setAPILimit] = useState(false);
+	const [startPrice, setStartPrice] = useState(-1);
+	const [endPrice, setEndPrice] = useState(-1);
+	const [rangePeriod, setRangePeriod] = useState(getRangePeriod(range));
+
+	// set color depending on the current price
+	const currPrice = hoverPrice ? hoverPrice : endPrice;
+	const percentDifference = (
+		((currPrice - startPrice) / startPrice) *
+		100
+	).toFixed(2);
+	const priceDifference = (currPrice - startPrice).toFixed(2);
 
 	useEffect(() => {
+		// getting the price/percentage different from open price
+		if (percentDifference > 0) setPriceColor('#5AC53B');
+		else setPriceColor('#fd5240');
+	}, [chartColor, hoverPrice]);
+
+	//Fetching for stocks
+	useEffect(() => {
 		async function getStockHistoricalData() {
-			const data = await getStonks(range, ticker);
-			let stonk;
+			let data;
 			try {
 				switch (range) {
 					case '1w':
-						stonk = data['Time Series (15min)'];
-						const oneWeekTimeSeries = Object.keys(stonk);
-						const firstDate = new Date(
-							oneWeekTimeSeries[0].split(' ')[0].replace(/-/g, '/')
-						);
-						const checkDate = firstDate.setDate(firstDate.getDate() - 7);
-						const oneWeekDates = oneWeekTimeSeries.filter((date) => {
-							const newDate = new Date(date);
-
-							//Extract hours and minutes to compare
-							let hour = newDate.getHours();
-							hour = hour < 10 ? '0' + hour : hour;
-							const minute = newDate.getMinutes();
-							const time = `${hour}:${minute}`;
-
-							// filter one week of date between 9:30-4:00pm EST
-							return (
-								new Date(date.split(' ')[0].replace(/-/g, '/')).getTime() >=
-									checkDate &&
-								time >= '09:30' &&
-								time <= '16:00'
-							);
-						});
-						const oneWeekData = oneWeekDates.map((date) => ({
-							x: date,
-							y: stonk[date]['4. close']
-						}));
 						setType('numeric');
-						setSeries([{ data: oneWeekData.reverse() }]);
+						if (stockData.oneWeek.length) {
+							data = stockData.oneWeek;
+							break;
+						}
+						data = await stockFunctions.getOneWeekStockData(ticker);
+						await dispatch(stockActions.loadOneWeek(data));
 						break;
 					case '3m':
-						stonk = data['Time Series (Daily)'];
-						const timeSeries = Object.keys(data['Time Series (Daily)']);
-						const date = new Date(timeSeries[0].replace(/-/g, '/'));
-						const threeMonth = date.setMonth(date.getMonth() - 3);
-
-						// filter everyday for the last 3 months
-						const threeMonthDate = timeSeries.filter(
-							(date) =>
-								new Date(date.replace(/-/g, '/')).getTime() >= threeMonth
-						);
-						const prices = threeMonthDate.map((date) => ({
-							x: date,
-							y: stonk[date]['4. close']
-						}));
 						setType('datetime');
-						setSeries([{ data: prices.reverse() }]);
+						if (stockData.threeMonths.length) {
+							data = stockData.threeMonths;
+							break;
+						}
+						data = await stockFunctions.GetThreeMonthsStockData(ticker);
+						await dispatch(stockActions.loadThreeMonths(data));
 						break;
 					case '1y':
-						stonk = data['Time Series (Daily)'];
-						const oneYearSeries = Object.keys(stonk);
-						const one = new Date(oneYearSeries[0].replace(/-/g, '/'));
-						const OneYearLater = one.setFullYear(one.getFullYear() - 1);
-						const oneYearDate = oneYearSeries.filter(
-							(date) =>
-								new Date(date.replace(/-/g, '/')).getTime() >= OneYearLater
-						);
-						const oneYearPrices = oneYearDate.map((date) => ({
-							x: date,
-							y: stonk[date]['4. close']
-						}));
 						setType('datetime');
-						setSeries([{ data: oneYearPrices.reverse() }]);
+						if (stockData.oneYear.length) {
+							data = stockData.oneYear;
+							break;
+						}
+						data = await stockFunctions.getOneYearStockData(ticker);
+						await dispatch(stockActions.loadOneYear(data));
 						break;
 					case '5y':
-						stonk = data['Weekly Time Series'];
-						const fiveYearSeries = Object.keys(stonk);
-						const five = new Date(fiveYearSeries[0].replace(/-/g, '/'));
-						const fiveYearTime = five.setFullYear(five.getFullYear() - 5);
-						const fiveYearDate = fiveYearSeries.filter(
-							(date) =>
-								new Date(date.replace(/-/g, '/')).getTime() >= fiveYearTime
-						);
-						const fiveYearPrices = fiveYearDate.map((date) => ({
-							x: date,
-							y: stonk[date]['4. close']
-						}));
 						setType('datetime');
-						setSeries([{ data: fiveYearPrices.reverse() }]);
+						if (stockData.fiveYear.length) {
+							data = stockData.fiveYear;
+							break;
+						}
+						data = await stockFunctions.getFiveYearStockData(ticker);
+						await dispatch(stockActions.loadFiveYear(data));
 						break;
 				}
+				setSeries([{ data }]);
 			} catch {
 				setAPILimit(true);
 			}
 		}
-
 		getStockHistoricalData();
+		console.log(stockData);
 	}, [range]);
 
+	//Setting chart color
+	useEffect(() => {
+		// set data color
+		if (series[0].data.length) {
+			const startPrice = series[0].data[0].y;
+			const endPrice = series[0].data[series[0].data.length - 1].y;
+			setStartPrice(startPrice);
+			setEndPrice(endPrice);
+			if (startPrice - endPrice < 0) {
+				setChartColor(['#5AC53B', 'black']);
+			} else setChartColor(['#fd5240', 'black']);
+		}
+	}, [series, rangePeriod]);
+
+	//loading screen in api keys ran out
 	if (APILimit)
 		return (
 			<div className="graph-loading-screen">
 				OOPS WE BROKE AND ONLY GOT 5 api request/minute
 			</div>
 		);
+
+	//graph loading screen
 	if (!series[0].data.length)
 		return <div className="graph-loading-screen">Loading...</div>;
 
 	return (
-		<div id="chart-historical">
-			<Chart
-				options={{
-					chart: {
-						type: 'line',
-						toolbar: {
-							show: false
-						},
-						events: {
-							mouseMove: function (event, chartContext, config) {
-								const points = series[0].data[config.dataPointIndex]?.y;
-								setHoverPrice(Number(points).toFixed(2));
+		<div className="historical-graph-wrapper">
+			<div
+				className="percentDifference"
+				style={{ color: priceColor, display: 'flex' }}
+			>
+				<p>
+					${priceDifference} ({percentDifference}%){' '}
+				</p>
+				<p style={{ color: 'gray', paddingLeft: '1rem' }}>{rangePeriod}</p>
+			</div>
+			<div id="chart-historical">
+				<Chart
+					options={{
+						chart: {
+							type: 'line',
+							toolbar: {
+								show: false
 							},
-							mouseLeave: function () {
-								setHoverPrice(null);
+							events: {
+								mouseMove: function (event, chartContext, config) {
+									if (config.dataPointIndex != -1) {
+										const points = series[0].data[config.dataPointIndex]?.y;
+										setHoverPrice(Number(points).toFixed(2));
+										setRangePeriod('');
+									}
+								},
+								mouseLeave: function () {
+									setHoverPrice(null);
+									setRangePeriod(getRangePeriod(range));
+								}
+							},
+							zoom: {
+								enabled: false
 							}
 						},
-						zoom: {
-							enabled: false
-						}
-					},
-					xaxis: {
-						type: type,
-						labels: {
-							show: false
-						},
-						axisTicks: {
-							show: false
-						},
-						tooltip: {
-							offsetY: -200,
-							formatter: function (val, opts) {
-								switch (type) {
-									case 'datetime':
-										let date = new Date(val);
-										return date.toLocaleDateString();
-									case 'numeric':
-										let time = new Date(val);
-										return `${time.toLocaleString('en-US')}`;
+						xaxis: {
+							type: type,
+							labels: {
+								show: false
+							},
+							axisTicks: {
+								show: false
+							},
+							tooltip: {
+								offsetY: -200,
+								formatter: function (val, opts) {
+									switch (type) {
+										case 'datetime':
+											let date = new Date(val);
+											return date.toLocaleDateString();
+										case 'numeric':
+											let time = new Date(val);
+											return `${time.toLocaleString('en-US')}`;
+									}
 								}
 							}
-						}
-					},
-					yaxis: {
-						show: false
-					},
-					grid: {
-						show: false
-					},
-					stroke: {
-						width: 2
-					},
-					colors: chartColor,
-					tooltip: {
-						enabled: true,
-						items: {
-							display: 'none'
 						},
-						x: {
+						yaxis: {
+							show: false
+						},
+						grid: {
+							show: false
+						},
+						stroke: {
+							width: 2
+						},
+						colors: chartColor,
+						tooltip: {
+							enabled: true,
+							items: {
+								display: 'none'
+							},
+							x: {
+								show: false
+							}
+						},
+						legend: {
 							show: false
 						}
-					},
-					legend: {
-						show: false
-					}
-				}}
-				series={series}
-				type="line"
-				width="100%"
-				height="100%"
-			/>
+					}}
+					series={series}
+					type="line"
+					width="100%"
+					height="100%"
+				/>
+			</div>
 		</div>
 	);
 }

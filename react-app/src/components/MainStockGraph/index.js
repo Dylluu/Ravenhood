@@ -2,7 +2,9 @@ import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Chart from 'react-apexcharts';
 import MainStockPage from '../MainStockPage';
+import * as stockActions from '../../store/stocks';
 import './MainStockGraph.css';
+import { useDispatch, useSelector } from 'react-redux';
 
 const directionEmojis = {
 	up: '🔥',
@@ -19,7 +21,8 @@ async function getStonks(ticker) {
 
 function MainStockGraph() {
 	const { ticker } = useParams();
-
+	const stockData = useSelector((state) => state.stockData);
+	const dispatch = useDispatch();
 	// Data variables
 	const [series, setSeries] = useState({
 		data: []
@@ -102,6 +105,11 @@ function MainStockGraph() {
 		};
 	}, []);
 
+	useEffect(() => {
+		console.log(stockData);
+		dispatch(stockActions.cleanUpStockData());
+		console.log(stockData);
+	}, []);
 	// generate graph data point for open price,
 	// will trigger once open price has been set
 	useEffect(() => {
@@ -133,82 +141,85 @@ function MainStockGraph() {
 			<div className={['price', direction].join(' ')}>
 				${hoverPrice ? hoverPrice : price} {directionEmojis[direction]}
 			</div>
-			<div className="percentDifference" style={{ color: priceColor }}>
-				<div>
-					${priceDifference} ({percentDifference}%)
-				</div>
-			</div>
 			<div id="chart">
 				{showOneDay && (
-					<Chart
-						options={{
-							chart: {
-								type: 'line',
-								toolbar: {
-									show: false
-								},
-								events: {
-									mouseMove: function (event, chartContext, config) {
-										const points = series.data[config.dataPointIndex]?.y;
-										setHoverPrice(points?.toFixed(2));
+					<>
+						<div className="percentDifference" style={{ color: priceColor }}>
+							<div>
+								${priceDifference} ({percentDifference}%)
+							</div>
+						</div>
+						<Chart
+							options={{
+								chart: {
+									type: 'line',
+									toolbar: {
+										show: false
 									},
-									mouseLeave: function () {
-										setHoverPrice(null);
+									events: {
+										mouseMove: function (event, chartContext, config) {
+											const points = series.data[config.dataPointIndex]?.y;
+											setHoverPrice(points?.toFixed(2));
+										},
+										mouseLeave: function () {
+											setHoverPrice(null);
+										}
+									},
+									zoom: {
+										enabled: false
 									}
 								},
-								zoom: {
-									enabled: false
-								}
-							},
-							xaxis: {
-								type: 'datetime',
-								labels: {
+								xaxis: {
+									type: 'datetime',
+									labels: {
+										show: false
+									},
+									tooltip: {
+										offsetY: -200,
+										formatter: function (val, opts) {
+											let time = new Date(val);
+											return time.toLocaleTimeString([], {
+												hour: '2-digit',
+												minute: '2-digit'
+											});
+										}
+									}
+								},
+								yaxis: {
 									show: false
 								},
+								grid: {
+									show: false
+								},
+								stroke: {
+									width: [2, 2],
+									dashArray: [0, 10]
+								},
+								colors: chartColor,
 								tooltip: {
-									offsetY: -200,
-									formatter: function (val, opts) {
-										let time = new Date(val);
-										return time.toLocaleTimeString([], {
-											hour: '2-digit',
-											minute: '2-digit'
-										});
+									enabled: true,
+									items: {
+										display: 'none'
+									},
+									x: {
+										show: false
 									}
-								}
-							},
-							yaxis: {
-								show: false
-							},
-							grid: {
-								show: false
-							},
-							stroke: {
-								width: [2, 2],
-								dashArray: [0, 10]
-							},
-							colors: chartColor,
-							tooltip: {
-								enabled: true,
-								items: {
-									display: 'none'
 								},
-								x: {
+								legend: {
 									show: false
 								}
-							},
-							legend: {
-								show: false
-							}
-						}}
-						series={[series, openPriceData]}
-						type="line"
-						width="100%"
-						height="100%"
-					/>
+							}}
+							series={[series, openPriceData]}
+							type="line"
+							width="100%"
+							height="100%"
+						/>
+					</>
 				)}
 				<MainStockPage
 					setShowOneDay={setShowOneDay}
 					setHoverPrice={setHoverPrice}
+					hoverPrice={hoverPrice}
 					showOneDay={showOneDay}
 				/>
 			</div>
