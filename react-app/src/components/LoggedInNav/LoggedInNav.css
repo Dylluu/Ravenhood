@@ -81,8 +81,9 @@
     position: fixed;
     box-sizing: border-box;
     right: 55px;
-    height: 23px;
-    width: 55px;
+    height: 30px;
+    width: 51px;
+    border-bottom: solid 2px white;
     /* border: solid 1px blue; */
     cursor: pointer;
 }
@@ -92,6 +93,128 @@
     font-weight: 650;
 }
 
-.logged-in-nav-buttons:hover {
+#logged-in-nav-buttons-hover:hover {
     color: rgb(0, 200, 5);
+}
+
+.green-font {
+    color: rgb(0, 200, 5);
+}
+
+.account-menu-popout {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin-top: 229px;
+    margin-right: 225px;
+    width: 296px;
+    /* height: 220px; */
+    border: solid 1px rgb(224,224,232);
+    border-radius: 4px;
+    background-color: white;
+}
+
+.account-menu-popout:hover {
+    color: black;
+}
+
+.account-menu-popout-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 105px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: solid 1px rgb(224,224,232);
+    cursor: default;
+}
+
+.account-menu-popout-header-inner {
+    display: flex;
+    flex-direction: column;
+    width: 82.5%;
+    height: 80%;
+    margin-top: -10px;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-name {
+    display: flex;
+    align-items: center;
+    height: 50%;
+    max-width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    /* border: solid 1px blue; */
+}
+
+#account-menu-user {
+    cursor: text;
+}
+
+.account-menu-popout-amounts {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    width: 100%;
+    box-sizing: border-box;
+    /* border: solid 1px green; */
+}
+
+.account-menu-popout-portfolio-buying {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    /* border: solid 1px orange; */
+}
+
+.account-menu-popout-dollars {
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    cursor: text;
+    /* border: solid 1px red; */
+}
+
+.portfolio-buying {
+    font-size: 13px;
+    width: fit-content;
+    cursor: text;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-middle {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-middle-buttons {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    height: 45px;
+    width: 100%;
+    font-size: 13px;
+    cursor: pointer;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-middle-buttons:hover {
+    background-color:rgb(245,245,248);
+}
+
+#history-icon, #logout-icon {
+    margin-left: 20px;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+#account-menu-popout-logout {
+    border-top: solid 2px rgb(224,224,232);
 }
