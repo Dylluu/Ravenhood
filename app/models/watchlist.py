@@ -17,5 +17,7 @@ class Watchlist(db.Model):
     return {
       'id': self.id,
       'name': self.name,
-      'user_id': self.user_id
+      'user_id': self.user_id,
+
+      # watchlist_stocks = relationship("WatchlistStock", back_populates="watchlist", cascade="all, delete-orphan" )
     }
