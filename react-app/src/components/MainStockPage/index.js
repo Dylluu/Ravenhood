@@ -4,7 +4,12 @@ import { useParams } from 'react-router-dom';
 import MainStockHistoricalGraph from '../MainStockHistoricalGraph';
 import './MainStockPage.css';
 
-function MainStockPage({ setShowOneDay, setHoverPrice, showOneDay }) {
+function MainStockPage({
+	setShowOneDay,
+	setHoverPrice,
+	showOneDay,
+	hoverPrice
+}) {
 	const { ticker } = useParams();
 	const [showOneWeek, setShowOneWeek] = useState(false);
 	const [showOneMonth, setShowOneMonth] = useState(false);
@@ -54,6 +59,7 @@ function MainStockPage({ setShowOneDay, setHoverPrice, showOneDay }) {
 					setHoverPrice={setHoverPrice}
 					range={range}
 					tikcer={ticker}
+					hoverPrice={hoverPrice}
 				/>
 			)}
 			{showThreeMonth && (
@@ -61,6 +67,7 @@ function MainStockPage({ setShowOneDay, setHoverPrice, showOneDay }) {
 					setHoverPrice={setHoverPrice}
 					range={range}
 					tikcer={ticker}
+					hoverPrice={hoverPrice}
 				/>
 			)}
 			{showOneYear && (
@@ -68,6 +75,7 @@ function MainStockPage({ setShowOneDay, setHoverPrice, showOneDay }) {
 					setHoverPrice={setHoverPrice}
 					range={range}
 					tikcer={ticker}
+					hoverPrice={hoverPrice}
 				/>
 			)}
 			{showFiveYear && (
@@ -75,6 +83,7 @@ function MainStockPage({ setShowOneDay, setHoverPrice, showOneDay }) {
 					setHoverPrice={setHoverPrice}
 					range={range}
 					tikcer={ticker}
+					hoverPrice={hoverPrice}
 				/>
 			)}
 			<div className="range-options">
