@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import { login } from "../../../store/session";
 import './RealLoginForm.css';
 import loginFormImage from '../../../assets/loginFormImage.jpeg';
@@ -21,6 +21,13 @@ function RealLoginForm() {
         //   console.log('logging')
         }
       };
+
+    const demoLogin = async (e) => {
+        e.preventDefault()
+        // console.log('demologin')
+        await dispatch(login('demo@aa.io', 'password'));
+        return <Redirect to='/' />
+    }
 
       const updateEmail = (e) => {
         setEmail(e.target.value);
@@ -86,6 +93,7 @@ function RealLoginForm() {
                     value={email}
                     onChange={updateEmail}
                     name='email'
+                    required
                     ></input>
                     <span className="login-form-labels">Password</span>
                     <div className="password-div"
@@ -96,6 +104,7 @@ function RealLoginForm() {
                     value={password}
                     onChange={updatePassword}
                     name='password'
+                    required
                     ></input>
                     <div className="password-visibility"
                     onClick={() => handlePasswordIcon()}
@@ -108,9 +117,21 @@ function RealLoginForm() {
                     />
                     </div>
                     </div>
-                    <span className='demo-user-login'>Demo user login</span>
-                    <div onClick={onLogin} id="log-in-form-button">Log in</div>
-                    <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <span className="demo-user-login">Create an account</span></span>
+                    <span className='demo-user-login'
+                    onClick={demoLogin}
+                    >Demo user login</span>
+                    {Object.values(errors).length > 0 && (
+                      <div className="login-form-error">
+                        <i className="fa-solid fa-info"
+                        id="circle-i"
+                        ></i>
+                        <span
+                        className="unable-to-login"
+                        >Unable to login with provided credentials.</span>
+                      </div>
+                    )}
+                    <button type='submit' id="log-in-form-button">Log in</button>
+                    <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <NavLink to='/signup' className="demo-user-login">Create an account</NavLink></span>
                 </div>
             </form>
         </div>

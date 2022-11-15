@@ -1,0 +1,104 @@
+.main-container {
+  /* background-color: bisque; */
+  display: flex;
+  flex-direction:row;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+.watchlist {
+  min-width: 350px;
+  width: 60%;
+}
+.picture-holder {
+  width: 200px;
+}
+
+.picture {
+  width: 100px;
+}
+
+.small-picture {
+  width: 50px
+}
+
+.item-count {
+  /* background-color: lavender; */
+
+  opacity: 50%;
+  font-size: 14px;
+}
+
+
+.watchlist-header {
+  display: flex;
+  /* background-color: red; */
+  opacity: 50%;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid silver;
+
+}
+
+.watchlist-list-header {
+  display: flex;
+  /* background-color: red; */
+  opacity: 50%;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid silver;
+  justify-content: space-between;
+}
+
+.watchlist-data {
+  display: flex;
+  /* background-color: greenyellow; */
+  font-size: 14px;
+  padding: 9px 0px;
+  border-bottom: 1px solid silver;
+}
+
+.watchlist-select {
+
+  border: 1px solid rgb(227,233,237);
+  width: 40%;
+}
+
+.name-column {
+ width: 40%;
+ font-weight: 700;
+}
+
+.symbol-column {
+  width: 25%
+ }
+
+ .price-column {
+  width: 25%
+ }
+
+ .list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+ }
+
+ .list-name {
+  padding-top: 20px;
+ }
+
+.list-title {
+  color: rgb(0,0,0);
+  font-weight: 700;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 24px;
+}
+
+button {
+  border: none;
+  background-color: white;
+}

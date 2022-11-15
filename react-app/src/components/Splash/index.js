@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useHistory, NavLink } from 'react-router-dom';
 import './Splash.css';
 import repoImage from '../../assets/repo.png';
 import linkedInLogo from '../../assets/linkedinLogo.png';
@@ -8,7 +9,9 @@ import stockBlocks from '../../assets/stockBlocks.png';
 
 function Splash() {
     const [scrollNum, setScrollNum] = useState(1);
+    const [menuOpen, setMenuOpen] = useState(true);
     const [locked, setLocked] = useState(false);
+    const history = useHistory();
     function unlock() {
         setLocked(false)
     }
@@ -56,15 +59,14 @@ function Splash() {
         }
     }
 
-
     return (
         <div className='splash-wrapper'>
             <div className='slime-green'></div>
             <div className='splash-first'>
                 <div className='vertical-slime-green'></div>
                 <div className='splash-left'>
-                    <img id='splash-img' alt='phone-splash' src='https://sparrowhood-dev.s3.us-west-1.amazonaws.com/images/splash-phone.png' />
-                    <video src='https://sparrowhood-dev.s3.us-west-1.amazonaws.com/videos/splash-video.mp4'
+                    <img id='splash-img' alt='phone-splash' src='https://cdn.robinhood.com/assets/robinhood/brand/_next/static/images/2x__ff9c36e27d7018cf707b95d8675793a3.png' />
+                    <video src='https://cdn.robinhood.com/assets/robinhood/brand/_next/static/images/3x__327bf4cc768a323497d5aaa7416319c2.mp4'
                         autoPlay
                         muted
                         loop
@@ -82,15 +84,17 @@ function Splash() {
                     <p
                         id='on-your-terms'
                     >on your terms.</p>
-                    <div className='get-started'>Get Started</div>
-                    <div className='splash-popout'>
+                    <NavLink to='/signup' className='get-started'>Get Started</NavLink>
+                    {/* <div className='splash-popout'>
                         <span className='popout-nav'>Invest</span>
                         <span className='popout-nav'>Crypto</span>
-                        <span className='popout-nav'>Cash Card</span>
+                        <span className='popout-nav'
+                        onClick={() => history.push('/cash')}
+                        >Cash Card</span>
                         <span className='popout-nav'>Learn</span>
                         <span className='popout-nav'>Snacks</span>
                         <span className='popout-nav'>Support</span>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className='slime-green'></div>

@@ -1,0 +1,221 @@
+.logged-in-nav-wrapper {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 65px;
+    box-sizing: border-box;
+    background-color: white;
+    /* border: solid 1px red; */
+}
+
+.logged-in-feather {
+    height: 35px;
+    position: fixed;
+    top: 14px;
+    left: 53px;
+    filter: brightness(0%);
+    cursor: pointer;
+}
+
+.logged-in-feather:hover {
+    filter: none;
+}
+
+.logged-in-inner-wrapper {
+    display: flex;
+    align-items: center;
+    height: 60%;
+    width: 80%;
+    /* border: solid 1px red; */
+}
+
+.logged-in-search-bar-div {
+    display: flex;
+    height: 36px;
+    width: 478px;
+    align-items: center;
+    margin-left: 5%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: solid 1px rgb(232,232,240);
+    transition: box-shadow 300ms;
+}
+
+.logged-in-search-bar-div:hover {
+    border: solid 1px white;
+    box-shadow: 0 13px 20px 	#F0F0F0;
+}
+
+.logged-in-search-bar-div-focus {
+    border: solid 1px white;
+    box-shadow: 0 13px 20px 	#F0F0F0;
+}
+
+#magnifying-glass {
+    font-size: 17px;
+    color: rgb(106, 114, 120);
+    margin-left: 13px;
+    margin-right: 8px;
+    /* border: solid 1px blue; */
+}
+
+#search-stock {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+}
+
+#search-stock:focus {
+    outline: none;
+}
+
+.logged-in-nav-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    box-sizing: border-box;
+    right: 55px;
+    height: 30px;
+    width: 51px;
+    border-bottom: solid 2px white;
+    /* border: solid 1px blue; */
+    cursor: pointer;
+}
+
+#account {
+    font-size: 12px;
+    font-weight: 650;
+}
+
+#logged-in-nav-buttons-hover:hover {
+    color: rgb(0, 200, 5);
+}
+
+.green-font {
+    color: rgb(0, 200, 5);
+}
+
+.account-menu-popout {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin-top: 229px;
+    margin-right: 225px;
+    width: 296px;
+    /* height: 220px; */
+    border: solid 1px rgb(224,224,232);
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 7px 15px 	#F0F0F0;
+}
+
+.account-menu-popout:hover {
+    color: black;
+}
+
+.account-menu-popout-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 105px;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: solid 1px rgb(224,224,232);
+    cursor: default;
+}
+
+.account-menu-popout-header-inner {
+    display: flex;
+    flex-direction: column;
+    width: 82.5%;
+    height: 80%;
+    margin-top: -10px;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-name {
+    display: flex;
+    align-items: center;
+    height: 50%;
+    max-width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    /* border: solid 1px blue; */
+}
+
+#account-menu-user {
+    cursor: text;
+}
+
+.account-menu-popout-amounts {
+    display: flex;
+    flex-direction: row;
+    height: 50%;
+    width: 100%;
+    box-sizing: border-box;
+    /* border: solid 1px green; */
+}
+
+.account-menu-popout-portfolio-buying {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    /* border: solid 1px orange; */
+}
+
+.account-menu-popout-dollars {
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    cursor: text;
+    /* border: solid 1px red; */
+}
+
+.portfolio-buying {
+    font-size: 13px;
+    width: fit-content;
+    cursor: text;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-middle {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-middle-buttons {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    height: 45px;
+    width: 100%;
+    font-size: 13px;
+    cursor: pointer;
+    /* border: solid 1px red; */
+}
+
+.account-menu-popout-middle-buttons:hover {
+    background-color:rgb(245,245,248);
+}
+
+#history-icon, #logout-icon {
+    margin-left: 20px;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+#account-menu-popout-logout {
+    border-top: solid 2px rgb(224,224,232);
+}

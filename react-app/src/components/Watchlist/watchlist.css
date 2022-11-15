@@ -1,0 +1,187 @@
+.main-container {
+  /* background-color: bisque; */
+  display: flex;
+  flex-direction:row;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  left: 100px;
+  padding-top: 80px;
+}
+
+
+.watchlist {
+  min-width: 350px;
+  width: 70%;
+  padding-right: 40px;
+}
+.picture-holder {
+  width: 200px;
+}
+
+.picture {
+  width: 100px;
+}
+
+.small-picture {
+  width: 50px
+}
+
+.item-count {
+  /* background-color: lavender; */
+
+  opacity: 50%;
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+.watchlist-title {
+  padding-left: 20px;
+}
+
+.watchlist-header {
+  display: flex;
+  /* background-color: red; */
+  opacity: 50%;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid silver;
+
+}
+
+
+.watchlist-list-header {
+  display: flex;
+  /* background-color: red; */
+  opacity: 50%;
+  font-size: 14px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid silver;
+  justify-content: space-between;
+  padding-left: 7px;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+
+.watchlist-table {
+  padding-left: 20px;
+}
+
+.watchlist-data {
+  display: flex;
+  /* background-color: greenyellow; */
+  font-size: 14px;
+  padding: 9px 0px;
+  border-bottom: 1px solid silver;
+  border-right: 1px solid silver;
+  border-left: 1px solid silver;
+}
+
+.watchlist-select {
+
+  border: 1px solid rgb(227,233,237);
+  width: 40%;
+}
+
+.name-column {
+ width: 30%;
+ font-weight: 700;
+}
+
+.symbol-column {
+  width: 20%
+ }
+
+ .price-column {
+  width: 20%
+ }
+
+ .today-column {
+  width: 20%
+ }
+
+ .list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+ }
+
+ .list-name {
+  padding-top: 20px;
+ }
+
+.list-title {
+  color: rgb(0,0,0);
+  font-weight: 700;
+  border-left: 5px;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-form-input {
+  width: 250px;
+  height: 20px;
+  border: 1px solid silver;
+  margin-top: 15px;
+}
+
+.delete-button:hover, .options-button:hover, .add-button:hover {
+  color: lime;
+}
+
+.add-button {
+  font-size: 24px;
+}
+
+.cancel-button {
+  border-radius: 25px;
+  border: 1px solid rgb(0,200,5);
+  color: rgb(0,200,5);
+  padding: 10px 25px;
+  margin: 10px 15px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.create-list-button {
+  border-radius: 25px;
+  border: 1px solid rgb(0,200,5);
+  background-color: rgb(0,200,5);
+  color: white;
+  padding: 10px 25px;
+  margin: 10px 15px;
+  font-size: 13px;
+  font-weight: 800;
+
+}
+
+
+
+.options-menu {
+  border: 1px solid rgb(227,233,237);
+  display: flex;
+  flex-direction: column;
+  position:absolute;
+  right: 10px;
+  width: 100px
+}
+
+.options-button {
+  font-size: 12px;
+  padding-right: 20px;
+}
+
+
+h3 {
+  font-weight: 400;
+  font-size: 24px;
+
+}
+
+button {
+  border: none;
+  background-color: white;
+}
