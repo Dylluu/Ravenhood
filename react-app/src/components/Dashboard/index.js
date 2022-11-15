@@ -5,6 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Dashboard.css';
 
 function Dashboard () {
+
+    const user = useSelector(state => state.session.user);
+    function thousandsSeparator (value) {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     return (
         <div className='dashboard-wrapper'>
             <div className='dashboard-inner-wrapper'>
@@ -13,7 +19,7 @@ function Dashboard () {
                 <div className='buying-power-wrapper'>
                     <div className='buy-power-div'>
                         <span id='buying-power'>Buying Power</span>
-                        <span id='buying-power-amount'>$0.00</span>
+                        <span id='buying-power-amount'>${thousandsSeparator(user.buy_power)}</span>
                     </div>
                 </div>
                     <div className='dashboard-inner-left-borders'></div>
