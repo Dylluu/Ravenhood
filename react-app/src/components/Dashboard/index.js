@@ -11,6 +11,12 @@ function Dashboard () {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    // useEffect(() => {window.addEventListener('scroll', () => {
+    //         const dashboardWatchlist = document.getElementsByClassName('dashboard-watchlists-wrapper');
+    //         dashboardWatchlist[0].style.paddingTop = `${window.scrollY}`
+    //     })
+    // }, [])
+
     return (
         <div className='dashboard-wrapper'>
             <div className='dashboard-inner-wrapper'>
