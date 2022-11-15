@@ -54,11 +54,10 @@ function MainStockPage({ setShowOneDay, setHoverPrice }) {
 			)}
 			<div className="range-options">
 				<p onClick={() => showGraph('1d')}>1D</p>
-				<p>1W</p>
-				<p>1M</p>
+				<p onClick={() => showGraph('1w')}>1W</p>
 				<p onClick={() => showGraph('3m')}>3M</p>
-				<p>1Y</p>
-				<p>5Y</p>
+				<p onClick={() => showGraph('1y')}>1Y</p>
+				<p onClick={() => showGraph('5y')}>5Y</p>
 			</div>
 		</>
 	);
