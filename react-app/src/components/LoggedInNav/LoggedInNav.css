@@ -28,8 +28,10 @@
 .logged-in-inner-wrapper {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 60%;
-    width: 80%;
+    width: 96%;
+    max-width: 1367px;
     /* border: solid 1px red; */
 }
 
@@ -38,7 +40,7 @@
     height: 36px;
     width: 478px;
     align-items: center;
-    margin-left: 5%;
+    margin-right: 40%;
     box-sizing: border-box;
     border-radius: 4px;
     border: solid 1px rgb(232,232,240);
@@ -218,4 +220,15 @@
 
 #account-menu-popout-logout {
     border-top: solid 2px rgb(224,224,232);
+}
+
+@media (max-width: 1090px) {
+    .logged-in-inner-wrapper {
+        justify-content: flex-start;
+        margin-left: 90px;
+        min-width: none;
+    }
+    .logged-in-search-bar-div {
+        width: 48.63%;
+    }
 }
