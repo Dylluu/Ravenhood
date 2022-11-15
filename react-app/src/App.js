@@ -19,6 +19,8 @@ import CashCard from './components/CashCard';
 import Watchlist from './components/Watchlist';
 import LoggedInNav from './components/LoggedInNav';
 import Dashboard from './components/Dashboard';
+import Transactions from './components/Transaction';
+
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -79,6 +81,9 @@ function App() {
 				</ProtectedRoute>
 				<Route path="/" exact={true}>
 					<h1>My Home Page</h1>
+				</Route>
+				<Route path="/stocks/:symbol">
+					<Transactions />
 				</Route>
 			</Switch>
 		</BrowserRouter>
