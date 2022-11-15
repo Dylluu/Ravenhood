@@ -1,4 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
+from sqlalchemy.schema import Column, ForeignKey
 
 class WatchlistStocks(db.Model):
 
@@ -11,6 +14,7 @@ class WatchlistStocks(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   symbol = db.Column(db.String(6), nullable=False)
   watchlist_id = db.Column(db.Integer, db.ForeignKey('watchlists.id'), nullable=False)
+  watchlist = relationship("Watchlist", back_populates="watchlist_stocks")
 
   def to_dict(self):
     return {
