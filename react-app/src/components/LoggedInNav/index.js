@@ -13,6 +13,10 @@ function LoggedInNav () {
     const dispatch = useDispatch()
     const [accountMenuOpen, setAccountMenuOpen] = useState(false);
 
+    function thousandsSeparator (value) {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     function handleSearchInputShadow () {
         const searchInput = document.getElementById('search-stock');
         const searchDiv = document.getElementsByClassName('logged-in-search-bar-div');
@@ -101,7 +105,7 @@ function LoggedInNav () {
                                     <span className='portfolio-buying'>Portfolio Value</span>
                                 </div>
                                 <div className='account-menu-popout-portfolio-buying'>
-                                    <span className='account-menu-popout-dollars'>$0.00</span>
+                                    <span className='account-menu-popout-dollars'>${thousandsSeparator(user.buy_power)}</span>
                                     <span className='portfolio-buying'>Buying Power</span>
                                 </div>
                             </div>
