@@ -116,9 +116,10 @@ function LoggedInNav () {
                         </div>
                     </div>
                         <div className='account-menu-popout-middle-buttons' id='account-menu-popout-logout'
-                        onClick={() => {
-                            dispatch(logout())
-                            history.go(0)
+                        onClick={async () => {
+                            dispatch(logout()).then(() => history.go(0))
+                            // history.push('/')
+                            // setTimeout(() => {history.go(0)}, 200)
                         }
                         }
                         >
