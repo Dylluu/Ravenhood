@@ -1,12 +1,10 @@
 import React from 'react';
-import { useParams, NavLink, useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
 import { thunkGetAllWatchlist, thunkUpdateWatchlist } from '../../store/watchlist';
-// import testBird from '../../assets/testbird.png'
-// import User from '../User';
-// import { TickerSymbols } from '../../utils/stocksSymbols';
+
 const WatchlistForm = ({id}) => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -18,11 +16,8 @@ const WatchlistForm = ({id}) => {
   let lists
   const submitHandler = async (e) => {
     e.preventDefault()
-    let submitList= Object.values(watchlist.allWatchlists)
-    let count = Object.values(submitList).length
 
     let list = {
-      // id: count+1,
       name,
       watchlistId
     }
