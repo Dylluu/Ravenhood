@@ -112,6 +112,7 @@
     border: solid 1px rgb(224,224,232);
     border-radius: 4px;
     background-color: white;
+    box-shadow: 0 7px 15px 	#F0F0F0;
 }
 
 .account-menu-popout:hover {

@@ -8,6 +8,7 @@ import logoGreen from '../../assets/robinHoodFeatherGreen.png';
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
 function LoggedInNav () {
+    const history = useHistory();
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch()
     const [accountMenuOpen, setAccountMenuOpen] = useState(false);
@@ -52,14 +53,25 @@ function LoggedInNav () {
     //     }
     // }, [accountMenuOpen])
 
+    function handleWindowClick () {
+        const accountButton = document.getElementById('account');
+        const accountDiv = document.getElementsByClassName('logged-in-nav-buttons');
+        if(accountMenuOpen) {
+            accountButton.classList.remove('green-font')
+            accountDiv[0].style.borderBottom = 'solid 2px white'
+            accountDiv[0].setAttribute('id', 'logged-in-nav-buttons-hover')
+            setAccountMenuOpen(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('click', handleWindowClick)
+    })
+
 
     return (
         <div className='logged-in-nav-wrapper'>
-            <img alt='feather' src={logoGreen} className='logged-in-feather'
-            onClick={() => {
-                console.log('logging out')
-                dispatch(logout())}}
-            />
+            <img alt='feather' src={logoGreen} className='logged-in-feather'/>
             <div className='logged-in-inner-wrapper'>
                 <div className='logged-in-search-bar-div'>
                 <i className="fa-solid fa-magnifying-glass" id='magnifying-glass'/>
@@ -69,7 +81,10 @@ function LoggedInNav () {
                 ></input>
                 </div>
             <div className='logged-in-nav-buttons' id='logged-in-nav-buttons-hover'
-            onClick={() => handleMenuOpen()}
+            onClick={(e) => {
+                e.stopPropagation()
+                handleMenuOpen()
+            }}
             >
                 <span id='account'>Account</span>
                 {accountMenuOpen && <div className='account-menu-popout'
@@ -100,7 +115,13 @@ function LoggedInNav () {
                             <span>Transaction History</span>
                         </div>
                     </div>
-                        <div className='account-menu-popout-middle-buttons' id='account-menu-popout-logout'>
+                        <div className='account-menu-popout-middle-buttons' id='account-menu-popout-logout'
+                        onClick={() => {
+                            dispatch(logout())
+                            history.go(0)
+                        }
+                        }
+                        >
                             <i className="fa-solid fa-arrow-right-from-bracket" id='logout-icon'/>
                             <span>Logout</span>
                         </div>
