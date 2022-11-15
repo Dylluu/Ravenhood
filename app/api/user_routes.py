@@ -23,6 +23,3 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
-
-# @user_routes.routes("/new", methods=["GET", "POST"])
-# def add_user():

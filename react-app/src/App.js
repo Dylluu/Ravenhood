@@ -15,6 +15,8 @@ import MainStockGraph from './components/MainStockGraph';
 import SmallStockGraph from './components/SmallStockGraph';
 import CashCard from './components/CashCard';
 import Watchlist from './components/Watchlist';
+import Transactions from './components/Transaction';
+
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -56,8 +58,8 @@ function App() {
 					<CashCard />
 				</Route>
 				<Route path="/watchlists/:watchlistId">
-					<TopNaviagtion/>
-					<Watchlist/>
+					<TopNaviagtion />
+					<Watchlist />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
@@ -67,6 +69,9 @@ function App() {
 				</ProtectedRoute>
 				<Route path="/" exact={true}>
 					<h1>My Home Page</h1>
+				</Route>
+				<Route path="/stocks/:symbol">
+					<Transactions />
 				</Route>
 			</Switch>
 		</BrowserRouter>

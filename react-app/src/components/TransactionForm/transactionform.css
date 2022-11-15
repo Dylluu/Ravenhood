@@ -1,0 +1,63 @@
+.transaction-container {
+    border: 3px solid blue;
+    height: 447px;
+    max-width: 330px;
+    min-width: 232px;
+}
+
+.buy-sell-container {
+    border: 3px solid orange;
+    height: 52px;
+    display: flex;
+    align-items: center;
+}
+
+.transaction-type-button {
+    border: 3px solid yellow;
+    height: 48px;
+    padding: 2px;
+    font-size: 15px;
+}
+
+.transaction-type-button:active {
+    color: #c3f53c;
+    border-bottom: 3px solid #c3f53c;
+}
+
+.transaction-form-container {
+    border: 3px solid green;
+    height: 347px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.transaction-form-divs {
+    border: 3px solid pink;
+    height: 48px;
+    max-width: 280px;
+    width: 280px;
+    min-width: 206px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.review-order-button {
+    border: 1px solid red;
+    height: 44px;
+    max-width: 280px;
+    width: 280px;
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+.buying-power-container {
+    border: 3px solid red;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
