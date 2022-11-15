@@ -81,6 +81,16 @@
     border-top: solid 1px rgb(224,224,232);
 }
 
+@media (max-width: 1440px) {
+    .dashboard-wrapper {
+        justify-content: flex-start;
+    }
+    .dashboard-inner-wrapper {
+        margin-left: 34px;
+        margin-right: 20px;
+    }
+}
+
 /* Watchlist CSS start */
 
 .dashboard-watchlists-wrapper {
