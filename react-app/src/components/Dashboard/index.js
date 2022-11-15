@@ -6,7 +6,8 @@ import './Dashboard.css';
 import testBird from '../../assets/testbird.png'
 import WatchlistExpand from './watchlist-expand'
 import WatchlistForm from '../Watchlist/watchlistForm';
-import { thunkGetAllStocks, thunkGetAllWatchlist, thunkGetOneWatchlist } from '../../store/watchlist';
+
+import { thunkGetAllStocks, thunkGetAllWatchlist, thunkGetOneWatchlist, thunkDeleteWatchlist} from '../../store/watchlist';
 
 function Dashboard () {
 
@@ -23,6 +24,8 @@ function Dashboard () {
     useEffect(() => {
         dispatch(thunkGetAllWatchlist(user_id))
     }, [dispatch])
+
+
 
     if (watchlist.allWatchlists) {
         lists = Object.values(watchlist.allWatchlists)
@@ -58,7 +61,9 @@ function Dashboard () {
                     </div>}
                     <div className='watchlist-list-body'>
                         {lists && lists.map(list => (
-                            <WatchlistExpand list = {list} id = {list.id}/>
+                            <div className='watchlist-list-row'>
+                                <WatchlistExpand list = {list} id = {list.id}/>
+                            </div>
                         ))}
                     </div>
                 </div>

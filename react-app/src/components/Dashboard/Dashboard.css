@@ -108,7 +108,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%
 }
 
 .watchlist-list {
@@ -136,18 +135,24 @@
 }
 
 .watchlist-picture {
-    width: 30px;
+    width: 40px;
 }
 
 .watchlist-navlink {
     margin-top: 5px;
-    max-width: 200px;
+    max-width: 35%;
+    min-width: 35%;
 }
 
-.watchlist-list:hover {
+.watchlist-navlink:hover {
     background-color: rgb(238, 238, 235);
 
 }
+
+.watchlist-menu-button {
+    visibility: visible;
+}
+
 
 .watchlist-stocks-body {
     display: flex;
@@ -161,5 +166,9 @@
     flex-direction: column;
 }
 
+.watchlist-list-row {
+    justify-content: space-between;
+
+}
 
 /* Watchlist CSS End */

@@ -8,7 +8,12 @@ function WatchlistFromModal({id}) {
 
   return (
     <>
-      <button className='options-button' onClick={() => setShowModal(true)}>Edit Watchlist</button>
+      <button className='options-button' onClick={() => setShowModal(true)}>
+        <div className='options-icon-text'>
+          <i class="fa-solid fa-gear"></i> Edit List
+        </div>
+
+        </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <WatchlistForm id ={id}/>
