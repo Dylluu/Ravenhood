@@ -73,7 +73,7 @@ def get_all_watchlist_stocks(id):
   """
   Allows user to get all stocks on a watchlist
   """
-  stocks = WatchlistStocks.query.filter(WatchlistStocks.watchlist_id == id)
+  stocks = WatchlistStocks.query.all()
   return {"stocks": [stock.to_dict() for stock in stocks]}
 
 

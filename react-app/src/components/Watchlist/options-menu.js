@@ -20,7 +20,9 @@ function Options ({list, deleteWatchlist, id})  {
     }}>...</button>
     {options &&<div class="options-menu">
       <WatchlistFromModal id = {id}/>
-      <div> <button class="options-button" onClick={() => deleteWatchlist(list)}>Delete Watchlist </button> </div>
+      <div>
+        <button class="options-button" onClick={() => deleteWatchlist(list)}>Delete Watchlist </button>
+      </div>
     </div>}
   </div>
   </div>

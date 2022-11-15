@@ -20,6 +20,7 @@ function Watchlist(){
   const user_id = useSelector(state => state.session.user.id)
   let stocks
   let lists
+  let count
 
   useEffect(() => {
     dispatch(thunkGetAllWatchlist(user_id))
@@ -57,7 +58,10 @@ function Watchlist(){
           <h3>Watchlist Template</h3>
         </div>
         <div class="item-count">
-          {watchlist.allStocks?<p> {Object.keys(watchlist.allStocks).length} items</p>:'nope'}
+
+          {stocks && watchlist.allStocks? <p> {stocks.filter(stock => {
+            return stock.watchlist_id == watchlistId
+          }).length} items</p>:'nope'}
         </div>
         <div class="watchlist-table">
           <div class="watchlist-header">
@@ -70,13 +74,18 @@ function Watchlist(){
           {/* <!-- this section gets for looped to include all stocks in watchlist --> */}
           {stocks && stocks.map(stock => {
             // eventually put name-column/symbol column in a navlink together
+            if (parseInt(stock.watchlist_id) === parseInt(watchlistId)) {
             return <div class="watchlist-data">
             <div class="name-column">{TickerSymbols[stock.symbol].name}</div>
+            <div>{stock.watchlist_id} </div>
+            {/* <div> {stock.watchlist_id === watchlistId ? watchlistId :''}  </div> */}
             <div class="symbol-column">{stock.symbol}</div>
             <div class="price-column">temp price</div>
             <div class="today-column">temp today </div>
             <button class="delete-button" onClick={() =>deleteStock(stock)}>X</button>
             </div>
+            }
+
           })}
           {/* <!-- button will delete the stock from the watchlist --> */}
 
@@ -95,7 +104,7 @@ function Watchlist(){
           </div>}
         {lists && lists.map( list=> (
           <div>
-            {list.id}
+
             <Options list = {list} deleteWatchlist = {deleteWatchlist} id = {list.id}/>
           </div>
         ))}
