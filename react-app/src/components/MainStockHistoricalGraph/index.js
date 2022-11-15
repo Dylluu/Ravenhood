@@ -146,6 +146,7 @@ function MainStockHistoricalGraph({ setHoverPrice, range }) {
 							y: stonk[date]['4. close']
 						}));
 						setType('datetime');
+						console.log(fiveYearPrices);
 						setSeries([{ data: fiveYearPrices.reverse() }]);
 						break;
 				}
