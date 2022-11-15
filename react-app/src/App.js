@@ -11,6 +11,8 @@ import { authenticate } from './store/session';
 import TopNaviagtion from './components/TopNavigation';
 import RealLoginForm from './components/auth/RealLoginForm';
 import Splash from './components/Splash';
+import MainStockPage from './components/MainStockPage';
+import MainStockHistoricalGraph from './components/MainStockHistoricalGraph';
 import MainStockGraph from './components/MainStockGraph';
 import SmallStockGraph from './components/SmallStockGraph';
 import CashCard from './components/CashCard';
@@ -20,7 +22,7 @@ import Dashboard from './components/Dashboard';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
-	const user = useSelector(state => state.session.user);
+	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -40,15 +42,16 @@ function App() {
 			<Switch>
 				<Route exact path="/">
 					{!user && (
-					<>
-					<TopNaviagtion />
-					<Splash />
-					</>)}
+						<>
+							<TopNaviagtion />
+							<Splash />
+						</>
+					)}
 					{user && (
-					<>
-					<LoggedInNav />
-					<Dashboard />
-					</>
+						<>
+							<LoggedInNav />
+							<Dashboard />
+						</>
 					)}
 				</Route>
 				<Route path="/login" exact={true}>
@@ -57,19 +60,16 @@ function App() {
 				<Route path="/signup" exact={true}>
 					<SignUpForm />
 				</Route>
-				<Route path="/nhut">
+				<Route path="/stocks/:ticker">
 					<MainStockGraph />
-				</Route>
-				<Route path="/linh">
-					<SmallStockGraph />
 				</Route>
 				<Route path="/cash">
 					<TopNaviagtion />
 					<CashCard />
 				</Route>
 				<Route path="/watchlists/:watchlistId">
-					<TopNaviagtion/>
-					<Watchlist/>
+					<TopNaviagtion />
+					<Watchlist />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />

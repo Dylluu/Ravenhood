@@ -1,15 +1,26 @@
-.apexcharts-xaxistooltip {
+#chart .apexcharts-xaxistooltip {
     background: transparent;
     border: none;
-    margin-top: 4px;
     padding-bottom: 0;
     font-weight: bold;
 }
 
-.apexcharts-xaxistooltip-bottom:before {
+#chart .apexcharts-xaxistooltip-bottom:before {
     opacity: 0
 }
 
-.apexcharts-xaxistooltip-bottom:after {
+#chart .apexcharts-xaxistooltip-bottom:after {
     opacity: 0
+}
+
+
+#chart{
+    height: 300px;
+    width: 900px;
+}
+.main-stock-page-wrapper {
+    border: 5px solid pink;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100vh;
 }

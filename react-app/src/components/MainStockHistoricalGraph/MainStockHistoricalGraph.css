@@ -1,0 +1,27 @@
+#chart-historical {
+    height: 300px;
+    width: 900px;
+}
+#chart-historical .apexcharts-xaxistooltip {
+    background: transparent;
+    border: none;
+    padding-bottom: 0;
+    font-weight: bold;
+}
+
+#chart-historical  .apexcharts-xaxistooltip-bottom:before {
+    opacity: 0
+}
+
+#chart-historical  .apexcharts-xaxistooltip-bottom:after {
+    opacity: 0
+}
+
+
+.graph-loading-screen{
+    height: 300px;
+    width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
