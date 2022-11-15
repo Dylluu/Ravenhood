@@ -77,6 +77,7 @@
     width: 23.75%;
     box-sizing: border-box;
     border: solid 1px rgb(224,224,232);
+    border-radius: 4px;
 }
 
 .dashboard-inner-left-borders {
