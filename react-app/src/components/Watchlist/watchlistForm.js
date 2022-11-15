@@ -1,12 +1,10 @@
 import React from 'react';
-import { useParams, NavLink, useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { useState,} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
-import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkGetAllStocks, thunkDeleteStocks, thunkDeleteWatchlist, thunkPostWatchlist } from '../../store/watchlist';
-// import testBird from '../../assets/testbird.png'
-// import User from '../User';
-// import { TickerSymbols } from '../../utils/stocksSymbols';
+import { thunkGetAllWatchlist, thunkPostWatchlist } from '../../store/watchlist';
+
 const WatchlistForm = () => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -14,15 +12,13 @@ const WatchlistForm = () => {
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
   const [name, setName] = useState("")
+  const [add, setAdd] = useState(true)
   let stocks
   let lists
   const submitHandler = async (e) => {
     e.preventDefault()
-    let submitList= Object.values(watchlist.allWatchlists)
-    let count = Object.values(submitList).length
 
     let list = {
-      // id: count+1,
       name,
       user_id
     }
@@ -32,16 +28,22 @@ const WatchlistForm = () => {
     history.push(`/watchlists/${watchlistId}`)
   }
 
-  return <div>
-    <form onSubmit={submitHandler}>
-    <input
-    type="text"
-    name="name"
-    onChange={(e) => setName(e.target.value)}
-    value={name}
-    />
-    <button type="submit">Add List</button>
-    </form>
+  return <div >
+      {add&&<form onSubmit={submitHandler} className='add-form'>
+      <input
+      className='add-form-input'
+      type="text"
+      name="name"
+      onChange={(e) => setName(e.target.value)}
+      value={name}
+      />
+      <div>
+        <button className='cancel-button' onClick={() => {
+          add == false ? setAdd(true): setAdd(false)
+        }}>Cancel</button>
+        <button className='create-list-button' type="submit">Create List</button>
+      </div>
+      </form>}
   </div>
 }
 

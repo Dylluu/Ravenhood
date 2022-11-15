@@ -10,11 +10,11 @@ import Options from './options-menu';
 import WatchlistForm from './watchlistForm';
 import WatchlistUpdate from './watchlistUpdate'
 import { TickerSymbols } from '../../utils/stocksSymbols';
-
 function Watchlist(){
   const dispatch = useDispatch()
   const history = useHistory()
   const [options, setOptions] = useState(false)
+  const [add, setAdd] = useState(false)
   const { watchlistId } = useParams()
   const watchlist = useSelector(state => state.watchlist)
   const user_id = useSelector(state => state.session.user.id)
@@ -64,6 +64,7 @@ function Watchlist(){
             <div class="name-column">Name</div>
             <div class="symbol-column">Symbol</div>
             <div class="price-column">Price</div>
+            <div class="today-column">Today</div>
           </div>
 
           {/* <!-- this section gets for looped to include all stocks in watchlist --> */}
@@ -73,6 +74,7 @@ function Watchlist(){
             <div class="name-column">{TickerSymbols[stock.symbol].name}</div>
             <div class="symbol-column">{stock.symbol}</div>
             <div class="price-column">temp price</div>
+            <div class="today-column">temp today </div>
             <button class="delete-button" onClick={() =>deleteStock(stock)}>X</button>
             </div>
           })}
@@ -84,8 +86,13 @@ function Watchlist(){
       <div class="watchlist-select">
         <div class="watchlist-list-header">
           <h2 class="list-title">Lists</h2>
-          <button class="add-button">+</button>
+          <button class="add-button" onClick={() => {
+            add == false ? setAdd(true): setAdd(false)
+          }}>+</button>
         </div>
+        {add && <div>
+           <WatchlistForm add = {add}/>
+          </div>}
         {lists && lists.map( list=> (
           <div>
             {list.id}
@@ -93,10 +100,7 @@ function Watchlist(){
           </div>
         ))}
           {/* temporary stuff */}
-          <div>
-           Add Form<WatchlistForm/>
-           Update Form<WatchlistUpdate />
-          </div>
+
 
 
           {/* <div>

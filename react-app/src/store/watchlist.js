@@ -137,10 +137,9 @@ export const thunkDeleteStocks = (stock) => async dispatch => {
   })
   if (response.ok) {
     const stock = await response.json()
-    // dispatch(deleteStocks(stock))
+    dispatch(deleteStocks(stock))
     return stock
   }
-  // this one may not work
 }
 
 const initialState = {}
