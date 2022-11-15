@@ -108,23 +108,6 @@ function Watchlist(){
             <Options list = {list} deleteWatchlist = {deleteWatchlist} id = {list.id}/>
           </div>
         ))}
-          {/* temporary stuff */}
-
-
-
-          {/* <div>
-            <form onSubmit={submitHandler}>
-            <input
-            type="text"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            />
-            <button type="submit">Add List</button>
-            </form>
-          </div> */}
-        {/* <!-- this section will be looped to create different lists  --> */}
-
       </div>
   </div>
   )

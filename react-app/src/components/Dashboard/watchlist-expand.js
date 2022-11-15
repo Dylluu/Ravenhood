@@ -4,13 +4,14 @@ import { useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Dashboard.css'
 import testBird from '../../assets/testbird.png'
-import { thunkGetAllStocks, thunkGetOneWatchlist, thunkGetAllWatchlist} from '../../store/watchlist';
-
+import { thunkGetAllStocks, thunkGetOneWatchlist, thunkGetAllWatchlist, thunkDeleteWatchlist} from '../../store/watchlist';
+import PortfolioOptions from './watchlist-menu';
 
 
 function WatchlistExpand ({list, id})  {
   const dispatch = useDispatch()
   const [expand, setExpand] = useState(false)
+  const [menu, setMenu] = useState(false)
   const user_id = useSelector(state => state.session.user.id)
   const watchlist = useSelector(state => state.watchlist)
 
@@ -23,6 +24,11 @@ function WatchlistExpand ({list, id})  {
     dispatch(thunkGetAllStocks(id))
   }, [dispatch], expand)
 
+  const deleteWatchlist = async(list) => {
+    await dispatch(thunkDeleteWatchlist(list.id))
+    await dispatch(thunkGetAllWatchlist(user_id))
+  }
+
   if (watchlist.allStocks) {
     stocks = Object.values(watchlist.allStocks)
   }
@@ -33,13 +39,14 @@ function WatchlistExpand ({list, id})  {
   return <div className='watchlist-list-body'>
     <div>
       <div className='watchlist-list'>
-      <img class="watchlist-picture" src={testBird}/>
-        <NavLink to={`/watchlists/${list.id}`} exact={true} className="watchlist-navlink">
-          {list.name}
-        </NavLink>
-        <button class="watchlist-expand-button" onClick={() => {
-          expand ==false ? setExpand(true): setExpand(false)
-        }}>{expand==false? 'v' : '^'}</button>
+        <img class="watchlist-picture" src={testBird}/>
+          <NavLink to={`/watchlists/${list.id}`} exact={true} className="watchlist-navlink">
+            {list.name.length >8? list.name.slice(0,11) + "..." : list.name }
+          </NavLink>
+          <PortfolioOptions list = {list} deleteWatchlist = {deleteWatchlist} id = {list.id}/>
+          <button class="watchlist-expand-button" onClick={() => {
+            expand ==false ? setExpand(true): setExpand(false)
+          }}>{expand==false? 'v' : '^'}</button>
 
       </div>
       {expand && <div>
