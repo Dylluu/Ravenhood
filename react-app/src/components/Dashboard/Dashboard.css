@@ -33,7 +33,7 @@
 
 .dashboard-graph-wrapper {
     display: flex;
-    height: 353px;
+    height: 373px;
     width: 100%;
     box-sizing: border-box;
     border: solid 1px turquoise;
@@ -41,10 +41,13 @@
 
 .buying-power-wrapper {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     min-width: 104%;
-    height: 91.5px;
+    height: 73px;
+    margin-top: 20px;
+    margin-bottom: -1px;
     box-sizing: border-box;
+    /* border: solid 1px red; */
     /* border-bottom: solid 1px rgb(224,224,232); */
 }
 
@@ -53,7 +56,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 70px;
+    height: 73px;
     font-size: 15px;
     font-weight: 550;
     /* border: solid 1px green; */

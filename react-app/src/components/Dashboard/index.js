@@ -7,9 +7,12 @@ import testBird from '../../assets/testbird.png'
 import WatchlistExpand from './watchlist-expand'
 import WatchlistForm from '../Watchlist/watchlistForm';
 import { thunkGetAllStocks, thunkGetAllWatchlist, thunkGetOneWatchlist } from '../../store/watchlist';
+import { thunkAddBuyPower } from '../../store/session';
 
 function Dashboard () {
 
+    const [buy_power, setBuyPower] = useState('');
+    const [buyPowerOpen, setBuyPowerOpen] = useState(false);
     const user = useSelector(state => state.session.user);
     function thousandsSeparator (value) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -32,6 +35,11 @@ function Dashboard () {
     //         dashboardWatchlist[0].style.paddingTop = `${window.scrollY}`
     //     })
     // }, [])
+
+    const addBuyPower = async (e) => {
+        e.preventDefault();
+        const data = await dispatch(thunkAddBuyPower(buy_power));
+    }
 
     return (
         <div className='dashboard-wrapper'>
