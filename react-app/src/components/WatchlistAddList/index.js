@@ -7,16 +7,21 @@ import {
 	thunkGetAllStocks,
 	thunkDeleteStocks,
 	thunkDeleteWatchlist,
-	thunkPostWatchlist
+	thunkPostWatchlist,
+  thunkPostStocks
 } from '../../store/watchlist';
+import { useParams } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 // import WatchlistFromModal from '../Watchlist/edit-watchlist-model';
 
 function WatchlistAddList(symbol) {
   const dispatch = useDispatch()
+  // const { symbol } = useParams();
   const [add, setAdd] = useState(false);
+  const [addListId, setAddListId] = useState()
   const watchlist = useSelector((state) => state.watchlist);
 	const user_id = useSelector((state) => state.session.user.id);
+  const newLists = useSelector ((state) => state.watchlist.AllWatchlists)
   let lists;
 
   useEffect(
@@ -28,19 +33,36 @@ function WatchlistAddList(symbol) {
 
   if (watchlist.allWatchlists) {
 		lists = Object.values(watchlist.allWatchlists);
-	}
+	}const submitHandler = async (e) => {
+    e.preventDefault()
+    let data = {
+      symbol: symbol.symbol,
+      watchlist_id: addListId
+    }
+
+    await dispatch(thunkPostStocks(data))
+    await dispatch(thunkGetAllWatchlist(user_id))
+    setAdd(false)
+    // history.push(`/watchlists/${watchlistId}`)
+  }
+
+
   return (
     <div>
       <button className='add-list-button' onClick={() => add == false? setAdd(true): setAdd(false)}>Add to List</button>
-      {/* {add && <WatchlistFromModal></WatchlistFromModal>} */}
       {add && <Modal>
-        <form className='add-form'>
-          <div>{`Add ${symbol} to your list `}</div>
-          <select name="add_list">
-
-          </select>
-        </form>
+        <form className='add-form' onSubmit={submitHandler}>
+          <div>{`Add ${symbol.symbol} to your list `}</div>
+          {lists && lists.map((list) => (
+            <div>
+              <input type="radio" id={list.id} name={'lists'} onChange={() => setAddListId(list.id)} value={list.id}/>
+              <label for={list.id}> {list.name}</label>
+            </div>
+          ))}
         <button className="cancel-button" onClick={() => add == false? setAdd(true): setAdd(false)}>Cancel</button>
+        <button className='create-list-button' type="submit">Add List</button>
+        </form>
+
       </Modal>}
     </div>
   )
