@@ -5,6 +5,7 @@ import MainStockPage from '../MainStockPage';
 import * as stockActions from '../../store/stocks';
 import './MainStockGraph.css';
 import { useDispatch, useSelector } from 'react-redux';
+import useSiteColorContext from '../../context/SiteColor';
 
 const directionEmojis = {
 	up: '🔥',
@@ -19,14 +20,17 @@ async function getStonks(ticker) {
 	return response.json();
 }
 
+const DoNothing = () => {};
 function MainStockGraph() {
 	const { ticker } = useParams();
 	const stockData = useSelector((state) => state.stockData);
+	const { setSiteColor } = useSiteColorContext();
 	const dispatch = useDispatch();
 	// Data variables
 	const [series, setSeries] = useState({
 		data: []
 	});
+
 	const [openPriceData, setOpenPriceData] = useState({
 		data: []
 	});
@@ -42,8 +46,8 @@ function MainStockGraph() {
 	const [openPrice, setOpenPrice] = useState(null);
 
 	// chart and price display color variables
-	const [chartColor, setChartColor] = useState(['#5AC53B']);
-	const [priceColor, setPriceColor] = useState('#5AC53B');
+	const [chartColor, setChartColor] = useState(['#00c805']);
+	const [priceColor, setPriceColor] = useState('#00c805');
 
 	// trading period variable for graphing full day
 	const [tradingPeriods, setTradingPeriods] = useState({});
@@ -58,8 +62,8 @@ function MainStockGraph() {
 
 	useEffect(() => {
 		// getting the price/percentage different from open price
-		if (percentDifference > 0) setPriceColor('#5AC53B');
-		else setPriceColor('#fd5240');
+		if (percentDifference > 0) setPriceColor('#00c805;');
+		else setPriceColor('#ff5404');
 	}, [chartColor, hoverPrice]);
 
 	useEffect(() => {
@@ -67,6 +71,7 @@ function MainStockGraph() {
 		async function getLatestPrice() {
 			try {
 				const data = await getStonks(ticker);
+				console.log(data);
 				const stonk = data.chart.result[0];
 				setPrevPrice(price);
 				setPrice(stonk.meta.regularMarketPrice.toFixed(2));
@@ -90,8 +95,12 @@ function MainStockGraph() {
 				setStartPrice(startPrice);
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
-					setChartColor(['#5AC53B', 'black']);
-				} else setChartColor(['#fd5240', 'black']);
+					showOneDay ? setSiteColor('green') : DoNothing();
+					setChartColor(['#00c805;', 'black']);
+				} else {
+					showOneDay ? setSiteColor('red') : DoNothing();
+					setChartColor(['#ff5404', 'black']);
+				}
 			} catch (error) {
 				console.log(error);
 			}
@@ -103,12 +112,10 @@ function MainStockGraph() {
 		return () => {
 			clearTimeout(timeoutId);
 		};
-	}, []);
+	}, [showOneDay]);
 
 	useEffect(() => {
-		console.log(stockData);
 		dispatch(stockActions.cleanUpStockData());
-		console.log(stockData);
 	}, []);
 	// generate graph data point for open price,
 	// will trigger once open price has been set

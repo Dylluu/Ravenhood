@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MainStockHistoricalGraph from '../MainStockHistoricalGraph';
+import useSiteColorContext from '../../context/SiteColor';
 import './MainStockPage.css';
 
 function MainStockPage({
@@ -10,12 +11,15 @@ function MainStockPage({
 	showOneDay,
 	hoverPrice
 }) {
+	const { siteColor } = useSiteColorContext();
 	const { ticker } = useParams();
 	const [showOneWeek, setShowOneWeek] = useState(false);
 	const [showThreeMonth, setShowThreeMonth] = useState(false);
 	const [showOneYear, setShowOneYear] = useState(false);
 	const [showFiveYear, setShowFiveYear] = useState(false);
 	const [range, setRange] = useState(null);
+	const [hoverColor, setHoverColor] = useState(null);
+	const [selectedColor, setSelectedColor] = useState(null);
 
 	const showGraph = (range) => {
 		setShowOneDay(false);
@@ -46,6 +50,13 @@ function MainStockPage({
 				break;
 		}
 	};
+
+	useEffect(() => {
+		const color = siteColor == 'green' ? 'selected-green' : 'selected-red';
+		const hover = siteColor == 'green' ? 'hover-green' : 'hover-red';
+		setHoverColor(hover);
+		setSelectedColor(color);
+	}, [siteColor]);
 	return (
 		<>
 			{showOneWeek && (
@@ -82,37 +93,46 @@ function MainStockPage({
 			)}
 			<div className="range-options">
 				<div
-					className={`range-select ${showOneDay ? 'selected' : ''}`}
+					className={`range-select ${
+						showOneDay ? selectedColor : ''
+					} ${hoverColor}`}
 					onClick={() => showGraph('1d')}
 				>
 					1D
 				</div>
 				<div
-					className={`range-select ${showOneWeek ? 'selected' : ''}`}
+					className={`range-select ${
+						showOneWeek ? selectedColor : ''
+					} ${hoverColor}`}
 					onClick={() => showGraph('1w')}
 				>
 					1W
 				</div>
 				<div
-					className={`range-select ${showThreeMonth ? 'selected' : ''}`}
+					className={`range-select ${
+						showThreeMonth ? selectedColor : ''
+					} ${hoverColor}`}
 					onClick={() => showGraph('3m')}
 				>
 					3M
 				</div>
 				<div
-					className={`range-select ${showOneYear ? 'selected' : ''}`}
+					className={`range-select ${
+						showOneYear ? selectedColor : ''
+					} ${hoverColor}`}
 					onClick={() => showGraph('1y')}
 				>
 					1Y
 				</div>
 				<div
-					className={`range-select ${showFiveYear ? 'selected' : ''}`}
+					className={`range-select ${
+						showFiveYear ? selectedColor : ''
+					} ${hoverColor}`}
 					onClick={() => showGraph('5y')}
 				>
 					5Y
 				</div>
 			</div>
-			
 		</>
 	);
 }

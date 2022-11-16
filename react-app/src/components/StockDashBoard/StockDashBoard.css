@@ -33,10 +33,10 @@
 
 .stock-dashboard-graph-wrapper {
     display: flex;
-    height: 373px;
+    height: 410px;
     width: 100%;
     box-sizing: border-box;
-    /* border: solid 1px turquoise; */
+    /* border: solid 3px turquoise; */
 }
 
 .stock-dashboard-buy-sell-wrapper {
