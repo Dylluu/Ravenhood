@@ -1,7 +1,7 @@
 .logged-in-nav-wrapper {
     display: flex;
     position: fixed;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
     top: 0px;
     left: 0px;
@@ -28,21 +28,58 @@
 .logged-in-inner-wrapper {
     display: flex;
     align-items: center;
-    height: 60%;
-    width: 80%;
+    justify-content: center;
+    height: fit-content;
+    width: 96%;
+    max-width: 1367px;
     /* border: solid 1px red; */
 }
 
 .logged-in-search-bar-div {
     display: flex;
-    height: 36px;
+    flex-direction: column;
+    height: fit-content;
     width: 478px;
-    align-items: center;
-    margin-left: 5%;
+    justify-content: center;
+    margin-top: 14px;
+    margin-right: 40%;
     box-sizing: border-box;
     border-radius: 4px;
     border: solid 1px rgb(232,232,240);
     transition: box-shadow 300ms;
+}
+
+.search-bar-inner {
+    display: flex;
+    width: 100%;
+    height: 34px;
+    flex-direction: row;
+    align-items: center;
+    /* overflow: auto; */
+}
+
+.search-results {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 12px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    width: 100%;
+    height: 34px;
+    cursor: pointer;
+    overflow: auto;
+    /* border: solid 1px red; */
+}
+
+.search-results:hover {
+    background-color: 	#F0F0F0;
+}
+
+#search-result-ticker {
+    min-width: 60px;
+    /* border: solid 1px blue; */
 }
 
 .logged-in-search-bar-div:hover {
@@ -60,6 +97,7 @@
     color: rgb(106, 114, 120);
     margin-left: 13px;
     margin-right: 8px;
+    padding-bottom: 5px;
     /* border: solid 1px blue; */
 }
 
@@ -80,7 +118,8 @@
     justify-content: center;
     position: fixed;
     box-sizing: border-box;
-    right: 55px;
+    right: 51px;
+    top: 18px;
     height: 30px;
     width: 51px;
     border-bottom: solid 2px white;
@@ -89,8 +128,11 @@
 }
 
 #account {
+    position: fixed;
     font-size: 12px;
     font-weight: 650;
+    top: 24px;
+    right: 52px;
 }
 
 #logged-in-nav-buttons-hover:hover {
@@ -113,7 +155,14 @@
     border-radius: 4px;
     background-color: white;
     box-shadow: 0 7px 15px 	#F0F0F0;
+    animation: fade 150ms linear;
+    /* z-index: 20; */
 }
+
+@keyframes fade {
+    0% { opacity: 0 }
+    50% { opacity: 1 }
+  }
 
 .account-menu-popout:hover {
     color: black;
@@ -191,6 +240,7 @@
     display: flex;
     width: 100%;
     box-sizing: border-box;
+    background-color: white;
     /* border: solid 1px red; */
 }
 
@@ -218,4 +268,15 @@
 
 #account-menu-popout-logout {
     border-top: solid 2px rgb(224,224,232);
+}
+
+@media (max-width: 1090px) {
+    .logged-in-inner-wrapper {
+        justify-content: flex-start;
+        margin-left: 90px;
+        min-width: none;
+    }
+    .logged-in-search-bar-div {
+        width: 48.63%;
+    }
 }

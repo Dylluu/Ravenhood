@@ -4,6 +4,7 @@ from app.models import Watchlist, WatchlistStocks, db
 
 from app.forms import WatchlistForm
 from app.forms import SignUpForm
+from app.forms import AddStockForm
 
 watchlist_routes = Blueprint('watchlists', __name__)
 
@@ -73,7 +74,7 @@ def get_all_watchlist_stocks(id):
   """
   Allows user to get all stocks on a watchlist
   """
-  stocks = WatchlistStocks.query.filter(WatchlistStocks.watchlist_id == id)
+  stocks = WatchlistStocks.query.all()
   return {"stocks": [stock.to_dict() for stock in stocks]}
 
 
@@ -83,15 +84,17 @@ def add_watchlist_stock(id):
   """
   Allows user to add one stock to the watchlist that they created
   """
-  data = request.get_json()
-  new_stock = WatchlistStocks(
-    data[symbol],
-    id
-  )
 
-  db.session.add(new_stock)
-  db.session.commit()
-  return new_stock.to_dict()
+  form = AddStockForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  if form.validate_on_submit():
+    new_stock = WatchlistStocks(
+      symbol = form.data['symbol'],
+      watchlist_id = form.data['watchlist_id']
+    )
+    db.session.add(new_stock)
+    db.session.commit()
+    return new_stock.to_dict()
 
 
 @watchlist_routes.route('/stocks/<int:stockId>', methods=['DELETE'])

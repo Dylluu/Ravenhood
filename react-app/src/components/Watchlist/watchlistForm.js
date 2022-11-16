@@ -24,7 +24,7 @@ const WatchlistForm = ({add, setAdd}) => {
 
     await dispatch(thunkPostWatchlist(list))
     await dispatch(thunkGetAllWatchlist(user_id))
-    history.push(`/watchlists/${watchlistId}`)
+    // history.push(`/watchlists/${watchlistId}`)
   }
 
   return <div >
@@ -35,12 +35,13 @@ const WatchlistForm = ({add, setAdd}) => {
       name="name"
       onChange={(e) => setName(e.target.value)}
       value={name}
+
       />
-      <div>
+      <div className='add-button-holder'>
         <button className='cancel-button' onClick={() => {
           add == false ? setAdd(true): setAdd(false)
         }}>Cancel</button>
-        <button className='create-list-button' type="submit">Create List</button>
+        <button className='create-list-button' type="submit">Create</button>
       </div>
       </form>}
   </div>

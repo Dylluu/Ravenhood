@@ -1,0 +1,188 @@
+.transaction-container {
+    border: 2px solid #e6e9ee;
+    min-height: fit-content;
+    max-height: 447px;
+    max-width: 330px;
+    min-width: 232px;
+    box-sizing: border-box;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 50px;
+}
+
+.top-container {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-bottom: 2px solid #e6e9ee;
+}
+
+.buy-sell-container {
+    /* border: 3px solid orange; */
+    height: 52px;
+    display: flex;
+    max-width: 280px;
+    width: 280px;
+    min-width: 206px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.transaction-type-button-off {
+    margin-top: 4px;
+    margin-right: 12px;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    border-bottom: 2px solid #e6e9ee;
+}
+
+.transaction-type-button-off:hover {
+    color: #00c805;
+}
+
+.transaction-type-button-on {
+    border-bottom: 2px solid #00c805;
+    color: #00c805
+}
+
+.transaction-form-container-shares {
+    /* border: 1px solid pink; */
+    height: 253px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.transaction-form-container-dollars {
+    /* border: 1px solid pink; */
+    height: 205px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.shares-dollars {
+    height: 36px;
+    width: 136px;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-left: 5px;
+    border: 1px solid #e6e9ee;
+}
+
+.shares-dollars:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.shares-dollars:focus {
+    border: 1px solid #e6e9ee;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.transaction-amount-input {
+    height: 36px;
+    width: 136px;
+    font-size: 13px;
+    opacity: 50%;
+    background-color: #f4f8fb;
+    border: 0;
+    border-radius: 5px;
+    padding: 0;
+    text-align: right;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.transaction-amount-input:hover {
+    background-color: white;
+    border: 1px solid #e6e9ee;
+    box-sizing: border-box;
+}
+
+.transaction-amount-input:focus {
+    outline-color: transparent;
+    outline-style: none;
+    background-color: white;
+    border: 1px solid #00c805;
+    box-sizing: border-box;
+    opacity: 100%;
+}
+
+.transaction-market-price-container {
+    font-weight: 700;
+    border-bottom: 1px solid #e6e9ee;
+    box-sizing: border-box;
+}
+
+.transaction-estimated-cost-container {
+    font-weight: 700;
+    box-sizing: border-box;
+}
+
+.transaction-form-divs {
+    /* border: 1px solid pink; */
+    height: 48px;
+    max-width: 280px;
+    width: 280px;
+    min-width: 206px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.transaction-place-order-container {
+    height: 92px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.review-order-button {
+    /* border: 1px solid red; */
+    height: 44px;
+    max-width: 280px;
+    width: 280px;
+    border-radius: 30px;
+    font-size: 13px;
+    background-color: #00c805;
+    color: white;
+    font-weight: 700;
+}
+
+.review-order-button:hover {
+    background-color: #00b405;
+}
+
+.buying-power-container {
+    border-top: 2px solid #e6e9ee;
+    /* border: 3px solid red; */
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}

@@ -1,0 +1,40 @@
+.range-options{
+    display: flex;
+    border-bottom: 2px solid #e6e9ee;
+    gap: 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.range-select{
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+    padding: 1rem 0;
+    margin: 0 0.5rem;
+}
+
+
+.hover-red:hover{
+    color: #ff5404;
+}
+
+.hover-green:hover {
+    color: #00c805;
+}
+
+.selected-green{
+    color:#00c805;
+    border-bottom: 2px solid #00c805;
+}
+
+.selected-red {
+    color: #ff5404;
+    border-bottom: 2px solid #ff5404;
+}
+
+.graph-page-wrapper{
+    box-sizing: border-box;
+    height: 100%;
+}

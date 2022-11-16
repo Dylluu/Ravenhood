@@ -27,15 +27,16 @@ const WatchlistForm = ({id}) => {
     history.push(`/watchlists/${watchlistId}`)
   }
 
-  return <div>
-    <form onSubmit={submitHandler}>
+  return <div className='update-modal'>
+    <div className='update-modal-title'>Edit Form</div>
+    <form className='update-modal-form' onSubmit={submitHandler}>
     <input
     type="text"
     name="name"
     onChange={(e) => setName(e.target.value)}
     value={name}
     />
-    <button type="submit">Add List</button>
+    <button className='create-list-button' type="submit">Save</button>
     </form>
   </div>
 }

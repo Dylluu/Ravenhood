@@ -117,6 +117,7 @@ export const thunkGetAllStocks = (id) => async dispatch => {
 }
 
 export const thunkPostStocks = (data) => async dispatch => {
+  console.log('mydata',data)
   const response = await fetch(`/api/watchlist/${data.watchlist_id}/stocks`, {
     method: 'post',
     headers: {
@@ -124,8 +125,10 @@ export const thunkPostStocks = (data) => async dispatch => {
     },
     body: JSON.stringify(data)
   })
+  console.log('myresponse', response)
   if(response.ok) {
     const stock = await response.json()
+    console.log("mystock", stock)
     dispatch(postStocks(stock))
     return stock
   }

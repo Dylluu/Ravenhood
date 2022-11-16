@@ -11,16 +11,22 @@ import { authenticate } from './store/session';
 import TopNaviagtion from './components/TopNavigation';
 import RealLoginForm from './components/auth/RealLoginForm';
 import Splash from './components/Splash';
+import MainStockPage from './components/MainStockPage';
+import MainStockHistoricalGraph from './components/MainStockHistoricalGraph';
 import MainStockGraph from './components/MainStockGraph';
 import SmallStockGraph from './components/SmallStockGraph';
 import CashCard from './components/CashCard';
 import Watchlist from './components/Watchlist';
 import LoggedInNav from './components/LoggedInNav';
 import Dashboard from './components/Dashboard';
+import Transactions from './components/Transaction';
+import WatchlistAddList from './components/WatchlistAddList';
+
+import StockDashBoard from './components/StockDashBoard';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
-	const user = useSelector(state => state.session.user);
+	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -40,15 +46,16 @@ function App() {
 			<Switch>
 				<Route exact path="/">
 					{!user && (
-					<>
-					<TopNaviagtion />
-					<Splash />
-					</>)}
+						<>
+							<TopNaviagtion />
+							<Splash />
+						</>
+					)}
 					{user && (
-					<>
-					<LoggedInNav />
-					<Dashboard />
-					</>
+						<>
+							<LoggedInNav />
+							<Dashboard />
+						</>
 					)}
 				</Route>
 				<Route path="/login" exact={true}>
@@ -57,19 +64,17 @@ function App() {
 				<Route path="/signup" exact={true}>
 					<SignUpForm />
 				</Route>
-				<Route path="/nhut">
-					<MainStockGraph />
-				</Route>
-				<Route path="/linh">
-					<SmallStockGraph />
+				<Route path="/stocks/:ticker">
+					<LoggedInNav />
+					<StockDashBoard />
 				</Route>
 				<Route path="/cash">
 					<TopNaviagtion />
 					<CashCard />
 				</Route>
 				<Route path="/watchlists/:watchlistId">
-					<TopNaviagtion/>
-					<Watchlist/>
+					<LoggedInNav />
+					<Watchlist />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
@@ -80,6 +85,9 @@ function App() {
 				<Route path="/" exact={true}>
 					<h1>My Home Page</h1>
 				</Route>
+				{/* <Route path="/stocks/:symbol">
+					<Transactions />
+				</Route> */}
 			</Switch>
 		</BrowserRouter>
 	);

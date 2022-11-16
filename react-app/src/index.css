@@ -14,3 +14,7 @@
 .apexcharts-xaxistooltip-bottom:after {
     opacity: 0
 }
+
+body {
+    overscroll-behavior: none;
+}
