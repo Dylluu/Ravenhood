@@ -141,80 +141,82 @@ function MainStockGraph() {
 			<div className={['price', direction].join(' ')}>
 				${hoverPrice ? hoverPrice : price} {directionEmojis[direction]}
 			</div>
-			<div id="chart">
+			<div className="graph-page-wrapper">
 				{showOneDay && (
-					<>
+					<div id="chart">
 						<div className="percentDifference" style={{ color: priceColor }}>
 							<div>
 								${priceDifference} ({percentDifference}%)
 							</div>
 						</div>
-						<Chart
-							options={{
-								chart: {
-									type: 'line',
-									toolbar: {
-										show: false
-									},
-									events: {
-										mouseMove: function (event, chartContext, config) {
-											const points = series.data[config.dataPointIndex]?.y;
-											setHoverPrice(points?.toFixed(2));
+						<div className="graph-holder">
+							<Chart
+								options={{
+									chart: {
+										type: 'line',
+										toolbar: {
+											show: false
 										},
-										mouseLeave: function () {
-											setHoverPrice(null);
+										events: {
+											mouseMove: function (event, chartContext, config) {
+												const points = series.data[config.dataPointIndex]?.y;
+												setHoverPrice(points?.toFixed(2));
+											},
+											mouseLeave: function () {
+												setHoverPrice(null);
+											}
+										},
+										zoom: {
+											enabled: false
 										}
 									},
-									zoom: {
-										enabled: false
-									}
-								},
-								xaxis: {
-									type: 'datetime',
-									labels: {
+									xaxis: {
+										type: 'datetime',
+										labels: {
+											show: false
+										},
+										tooltip: {
+											offsetY: -200,
+											formatter: function (val, opts) {
+												let time = new Date(val);
+												return time.toLocaleTimeString([], {
+													hour: '2-digit',
+													minute: '2-digit'
+												});
+											}
+										}
+									},
+									yaxis: {
 										show: false
 									},
+									grid: {
+										show: false
+									},
+									stroke: {
+										width: [2, 2],
+										dashArray: [0, 10]
+									},
+									colors: chartColor,
 									tooltip: {
-										offsetY: -200,
-										formatter: function (val, opts) {
-											let time = new Date(val);
-											return time.toLocaleTimeString([], {
-												hour: '2-digit',
-												minute: '2-digit'
-											});
+										enabled: true,
+										items: {
+											display: 'none'
+										},
+										x: {
+											show: false
 										}
-									}
-								},
-								yaxis: {
-									show: false
-								},
-								grid: {
-									show: false
-								},
-								stroke: {
-									width: [2, 2],
-									dashArray: [0, 10]
-								},
-								colors: chartColor,
-								tooltip: {
-									enabled: true,
-									items: {
-										display: 'none'
 									},
-									x: {
+									legend: {
 										show: false
 									}
-								},
-								legend: {
-									show: false
-								}
-							}}
-							series={[series, openPriceData]}
-							type="line"
-							width="100%"
-							height="100%"
-						/>
-					</>
+								}}
+								series={[series, openPriceData]}
+								type="line"
+								width="100%"
+								height="100%"
+							/>
+						</div>
+					</div>
 				)}
 				<MainStockPage
 					setShowOneDay={setShowOneDay}
