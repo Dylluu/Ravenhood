@@ -36,7 +36,7 @@
     height: 373px;
     width: 100%;
     box-sizing: border-box;
-    border: solid 1px turquoise;
+    /* border: solid 1px turquoise; */
 }
 
 .stock-dashboard-buy-sell-wrapper {
