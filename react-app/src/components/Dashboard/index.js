@@ -32,11 +32,12 @@ function Dashboard () {
     if (watchlist.allWatchlists) {
         lists = Object.values(watchlist.allWatchlists)
       }
-    // useEffect(() => {window.addEventListener('scroll', () => {
-    //         const dashboardWatchlist = document.getElementsByClassName('dashboard-watchlists-wrapper');
-    //         dashboardWatchlist[0].style.paddingTop = `${window.scrollY}`
-    //     })
-    // }, [])
+
+    useEffect(() => {window.addEventListener('scroll', () => {
+            const dashboardWatchlist = document.getElementsByClassName('dashboard-watchlists-wrapper');
+            dashboardWatchlist[0].style.marginTop = `${window.scrollY}px`
+        })
+    }, [window.scrollY])
 
     const addBuyPower = async (e) => {
         e.preventDefault();
