@@ -200,6 +200,17 @@
   /* padding-right: 20px; */
 }
 
+.update-modal {
+  padding: 25px;
+}
+
+.update-modal-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+}
+
 .fa-regular, .fa-solid{
   padding-top: 4px;
   font-size: 14px

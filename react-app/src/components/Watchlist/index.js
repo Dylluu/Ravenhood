@@ -77,7 +77,7 @@ function Watchlist(){
             if (parseInt(stock.watchlist_id) === parseInt(watchlistId)) {
             return <div class="watchlist-data">
             <div class="name-column">{TickerSymbols[stock.symbol].name}</div>
-            <div>{stock.watchlist_id} </div>
+            
             {/* <div> {stock.watchlist_id === watchlistId ? watchlistId :''}  </div> */}
             <div class="symbol-column">{stock.symbol}</div>
             <div class="price-column">temp price</div>
