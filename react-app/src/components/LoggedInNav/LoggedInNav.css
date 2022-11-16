@@ -155,7 +155,13 @@
     border-radius: 4px;
     background-color: white;
     box-shadow: 0 7px 15px 	#F0F0F0;
+    animation: fade 150ms linear;
 }
+
+@keyframes fade {
+    0% { opacity: 0 }
+    50% { opacity: 1 }
+  }
 
 .account-menu-popout:hover {
     color: black;
