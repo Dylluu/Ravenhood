@@ -55,6 +55,7 @@
     height: 34px;
     flex-direction: row;
     align-items: center;
+    /* overflow: auto; */
 }
 
 .search-results {
@@ -68,6 +69,7 @@
     width: 100%;
     height: 34px;
     cursor: pointer;
+    overflow: auto;
     /* border: solid 1px red; */
 }
 
@@ -116,7 +118,8 @@
     justify-content: center;
     position: fixed;
     box-sizing: border-box;
-    right: 55px;
+    right: 51px;
+    top: 18px;
     height: 30px;
     width: 51px;
     border-bottom: solid 2px white;
