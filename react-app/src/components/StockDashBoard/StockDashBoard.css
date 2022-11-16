@@ -11,7 +11,7 @@
 .stock-dashboard-inner-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 100%;
     max-width: 1367px;
     min-width: 1020px;
@@ -49,4 +49,11 @@
     border: solid 1px rgb(224, 224, 232);
     border-radius: 4px;
     padding: 10px;
+}
+
+.stock-dashboard-right-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-left: 8%;
+    width: 15%;
 }

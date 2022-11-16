@@ -99,6 +99,7 @@
 .dashboard-watchlists-wrapper {
     display: flex;
     flex-direction: column;
+    font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
     /* height: 100%; */
     height: fit-content;
     width: 23.75%;

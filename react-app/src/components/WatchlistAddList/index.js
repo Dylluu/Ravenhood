@@ -48,17 +48,20 @@ function WatchlistAddList(symbol) {
 
 
   return (
-    <div>
+    <div className='watchlist-add-list-page'>
       <button className='add-list-button' onClick={() => add == false? setAdd(true): setAdd(false)}>Add to List</button>
       {add && <Modal>
         <form className='add-form' onSubmit={submitHandler}>
-          <div>{`Add ${symbol.symbol} to your list `}</div>
-          {lists && lists.map((list) => (
-            <div>
-              <input type="radio" id={list.id} name={'lists'} onChange={() => setAddListId(list.id)} value={list.id}/>
-              <label for={list.id}> {list.name}</label>
-            </div>
-          ))}
+          <div className='add-form-title'>{`Add ${symbol.symbol} to your list `}</div>
+          <div>
+            {lists && lists.map((list) => (
+              <div className='container'>
+                  <input type="radio" id={list.id} name={'lists'} onChange={() => setAddListId(list.id)} value={list.id}/>
+                  <label className='add-label' for={list.id}> {list.name}</label>
+              </div>
+            ))}
+          </div>
+
         <button className="cancel-button" onClick={() => add == false? setAdd(true): setAdd(false)}>Cancel</button>
         <button className='create-list-button' type="submit">Add List</button>
         </form>

@@ -2,7 +2,7 @@
   /* background-color: bisque; */
   display: flex;
   flex-direction:row;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
   left: 100px;
   padding-top: 80px;
 }
@@ -12,6 +12,7 @@
   min-width: 350px;
   width: 70%;
   padding-right: 40px;
+
 }
 
 .picture-holder {

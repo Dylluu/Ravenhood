@@ -1,0 +1,32 @@
+.wacthlist-add-list-page {
+  font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+.add-list-button {
+  border-radius: 25px;
+  border: 1px solid rgb(0,200,5);
+  color: rgb(0,200,5);
+  padding: 8% 20%;
+  margin: 3% 6%;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.add-form {
+  padding: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.add-form-title {
+  padding-bottom: 10px;
+}
+
+.add-label {
+  padding: 5px;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+}
