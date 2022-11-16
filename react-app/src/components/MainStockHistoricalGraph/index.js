@@ -135,80 +135,82 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 				</p>
 				<p style={{ color: 'gray', paddingLeft: '1rem' }}>{rangePeriod}</p>
 			</div>
-			<Chart
-				options={{
-					chart: {
-						type: 'line',
-						toolbar: {
-							show: false
-						},
-						events: {
-							mouseMove: function (event, chartContext, config) {
-								if (config.dataPointIndex != -1) {
-									const points = series[0].data[config.dataPointIndex]?.y;
-									setHoverPrice(Number(points).toFixed(2));
-									setRangePeriod('');
+			<div className="graph-holder">
+				<Chart
+					options={{
+						chart: {
+							type: 'line',
+							toolbar: {
+								show: false
+							},
+							events: {
+								mouseMove: function (event, chartContext, config) {
+									if (config.dataPointIndex != -1) {
+										const points = series[0].data[config.dataPointIndex]?.y;
+										setHoverPrice(Number(points).toFixed(2));
+										setRangePeriod('');
+									}
+								},
+								mouseLeave: function () {
+									setHoverPrice(null);
+									setRangePeriod(getRangePeriod(range));
 								}
 							},
-							mouseLeave: function () {
-								setHoverPrice(null);
-								setRangePeriod(getRangePeriod(range));
+							zoom: {
+								enabled: false
 							}
 						},
-						zoom: {
-							enabled: false
-						}
-					},
-					xaxis: {
-						type: type,
-						labels: {
-							show: false
-						},
-						axisTicks: {
-							show: false
-						},
-						tooltip: {
-							offsetY: -200,
-							formatter: function (val, opts) {
-								switch (type) {
-									case 'datetime':
-										let date = new Date(val);
-										return date.toLocaleDateString();
-									case 'numeric':
-										let time = new Date(val);
-										return `${time.toLocaleString('en-US')}`;
+						xaxis: {
+							type: type,
+							labels: {
+								show: false
+							},
+							axisTicks: {
+								show: false
+							},
+							tooltip: {
+								offsetY: -200,
+								formatter: function (val, opts) {
+									switch (type) {
+										case 'datetime':
+											let date = new Date(val);
+											return date.toLocaleDateString();
+										case 'numeric':
+											let time = new Date(val);
+											return `${time.toLocaleString('en-US')}`;
+									}
 								}
 							}
-						}
-					},
-					yaxis: {
-						show: false
-					},
-					grid: {
-						show: false
-					},
-					stroke: {
-						width: 2
-					},
-					colors: chartColor,
-					tooltip: {
-						enabled: true,
-						items: {
-							display: 'none'
 						},
-						x: {
+						yaxis: {
+							show: false
+						},
+						grid: {
+							show: false
+						},
+						stroke: {
+							width: 2
+						},
+						colors: chartColor,
+						tooltip: {
+							enabled: true,
+							items: {
+								display: 'none'
+							},
+							x: {
+								show: false
+							}
+						},
+						legend: {
 							show: false
 						}
-					},
-					legend: {
-						show: false
-					}
-				}}
-				series={series}
-				type="line"
-				width="100%"
-				height="100%"
-			/>
+					}}
+					series={series}
+					type="line"
+					width="100%"
+					height="100%"
+				/>
+			</div>
 		</div>
 	);
 }

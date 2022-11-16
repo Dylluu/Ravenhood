@@ -1,5 +1,5 @@
 #chart-historical {
-    height: 100%;
+    min-height: 100%;
     width: 100%;
     /* border: 3px solid orange; */
 }
@@ -20,8 +20,8 @@
 
 
 .graph-loading-screen{
-    height: 100%;
-        width: 100%;
+    min-height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
