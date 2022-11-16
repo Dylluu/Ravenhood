@@ -102,6 +102,7 @@
 .dashboard-watchlists-wrapper {
     display: flex;
     flex-direction: column;
+    /* position: fixed; */
     /* height: 100%; */
     height: fit-content;
     width: 23.75%;
@@ -295,6 +296,7 @@
     height: 0px;
     width: 0px;
     margin-right: 2px;
+    /* z-index: 0; */
     /* z-index: -100; */
     /* border: solid 1px red; */
     /* background-color: transparent !important; */
