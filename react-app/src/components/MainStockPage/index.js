@@ -12,7 +12,6 @@ function MainStockPage({
 }) {
 	const { ticker } = useParams();
 	const [showOneWeek, setShowOneWeek] = useState(false);
-	const [showOneMonth, setShowOneMonth] = useState(false);
 	const [showThreeMonth, setShowThreeMonth] = useState(false);
 	const [showOneYear, setShowOneYear] = useState(false);
 	const [showFiveYear, setShowFiveYear] = useState(false);
@@ -21,7 +20,6 @@ function MainStockPage({
 	const showGraph = (range) => {
 		setShowOneDay(false);
 		setShowOneWeek(false);
-		setShowOneMonth(false);
 		setShowThreeMonth(false);
 		setShowOneYear(false);
 		setShowFiveYear(false);
@@ -33,10 +31,6 @@ function MainStockPage({
 			case '1w':
 				setRange('1w');
 				setShowOneWeek(true);
-				break;
-			case '1m':
-				setRange('1w');
-				setShowOneMonth(true);
 				break;
 			case '3m':
 				setRange('3m');

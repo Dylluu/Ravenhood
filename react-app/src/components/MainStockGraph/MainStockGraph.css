@@ -15,12 +15,20 @@
 
 
 #chart{
-    height: 300px;
-    width: 900px;
+    height: 100%;
+    width: 100%;
+    /* border: 2px solid green; */
 }
 .main-stock-page-wrapper {
     /* border: 5px solid pink; */
     box-sizing: border-box;
     width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-holder{
     height: 100%;
+    width: 100%;
 }

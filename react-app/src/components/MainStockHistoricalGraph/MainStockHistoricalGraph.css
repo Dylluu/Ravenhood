@@ -1,6 +1,7 @@
 #chart-historical {
-    height: 300px;
-    width: 900px;
+    height: 100%;
+    width: 100%;
+    /* border: 3px solid orange; */
 }
 #chart-historical .apexcharts-xaxistooltip {
     background: transparent;
@@ -19,9 +20,24 @@
 
 
 .graph-loading-screen{
-    height: 300px;
-    width: 900px;
+    height: 100%;
+        width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.historical-graph-wrapper{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.percentDifference{
+    display: flex;
+}
+
+.percentDifference >p{
+        padding: 0;
+        margin: 0;
 }
