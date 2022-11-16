@@ -3,7 +3,7 @@
     justify-content: center;
     margin-top: 100px;
     width: 100%;
-    height: 1000px;
+    /* height: 1000px; */
     box-sizing: border-box;
     /* border: solid 1px red; */
 }
@@ -15,7 +15,7 @@
     width: 100%;
     max-width: 1395px;
     min-width: 1020px;
-    height: 100%;
+    /* height: 100%; */
     margin-left: 12px;
     /* margin-right: 20px; */
     box-sizing: border-box;
@@ -103,6 +103,7 @@
     display: flex;
     flex-direction: column;
     font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
+    /* position: fixed; */
     /* height: 100%; */
     height: fit-content;
     width: 23.75%;
@@ -221,6 +222,8 @@
     align-items: center;
     height: 95%;
     /* margin-left: 10px; */
+    max-width: 200px;
+    overflow: hidden;
     font-size: 13px;
     padding: 0 5px;
     border-radius: 4px;
@@ -296,6 +299,7 @@
     height: 0px;
     width: 0px;
     margin-right: 2px;
+    /* z-index: 0; */
     /* z-index: -100; */
     /* border: solid 1px red; */
     /* background-color: transparent !important; */

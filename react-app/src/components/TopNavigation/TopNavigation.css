@@ -19,22 +19,21 @@
     border-right: solid 1px black;
 }
 
-.robinhood {
+.ravenhood {
     /* border: solid 1px purple; */
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: 350;
     height: 53%;
-    width: 78%;
+    width: 85%;
     cursor: pointer;
 }
 
 #logo {
     display: flex;
-    z-index: -1;
-    /* border: solid 1px green; */
-    height: 81px;
-    position: absolute;
-    top: -7px;
-    left: 23px;
+    height: 30px;
 }
 
 .middle-top-nav {
