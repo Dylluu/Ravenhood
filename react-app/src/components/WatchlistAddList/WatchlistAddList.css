@@ -4,8 +4,8 @@
 
 .add-list-button {
   border-radius: 25px;
-  border: 1px solid rgb(0,200,5);
-  color: rgb(0,200,5);
+  border: 1px solid #ff5404;
+  color: #ff5404;
   padding: 8% 20%;
   margin: 3% 6%;
   font-size: 13px;
@@ -29,4 +29,25 @@
 .container {
   display: flex;
   justify-content: flex-start;
+}
+
+.add-cancel-button {
+  border-radius: 25px;
+  border: 1px solid #ff5404;;
+  color: #ff5404;;
+  padding: 8% 20%;
+  margin: 3% 6%;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.add-create-list-button {
+  border-radius: 25px;
+  border: 1px solid #ff5404;;
+  background-color: #ff5404;;
+  color: white;
+  padding: 8% 20%;
+  margin: 3% 6%;
+  font-size: 13px;
+  font-weight: 800;
 }
