@@ -20,6 +20,7 @@ import Watchlist from './components/Watchlist';
 import LoggedInNav from './components/LoggedInNav';
 import Dashboard from './components/Dashboard';
 import Transactions from './components/Transaction';
+import WatchlistAddList from './components/WatchlistAddList';
 
 import StockDashBoard from './components/StockDashBoard';
 
@@ -74,6 +75,7 @@ function App() {
 				<Route path="/watchlists/:watchlistId">
 					<LoggedInNav />
 					<Watchlist />
+					<WatchlistAddList/>
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
