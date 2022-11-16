@@ -215,6 +215,7 @@
     border-radius: 75%;
     margin-left: 8px;
     font-size: 20px;
+    cursor: pointer;
 }
 
 #scroll-forward {
@@ -496,6 +497,25 @@
         width: 130px;
         border-radius: 24px;
         margin-top: -5px;
+    }
+}
+
+@media (max-width: 625px) {
+    .first-right-mid{
+        font-size: 25px;
+    }
+    .first-right-middle-bottom {
+        font-size: 12px;
+        margin-top: -5px;
+        margin-bottom: -23px;
+    }
+    #on-your-terms {
+        font-size: 12px;
+    }
+    .get-started {
+        font-size: 11px;
+        height: 33px;
+        width: 110px;
     }
 }
 

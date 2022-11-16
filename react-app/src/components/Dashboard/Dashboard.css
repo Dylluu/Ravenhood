@@ -221,6 +221,8 @@
     align-items: center;
     height: 95%;
     /* margin-left: 10px; */
+    max-width: 200px;
+    overflow: hidden;
     font-size: 13px;
     padding: 0 5px;
     border-radius: 4px;
