@@ -1,5 +1,5 @@
-const apiKeys = '3MO65OQ6CPMMNJTQ';
-const apiKeysStockInfo = ['LHU9QYGE8G6XZO0T', '03A3G6JU0R69U3TN'];
+const apikey = '3MO65OQ6CPMMNJTQ';
+const apikeyStockInfo = ['LHU9QYGE8G6XZO0T', '03A3G6JU0R69U3TN'];
 
 export async function getStonks(range, ticker) {
 	let rangeFunction, apiKey;
@@ -8,28 +8,28 @@ export async function getStonks(range, ticker) {
 	switch (range) {
 		case '1w':
 			rangeFunction = 'TIME_SERIES_INTRADAY';
-			apiKey = apiKeys;
+			apiKey = apikey;
 			outputsize = '&outputsize=full';
 			interval = '&interval=15min';
 			break;
 		case '1m':
 			rangeFunction = 'TIME_SERIES_INTRADAY';
 			interval = '&interval=60min';
-			apiKey = apiKeys;
+			apiKey = apikey;
 			break;
 		case '3m':
 			rangeFunction = 'TIME_SERIES_DAILY_ADJUSTED';
 			outputsize = '&outputsize=compact';
-			apiKey = apiKeys;
+			apiKey = apikey;
 			break;
 		case '1y':
 			rangeFunction = 'TIME_SERIES_DAILY_ADJUSTED';
 			outputsize = '&outputsize=full';
-			apiKey = apiKeys;
+			apiKey = apikey;
 			break;
 		case '5y':
 			rangeFunction = 'TIME_SERIES_WEEKLY';
-			apiKey = apiKeys;
+			apiKey = apikey;
 			break;
 	}
 	const baseURl = `https://www.alphavantage.co/query?function=${rangeFunction}&symbol=${ticker}${outputsize}${interval}&apikey=${apiKey}`;
@@ -143,4 +143,11 @@ export async function getStockLattestPrice(ticker) {
 	const stonk = data.chart.result[0];
 	const price = stonk.meta.regularMarketPrice.toFixed(2);
 	return price;
+}
+
+// Get Company Overview function
+export async function GetComparyOverview(ticker) {
+	const baseURL = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${apikey}`;
+	const response = await fetch(baseURL);
+	return response.json();
 }
