@@ -8,7 +8,7 @@ import TransactionForm from "../TransactionForm";
 const Transactions = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { symbol } = useParams();
+    const { ticker } = useParams();
     const sessionUser = useSelector(state => state.session.user);
     const transactions = useSelector(state => state.transactions)
 
@@ -20,11 +20,11 @@ const Transactions = () => {
 
 
     useEffect(() => {
-        dispatch(transactionActions.getStockTransactionsByUserId(symbol))
+        dispatch(transactionActions.getStockTransactionsByUserId(ticker))
         return () => {
             dispatch(transactionActions.cleanUpTransactions());
         }
-    }, [dispatch], symbol);
+    }, [dispatch], ticker);
 
     return (
         // { transactionsObj }
