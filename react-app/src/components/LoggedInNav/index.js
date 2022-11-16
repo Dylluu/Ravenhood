@@ -19,18 +19,30 @@ function LoggedInNav () {
     const allSymbols = Object.keys(TickerSymbols)
 
     useEffect(() => {
-        if(search.length > 2) {
+        // if(search.length === 1) {
+        //     let matches = [];
+        //     setSearchOpen(true)
+        //     function handleSearchOne (search) {
+        //         for(let i = 0; i < allSymbols.length; i++){
+        //             let count = 0;
+        //             if(allSymbols[i].startsWith(search.toUpperCase()) && allSymbols[i].length < 2){
+        //                 matches.push(allSymbols[i])
+        //             }
+        //         }
+        //         setSearchResults(matches)
+        //     }
+        //     handleSearchOne(search)
+        // }
+        if(search.length > 0) {
             let matches = [];
             setSearchOpen(true)
             function handleSearch (search) {
                 for(let i = 0; i < allSymbols.length; i++){
                     let count = 0;
                     if(allSymbols[i].startsWith(search.toUpperCase())){
-                        console.log(allSymbols[i])
                         matches.push(allSymbols[i])
                     }
                 }
-                console.log(matches)
                 setSearchResults(matches)
             }
             handleSearch(search)
@@ -119,7 +131,7 @@ function LoggedInNav () {
                 autoComplete='off'
                 ></input>
                 </div>
-                {searchOpen && searchResults.length > 0 && (searchResults.map((result) => <div className='search-results'
+                {searchOpen && (searchResults.map((result) => <div className='search-results'
                 key={result}
                 onClick={() => history.push(`/stocks/${result}`)}
                 >
