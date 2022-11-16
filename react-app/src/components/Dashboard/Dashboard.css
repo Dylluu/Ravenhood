@@ -13,7 +13,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    max-width: 1367px;
+    max-width: 1395px;
     min-width: 1020px;
     height: 100%;
     margin-left: 12px;
@@ -61,12 +61,12 @@
     font-weight: 550;
     /* border: solid 1px green; */
     border-radius: 5px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
-.buy-power-div:hover {
+/* .buy-power-div:hover {
     background-color: 	#F0F0F0;
-}
+} */
 
 #buying-power {
     margin-left: 2%;
@@ -90,7 +90,7 @@
     }
     .dashboard-inner-wrapper {
         margin-left: 34px;
-        margin-right: 20px;
+        margin-right: 25px;
     }
 }
 

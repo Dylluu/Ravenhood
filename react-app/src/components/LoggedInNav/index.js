@@ -5,6 +5,7 @@ import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import './LoggedInNav.css';
 import logoGreen from '../../assets/robinHoodFeatherGreen.png';
+import { TickerSymbols } from '../../utils/stocksSymbols';
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
 function LoggedInNav () {
@@ -12,6 +13,31 @@ function LoggedInNav () {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch()
     const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+    const [search, setSearch] = useState('');
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+    const allSymbols = Object.keys(TickerSymbols)
+
+    useEffect(() => {
+        if(search.length > 2) {
+            let matches = [];
+            setSearchOpen(true)
+            function handleSearch (search) {
+                for(let i = 0; i < allSymbols.length; i++){
+                    let count = 0;
+                    if(allSymbols[i].startsWith(search.toUpperCase())){
+                        console.log(allSymbols[i])
+                        matches.push(allSymbols[i])
+                    }
+                }
+                console.log(matches)
+                setSearchResults(matches)
+            }
+            handleSearch(search)
+        } else {
+            setSearchOpen(false)
+        }
+    }, [search])
 
     function thousandsSeparator (value) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -83,11 +109,23 @@ function LoggedInNav () {
             />
             <div className='logged-in-inner-wrapper'>
                 <div className='logged-in-search-bar-div'>
+                <div className='search-bar-inner'>
                 <i className="fa-solid fa-magnifying-glass" id='magnifying-glass'/>
                 <input id='search-stock'
                 placeholder='Search'
                 onClick={() => handleSearchInputShadow()}
+                value={search}
+                onChange={(e) => {setSearch(e.target.value)}}
+                autoComplete='off'
                 ></input>
+                </div>
+                {searchOpen && searchResults.length > 0 && (searchResults.map((result) => <div className='search-results'
+                key={result}
+                onClick={() => history.push(`/stocks/${result}`)}
+                >
+                    <span id='search-result-ticker'>{result}</span>
+                    <span>{TickerSymbols[result].name}</span>
+                </div>))}
                 </div>
             <div className='logged-in-nav-buttons' id='logged-in-nav-buttons-hover'
             onClick={(e) => {
