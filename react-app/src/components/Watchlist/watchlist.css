@@ -71,7 +71,9 @@
   display: flex;
   /* background-color: greenyellow; */
   font-size: 14px;
-  padding: 9px 0px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-right: 5px;
   border-bottom: 1px solid silver;
   border-right: 1px solid silver;
   border-left: 1px solid silver;

@@ -118,6 +118,7 @@ function MainStockPage({
 					5Y
 				</div>
 			</div>
+			
 		</>
 	);
 }
