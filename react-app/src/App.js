@@ -20,6 +20,7 @@ import Watchlist from './components/Watchlist';
 import LoggedInNav from './components/LoggedInNav';
 import Dashboard from './components/Dashboard';
 import Transactions from './components/Transaction';
+import AddListStock from './components/AddListStock';
 
 
 function App() {
@@ -70,8 +71,11 @@ function App() {
 					<CashCard />
 				</Route>
 				<Route path="/watchlists/:watchlistId">
-					<TopNaviagtion />
+					<LoggedInNav />
 					<Watchlist />
+				</Route>
+				<Route path="/test">
+					<AddListStock/>
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />

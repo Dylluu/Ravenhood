@@ -41,7 +41,7 @@ function WatchlistExpand ({list, id})  {
       <div className='watchlist-list'>
         <img class="watchlist-picture" src={testBird}/>
           <NavLink to={`/watchlists/${list.id}`} exact={true} className="watchlist-navlink">
-            {list.name.length >8? list.name.slice(0,11) + "..." : list.name }
+            {list.name.length >8? list.name.slice(0,9) + "..." : list.name }
           </NavLink>
           <PortfolioOptions list = {list} deleteWatchlist = {deleteWatchlist} id = {list.id}/>
           <button class="watchlist-expand-button" onClick={() => {
