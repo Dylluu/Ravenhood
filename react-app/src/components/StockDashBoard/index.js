@@ -14,9 +14,13 @@ function StockDashBoard() {
 					</div>
 					<div className="stock-dashboard-inner-left-borders"></div>
 				</div>
-				<div className="stock-dashboard-buy-sell-wrapper"></div>
+				<div className='stock-dashboard-right-wrapper'>
+					<div className="stock-dashboard-buy-sell-wrapper"></div>
+					<WatchlistAddList symbol = {ticker}/>
+				</div>
+
 			</div>
-			<WatchlistAddList symbol = {ticker}/>
+
 		</div>
 	);
 }
