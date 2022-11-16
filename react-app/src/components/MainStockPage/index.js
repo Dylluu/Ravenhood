@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import MainStockHistoricalGraph from '../MainStockHistoricalGraph';
+import WatchlistAddList from '../WatchlistAddList';
 import './MainStockPage.css';
 
 function MainStockPage({
@@ -112,7 +113,7 @@ function MainStockPage({
 					5Y
 				</div>
 			</div>
-			
+				
 		</>
 	);
 }

@@ -75,7 +75,6 @@ function App() {
 				<Route path="/watchlists/:watchlistId">
 					<LoggedInNav />
 					<Watchlist />
-					<WatchlistAddList/>
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />

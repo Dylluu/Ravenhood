@@ -35,6 +35,7 @@ const WatchlistForm = ({add, setAdd}) => {
       name="name"
       onChange={(e) => setName(e.target.value)}
       value={name}
+
       />
       <div className='add-button-holder'>
         <button className='cancel-button' onClick={() => {
