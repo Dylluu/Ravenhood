@@ -13,7 +13,7 @@ import SmallStockGraph from '../SmallStockGraph';
 
 function WatchlistExpand({ list, id }) {
 	const dispatch = useDispatch();
-	const [expand, setExpand] = useState(false);
+	const [expand, setExpand] = useState(true);
 	const [menu, setMenu] = useState(false);
 	const user_id = useSelector((state) => state.session.user.id);
 	const watchlist = useSelector((state) => state.watchlist);

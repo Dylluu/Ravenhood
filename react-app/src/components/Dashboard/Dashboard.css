@@ -108,6 +108,7 @@
     padding: 10px;
 }
 
+
 .watchlists-header-dashboard {
     display: flex;
     flex-direction: row;
@@ -144,6 +145,8 @@
     font-size: 16px;
 }
 
+
+
 .watchlist-add-button:hover, .watchlist-expand-button:hover {
     color: rgb(69, 211, 69);
 }
@@ -154,7 +157,7 @@
 
 .watchlist-navlink {
     margin-top: 5px;
-    max-width: 35%;
+    max-width: 40%;
     min-width: 35%;
 }
 
