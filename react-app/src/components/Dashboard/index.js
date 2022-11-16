@@ -28,7 +28,6 @@ function Dashboard () {
     }, [dispatch])
 
 
-
     if (watchlist.allWatchlists) {
         lists = Object.values(watchlist.allWatchlists)
       }

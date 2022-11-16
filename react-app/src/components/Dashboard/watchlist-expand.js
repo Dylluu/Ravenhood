@@ -42,7 +42,9 @@ function WatchlistExpand({ list, id }) {
 		id='watch-list-body-expand'
 		>
 			<div>
-				<div className='watchlist-list-wrapper'>
+				<div className='watchlist-list-wrapper'
+				onClick={() => setExpand(!expand)}
+				>
 				<div className="watchlist-list">
 					<div className='watchlist-picture-and-navlink'>
 					<NavLink
@@ -60,7 +62,7 @@ function WatchlistExpand({ list, id }) {
 							expand == false ? setExpand(true) : setExpand(false);
 						}}
 					>
-						{expand == false ? (<i id='chevron-down' className="fa-solid fa-chevron-down" />) : (<i className="fa-solid fa-chevron-up" id='chevron-up'/>)}
+						{expand == false ? (<i id='chevron-down' className="fa-solid fa-chevron-up" />) : (<i className="fa-solid fa-chevron-up" id='chevron-up'/>)}
 					</button>}
 				</div>
 				</div>
