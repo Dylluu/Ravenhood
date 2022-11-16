@@ -48,19 +48,19 @@ function WatchlistExpand({ list, id }) {
 					>
 						{list.name}
 					</NavLink>
-					<button
+					{stocks &&<button
 						class="watchlist-expand-button"
 						onClick={() => {
 							expand == false ? setExpand(true) : setExpand(false);
 						}}
 					>
 						{expand == false ? 'v' : '^'}
-					</button>
+					</button>}
 				</div>
 				{expand && (
 					<div>
 						{/* there might be an error related to allStocks state */}
-						{stocks.map((stock) => {
+						{stocks && stocks.map((stock) => {
 							if (parseInt(stock.watchlist_id) === parseInt(id)) {
 								return (
 									<div className="watchlist-stocks-body">
