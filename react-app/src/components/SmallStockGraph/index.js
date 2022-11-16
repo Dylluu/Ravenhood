@@ -156,8 +156,8 @@ export default function SmallStockGraph({ ticker, graph }) {
 						/>
 					</div>
 					<div className="watchlist-price-today">
-						<div>${endPrice}</div>
-						<div style={{ color: chartColor }}>{percentDifference}%</div>
+						<div id='watchlist-price-today'>${endPrice}</div>
+						<div style={{ color: chartColor }} id='watchlist-today'>{percentDifference}%</div>
 					</div>
 				</>
 			)}

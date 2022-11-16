@@ -69,10 +69,13 @@ function LoggedInNav() {
 	function handleMenuOpen() {
 		const accountButton = document.getElementById('account');
 		const accountDiv = document.getElementsByClassName('logged-in-nav-buttons');
+        const buttons = document.getElementsByTagName('button');
 		if (!accountMenuOpen) {
 			accountButton.classList.add('green-font');
 			accountDiv[0].removeAttribute('id');
 			accountDiv[0].style.borderBottom = 'solid 2px rgb(0, 200, 5)';
+            buttons[1].style.zIndex = '-1'
+            console.log(buttons)
 			setAccountMenuOpen(true);
 			// const menuPopout = document.getElementsByClassName('account-menu-popout');
 			// menuPopout[0].addEventListener('click', (e) => {
@@ -83,6 +86,7 @@ function LoggedInNav() {
 			accountButton.classList.remove('green-font');
 			accountDiv[0].style.borderBottom = 'solid 2px white';
 			accountDiv[0].setAttribute('id', 'logged-in-nav-buttons-hover');
+            buttons[1].style.zIndex = '1'
 			setAccountMenuOpen(false);
 		}
 	}
@@ -100,10 +104,12 @@ function LoggedInNav() {
 	function handleWindowClick() {
 		const accountButton = document.getElementById('account');
 		const accountDiv = document.getElementsByClassName('logged-in-nav-buttons');
+        const buttons = document.getElementsByTagName('button');
 		if (accountMenuOpen) {
 			accountButton.classList.remove('green-font');
 			accountDiv[0].style.borderBottom = 'solid 2px white';
 			accountDiv[0].setAttribute('id', 'logged-in-nav-buttons-hover');
+            buttons[1].style.zIndex = '1'
 			setAccountMenuOpen(false);
 		}
 	}

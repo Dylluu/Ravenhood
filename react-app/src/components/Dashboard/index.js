@@ -28,7 +28,6 @@ function Dashboard () {
     }, [dispatch])
 
 
-
     if (watchlist.allWatchlists) {
         lists = Object.values(watchlist.allWatchlists)
       }
@@ -58,21 +57,25 @@ function Dashboard () {
                     <div className='dashboard-inner-left-borders'></div>
                 </div>
                 <div className='dashboard-watchlists-wrapper'>
+                    <div className='watchlists-header-wrapper'>
                     <div className='watchlists-header-dashboard'>
                         <div className='watchlist-header-title'>Lists</div>
                         <button className='watchlist-add-button' onClick={() => {
                             add == false ? setAdd(true): setAdd(false)
                         }}>+</button>
                     </div>
+                    </div>
                     {add && <div>
                         <WatchlistForm add = {add} setAdd= {setAdd}/>
                     </div>}
+                    <div className='watchlist-list-body-wrapper'>
                     <div className='watchlist-list-body'>
                         {lists && lists.map(list => (
                             <div className='watchlist-list-row'>
                                 <WatchlistExpand list = {list} id = {list.id}/>
                             </div>
                         ))}
+                    </div>
                     </div>
                 </div>
             </div>

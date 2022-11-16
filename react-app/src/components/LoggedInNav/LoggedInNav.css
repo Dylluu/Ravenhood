@@ -156,6 +156,7 @@
     background-color: white;
     box-shadow: 0 7px 15px 	#F0F0F0;
     animation: fade 150ms linear;
+    /* z-index: 20; */
 }
 
 @keyframes fade {
@@ -239,6 +240,7 @@
     display: flex;
     width: 100%;
     box-sizing: border-box;
+    background-color: white;
     /* border: solid 1px red; */
 }
 
