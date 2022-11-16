@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect, useParams } from "react-router-dom";
-import transactions, * as transactionActions from "../../store/transaction"
+import * as transactionActions from "../../store/transaction"
 import "./transactionform.css"
 
 const TransactionForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const user_id = useSelector(state => state.session.user.id)
     const { ticker } = useParams();
     const [activity, setActivity] = useState("Buy");
     const [type, setType] = useState("Shares");
     const [amount, setAmount] = useState("");
     const [errors, setErrors] = useState({});
-    // const [buyButton, setBuyButton] = useState(true);
-    // const [sellButton, setSellButton] = useState(false);
     const options = [
         { value: 'Shares', text: 'Shares' },
         { value: 'Dollars', text: 'Dollars' }
@@ -69,8 +68,10 @@ const TransactionForm = () => {
         e.preventDefault();
 
         const transaction = {
-            type: type,
-            amount: amount,
+            symbol: ticker,
+            user_id: user_id,
+            is_purchase: activity,
+            num_shares: activity
         }
 
         const createdTransaction = await dispatch(transactionActions.createTransaction(transaction))
@@ -106,7 +107,7 @@ const TransactionForm = () => {
                     <div className="order-type">Order Type</div>
                     <div className="market-order">Market Order</div>
                 </div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="transaction-in-container transaction-form-divs">
                         <div className="transaction-in">{activity} In</div>
                         <select className="shares-dollars" value={type} onChange={handleChange}>
@@ -158,7 +159,7 @@ const TransactionForm = () => {
                 </div>
             </div>
             <div className="transaction-place-order-container">
-                <button className="review-order-button">Review Order</button>
+                <button className="review-order-button" type="submit">Review Order</button>
             </div>
             <div className="buying-power-container">
                 {currentUserBuyPower} buying power available

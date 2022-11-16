@@ -67,6 +67,7 @@ function App() {
 				<Route path="/stocks/:ticker">
 					<LoggedInNav />
 					<StockDashBoard />
+					<Transactions />
 				</Route>
 				<Route path="/cash">
 					<TopNaviagtion />
