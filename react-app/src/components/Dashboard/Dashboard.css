@@ -3,7 +3,7 @@
     justify-content: center;
     margin-top: 100px;
     width: 100%;
-    height: 1000px;
+    /* height: 1000px; */
     box-sizing: border-box;
     /* border: solid 1px red; */
 }
@@ -15,7 +15,7 @@
     width: 100%;
     max-width: 1395px;
     min-width: 1020px;
-    height: 100%;
+    /* height: 100%; */
     margin-left: 12px;
     /* margin-right: 20px; */
     box-sizing: border-box;
