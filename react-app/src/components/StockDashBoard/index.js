@@ -9,8 +9,7 @@ function StockDashBoard() {
 					<div className="stock-dashboard-graph-wrapper">
 						<MainStockGraph />
 					</div>
-
-					<div className="stock-dashboard-inner-left-borders"></div>
+					<div className="stock-dashboard-inner-left-borders">sdfasdfasd</div>
 				</div>
 				<div className="stock-dashboard-buy-sell-wrapper"></div>
 			</div>

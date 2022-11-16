@@ -1,7 +1,10 @@
 #chart-historical {
-    min-height: 100%;
+    min-height: 84%;
     width: 100%;
     /* border: 3px solid orange; */
+    display: flex;
+    flex-direction: column;
+
 }
 #chart-historical .apexcharts-xaxistooltip {
     background: transparent;
@@ -20,7 +23,7 @@
 
 
 .graph-loading-screen{
-    min-height: 100%;
+    min-height: 84%;
     width: 100%;
     display: flex;
     justify-content: center;

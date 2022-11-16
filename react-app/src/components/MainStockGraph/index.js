@@ -176,7 +176,7 @@ function MainStockGraph() {
 											show: false
 										},
 										tooltip: {
-											offsetY: -200,
+											offsetY: -240,
 											formatter: function (val, opts) {
 												let time = new Date(val);
 												return time.toLocaleTimeString([], {

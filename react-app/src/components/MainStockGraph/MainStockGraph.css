@@ -15,9 +15,10 @@
 
 
 #chart{
-    min-height: 100%;
+    min-height: 84%;
     width: 100%;
-    /* border: 2px solid green; */
+    display: flex;
+    flex-direction: column;
 }
 .main-stock-page-wrapper {
     /* border: 5px solid pink; */
@@ -31,4 +32,6 @@
 .graph-holder{
     height: 100%;
     width: 100%;
+    box-sizing: border-box;
+    flex-grow: 1;
 }
