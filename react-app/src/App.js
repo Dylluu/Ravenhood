@@ -22,6 +22,7 @@ import Dashboard from './components/Dashboard';
 import Transactions from './components/Transaction';
 import AddListStock from './components/AddListStock';
 
+import StockDashBoard from './components/StockDashBoard';
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
@@ -64,7 +65,8 @@ function App() {
 					<SignUpForm />
 				</Route>
 				<Route path="/stocks/:ticker">
-					<MainStockGraph />
+					<TopNaviagtion />
+					<StockDashBoard />
 				</Route>
 				<Route path="/cash">
 					<TopNaviagtion />

@@ -133,3 +133,14 @@ export async function getFiveYearStockData(ticker) {
 	}));
 	return fiveYearPrices.reverse();
 }
+
+// get lattest price of Stock base on ticker
+export async function getStockLattestPrice(ticker) {
+	const response = await fetch(
+		`https://yahoo-finance-api.vercel.app/${ticker}`
+	);
+	const data = await response.json();
+	const stonk = data.chart.result[0];
+	const price = stonk.meta.regularMarketPrice.toFixed(2);
+	return price;
+}
