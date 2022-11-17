@@ -138,8 +138,8 @@ const TransactionForm = () => {
         const portfolioTrans = {
             symbol: ticker,
             user_id: user_id,
-            num_shares: numberOfShares,
-            transaction_price: parseFloat(price)
+            num_shares: parseFloat(numberOfShares),
+            average_price: parseFloat(price)
         };
 
         let createdTransaction = null;
@@ -154,8 +154,10 @@ const TransactionForm = () => {
                 if (data && data.errors) setErrors(data.errors);
             });
             console.log("inside ticker",ticker)
-            console.log("inside portfolio", portfolio)
-            for (let i = 0; i < portfolio.length; i++) {
+            console.log("inside portfolio", Object.keys(portfolio).length)
+            console.log("inside ticker",  )
+            for (let i = 0; i < Object.keys(portfolio).length; i++) {
+                console.log('stock ticker', portfolio[i].symbol, i)
                 if (portfolio[i].symbol == ticker) {
                     createdPortfolioTransaction = await dispatch(
                         thunkUpdateStockInPortfolio(portfolioTrans)
@@ -165,15 +167,17 @@ const TransactionForm = () => {
                         if (data && data.errors) setErrors(data.errors);
                     });
                 }
+                if (i == Object.keys(portfolio).length - 1 && portfolio[i].symbol !== ticker) {
+                    createdPortfolioTransaction = await dispatch(
+                        thunkAddStockToPortfolio(portfolioTrans)
+                    ).catch(async (res) => {
+                        const data = await res.json();
+                        // console.log(data)
+                        if (data && data.errors) setErrors(data.errors);
+                    });
+                    break
+                }
             }
-            createdPortfolioTransaction = await dispatch(
-                thunkAddStockToPortfolio(portfolioTrans)
-            ).catch(async (res) => {
-                const data = await res.json();
-                // console.log(data)
-                if (data && data.errors) setErrors(data.errors);
-            });
-
         }
 
         if (!transaction.is_purchase) {
@@ -185,7 +189,7 @@ const TransactionForm = () => {
                 // console.log(data)
                 if (data && data.errors) setErrors(data.errors);
             });
-            for (let i = 0; i < portfolio.length; i++) {
+            for (let i = 0; i < Object.keys(portfolio).length; i++) {
                 if (portfolio[i].num_shares - numberOfShares === 0) {
                     createdPortfolioTransaction = await dispatch(
                         thunkDeleteStockInPortfolio(ticker)

@@ -37,6 +37,7 @@ export const thunkGetWholePortfolio = (user_id) => async (dispatch) => {
 }
 
 export const thunkAddStockToPortfolio = (data) => async (dispatch) => {
+  console.log("mydata",data)
   const response = await fetch (`/api/portfolio/${data.user_id}`, {
     method: "POST",
     headers: {
@@ -51,6 +52,7 @@ export const thunkAddStockToPortfolio = (data) => async (dispatch) => {
 }
 
 export const thunkUpdateStockInPortfolio = (data) => async (dispatch) => {
+  console.log("mydata",data)
   const response = await fetch(`/api/portfolio/${data.symbol}`, {
     method: "PUT",
     headers: {
@@ -84,8 +86,8 @@ const portfolio = (state = initialState, action) => {
       newState.userPortfolio = {...action.payload}
       return newState
     case ADD_STOCK_TO_PORTFOLIO:
-      let symbol = action.payload.symbol
-      newState.userPortfolio[symbol] = action.payload
+      let id = action.payload.id
+      newState.userPortfolio[id-1] = action.payload
       return newState
     case UPDATE_STOCK_IN_PORTFOLIO:
       newState.userPortfolio[action.payload.symbol] = action.payload

@@ -32,7 +32,6 @@ def add_to_portfolo(userId):
         user_id = data["user_id"],
         num_shares = data["num_shares"],
         average_price = data["average_price"],
-        transaction_date = data["transaction_date"]
     )
     db.session.add(new_add_stock)
     db.session.commit()
@@ -44,7 +43,6 @@ def update_stock(symbol):
   """
   Query to update a stock in the user's portfolio and mathmatically
   update num shares and average price
-
   """
 
   form = PortfolioForm()
@@ -53,9 +51,10 @@ def update_stock(symbol):
     symbol = form.data['symbol'],
     user_id = form.data['user_id']
   )
+  print(currStock)
   if form.validate_on_submit():
-    currStock.num_shares = currStock.num_shares + form.data['num_shares']
-    currStock.average_price = ((currStock.average_price*currStock.num_shares) + (form.data['average_price']*abs(form.data['num_shares'])))/(currStock.num_shares + form.data['num_shares'])
+    currStock['num_shares'] = float(currStock['num_shares']) + float(form.data['num_shares'])
+    currStock['average_price'] = ((float(currStock['average_price'])*float(currStock['num_shares'])) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(currStock['num_shares']) + float(form.data['num_shares']))
     db.session.commit()
     return currStock.to_dict()
 
