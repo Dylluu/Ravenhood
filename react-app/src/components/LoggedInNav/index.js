@@ -118,7 +118,7 @@ function LoggedInNav() {
 		<div className="logged-in-nav-wrapper">
 			<img
 				alt="feather"
-				src={logoPurple}
+				src={logoGreen}
 				className="logged-in-feather"
 				onClick={() => {
 					history.push('/');
