@@ -5,7 +5,6 @@ import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import './TopNavigation.css';
 import logo from '../../assets/ravenHood.png'
-import logo2 from '../../assets/ravenHood2.png'
 
 function TopNaviagtion() {
 
