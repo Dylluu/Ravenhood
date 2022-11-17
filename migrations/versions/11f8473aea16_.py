@@ -1,12 +1,16 @@
 """empty message
 
 Revision ID: 11f8473aea16
-Revises: 
+Revises:
 Create Date: 2022-11-17 09:53:33.863776
 
 """
 from alembic import op
 import sqlalchemy as sa
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 
 # revision identifiers, used by Alembic.
@@ -30,6 +34,9 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.create_table('portfolio',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=6), nullable=False),
@@ -41,6 +48,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('symbol')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE portfolio SET SCHEMA {SCHEMA};")
+
+
     op.create_table('user_transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=6), nullable=False),
@@ -52,6 +63,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE user_transactions SET SCHEMA {SCHEMA};")
+
+
     op.create_table('watchlists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=False),
@@ -59,6 +74,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE watchlists SET SCHEMA {SCHEMA};")
+
+
     op.create_table('watchlist_stocks',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=7), nullable=False),
@@ -66,6 +85,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['watchlist_id'], ['watchlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE watchlist_stocks SET SCHEMA {SCHEMA};")
+
+
     # ### end Alembic commands ###
 
 

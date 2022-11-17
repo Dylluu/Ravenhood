@@ -32,7 +32,7 @@ export const thunkGetWholePortfolio = (user_id) => async (dispatch) => {
 
   if (response.ok) {
     const wholePortfolio = await response.json()
-    dispatch(getWholePortfolio(wholePortfolio))
+    dispatch(getWholePortfolio(wholePortfolio.portfolio))
   }
 }
 
@@ -105,7 +105,7 @@ const normalizeArrUser = (arr, user_id) => {
   let obj = {}
   arr.forEach(el => {
     if (el.user_id === user_id)
-      obj[el.id] = el
+      obj[el.symbol] = el
   })
   return obj
 }
