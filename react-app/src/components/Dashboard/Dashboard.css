@@ -3,7 +3,7 @@
     justify-content: center;
     margin-top: 100px;
     width: 100%;
-    /* height: 1000px; */
+    height: 1000px;
     box-sizing: border-box;
     /* border: solid 1px red; */
 }
@@ -103,7 +103,8 @@
     display: flex;
     flex-direction: column;
     font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
-    /* position: fixed; */
+    position: sticky;
+    top: 100px;
     /* height: 100%; */
     height: fit-content;
     width: 23.75%;
@@ -111,6 +112,7 @@
     border: solid 1px rgb(224,224,232);
     border-top: solid 2px rgb(224,224,232);
     border-radius: 4px;
+    /* border: solid 1px red; */
     /* padding: 10px; */
 }
 
@@ -158,14 +160,16 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     width: 100%;
+    height: 60px;
     box-sizing: border-box;
     cursor: pointer;
     /* border: solid 1px green; */
 }
 
 .watchlist-list-wrapper:hover {
-    background-color: 	#F0F0F0;
+    background-color: 	rgb(245,248,252);
 }
 
 .watchlist-list {
@@ -239,7 +243,7 @@
 }
 
 .watchlist-navlink:hover {
-    background-color: #E0E0E0;
+    background-color: #F0F0F0;
 }
 
 .watchlist-menu-button {
@@ -255,7 +259,7 @@
 }
 
 .watchlist-stocks-body-wrapper:hover {
-    background-color: 	#F0F0F0;
+    background-color: 	rgb(245,248,252);
 }
 
 .watchlist-stocks-body {

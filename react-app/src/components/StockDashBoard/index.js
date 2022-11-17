@@ -23,14 +23,6 @@ function StockDashBoard() {
 			const companyInfo = await GetCompanyOverview(ticker);
 			const stockInfo = await getStockVolume(ticker);
 			const companynews = await getTodayCompanyNews(ticker);
-			const ownedStockData = await getPortfolioPerformancedifference({
-				TSLA: 2.03,
-				SPPI: 2,
-				AGEN: 1,
-				AAPL: 1.01,
-				CPNG: 2
-			});
-			console.log(ownedStockData);
 			setCompanyNews(companynews);
 			setStockInfo(stockInfo);
 			setCompanyOverview(companyInfo);
@@ -38,6 +30,11 @@ function StockDashBoard() {
 		companyInfo();
 	}, []);
 
+	let fiveNewsMax;
+	if (companyNews) {
+		fiveNewsMax =
+			companyNews.length > 5 ? companyNews.slice(0, 5) : companyNews;
+	}
 	if (!companyOverview) return null;
 
 	return (
@@ -58,11 +55,14 @@ function StockDashBoard() {
 							companyOverview={companyOverview}
 						/>
 						<div className="section-title">News</div>
-						<CompanyNews />
+						<div className="company-news-wrapper">
+							{fiveNewsMax?.map((eachNews) => (
+								<CompanyNews news={eachNews} />
+							))}
+						</div>
 					</div>
 				</div>
 				<div className="stock-dashboard-right-wrapper">
-					{/* <div className="stock-dashboard-buy-sell-wrapper">sdfsd</div> */}
 					<WatchlistAddList symbol={ticker} />
 				</div>
 			</div>

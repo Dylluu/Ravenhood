@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .watchlist import seed_watchlist, undo_watchlist
 from .watchlistStocks import seed_watchlist_stocks, undo_watchlist_stocks
 from .userTransactions import seed_transactions, undo_user_transactions
+from .portfolio import seed_portfolio, undo_portfolio
 
 from app.models.db import db, environment, SCHEMA
 
@@ -23,10 +24,12 @@ def seed():
         undo_watchlist()
         undo_watchlist_stocks()
         undo_user_transactions()
+        undo_portfolio()
     seed_users()
     seed_watchlist()
     seed_watchlist_stocks()
     seed_transactions()
+    seed_portfolio()
     # Add other seed functions here
 
 
@@ -37,4 +40,5 @@ def undo():
     undo_watchlist()
     undo_watchlist_stocks()
     undo_user_transactions()
+    undo_portfolio()
     # Add other undo functions here

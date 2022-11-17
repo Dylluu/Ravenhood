@@ -62,8 +62,8 @@ function WatchlistAddList(symbol) {
             ))}
           </div>
 
-        <button className="cancel-button" onClick={() => add == false? setAdd(true): setAdd(false)}>Cancel</button>
-        <button className='create-list-button' type="submit">Add List</button>
+        <button className="add-cancel-button" onClick={() => add == false? setAdd(true): setAdd(false)}>Cancel</button>
+        <button className='add-create-list-button' type="submit">Add List</button>
         </form>
 
       </Modal>}
