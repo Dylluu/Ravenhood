@@ -155,15 +155,18 @@ const TransactionForm = () => {
             });
             console.log("inside ticker", ticker)
             console.log("inside portfolio", portfolio)
-            if (ticker in Object.keys(portfolio)) {
-                createdPortfolioTransaction = await dispatch(
-                    thunkUpdateStockInPortfolio(portfolioTrans)
-                ).catch(async (res) => {
-                    const data = await res.json();
-                    // console.log(data)
-                    if (data && data.errors) setErrors(data.errors);
-                });
+            for (let i = 0; i < portfolio.length; i++) {
+                if (ticker in portfolio[i]) {
+                    createdPortfolioTransaction = await dispatch(
+                        thunkUpdateStockInPortfolio(portfolioTrans)
+                    ).catch(async (res) => {
+                        const data = await res.json();
+                        // console.log(data)
+                        if (data && data.errors) setErrors(data.errors);
+                    });
+                }
             }
+
             if (!ticker in Object.keys(portfolio)) {
                 createdPortfolioTransaction = await dispatch(
                     thunkAddStockToPortfolio(portfolioTrans)
