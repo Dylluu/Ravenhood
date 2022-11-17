@@ -10,7 +10,7 @@ class UserTransactions(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(6), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefic_for_prod("users.id")), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     is_purchase = db.Column(db.Boolean, nullable=False)
     num_shares = db.Column(db.Integer, nullable=False) #(integer places, decimal places)
     transaction_price = db.Column(db.Float, nullable=False)
