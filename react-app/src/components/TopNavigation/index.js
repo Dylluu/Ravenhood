@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import './TopNavigation.css';
-import logo from '../../assets/Robinhood-logo.png'
+import logo from '../../assets/ravenHood.png'
 
 function TopNaviagtion() {
 
@@ -45,12 +45,14 @@ function TopNaviagtion() {
     return (
         <div className='nav-wrapper'>
             <div className='logo-wrapper'>
-                <div className='robinhood'
+                <div className='ravenhood'
                 onClick={() => {
                     if(menuOpen) handleMenuOpen()
                     history.push('/')
+                    history.go(0)
                 }}
                 >
+                    <span>Ravenhood</span>
                     <img id='logo' src={logo}/>
                 </div>
             </div>

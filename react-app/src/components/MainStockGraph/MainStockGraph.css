@@ -35,3 +35,9 @@
     box-sizing: border-box;
     flex-grow: 1;
 }
+
+.price {
+    margin-bottom: 0.2rem;
+    font-size: 2rem;
+    font-weight: 350;
+}

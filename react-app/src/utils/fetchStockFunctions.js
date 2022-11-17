@@ -146,7 +146,7 @@ export async function getStockLattestPrice(ticker) {
 }
 
 // Get Company Overview function
-export async function GetComparyOverview(ticker) {
+export async function GetCompanyOverview(ticker) {
 	const baseURL = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${apikey}`;
 	const response = await fetch(baseURL);
 	return response.json();

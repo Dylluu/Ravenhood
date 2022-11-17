@@ -41,92 +41,98 @@ def transactions_by_stock_and_user_id(symbol):
 
 
 
-@transaction_routes.route('/<symbol>', methods=["POST"])
+@transaction_routes.route('<symbol>/buy', methods=["POST"])
 @login_required
 def create_buy_transaction(symbol):
     """
     Records the buy transaction
     """
-    CurrentUser = current_user.id
-    LookupSymbol = symbol.upper()
+    # CurrentUser = current_user.id
+    # LookupSymbol = symbol.upper()
 
     form = TransactionForm()
-    form['csrf_token'].data = request.cookies
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
 
-        if data["transaction_in"] == "Shares":
-            # insert data into UserTransactions model
-            new_buy_transaction_shares = UserTransactions(
-                symbol = LookupSymbol,
-                user_id = CurrentUser,
-                is_purchase = True,
-                num_shares = data["transaction_amount"],
-                transaction_price = 100,
-            )
+        # insert data into UserTransactions model
+        new_buy_transaction_shares = UserTransactions(
+            symbol = data["symbol"],
+            user_id = data["user_id"],
+            is_purchase = data["is_purchase"],
+            num_shares = data["num_shares"],
+            transaction_price = data["transaction_price"],
+        )
+        db.session.add(new_buy_transaction_shares)
+        db.session.commit()
+        return new_buy_transaction_shares.to_dict()
 
-            db.session.add(new_buy_transaction_shares)
-            db.session.commit()
-            return new_buy_transaction_shares.to_dict()
-
-        if data["transaction_in"] == "Dollars":
-            TransactionPrice = 100
-            inShares = data["transaction_amount"] / TransactionPrice
-
-            new_buy_transaction_dollars = UserTransactions(
-                symbol = LookupSymbol,
-                user_id = CurrentUser,
-                is_purchase = True,
-                num_shares = inShares,
-                transaction_price = 100,
-            )
-
-            db.session.add(new_buy_transaction_dollars)
-            db.session.commit()
-            return new_buy_transaction_dollars.to_dict()
-
-
-
-@transaction_routes.route('/<symbol>', methods=["POST"])
+@transaction_routes.route('<symbol>/sell', methods=["POST"])
 @login_required
 def create_sell_transaction(symbol):
     """
     Records the buy transaction
     """
-    CurrentUser = current_user.id
-    LookupSymbol = symbol.upper()
+    # CurrentUser = current_user.id
+    # LookupSymbol = symbol.upper()
 
     form = TransactionForm()
-    form['csrf_token'].data = request.cookies
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
 
-        if data["transaction_in"] == "Shares":
-            # insert data into UserTransactions model
-            new_sell_transaction_shares = UserTransactions(
-                symbol = LookupSymbol,
-                user_id = CurrentUser,
-                is_purchase = False,
-                num_shares = data["transaction_amount"],
-                transaction_price = 100,
-            )
+        # insert data into UserTransactions model
+        new_sell_transaction_shares = UserTransactions(
+            symbol = data["symbol"],
+            user_id = data["user_id"],
+            is_purchase = data["is_purchase"],
+            num_shares = data["num_shares"],
+            transaction_price = data["transaction_price"],
+        )
+        db.session.add(new_sell_transaction_shares)
+        db.session.commit()
+        return new_sell_transaction_shares.to_dict()
 
-            db.session.add(new_sell_transaction_shares)
-            db.session.commit()
-            return new_sell_transaction_shares.to_dict()
+# @transaction_routes.route('/<symbol>', methods=["POST"])
+# @login_required
+# def create_sell_transaction(symbol):
+#     """
+#     Records the buy transaction
+#     """
+#     CurrentUser = current_user.id
+#     LookupSymbol = symbol.upper()
 
-        if data["transaction_in"] == "Dollars":
-            TransactionPrice = 100
-            inShares = data["transaction_amount"] / TransactionPrice
+#     form = TransactionForm()
+#     form['csrf_token'].data = request.cookies
+#     if form.validate_on_submit():
+#         data = form.data
 
-            new_sell_transaction_dollars = UserTransactions(
-                symbol = LookupSymbol,
-                user_id = CurrentUser,
-                is_purchase = True,
-                num_shares = inShares,
-                transaction_price = 100,
-            )
+#         if data["transaction_in"] == "Shares":
+#             # insert data into UserTransactions model
+#             new_sell_transaction_shares = UserTransactions(
+#                 symbol = LookupSymbol,
+#                 user_id = CurrentUser,
+#                 is_purchase = False,
+#                 num_shares = data["transaction_amount"],
+#                 transaction_price = 100,
+#             )
 
-            db.session.add(new_sell_transaction_dollars)
-            db.session.commit()
-            return new_sell_transaction_dollars.to_dict()
+#             db.session.add(new_sell_transaction_shares)
+#             db.session.commit()
+#             return new_sell_transaction_shares.to_dict()
+
+#         if data["transaction_in"] == "Dollars":
+#             TransactionPrice = 100
+#             inShares = data["transaction_amount"] / TransactionPrice
+
+#             new_sell_transaction_dollars = UserTransactions(
+#                 symbol = LookupSymbol,
+#                 user_id = CurrentUser,
+#                 is_purchase = True,
+#                 num_shares = inShares,
+#                 transaction_price = 100,
+#             )
+
+#             db.session.add(new_sell_transaction_dollars)
+#             db.session.commit()
+#             return new_sell_transaction_dollars.to_dict()

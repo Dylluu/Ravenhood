@@ -18,8 +18,20 @@ export const cleanUpTransactions = () => {
     }
 }
 
-export const createTransaction = (transaction) => async (dispatch) => {
-    const response = await fetch("/api/stocks", {
+export const createBuyTransaction = (transaction) => async (dispatch) => {
+    console.log("buy", transaction)
+    const response = await fetch(`/api/stocks/${transaction.symbol}/buy`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(transaction)
+    })
+}
+
+export const createSellTransaction = (transaction) => async (dispatch) => {
+    console.log("sell", transaction)
+    const response = await fetch(`/api/stocks/${transaction.symbol}/sell`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

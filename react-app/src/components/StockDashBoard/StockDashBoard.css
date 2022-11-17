@@ -28,12 +28,13 @@
     /* justify-content: space-between; */
     width: 72.8%;
     box-sizing: border-box;
+    padding: 0 10px;
     border: solid 1px pink;
 }
 
 .stock-dashboard-graph-wrapper {
     display: flex;
-    height: 410px;
+    height: 445px;
     width: 100%;
     box-sizing: border-box;
     /* border: solid 3px turquoise; */
@@ -56,4 +57,32 @@
     flex-direction: column;
     margin-left: 8%;
     width: 15%;
+}
+
+.stock-dashboard-inner-left-borders{
+    padding: 2rem 0;
+    /* border: 1px solid salmon; */
+}
+/* COMPANY INFO CSS */
+
+#Company-name{
+    font-weight: 350;
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.percentDifference{
+    font-weight: bold;
+}
+
+.section-title{
+    font-weight: 350;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid #e6e9ee;
+}
+
+#company-description{
+    padding: 1rem 0;
+    line-height: 1.5rem;
 }
