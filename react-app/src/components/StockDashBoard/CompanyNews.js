@@ -13,7 +13,6 @@ function CompanyNews({ news }) {
 		shorttenSummary.length == 50
 			? shorttenSummary.join(' ') + ' ...'
 			: shorttenSummary.join(' ');
-	console.log(summary);
 	return (
 		<a href={news.url} target="_blank">
 			<div className="company-news">
