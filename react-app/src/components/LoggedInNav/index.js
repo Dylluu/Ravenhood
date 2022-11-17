@@ -152,6 +152,9 @@ function LoggedInNav() {
 								className="search-results"
 								key={result}
 								onClick={() => {
+									setSearch('');
+									setSearchResults([]);
+									setSearchOpen(false);
 									history.push(`/stocks/${result}`);
 									// history.go(0);
 								}}
