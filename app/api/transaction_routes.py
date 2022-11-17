@@ -14,11 +14,31 @@ def all_transactions():
     Query for all transactions and returns them in a list of transaction dictionaries
     """
     transactions = UserTransactions.query.all()
-    return {'transactions': [transaction.to_dict() for transaction in transactions]}
+    return {'allTransactions': [transaction.to_dict() for transaction in transactions]}
 
 
 
-@transaction_routes.route('/<symbol>')
+@transaction_routes.route('/my-stocks')
+@login_required
+def transactions_by_user_id():
+    """
+    Query for all transactions and returns them in a list of transaction dictionaries
+    """
+    CurrentUser = current_user.id
+    transactions = UserTransactions.query.filter_by(
+        user_id = int(CurrentUser)
+        ).all()
+
+    transactions_dict = {}
+
+    for transaction in transactions:
+        transactions_dict[transaction.to_dict()["id"]] = transaction.to_dict()
+
+    return {'myTransactions': [transaction.to_dict() for transaction in transactions]}
+
+
+
+@transaction_routes.route('/<symbol>/owned')
 @login_required
 def transactions_by_stock_and_user_id(symbol):
     """

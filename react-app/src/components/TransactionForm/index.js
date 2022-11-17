@@ -75,11 +75,24 @@ const TransactionForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        let numberOfShares;
+        if (isBuy && type === "Shares") {
+            numberOfShares = parseFloat(amount).toFixed(6)
+        } else if (!isBuy && type === "Shares") {
+            numberOfShares = -Math.abs(amount).toFixed(6)
+        } else if (isBuy && type === "Dollars") {
+            let quantity = amount / price
+            numberOfShares = parseFloat(quantity).toFixed(6)
+        } else if (!isBuy && type === "Dollars") {
+            let quantity = amount / price
+            numberOfShares = -Math.abs(quantity).toFixed(6)
+        }
+
         const transaction = {
             symbol: ticker,
             user_id: user_id,
             is_purchase: isBuy,
-            num_shares: parseFloat(amount),
+            num_shares: numberOfShares,
             transaction_price: parseFloat(price)
         }
 
@@ -150,8 +163,9 @@ const TransactionForm = () => {
                                 onChange={(e) => setAmount(e.target.value)}
                                 placeholder="$0.00"
                                 min="0"
-                                max="1"
+                                max="10000000"
                                 required
+                                step="any"
                                 onInput={(e) => e.target.value = e.target.value.slice(0, 12)}
                             />
                         </div>
@@ -164,7 +178,10 @@ const TransactionForm = () => {
                                 type="number"
                                 onChange={(e) => setAmount(e.target.value)}
                                 placeholder="0"
+                                min="0"
+                                max="10000000"
                                 required
+                                step="any"
                                 onInput={(e) => e.target.value = e.target.value.slice(0, 12)}
                             />
                         </div>
