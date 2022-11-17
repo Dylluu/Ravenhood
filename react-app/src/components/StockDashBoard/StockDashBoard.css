@@ -5,7 +5,7 @@
     width: 100%;
     height: 1000px;
     box-sizing: border-box;
-    border: solid 1px red;
+    /* border: solid 1px red; */
 }
 
 .stock-dashboard-inner-wrapper {
@@ -26,15 +26,15 @@
     display: flex;
     flex-direction: column;
     /* justify-content: space-between; */
-    width: 72.8%;
+    width: 73%;
     box-sizing: border-box;
     padding: 0 10px;
-    border: solid 1px pink;
+    /* border: solid 1px pink; */
 }
 
 .stock-dashboard-graph-wrapper {
     display: flex;
-    height: 445px;
+    min-height: 520px;
     width: 100%;
     box-sizing: border-box;
     /* border: solid 3px turquoise; */
@@ -55,8 +55,10 @@
 .stock-dashboard-right-wrapper{
     display: flex;
     flex-direction: column;
-    margin-left: 8%;
-    width: 15%;
+    /* align-items: center; */
+    margin-left: 10px;
+    width: 27%;
+    box-sizing: border-box;
 }
 
 .stock-dashboard-inner-left-borders{
@@ -78,11 +80,95 @@
 .section-title{
     font-weight: 350;
     font-size: 1.5rem;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     border-bottom: 2px solid #e6e9ee;
 }
 
 #company-description{
-    padding: 1rem 0;
+    padding: 2rem 0;
     line-height: 1.5rem;
+}
+
+
+#statistics-wrapper{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+
+}
+.company-statistic-info-box{
+    width: 24.7%;
+    padding-bottom: 1.2rem;
+}
+
+.company-statistic-info-title{
+    font-weight: 600;
+    font-size: 13px;
+}
+.company-statistic-info-body{
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* END COMPANY INFO CSS */
+
+/* News CSS */
+.company-news-wrapper{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.company-news{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+    /* border: 1px solid red; */
+    padding: 2rem 0.2rem 2rem 0.2rem;
+}
+.company-news:hover{
+    background-color: rgb(245, 248, 252);
+    cursor: pointer;
+}
+
+.news-left-col{
+    padding-right: 1rem;
+}
+.news-right-col{
+    min-height: 180px;
+    min-width: 200px;
+    max-height: 180px;
+    max-width: 200px;
+    box-sizing: border-box;
+}
+.news-right-col > img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.news-sourse{
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0;
+    height: 25px;
+}
+#news-published-time{
+    color: rgb(145, 159, 166);
+    padding-left: 0.2rem;
+}
+
+.news-headline{
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.news-summary{
+    font-size: 14px;
+    color:rgb(145, 159, 166)
 }

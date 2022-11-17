@@ -145,9 +145,67 @@ export async function getStockLattestPrice(ticker) {
 	return price;
 }
 
+// get Stock Volumne per day
+export async function getStockVolume(ticker) {
+	const response = await fetch(
+		`https://yahoo-finance-api.vercel.app/${ticker}`
+	);
+	const data = await response.json();
+	const volume = data.chart.result[0].indicators.quote[0].volume.reduce(
+		(a, b) => a + b,
+		0
+	);
+	const openPrice = data.chart.result[0].indicators.quote[0].open[0];
+	return [volume, openPrice];
+}
 // Get Company Overview function
 export async function GetCompanyOverview(ticker) {
 	const baseURL = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${apikey}`;
 	const response = await fetch(baseURL);
 	return response.json();
+}
+
+//Get Today Company News
+export async function getTodayCompanyNews(ticker) {
+	let todayDate = new Date();
+	todayDate.setDate(todayDate.getDate() - 1);
+	todayDate = todayDate.toISOString().split('T')[0];
+	const baseURL = `https://finnhub.io/api/v1/company-news?symbol=${ticker}&from=${todayDate}&to=${todayDate}&token=cdqn3niad3ifho9o8em0cdqn3niad3ifho9o8emg`;
+	const response = await fetch(baseURL);
+	return response.json();
+}
+
+export async function getTodayNews(ticker) {
+	const baseURL = `https://finnhub.io/api/v1/news?category=general&token=cdqn3niad3ifho9o8em0cdqn3niad3ifho9o8emg`;
+	const response = await fetch(baseURL);
+	return response.json();
+}
+
+async function getStonk(ticker) {
+	const response = await fetch(
+		`https://yahoo-finance-api.vercel.app/${ticker}`
+	);
+	return response.json();
+}
+
+export async function getPortfolioPerformancedifference(portfolio) {
+	const ownedStock = Object.keys(portfolio);
+
+	const ownedStockData = await Promise.all(
+		ownedStock.map(async (ticker) => await getStonk(ticker))
+	);
+
+	const dataLength = ownedStockData[0].chart.result[0].timestamp.length;
+	const portfolioArr = [];
+	for (let i = 0; i <= dataLength - 1; i++) {
+		let PortfolioTotal = 0;
+		ownedStockData.forEach((stock) => {
+			const key = stock.chart.result[0].meta.symbol;
+			const price =
+				stock.chart.result[0].indicators.quote[0].close[i] * portfolio[key];
+			PortfolioTotal += price;
+		});
+		portfolioArr[i] = PortfolioTotal;
+	}
+	return portfolioArr;
 }

@@ -1,25 +1,11 @@
 import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Chart from 'react-apexcharts';
-import MainStockPage from '../MainStockPage';
-import * as stockActions from '../../store/stocks';
-import './MainStockGraph.css';
 import { useDispatch, useSelector } from 'react-redux';
-import useSiteColorContext from '../../context/SiteColor';
-import useStockPriceContext from '../../context/stockCurrentPrice';
+import './PortfolioGraph.css';
 
-async function getStonks(ticker) {
-	const response = await fetch(
-		`https://yahoo-finance-api.vercel.app/${ticker}`
-	);
-	return response.json();
-}
-
-function MainStockGraph() {
-	const { ticker } = useParams();
-	const stockData = useSelector((state) => state.stockData);
-	const { setSiteColor } = useSiteColorContext();
-	const { setPriceContext } = useStockPriceContext();
+function PortfolioGraph() {
 	const dispatch = useDispatch();
 	// Data variables
 	const [series, setSeries] = useState({
@@ -70,7 +56,6 @@ function MainStockGraph() {
 				const stonk = data.chart.result[0];
 				setPrevPrice(price);
 				setPrice(stonk.meta.regularMarketPrice.toFixed(2));
-				setPriceContext(stonk.meta.regularMarketPrice.toFixed(2));
 
 				// Setting prices values for graphs
 				const quote = stonk.indicators.quote[0];
@@ -224,4 +209,4 @@ function MainStockGraph() {
 	);
 }
 
-export default MainStockGraph;
+export default PortfolioGraph;

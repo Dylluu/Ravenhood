@@ -1,15 +1,22 @@
 .wacthlist-add-list-page {
-  font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-family: Capsule Sans Text, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .add-list-button {
+  min-height: 44px;
+  max-height: 44px;
+  max-width: 280px;
+  width: 280px;
+  min-width: 205px;
   border-radius: 25px;
-  border: 1px solid rgb(0,200,5);
-  color: rgb(0,200,5);
-  padding: 8% 20%;
-  margin: 3% 6%;
   font-size: 13px;
-  font-weight: 800;
+  background-color: #00c805;
+  color: white;
+  font-weight: 700;
+}
+
+.add-list-button:hover {
+  background-color: #00b405;
 }
 
 .add-form {
@@ -29,4 +36,29 @@
 .container {
   display: flex;
   justify-content: flex-start;
+}
+
+.add-cancel-button {
+  border-radius: 25px;
+  border: 1px solid #ff5404;
+  ;
+  color: #ff5404;
+  ;
+  padding: 8% 20%;
+  margin: 3% 6%;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.add-create-list-button {
+  border-radius: 25px;
+  border: 1px solid #ff5404;
+  ;
+  background-color: #ff5404;
+  ;
+  color: white;
+  padding: 8% 20%;
+  margin: 3% 6%;
+  font-size: 13px;
+  font-weight: 800;
 }
