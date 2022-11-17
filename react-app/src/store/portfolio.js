@@ -32,7 +32,7 @@ export const thunkGetWholePortfolio = (user_id) => async (dispatch) => {
 
   if (response.ok) {
     const wholePortfolio = await response.json()
-    dispatch(getWholePortfolio(normalizeArrUser(wholePortfolio), user_id))
+    dispatch(getWholePortfolio(wholePortfolio))
   }
 }
 
