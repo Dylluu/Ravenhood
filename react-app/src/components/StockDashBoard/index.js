@@ -48,7 +48,9 @@ function StockDashBoard() {
 					</div>
 					<div className="stock-dashboard-inner-left-borders">
 						<div className="stock-holding-wrapper"></div>
-						<div className="section-title">About</div>
+						<div className="section-title"
+						id='about'
+						>About</div>
 						<div id="company-description">{companyOverview.Description}</div>
 						<div className="section-title">Key statistics</div>
 						<KeyStatistics

@@ -85,6 +85,11 @@
     font-size: 1.5rem;
     padding: 1.5rem 0;
     border-bottom: 2px solid #e6e9ee;
+    /* border: solid 1px red; */
+}
+
+#about {
+    margin-top: 15px;
 }
 
 #company-description{
