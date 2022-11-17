@@ -78,11 +78,33 @@
 .section-title{
     font-weight: 350;
     font-size: 1.5rem;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     border-bottom: 2px solid #e6e9ee;
 }
 
 #company-description{
-    padding: 1rem 0;
+    padding: 2rem 0;
     line-height: 1.5rem;
+}
+
+
+#statistics-wrapper{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+
+}
+.company-statistic-info-box{
+    width: 24.7%;
+    padding-bottom: 1.2rem;
+}
+
+.company-statistic-info-title{
+    font-weight: 600;
+    font-size: 13px;
+}
+.company-statistic-info-body{
+    font-size: 13px;
+    font-weight: 400;
 }

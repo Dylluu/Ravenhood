@@ -3,7 +3,7 @@
     border-bottom: 2px solid #e6e9ee;
     gap: 1rem;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.7rem;
     box-sizing: border-box;
 }
 
@@ -12,7 +12,7 @@
     top: 2px;
     cursor: pointer;
     padding: 1rem 0;
-    margin: 0 0.5rem;
+    margin-right: 0.5rem;
 }
 
 

@@ -145,9 +145,32 @@ export async function getStockLattestPrice(ticker) {
 	return price;
 }
 
+// get Stock Volumne per day
+export async function getStockVolume(ticker) {
+	const response = await fetch(
+		`https://yahoo-finance-api.vercel.app/${ticker}`
+	);
+	const data = await response.json();
+	const volume = data.chart.result[0].indicators.quote[0].volume.reduce(
+		(a, b) => a + b,
+		0
+	);
+	const openPrice = data.chart.result[0].indicators.quote[0].open[0];
+	return [volume, openPrice];
+}
 // Get Company Overview function
 export async function GetCompanyOverview(ticker) {
 	const baseURL = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${ticker}&apikey=${apikey}`;
+	const response = await fetch(baseURL);
+	return response.json();
+}
+
+//Get Today Company News
+export async function getTodayCompanyNews(ticker) {
+	let todayDate = new Date();
+	todayDate.setDate(todayDate.getDate() - 1);
+	todayDate = todayDate.toISOString().split('T')[0];
+	const baseURL = `https://finnhub.io/api/v1/company-news?symbol=${ticker}&from=${todayDate}&to=${todayDate}&token=cdqn3niad3ifho9o8em0cdqn3niad3ifho9o8emg`;
 	const response = await fetch(baseURL);
 	return response.json();
 }

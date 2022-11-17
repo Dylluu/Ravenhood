@@ -14,11 +14,10 @@ async function getStonks(ticker) {
 	return response.json();
 }
 
-const DoNothing = () => {};
 function MainStockGraph() {
 	const { ticker } = useParams();
 	const stockData = useSelector((state) => state.stockData);
-	const { setSiteColor } = useSiteColorContext();
+	const { setSiteColor, siteColor } = useSiteColorContext();
 	const dispatch = useDispatch();
 	// Data variables
 	const [series, setSeries] = useState({
@@ -89,10 +88,10 @@ function MainStockGraph() {
 				setStartPrice(startPrice);
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
-					showOneDay ? setSiteColor('green') : DoNothing();
+					if (showOneDay) setSiteColor('green');
 					setChartColor(['#00c805', 'black']);
 				} else {
-					showOneDay ? setSiteColor('red') : DoNothing();
+					if (showOneDay) setSiteColor('red');
 					setChartColor(['#ff5404', 'black']);
 				}
 			} catch (error) {
@@ -111,6 +110,7 @@ function MainStockGraph() {
 	useEffect(() => {
 		dispatch(stockActions.cleanUpStockData());
 	}, []);
+
 	// generate graph data point for open price,
 	// will trigger once open price has been set
 	useEffect(() => {
@@ -169,7 +169,7 @@ function MainStockGraph() {
 											show: false
 										},
 										tooltip: {
-											offsetY: -300,
+											offsetY: -220,
 											formatter: function (val, opts) {
 												let time = new Date(val);
 												return time.toLocaleTimeString([], {
