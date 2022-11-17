@@ -174,3 +174,32 @@ export async function getTodayCompanyNews(ticker) {
 	const response = await fetch(baseURL);
 	return response.json();
 }
+
+async function getStonk(ticker) {
+	const response = await fetch(
+		`https://yahoo-finance-api.vercel.app/${ticker}`
+	);
+	return response.json();
+}
+
+export async function getPortfolioPerformancedifference(portfolio) {
+	const ownedStock = Object.keys(portfolio);
+
+	const ownedStockData = await Promise.all(
+		ownedStock.map(async (ticker) => await getStonk(ticker))
+	);
+
+	const dataLength = ownedStockData[0].chart.result[0].timestamp.length;
+	const portfolioArr = [];
+	for (let i = 0; i <= dataLength - 1; i++) {
+		let PortfolioTotal = 0;
+		ownedStockData.forEach((stock) => {
+			const key = stock.chart.result[0].meta.symbol;
+			const price =
+				stock.chart.result[0].indicators.quote[0].close[i] * portfolio[key];
+			PortfolioTotal += price;
+		});
+		portfolioArr[i] = PortfolioTotal;
+	}
+	return portfolioArr;
+}
