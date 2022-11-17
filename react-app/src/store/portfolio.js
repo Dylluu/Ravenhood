@@ -75,7 +75,7 @@ export const thunkDeleteStockInPortfolio = (symbol) => async (dispatch) => {
 }
 
 
-let initialState = {}
+let initialState = {userPortfolio: {}}
 
 const portfolio = (state = initialState, action) => {
   const newState = {...state}
