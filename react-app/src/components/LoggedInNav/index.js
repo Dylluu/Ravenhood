@@ -35,6 +35,11 @@ function LoggedInNav() {
 		//     }
 		//     handleSearchOne(search)
 		// }
+		const searchBar = document.getElementById('search-stock');
+		searchBar.addEventListener('focusout', () => {
+			setSearchOpen(false)
+		})
+
 		if (search.length > 0) {
 			let matches = [];
 			setSearchOpen(true);
