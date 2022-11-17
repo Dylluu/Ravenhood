@@ -6,11 +6,12 @@
     min-width: 232px;
     box-sizing: border-box;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    margin: 50px;
+    margin: 100px;
 }
 
 .top-container {
-    height: 52px;
+    min-height: 52px;
+    max-height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,7 +21,8 @@
 
 .buy-sell-container {
     /* border: 3px solid orange; */
-    height: 52px;
+    min-height: 52px;
+    max-height: 52px;
     display: flex;
     max-width: 280px;
     width: 280px;
@@ -32,7 +34,8 @@
 .transaction-type-button-off {
     margin-top: 4px;
     margin-right: 12px;
-    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
     font-size: 15px;
     font-weight: 700;
     border-bottom: 2px solid #e6e9ee;
@@ -47,9 +50,29 @@
     color: #00c805
 }
 
+.transaction-type-button-off-red {
+    margin-top: 4px;
+    margin-right: 12px;
+    min-height: 50px;
+    max-height: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    border-bottom: 2px solid #e6e9ee;
+}
+
+.transaction-type-button-off-red:hover {
+    color: #ff5404;
+}
+
+.transaction-type-button-on-red {
+    border-bottom: 2px solid #ff5404;
+    color: #ff5404
+}
+
 .transaction-form-container-shares {
     /* border: 1px solid pink; */
-    height: 253px;
+    min-height: 253px;
+    max-height: 253px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +81,8 @@
 
 .transaction-form-container-dollars {
     /* border: 1px solid pink; */
-    height: 205px;
+    min-height: 205px;
+    max-height: 205px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,8 +91,10 @@
 
 
 .shares-dollars {
-    height: 36px;
-    width: 136px;
+    min-height: 36px;
+    max-height: 36px;
+    min-width: 136px;
+    max-width: 136px;
     font-size: 13px;
     border-radius: 5px;
     cursor: pointer;
@@ -86,8 +112,10 @@
 }
 
 .transaction-amount-input {
-    height: 36px;
-    width: 136px;
+    min-height: 36px;
+    max-height: 36px;
+    min-width: 136px;
+    max-width: 136px;
     font-size: 13px;
     opacity: 50%;
     background-color: #f4f8fb;
@@ -127,7 +155,8 @@
 
 .transaction-form-divs {
     /* border: 1px solid pink; */
-    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
     max-width: 280px;
     width: 280px;
     min-width: 206px;
@@ -142,7 +171,8 @@
 }
 
 .transaction-place-order-container {
-    height: 92px;
+    min-height: 92px;
+    max-height: 92px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,10 +181,12 @@
 
 .review-order-button {
     /* border: 1px solid red; */
-    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
     max-width: 280px;
     width: 280px;
-    border-radius: 30px;
+    min-width: 205px;
+    border-radius: 25px;
     font-size: 13px;
     background-color: #00c805;
     color: white;
@@ -165,15 +197,51 @@
     background-color: #00b405;
 }
 
+.review-order-button-red {
+    /* border: 1px solid red; */
+    min-height: 44px;
+    max-height: 44px;
+    max-width: 280px;
+    width: 280px;
+    min-width: 205px;
+    border-radius: 25px;
+    font-size: 13px;
+    background-color: #ff5404;
+    color: white;
+    font-weight: 700;
+}
+
+.review-order-button-red:hover {
+    background-color: #ff5404;
+}
+
 .buying-power-container {
     border-top: 2px solid #e6e9ee;
     /* border: 3px solid red; */
-    height: 48px;
+    max-height: 48px;
+    min-height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 13px;
     box-sizing: border-box;
+}
+
+.confirmation-top-container {
+    font-weight: 700;
+}
+
+.transaction-confirmation-divs {
+    border-bottom: 2px solid #e6e9ee;
+}
+
+.transaction-confirmation-container-dollars {
+    min-height: 151px;
+    max-height: 151px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 input::-webkit-outer-spin-button,

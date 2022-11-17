@@ -38,7 +38,7 @@ def transactions_by_user_id():
 
 
 
-@transaction_routes.route('/<symbol>/owned')
+@transaction_routes.route('/<symbol>')
 @login_required
 def transactions_by_stock_and_user_id(symbol):
     """
