@@ -19,7 +19,7 @@ const TransactionForm = () => {
     const { siteColor } = SiteColorContext()
     const history = useHistory();
     const user_id = useSelector((state) => state.session.user.id);
-    const portfolio = useSelector((state) => state.userPortfolio);
+    const portfolio = useSelector((state) => state.portfolio.userPortfolio);
     const { ticker } = useParams();
     const [isBuy, setisBuy] = useState(true);
     const [type, setType] = useState("Shares");
@@ -144,7 +144,7 @@ const TransactionForm = () => {
 
         let createdTransaction = null;
         let createdPortfolioTransaction = null;
-
+        console.log('transaction', transaction)
         if (transaction.is_purchase) {
             createdTransaction = await dispatch(
                 transactionActions.createBuyTransaction(transaction)
@@ -153,6 +153,8 @@ const TransactionForm = () => {
                 // console.log(data)
                 if (data && data.errors) setErrors(data.errors);
             });
+            console.log("inside ticker",ticker)
+            console.log("inside portfolio", portfolio)
             if (ticker in Object.keys(portfolio)) {
                 createdPortfolioTransaction = await dispatch(
                     thunkUpdateStockInPortfolio(portfolioTrans)
