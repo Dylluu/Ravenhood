@@ -88,14 +88,14 @@ const portfolio = (state = initialState, action) => {
       newState.userPortfolio = {...action.payload}
       return newState
     case ADD_STOCK_TO_PORTFOLIO:
-      let id = action.payload.id
-      newState.userPortfolio[id] = action.payload
+      let symbol = action.payload.symbol
+      newState.userPortfolio[symbol] = action.payload
       return newState
     case UPDATE_STOCK_IN_PORTFOLIO:
-      newState[action.payload.id] = action.payload
+      newState[action.payload.symbol] = action.payload
       return newState
     case DELETE_STOCK_IN_PORTFOLIO:
-      delete newState[action.id]
+      delete newState[action.symbol]
       return newState
     default:
       return state

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect, useParams } from "react-router-dom";
 import * as transactionActions from "../../store/transaction"
+import {thunkGetWholePortfolio, thunkAddStockToPortfolio, thunkUpdateStockInPortfolio, thunkDeleteStockInPortfolio } from "../../store/portfolio";
 import "./transactionform.css"
 
 const TransactionForm = () => {
@@ -24,6 +25,13 @@ const TransactionForm = () => {
     let isShares;
     let dollarsToShares;
     let buyOrSell;
+
+    useEffect(
+        () => {
+            dispatch(thunkGetWholePortfolio(user_id))
+        },
+        [dispatch]
+    )
 
     const currentUserBuyPower = useSelector((state) => {
         let num = state?.session?.user?.buy_power
@@ -92,6 +100,13 @@ const TransactionForm = () => {
             symbol: ticker,
             user_id: user_id,
             is_purchase: isBuy,
+            num_shares: numberOfShares,
+            transaction_price: parseFloat(price)
+        }
+
+        const portfolioTrans = {
+            symbol: ticker,
+            user_id: user_id,
             num_shares: numberOfShares,
             transaction_price: parseFloat(price)
         }
