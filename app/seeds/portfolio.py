@@ -1,24 +1,23 @@
 from app.models import db, Portfolio, environment, SCHEMA
-from datetime import datetime
-now =datetime.today()
+
 
 def seed_portfolio():
 
     tsla = Portfolio(
-      symbol="TSLA", user_id=1, num_shares=10, average_price=187.85, transaction_date=(now)
+      symbol="TSLA", user_id=1, num_shares=10, average_price=187.85
     )
     # look up python docs for datetime
     nvda= Portfolio(
-      symbol="NVDA", user_id=1, num_shares=15, average_price=162.60, transaction_date=(now)
+      symbol="NVDA", user_id=1, num_shares=15, average_price=162.60
     )
     aapl = Portfolio(
-      symbol="AAPL", user_id=1, num_shares=12, average_price=148.90, transaction_date=(now)
+      symbol="AAPL", user_id=1, num_shares=12, average_price=148.90
     )
     lcid = Portfolio(
-      symbol="LCID", user_id=1, num_shares=30, average_price=11.50, transaction_date=(now)
+      symbol="LCID", user_id=1, num_shares=30, average_price=11.50
     )
     amzn = Portfolio(
-      symbol="AMZN", user_id=1, num_shares=25, average_price=97.60, transaction_date=(now)
+      symbol="AMZN", user_id=1, num_shares=25, average_price=97.60
     )
 
     db.session.add(tsla)
