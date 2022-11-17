@@ -175,6 +175,12 @@ export async function getTodayCompanyNews(ticker) {
 	return response.json();
 }
 
+export async function getTodayNews(ticker) {
+	const baseURL = `https://finnhub.io/api/v1/news?category=general&token=cdqn3niad3ifho9o8em0cdqn3niad3ifho9o8emg`;
+	const response = await fetch(baseURL);
+	return response.json();
+}
+
 async function getStonk(ticker) {
 	const response = await fetch(
 		`https://yahoo-finance-api.vercel.app/${ticker}`
