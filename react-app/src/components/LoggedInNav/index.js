@@ -76,7 +76,7 @@ function LoggedInNav() {
 	function handleMenuOpen() {
 		const accountButton = document.getElementById('account');
 		const accountDiv = document.getElementsByClassName('logged-in-nav-buttons');
-		if (!accountMenuOpen) {
+		if (!accountMenuOpen && accountButton && accountDiv) {
 			accountButton.classList.add('green-font');
 			accountDiv[0].removeAttribute('id');
 			accountDiv[0].style.borderBottom = 'solid 2px rgb(0, 200, 5)';
@@ -86,7 +86,7 @@ function LoggedInNav() {
 			//     e.stopPropagation()
 			// })
 		}
-		if (accountMenuOpen) {
+		if (accountMenuOpen && accountButton && accountDiv) {
 			accountButton.classList.remove('green-font');
 			accountDiv[0].style.borderBottom = 'solid 2px white';
 			accountDiv[0].setAttribute('id', 'logged-in-nav-buttons-hover');
@@ -107,7 +107,7 @@ function LoggedInNav() {
 	function handleWindowClick() {
 		const accountButton = document.getElementById('account');
 		const accountDiv = document.getElementsByClassName('logged-in-nav-buttons');
-		if (accountMenuOpen) {
+		if (accountMenuOpen && accountButton && accountDiv) {
 			accountButton.classList.remove('green-font');
 			accountDiv[0].style.borderBottom = 'solid 2px white';
 			accountDiv[0].setAttribute('id', 'logged-in-nav-buttons-hover');
@@ -127,7 +127,7 @@ function LoggedInNav() {
 				className="logged-in-feather"
 				onClick={() => {
 					history.push('/');
-					history.go(0);
+					// history.go(0);
 				}}
 			/>
 			<div className="logged-in-inner-wrapper">
@@ -211,7 +211,7 @@ function LoggedInNav() {
 								onClick={async () => {
 									history.push('/')
 									dispatch(logout())
-									.then(() => history.go(0))
+									// .then(() => history.go(0))
 									// dispatch(logout()).then(() => history.go(0));
 									// history.push('/')
 									// setTimeout(() => {history.go(0)}, 200)

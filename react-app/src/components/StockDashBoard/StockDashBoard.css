@@ -13,9 +13,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 73%;
-    max-width: 1367px;
-    min-width: 1020px;
+    width: 1040px;
+    /* max-width: 1367px;
+    min-width: 1020px; */
     height: 100%;
     margin-left: 12px;
     /* margin-right: 20px; */
