@@ -13,7 +13,7 @@ class WatchlistStocks(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   symbol = db.Column(db.String(7), nullable=False, unique=True)
-  watchlist_id = db.Column(db.Integer, db.ForeignKey('watchlists.id'), nullable=False)
+  watchlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('watchlists.id')), nullable=False)
   watchlist = relationship("Watchlist", back_populates="watchlist_stocks")
 
   def to_dict(self):

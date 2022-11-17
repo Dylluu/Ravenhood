@@ -9,6 +9,7 @@
     height: 65px;
     box-sizing: border-box;
     background-color: white;
+    z-index: 10;
     /* border: solid 1px red; */
 }
 
