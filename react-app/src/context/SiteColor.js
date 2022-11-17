@@ -20,4 +20,4 @@ export function SiteColorProvider({ children }) {
 
 const useSiteColorContext = () => useContext(SiteColorContext);
 
-export default useSiteColorContext;
+export default useSiteColorContext
