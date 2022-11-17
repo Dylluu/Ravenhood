@@ -5,6 +5,8 @@ import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import './LoggedInNav.css';
 import logoGreen from '../../assets/robinHoodFeatherGreen.png';
+import logoBlack from '../../assets/ravenhood-black.PNG'
+import logoPurple from '../../assets/ravenhood-purple.PNG'
 import { TickerSymbols } from '../../utils/stocksSymbols';
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
@@ -122,7 +124,7 @@ function LoggedInNav() {
 		<div className="logged-in-nav-wrapper">
 			<img
 				alt="feather"
-				src={logoGreen}
+				src={logoPurple}
 				className="logged-in-feather"
 				onClick={() => {
 					history.push('/');
