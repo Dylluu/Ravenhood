@@ -127,7 +127,7 @@ function RealLoginForm() {
                         ></i>
                         <span
                         className="unable-to-login"
-                        >Unable to login with provided credentials.</span>
+                        >{errors.email ? errors.email : errors.password}</span>
                       </div>
                     )}
                     <button type='submit' id="log-in-form-button">Log in</button>
