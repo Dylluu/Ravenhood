@@ -11,6 +11,7 @@ import {
 } from '../../utils/fetchStockFunctions';
 import KeyStatistics from './KeyStatistics';
 import CompanyNews from './CompanyNews';
+import Transactions from '../Transaction';
 
 function StockDashBoard() {
 	const { ticker } = useParams();
@@ -63,6 +64,7 @@ function StockDashBoard() {
 					</div>
 				</div>
 				<div className="stock-dashboard-right-wrapper">
+					<Transactions />
 					<WatchlistAddList symbol={ticker} />
 				</div>
 			</div>

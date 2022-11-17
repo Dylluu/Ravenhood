@@ -3,20 +3,20 @@
 }
 
 .add-list-button {
-  min-height: 44px;
-  max-height: 44px;
-  max-width: 280px;
-  width: 280px;
-  min-width: 205px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  /* top: 100px; */
+  height: 44px;
+  width: 192px;
   border-radius: 25px;
+  border: 1px solid #ff5404;
+  color: #ff5404;
+  padding: 8% 20%;
+  margin: 3% 6%;
   font-size: 13px;
-  background-color: #00c805;
-  color: white;
-  font-weight: 700;
-}
-
-.add-list-button:hover {
-  background-color: #00b405;
+  font-weight: 800;
 }
 
 .add-form {
