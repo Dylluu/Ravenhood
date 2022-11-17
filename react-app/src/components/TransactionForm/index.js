@@ -9,7 +9,7 @@ const TransactionForm = () => {
     const history = useHistory();
     const user_id = useSelector(state => state.session.user.id)
     const { ticker } = useParams();
-    const [activity, setActivity] = useState("Buy");
+    const [isBuy, setisBuy] = useState(true);
     const [type, setType] = useState("Shares");
     const [amount, setAmount] = useState("");
     const [errors, setErrors] = useState({});
@@ -22,6 +22,8 @@ const TransactionForm = () => {
     let dollarAmount;
     let estimatedType;
     let isShares;
+    let dollarsToShares;
+    let buyOrSell;
 
     const currentUserBuyPower = useSelector((state) => {
         let num = state?.session?.user?.buy_power
@@ -36,32 +38,38 @@ const TransactionForm = () => {
         setAmount("")
     };
 
-    if (type === "Shares" && activity === "Buy") {
+    if (type === "Shares" && isBuy) {
         let cost = price * amount
         dollarAmount = cost.toLocaleString("en-US", { style: "currency", currency: "USD" })
         estimatedType = "Estimated Cost"
         isShares = true
+        buyOrSell = "Buy"
     }
 
-    if (type === "Dollars" && activity === "Buy") {
+    if (type === "Dollars" && isBuy) {
         let quantity = (amount / price)
         dollarAmount = quantity.toLocaleString('en-US', { maximumFractionDigits: 6 })
         estimatedType = "Est.Quantity"
         isShares = false
+        buyOrSell = "Buy"
+        dollarsToShares = quantity
     }
 
-    if (type === "Shares" && activity === "Sell") {
+    if (type === "Shares" && !isBuy) {
         let cost = price * amount
         dollarAmount = cost.toLocaleString("en-US", { style: "currency", currency: "USD" })
         estimatedType = "Estimated Credit"
         isShares = true
+        buyOrSell = "Sell"
     }
 
-    if (type === "Dollars" && activity === "Sell") {
+    if (type === "Dollars" && !isBuy) {
         let quantity = (amount / price)
         dollarAmount = quantity.toLocaleString('en-US', { maximumFractionDigits: 6 })
         estimatedType = "Est.Quantity"
         isShares = false
+        buyOrSell = "Sell"
+        dollarsToShares = quantity
     }
 
     const handleSubmit = async (e) => {
@@ -70,21 +78,36 @@ const TransactionForm = () => {
         const transaction = {
             symbol: ticker,
             user_id: user_id,
-            is_purchase: activity,
-            num_shares: activity
+            is_purchase: isBuy,
+            num_shares: parseFloat(amount),
+            transaction_price: parseFloat(price)
         }
 
-        const createdTransaction = await dispatch(transactionActions.createTransaction(transaction))
-            .catch(async (res) => {
-                const data = await res.json();
-                // console.log(data)
-                if (data && data.errors) setErrors(data.errors);
-            });
+        let createdTransaction = null;
+
+        if (transaction.is_purchase) {
+            createdTransaction = await dispatch(transactionActions.createBuyTransaction(transaction))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    // console.log(data)
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        }
+
+        if (!transaction.is_purchase) {
+            createdTransaction = await dispatch(transactionActions.createSellTransaction(transaction))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    // console.log(data)
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        }
 
         if (createdTransaction) {
-            //console.log(createdTransaction)
+            // console.log(createdTransaction)
             await dispatch(transactionActions.getStockTransactionsByUserId(ticker))
         }
+        // console.log("hi")
     }
 
     if (!currentUserBuyPower) return null;
@@ -94,22 +117,22 @@ const TransactionForm = () => {
             <div className="top-container">
                 <div className="buy-sell-container">
                     <div className="transaction-type">
-                        <button className={`transaction-type-button-off ${activity == "Buy" ? "transaction-type-button-on" : ""}`} onClick={(e) => setActivity("Buy")}>Buy {ticker}</button>
+                        <button className={`transaction-type-button-off ${isBuy ? "transaction-type-button-on" : ""}`} onClick={(e) => setisBuy(true)}>Buy {ticker}</button>
                     </div>
                     <div className="transaction-type">
-                        <button className={`transaction-type-button-off ${activity == "Sell" ? "transaction-type-button-on" : ""}`} onClick={(e) => setActivity("Sell")}>Sell {ticker}</button>
+                        <button className={`transaction-type-button-off ${!isBuy ? "transaction-type-button-on" : ""}`} onClick={(e) => setisBuy(false)}>Sell {ticker}</button>
                     </div>
                 </div>
             </div>
-            <div className={`transaction-form-container-shares ${type ==
-                "Dollars" ? "transaction-form-container-dollars" : ""}`}>
-                <div className="transaction-order-type-container transaction-form-divs">
-                    <div className="order-type">Order Type</div>
-                    <div className="market-order">Market Order</div>
-                </div>
-                <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
+                <div className={`transaction-form-container-shares ${type == "Dollars" ? "transaction-form-container-dollars" : ""}`}>
+                    <div className="transaction-order-type-container transaction-form-divs">
+                        <div className="order-type">Order Type</div>
+                        <div className="market-order">Market Order</div>
+                    </div>
+
                     <div className="transaction-in-container transaction-form-divs">
-                        <div className="transaction-in">{activity} In</div>
+                        <div className="transaction-in">{buyOrSell} In</div>
                         <select className="shares-dollars" value={type} onChange={handleChange}>
                             {options.map(option => (
                                 <option key={option.value} value={option.value}>
@@ -146,24 +169,25 @@ const TransactionForm = () => {
                             />
                         </div>
                     )}
-                </form>
-                {isShares && (
-                    <div className="transaction-market-price-container transaction-form-divs">
-                        <div className="market-price">Market Price</div>
-                        <div className="market-price-amount">{marketPrice}</div>
+
+                    {isShares && (
+                        <div className="transaction-market-price-container transaction-form-divs">
+                            <div className="market-price">Market Price</div>
+                            <div className="market-price-amount">{marketPrice}</div>
+                        </div>
+                    )}
+                    <div className="transaction-estimated-cost-container transaction-form-divs">
+                        <div className="estimated-cost">{estimatedType}</div>
+                        <div className="estimated-cost-amount">{dollarAmount}</div>
                     </div>
-                )}
-                <div className="transaction-estimated-cost-container transaction-form-divs">
-                    <div className="estimated-cost">{estimatedType}</div>
-                    <div className="estimated-cost-amount">{dollarAmount}</div>
                 </div>
-            </div>
-            <div className="transaction-place-order-container">
-                <button className="review-order-button" type="submit">Review Order</button>
-            </div>
-            <div className="buying-power-container">
-                {currentUserBuyPower} buying power available
-            </div>
+                <div className="transaction-place-order-container">
+                    <button className="review-order-button" type="submit">Review Order</button>
+                </div>
+                <div className="buying-power-container">
+                    {currentUserBuyPower} buying power available
+                </div>
+            </form>
         </div>
     );
 }
