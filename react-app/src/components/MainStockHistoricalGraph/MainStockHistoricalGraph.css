@@ -38,6 +38,7 @@
 
 .percentDifference{
     display: flex;
+    font-weight: 300;
 }
 
 .percentDifference >p{

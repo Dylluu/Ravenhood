@@ -3,14 +3,22 @@ import MainStockGraph from '../MainStockGraph';
 import './StockDashBoard.css';
 import { useParams } from 'react-router-dom';
 import WatchlistAddList from '../WatchlistAddList';
-import { GetCompanyOverview } from '../../utils/fetchStockFunctions';
+import {
+	GetCompanyOverview,
+	getStockVolume
+} from '../../utils/fetchStockFunctions';
+import KeyStatistics from './KeyStatistics';
+import CompanyNews from './CompanyNews';
 
 function StockDashBoard() {
 	const { ticker } = useParams();
 	const [companyOverview, setCompanyOverview] = useState(null);
+	const [stockInfo, setStockInfo] = useState(null);
 	useEffect(() => {
 		const companyInfo = async () => {
 			const companyInfo = await GetCompanyOverview(ticker);
+			const stockInfo = await getStockVolume(ticker);
+			setStockInfo(stockInfo);
 			setCompanyOverview(companyInfo);
 		};
 		companyInfo();
@@ -31,6 +39,12 @@ function StockDashBoard() {
 						<div className="section-title">About</div>
 						<div id="company-description">{companyOverview.Description}</div>
 						<div className="section-title">Key statistics</div>
+						<KeyStatistics
+							stockInfo={stockInfo}
+							companyOverview={companyOverview}
+						/>
+						<div className="section-title">News</div>
+						<CompanyNews />
 					</div>
 				</div>
 				<div className="stock-dashboard-right-wrapper">
