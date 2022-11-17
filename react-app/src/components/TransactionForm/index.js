@@ -113,6 +113,7 @@ const TransactionForm = () => {
         }
 
         let createdTransaction = null;
+        let createdPortfolioTransaction = null
 
         if (transaction.is_purchase) {
             createdTransaction = await dispatch(transactionActions.createBuyTransaction(transaction))
@@ -121,7 +122,22 @@ const TransactionForm = () => {
                     // console.log(data)
                     if (data && data.errors) setErrors(data.errors);
                 });
-          
+            if (symbol in Object.keys(portfolio)) {
+                createdPortfolioTransaction = await dispatch(thunkUpdateStockInPortfolio(portfolioTrans))
+                    .catch(async (res) => {
+                        const data = await res.json();
+                        // console.log(data)
+                        if (data && data.errors) setErrors(data.errors);
+                    })
+            }
+            if (!symbol in Object.keys(portfolio)) {
+                createdPortfolioTransaction = await dispatch(thunkAddStockToPortfolio(portfolioTrans))
+                    .catch(async (res) => {
+                        const data = await res.json();
+                        // console.log(data)
+                        if (data && data.errors) setErrors(data.errors);
+                    })
+            }
         }
 
         if (!transaction.is_purchase) {
@@ -131,9 +147,25 @@ const TransactionForm = () => {
                     // console.log(data)
                     if (data && data.errors) setErrors(data.errors);
                 });
+                if (symbol in Object.keys(portfolio)) {
+                    createdPortfolioTransaction = await dispatch(thunkUpdateStockInPortfolio(portfolioTrans))
+                        .catch(async (res) => {
+                            const data = await res.json();
+                            // console.log(data)
+                            if (data && data.errors) setErrors(data.errors);
+                        })
+                }
+                if (symbol in Object.keys(portfolio) && portfolio[symbol].num_shares-numberOfShares === 0) {
+                    createdPortfolioTransaction = await dispatch(thunkDeleteStockInPortfolio(symbol))
+                        .catch(async (res) => {
+                            const data = await res.json();
+                            // console.log(data)
+                            if (data && data.errors) setErrors(data.errors);
+                        })
+                }
         }
 
-        if (createdTransaction) {
+        if (createdTransaction || createdPortfolioTransaction) {
             // console.log(createdTransaction)
             await dispatch(transactionActions.getStockTransactionsByUserId(ticker))
         }

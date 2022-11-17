@@ -8,6 +8,7 @@ import WatchlistExpand from './watchlist-expand'
 import WatchlistForm from '../Watchlist/watchlistForm';
 import { thunkAddBuyPower } from '../../store/session';
 import { thunkGetAllStocks, thunkGetAllWatchlist, thunkGetOneWatchlist, thunkDeleteWatchlist} from '../../store/watchlist';
+import { thunkGetWholePortfolio } from '../../store/portfolio';
 
 function Dashboard () {
 
@@ -25,6 +26,7 @@ function Dashboard () {
 
     useEffect(() => {
         dispatch(thunkGetAllWatchlist(user_id))
+        dispatch(thunkGetWholePortfolio(user_id))
     }, [dispatch])
 
 
