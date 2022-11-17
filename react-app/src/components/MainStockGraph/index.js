@@ -7,12 +7,6 @@ import './MainStockGraph.css';
 import { useDispatch, useSelector } from 'react-redux';
 import useSiteColorContext from '../../context/SiteColor';
 
-const directionEmojis = {
-	up: '🔥',
-	down: '🔻',
-	'': ''
-};
-
 async function getStonks(ticker) {
 	const response = await fetch(
 		`https://yahoo-finance-api.vercel.app/${ticker}`
@@ -62,7 +56,7 @@ function MainStockGraph() {
 
 	useEffect(() => {
 		// getting the price/percentage different from open price
-		if (percentDifference > 0) setPriceColor('#00c805;');
+		if (percentDifference > 0) setPriceColor('#00c805');
 		else setPriceColor('#ff5404');
 	}, [chartColor, hoverPrice]);
 
@@ -96,7 +90,7 @@ function MainStockGraph() {
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
 					showOneDay ? setSiteColor('green') : DoNothing();
-					setChartColor(['#00c805;', 'black']);
+					setChartColor(['#00c805', 'black']);
 				} else {
 					showOneDay ? setSiteColor('red') : DoNothing();
 					setChartColor(['#ff5404', 'black']);
@@ -136,18 +130,10 @@ function MainStockGraph() {
 		setOpenPriceData({ data: dashedData });
 	}, [openPrice]);
 
-	const direction = useMemo(
-		() => (prevPrice < price ? 'up' : prevPrice > price ? 'down' : ''),
-		[prevPrice, price]
-	);
-
 	if (!series.data.length && !openPrice) return null;
 	return (
 		<div className="main-stock-page-wrapper">
-			<div className="ticker">{ticker}</div>
-			<div className={['price', direction].join(' ')}>
-				${hoverPrice ? hoverPrice : price} {directionEmojis[direction]}
-			</div>
+			<div className="price">${hoverPrice ? hoverPrice : price}</div>
 			<div className="graph-page-wrapper">
 				{showOneDay && (
 					<div id="chart">
@@ -183,7 +169,7 @@ function MainStockGraph() {
 											show: false
 										},
 										tooltip: {
-											offsetY: -240,
+											offsetY: -300,
 											formatter: function (val, opts) {
 												let time = new Date(val);
 												return time.toLocaleTimeString([], {
