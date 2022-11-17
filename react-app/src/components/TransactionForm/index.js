@@ -156,7 +156,7 @@ const TransactionForm = () => {
             console.log("inside ticker",ticker)
             console.log("inside portfolio", portfolio)
             for (let i = 0; i < portfolio.length; i++) {
-                if (ticker in portfolio[i]) {
+                if (portfolio[i].symbol == ticker) {
                     createdPortfolioTransaction = await dispatch(
                         thunkUpdateStockInPortfolio(portfolioTrans)
                     ).catch(async (res) => {
@@ -166,19 +166,18 @@ const TransactionForm = () => {
                     });
                 }
             }
+            createdPortfolioTransaction = await dispatch(
+                thunkAddStockToPortfolio(portfolioTrans)
+            ).catch(async (res) => {
+                const data = await res.json();
+                // console.log(data)
+                if (data && data.errors) setErrors(data.errors);
+            });
 
-            if (!ticker in Object.keys(portfolio)) {
-                createdPortfolioTransaction = await dispatch(
-                    thunkAddStockToPortfolio(portfolioTrans)
-                ).catch(async (res) => {
-                    const data = await res.json();
-                    // console.log(data)
-                    if (data && data.errors) setErrors(data.errors);
-                });
-            }
         }
 
         if (!transaction.is_purchase) {
+
             createdTransaction = await dispatch(
                 transactionActions.createSellTransaction(transaction)
             ).catch(async (res) => {
@@ -186,26 +185,25 @@ const TransactionForm = () => {
                 // console.log(data)
                 if (data && data.errors) setErrors(data.errors);
             });
-            if (ticker in Object.keys(portfolio)) {
-                createdPortfolioTransaction = await dispatch(
-                    thunkUpdateStockInPortfolio(portfolioTrans)
-                ).catch(async (res) => {
-                    const data = await res.json();
-                    // console.log(data)
-                    if (data && data.errors) setErrors(data.errors);
-                });
-            }
-            if (
-                ticker in Object.keys(portfolio) &&
-                portfolio[ticker].num_shares - numberOfShares === 0
-            ) {
-                createdPortfolioTransaction = await dispatch(
-                    thunkDeleteStockInPortfolio(ticker)
-                ).catch(async (res) => {
-                    const data = await res.json();
-                    // console.log(data)
-                    if (data && data.errors) setErrors(data.errors);
-                });
+            for (let i = 0; i < portfolio.length; i++) {
+                if (portfolio[i].num_shares - numberOfShares === 0) {
+                    createdPortfolioTransaction = await dispatch(
+                        thunkDeleteStockInPortfolio(ticker)
+                    ).catch(async (res) => {
+                        const data = await res.json();
+                        // console.log(data)
+                        if (data && data.errors) setErrors(data.errors);
+                    });
+                }
+                if (portfolio[i].symbol == ticker) {
+                    createdPortfolioTransaction = await dispatch(
+                        thunkUpdateStockInPortfolio(portfolioTrans)
+                    ).catch(async (res) => {
+                        const data = await res.json();
+                        // console.log(data)
+                        if (data && data.errors) setErrors(data.errors);
+                    });
+                }
             }
         }
 

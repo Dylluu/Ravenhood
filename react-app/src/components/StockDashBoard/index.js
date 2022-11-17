@@ -29,7 +29,7 @@ function StockDashBoard() {
 			setCompanyOverview(companyInfo);
 		};
 		companyInfo();
-	}, []);
+	}, [ticker]);
 
 	let fiveNewsMax;
 	if (companyNews) {

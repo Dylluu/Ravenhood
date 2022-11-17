@@ -153,7 +153,7 @@ function LoggedInNav() {
 								key={result}
 								onClick={() => {
 									history.push(`/stocks/${result}`);
-									history.go(0);
+									// history.go(0);
 								}}
 							>
 								<span id="search-result-ticker">{result}</span>

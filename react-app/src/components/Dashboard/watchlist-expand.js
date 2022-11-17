@@ -75,7 +75,7 @@ function WatchlistExpand({ list, id }) {
 									<div className='watchlist-stocks-body-wrapper'
 									onClick={() => {
 										history.push(`/stocks/${stock.symbol}`)
-										history.go(0)
+										// history.go(0)
 									}}
 									>
 									<div className="watchlist-stocks-body">

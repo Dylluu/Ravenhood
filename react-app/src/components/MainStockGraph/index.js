@@ -59,7 +59,7 @@ function MainStockGraph() {
 		// getting the price/percentage different from open price
 		if (percentDifference > 0) setPriceColor('#00c805');
 		else setPriceColor('#ff5404');
-	}, [chartColor, hoverPrice]);
+	}, [chartColor, hoverPrice, ticker]);
 
 	useEffect(() => {
 		let timeoutId;
@@ -108,11 +108,11 @@ function MainStockGraph() {
 		return () => {
 			clearTimeout(timeoutId);
 		};
-	}, [showOneDay]);
+	}, [ticker]);
 
 	useEffect(() => {
 		dispatch(stockActions.cleanUpStockData());
-	}, []);
+	}, [ticker]);
 
 	// generate graph data point for open price,
 	// will trigger once open price has been set
@@ -130,7 +130,7 @@ function MainStockGraph() {
 			dashedData.push(data);
 		}
 		setOpenPriceData({ data: dashedData });
-	}, [openPrice]);
+	}, [openPrice, ticker]);
 
 	if (!series.data.length && !openPrice) return null;
 	return (
