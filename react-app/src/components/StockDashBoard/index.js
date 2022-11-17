@@ -6,7 +6,8 @@ import WatchlistAddList from '../WatchlistAddList';
 import {
 	GetCompanyOverview,
 	getStockVolume,
-	getTodayCompanyNews
+	getTodayCompanyNews,
+	getPortfolioPerformancedifference
 } from '../../utils/fetchStockFunctions';
 import KeyStatistics from './KeyStatistics';
 import CompanyNews from './CompanyNews';
@@ -22,6 +23,14 @@ function StockDashBoard() {
 			const companyInfo = await GetCompanyOverview(ticker);
 			const stockInfo = await getStockVolume(ticker);
 			const companynews = await getTodayCompanyNews(ticker);
+			const ownedStockData = await getPortfolioPerformancedifference({
+				TSLA: 2.03,
+				SPPI: 2,
+				AGEN: 1,
+				AAPL: 1.01,
+				CPNG: 2
+			});
+			console.log(ownedStockData);
 			setCompanyNews(companynews);
 			setStockInfo(stockInfo);
 			setCompanyOverview(companyInfo);

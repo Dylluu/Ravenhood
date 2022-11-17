@@ -6,6 +6,7 @@ import * as stockActions from '../../store/stocks';
 import './MainStockGraph.css';
 import { useDispatch, useSelector } from 'react-redux';
 import useSiteColorContext from '../../context/SiteColor';
+import useStockPriceContext from '../../context/stockCurrentPrice';
 
 async function getStonks(ticker) {
 	const response = await fetch(
@@ -17,7 +18,8 @@ async function getStonks(ticker) {
 function MainStockGraph() {
 	const { ticker } = useParams();
 	const stockData = useSelector((state) => state.stockData);
-	const { setSiteColor, siteColor } = useSiteColorContext();
+	const { setSiteColor } = useSiteColorContext();
+	const { setPriceContext } = useStockPriceContext();
 	const dispatch = useDispatch();
 	// Data variables
 	const [series, setSeries] = useState({
@@ -68,6 +70,7 @@ function MainStockGraph() {
 				const stonk = data.chart.result[0];
 				setPrevPrice(price);
 				setPrice(stonk.meta.regularMarketPrice.toFixed(2));
+				setPriceContext(stonk.meta.regularMarketPrice.toFixed(2));
 
 				// Setting prices values for graphs
 				const quote = stonk.indicators.quote[0];
@@ -126,7 +129,6 @@ function MainStockGraph() {
 			};
 			dashedData.push(data);
 		}
-		console.log('yooooooo');
 		setOpenPriceData({ data: dashedData });
 	}, [openPrice]);
 
