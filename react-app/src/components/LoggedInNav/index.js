@@ -202,7 +202,10 @@ function LoggedInNav() {
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
 								onClick={async () => {
-									dispatch(logout()).then(() => history.go(0));
+									history.push('/')
+									dispatch(logout())
+									.then(() => history.go(0))
+									// dispatch(logout()).then(() => history.go(0));
 									// history.push('/')
 									// setTimeout(() => {history.go(0)}, 200)
 								}}
