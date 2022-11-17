@@ -153,7 +153,7 @@ const TransactionForm = () => {
                 // console.log(data)
                 if (data && data.errors) setErrors(data.errors);
             });
-            console.log("inside ticker",ticker)
+            console.log("inside ticker", ticker)
             console.log("inside portfolio", portfolio)
             if (ticker in Object.keys(portfolio)) {
                 createdPortfolioTransaction = await dispatch(
@@ -352,7 +352,14 @@ const TransactionForm = () => {
                     </div>
                     {isGreen && (
                         <div className="transaction-place-order-container">
-                            <button className="review-order-button" type="submit">Done</button>
+                            <button
+                                className="review-order-button"
+                                type="submit"
+                                onClick={(e) => {
+                                    setAmount('')
+                                    setIsPlaced(false)
+                                }}
+                            >Done</button>
                         </div>
                     )}
                     {!isGreen && (
@@ -360,12 +367,16 @@ const TransactionForm = () => {
                             <button
                                 className="review-order-button-red"
                                 type="submit"
-                                onClick={(e) => setIsPlaced(false)}
+                                onClick={(e) => {
+                                    setAmount('')
+                                    setIsPlaced(false)
+                                }}
                             >Done</button>
                         </div>
                     )}
                 </div>
-            )}
+            )
+            }
         </>
     );
 };

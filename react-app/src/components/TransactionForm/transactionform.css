@@ -39,7 +39,7 @@
     min-height: 50px;
     max-height: 50px;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
     border-bottom: 2px solid #e6e9ee;
 }
 
@@ -58,7 +58,7 @@
     min-height: 50px;
     max-height: 50px;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
     border-bottom: 2px solid #e6e9ee;
 }
 
@@ -145,13 +145,13 @@
 }
 
 .transaction-market-price-container {
-    font-weight: 700;
+    font-weight: 600;
     border-bottom: 1px solid #e6e9ee;
     box-sizing: border-box;
 }
 
 .transaction-estimated-cost-container {
-    font-weight: 700;
+    font-weight: 600;
     box-sizing: border-box;
 }
 
@@ -192,7 +192,7 @@
     font-size: 13px;
     background-color: #00c805;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .review-order-button:hover {
@@ -210,7 +210,7 @@
     font-size: 13px;
     background-color: #ff5404;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .review-order-button-red:hover {
@@ -230,7 +230,7 @@
 }
 
 .confirmation-top-container {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .transaction-confirmation-divs {
