@@ -2,7 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 class Portfolio(db.Model):
-    __tablename__ = 'user_transactions'
+    __tablename__ = 'portfolio'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
@@ -17,7 +17,7 @@ class Portfolio(db.Model):
 
 
     # relationship attributes
-    user = db.relationship("User", back_populates="user_transactions")
+    user = db.relationship("User", back_populates="portfolio")
 
     def to_dict(self):
         return {

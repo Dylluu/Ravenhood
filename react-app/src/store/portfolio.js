@@ -16,12 +16,12 @@ const addStockToPortfolio = (payload) => ({
   payload
 })
 
-const updateStockInPortfolio = () => ({
+const updateStockInPortfolio = (payload) => ({
   type: UPDATE_STOCK_IN_PORTFOLIO,
   payload
 })
 
-const deleteStockInPortfolio = () => ({
+const deleteStockInPortfolio = (payload) => ({
   type: DELETE_STOCK_IN_PORTFOLIO,
   payload
 })
@@ -66,11 +66,7 @@ export const thunkUpdateStockInPortfolio = (data) => async (dispatch) => {
 
 export const thunkDeleteStockInPortfolio = (symbol) => async (dispatch) => {
   const response = await fetch(`/api/portfolio/${symbol}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": 'application/json'
-    },
-    body: JSON.stringify(data)
+    method: "DELETE"
   })
   if (response.ok) {
     const deleteFromPortfolio = await response.json()
@@ -79,7 +75,7 @@ export const thunkDeleteStockInPortfolio = (symbol) => async (dispatch) => {
 }
 
 
-initialState = {}
+let initialState = {}
 
 const portfolio = (state = initialState, action) => {
   const newState = {...state}
@@ -92,7 +88,7 @@ const portfolio = (state = initialState, action) => {
       newState.userPortfolio[symbol] = action.payload
       return newState
     case UPDATE_STOCK_IN_PORTFOLIO:
-      newState[action.payload.symbol] = action.payload
+      newState.userPortfolio[action.payload.symbol] = action.payload
       return newState
     case DELETE_STOCK_IN_PORTFOLIO:
       delete newState[action.symbol]

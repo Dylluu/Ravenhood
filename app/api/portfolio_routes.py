@@ -25,18 +25,18 @@ def add_to_portfolo(userId):
   """
   form = PortfolioForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-      data = form.data
-       new_add_stock= Portfolio(
-            symbol = data["symbol"],
-            user_id = data["user_id"],
-            num_shares = data["num_shares"],
-            average_price = data["average_price"],
-            transaction_date = data["transaction_date"]
-        )
-        db.session.add(new_add_stock)
-        db.session.commit()
-        return new_add_stock.to_dict()
+  if form.validate_on_submit():
+    data = form.data
+    new_add_stock= Portfolio(
+        symbol = data["symbol"],
+        user_id = data["user_id"],
+        num_shares = data["num_shares"],
+        average_price = data["average_price"],
+        transaction_date = data["transaction_date"]
+    )
+    db.session.add(new_add_stock)
+    db.session.commit()
+    return new_add_stock.to_dict()
 
 @portfolio_routes.route('/<symbol>', methods=["PUT"])
 @login_required
@@ -50,7 +50,7 @@ def update_stock(symbol):
   form = PortfolioForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   currStock = Portfolio.query.filter_by(
-    symbol = form.data=['symbol']
+    symbol = form.data['symbol'],
     user_id = form.data['user_id']
   )
   if form.validate_on_submit():
@@ -69,7 +69,7 @@ def delete_stock(symbol):
   form = PortfolioForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   currStock = Portfolio.query.filter_by(
-    symbol = form.data['symbol']
+    symbol = form.data['symbol'],
     user_id = form.data['user_id']
   )
   db.session.delete(currStock)

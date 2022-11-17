@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
 
     # relationship attributes
     user_transactions = db.relationship("UserTransactions", back_populates="user")
-
+    portfolio = db.relationship("Portfolio", back_populates="user")
 
 
     @property

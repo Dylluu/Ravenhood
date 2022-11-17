@@ -9,6 +9,7 @@ const TransactionForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const user_id = useSelector(state => state.session.user.id)
+    const portfolio = useSelector(state => state.userPortfolio)
     const { ticker } = useParams();
     const [isBuy, setisBuy] = useState(true);
     const [type, setType] = useState("Shares");
@@ -120,6 +121,7 @@ const TransactionForm = () => {
                     // console.log(data)
                     if (data && data.errors) setErrors(data.errors);
                 });
+          
         }
 
         if (!transaction.is_purchase) {
