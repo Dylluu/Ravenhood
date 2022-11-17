@@ -24,6 +24,7 @@ const SignUpForm = () => {
       // console.log(data, '---------------------')
       if (data) {
         setErrors(data)
+        console.log(errors, '--------')
       }
   };
 
@@ -172,17 +173,17 @@ function removePasswordBorder() {
       </div>
       {errors.first_name && errors.last_name && (
         <div className='signup-error-message-first-and-last'>
-          <span id='please-enter-first-name'>Please enter your first name.</span>
-          <span id='please-enter-last-name'>Please enter your last name.</span>
+          <span id='please-enter-first-name'>{errors.first_name}</span>
+          <span id='please-enter-last-name'>{errors.last_name}</span>
         </div>
       )}
       {errors.first_name && !errors.last_name && (
-        <div className='signup-error-message'>Please enter your first name.</div>
+        <div className='signup-error-message'>{errors.first_name}</div>
       )}
       {!errors.first_name && errors.last_name && (
         <div className='signup-error-message-first-and-last'>
           <span id='please-enter-first-name'></span>
-          <span id='please-enter-last-name'>Please enter your last name.</span>
+          <span id='please-enter-last-name'>{errors.last_name}</span>
         </div>
       )}
       <div>
@@ -197,7 +198,7 @@ function removePasswordBorder() {
         ></input>
       </div>
       {errors.email && (
-        <div className='signup-error-message'>Please enter your email.</div>
+        <div className='signup-error-message'>{errors.email}</div>
       )}
       <div className='signup-form-password-input'
       id='signup-form-password-input'
@@ -207,7 +208,7 @@ function removePasswordBorder() {
           name='password'
           onChange={updatePassword}
           value={password}
-          placeholder='Password (min. 10 characters)'
+          placeholder='Password (min. 8 characters)'
           id='signup-form-password'
           onClick={() => handlePasswordBorder()}
         ></input>
@@ -223,7 +224,7 @@ function removePasswordBorder() {
         </div>
       </div>
       {errors.password && (
-        <div className='signup-error-message'>Please enter your password.</div>
+        <div className='signup-error-message'>{errors.password}</div>
       )}
       {/* <button type='submit' className='signup-form-submit'>Sign Up</button> */}
     </form>
