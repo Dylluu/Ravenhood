@@ -13,7 +13,7 @@ class Watchlist(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(40), nullable=False)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
   watchlist_stocks = relationship("WatchlistStocks", back_populates="watchlist", cascade="all, delete-orphan" )
   # not sure if its user/users
 

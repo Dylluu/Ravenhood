@@ -67,6 +67,7 @@ function App() {
 				<Route path="/stocks/:ticker">
 					<LoggedInNav />
 					<StockDashBoard />
+					<Transactions />
 				</Route>
 				<Route path="/cash">
 					<TopNaviagtion />
@@ -85,9 +86,9 @@ function App() {
 				<Route path="/" exact={true}>
 					<h1>My Home Page</h1>
 				</Route>
-				<Route path="/stocks/:symbol">
+				{/* <Route path="/stocks/:symbol">
 					<Transactions />
-				</Route>
+				</Route> */}
 			</Switch>
 		</BrowserRouter>
 	);

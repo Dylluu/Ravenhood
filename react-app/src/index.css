@@ -1,20 +1,4 @@
 /* TODO Add site wide styles */
-.apexcharts-xaxistooltip {
-    background: transparent;
-    border: none;
-    margin-top: 4px;
-    padding-bottom: 0;
-    font-weight: bold;
-}
-
-.apexcharts-xaxistooltip-bottom:before {
-    opacity: 0
-}
-
-.apexcharts-xaxistooltip-bottom:after {
-    opacity: 0
-}
-
 body {
     overscroll-behavior: none;
 }

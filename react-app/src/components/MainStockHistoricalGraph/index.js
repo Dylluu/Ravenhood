@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import './MainStockHistoricalGraph.css';
 import * as stockFunctions from '../../utils/fetchStockFunctions';
 import * as stockActions from '../../store/stocks';
+import useSiteColorContext from '../../context/SiteColor';
 import { useDispatch, useSelector } from 'react-redux';
 
 const getRangePeriod = (range) => {
@@ -21,14 +22,15 @@ const getRangePeriod = (range) => {
 function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 	const { ticker } = useParams();
 	const dispatch = useDispatch();
+	const { setSiteColor } = useSiteColorContext();
 	const stockData = useSelector((state) => state.stockData);
 	const [series, setSeries] = useState([
 		{
 			data: []
 		}
 	]);
-	const [chartColor, setChartColor] = useState(['#5AC53B']);
-	const [priceColor, setPriceColor] = useState('#5AC53B');
+	const [chartColor, setChartColor] = useState(['#00c805']);
+	const [priceColor, setPriceColor] = useState('#00c805');
 	const [type, setType] = useState('datetime');
 	const [APILimit, setAPILimit] = useState(false);
 	const [startPrice, setStartPrice] = useState(-1);
@@ -45,8 +47,8 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 
 	useEffect(() => {
 		// getting the price/percentage different from open price
-		if (percentDifference > 0) setPriceColor('#5AC53B');
-		else setPriceColor('#fd5240');
+		if (percentDifference > 0) setPriceColor('#00c805');
+		else setPriceColor('#ff5404');
 	}, [chartColor, hoverPrice]);
 
 	//Fetching for stocks
@@ -98,7 +100,6 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 			}
 		}
 		getStockHistoricalData();
-		console.log(stockData);
 	}, [range]);
 
 	//Setting chart color
@@ -110,8 +111,12 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 			setStartPrice(startPrice);
 			setEndPrice(endPrice);
 			if (startPrice - endPrice < 0) {
-				setChartColor(['#5AC53B', 'black']);
-			} else setChartColor(['#fd5240', 'black']);
+				setChartColor(['#00c805', 'black']);
+				setSiteColor('green');
+			} else {
+				setChartColor(['#ff5404', 'black']);
+				setSiteColor('red');
+			}
 		}
 	}, [series, rangePeriod]);
 
@@ -169,7 +174,7 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 								show: false
 							},
 							tooltip: {
-								offsetY: -240,
+								offsetY: -285,
 								formatter: function (val, opts) {
 									switch (type) {
 										case 'datetime':
