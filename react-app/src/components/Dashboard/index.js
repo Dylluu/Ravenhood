@@ -34,7 +34,9 @@ function Dashboard () {
 
     // useEffect(() => {window.addEventListener('scroll', () => {
     //         const dashboardWatchlist = document.getElementsByClassName('dashboard-watchlists-wrapper');
-    //         dashboardWatchlist[0].style.marginTop = `${window.scrollY}px`
+    //         if(dashboardWatchlist[0]) {
+    //             dashboardWatchlist[0].style.marginTop = `${window.scrollY}px`
+    //         }
     //     })
     // }, [window.scrollY])
 
