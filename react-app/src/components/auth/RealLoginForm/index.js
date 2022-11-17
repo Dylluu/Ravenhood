@@ -18,7 +18,7 @@ function RealLoginForm() {
         const data = await dispatch(login(email, password));
         if (data) {
           setErrors(data);
-        //   console.log('logging')
+          console.log(errors, '------------------------')
         }
       };
 
