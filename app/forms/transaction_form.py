@@ -6,6 +6,9 @@ v = [DataRequired()]
 c = ["Shares", "Dollars"]
 
 class TransactionForm(FlaskForm):
-    transaction_in = SelectField('transaction_in', choices=c)
-    transaction_amount = FloatField('transaction_amount', v)
+    symbol = StringField("symbol", v)
+    user_id = IntegerField("user_id", v)
+    is_purchase = BooleanField("is_purchase")
+    num_shares = FloatField("num_shares", v)
+    transaction_price = FloatField('transaction_price', v)
     submit = SubmitField("submit")
