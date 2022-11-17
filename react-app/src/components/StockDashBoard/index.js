@@ -23,7 +23,6 @@ function StockDashBoard() {
 			const companyInfo = await GetCompanyOverview(ticker);
 			const stockInfo = await getStockVolume(ticker);
 			const companynews = await getTodayCompanyNews(ticker);
-			console.log(companynews);
 			setCompanyNews(companynews);
 			setStockInfo(stockInfo);
 			setCompanyOverview(companyInfo);
