@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Redirect, useParams } from "react-router-dom";
 import * as transactionActions from "../../store/transaction"
 import "./transactionform.css"
+import { getStockLattestPrice } from "../../utils/fetchStockFunctions";
 
 const TransactionForm = () => {
     const dispatch = useDispatch();
@@ -17,12 +18,12 @@ const TransactionForm = () => {
         { value: 'Shares', text: 'Shares' },
         { value: 'Dollars', text: 'Dollars' }
     ];
-    let price = 99.95 // NEED THE API PRICE
+    let price = getStockLattestPrice(ticker) // NEED THE API PRICE
+    console.log(price)
     let marketPrice = price.toLocaleString("en-US", { style: "currency", currency: "USD" })
     let dollarAmount;
     let estimatedType;
     let isShares;
-    let dollarsToShares;
     let buyOrSell;
 
     const currentUserBuyPower = useSelector((state) => {
@@ -52,7 +53,6 @@ const TransactionForm = () => {
         estimatedType = "Est.Quantity"
         isShares = false
         buyOrSell = "Buy"
-        dollarsToShares = quantity
     }
 
     if (type === "Shares" && !isBuy) {
@@ -69,7 +69,6 @@ const TransactionForm = () => {
         estimatedType = "Est.Quantity"
         isShares = false
         buyOrSell = "Sell"
-        dollarsToShares = quantity
     }
 
     const handleSubmit = async (e) => {
@@ -160,13 +159,13 @@ const TransactionForm = () => {
                             <input
                                 className="transaction-amount-input"
                                 type="number"
-                                onChange={(e) => setAmount(e.target.value)}
+                                value={amount}
+                                onChange={(e) => { if (e.target.value.length < 8) setAmount(e.target.value) }}
                                 placeholder="$0.00"
                                 min="0"
                                 max="10000000"
                                 required
                                 step="any"
-                                onInput={(e) => e.target.value = e.target.value.slice(0, 12)}
                             />
                         </div>
                     )}
@@ -176,13 +175,13 @@ const TransactionForm = () => {
                             <input
                                 className="transaction-amount-input"
                                 type="number"
-                                onChange={(e) => setAmount(e.target.value)}
+                                value={amount}
+                                onChange={(e) => { if (e.target.value.length < 8) setAmount(e.target.value) }}
                                 placeholder="0"
                                 min="0"
                                 max="10000000"
                                 required
                                 step="any"
-                                onInput={(e) => e.target.value = e.target.value.slice(0, 12)}
                             />
                         </div>
                     )}
