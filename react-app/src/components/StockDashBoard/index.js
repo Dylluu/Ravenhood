@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 import WatchlistAddList from '../WatchlistAddList';
 import {
 	GetCompanyOverview,
-	getStockVolume
+	getStockVolume,
+	getTodayCompanyNews
 } from '../../utils/fetchStockFunctions';
 import KeyStatistics from './KeyStatistics';
 import CompanyNews from './CompanyNews';
@@ -14,10 +15,14 @@ function StockDashBoard() {
 	const { ticker } = useParams();
 	const [companyOverview, setCompanyOverview] = useState(null);
 	const [stockInfo, setStockInfo] = useState(null);
+	const [companyNews, setCompanyNews] = useState(null);
+
 	useEffect(() => {
 		const companyInfo = async () => {
 			const companyInfo = await GetCompanyOverview(ticker);
 			const stockInfo = await getStockVolume(ticker);
+			const companynews = await getTodayCompanyNews(ticker);
+			setCompanyNews(companynews);
 			setStockInfo(stockInfo);
 			setCompanyOverview(companyInfo);
 		};

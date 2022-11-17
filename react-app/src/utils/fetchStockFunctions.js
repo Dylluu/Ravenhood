@@ -164,3 +164,13 @@ export async function GetCompanyOverview(ticker) {
 	const response = await fetch(baseURL);
 	return response.json();
 }
+
+//Get Today Company News
+export async function getTodayCompanyNews(ticker) {
+	let todayDate = new Date();
+	todayDate.setDate(todayDate.getDate() - 1);
+	todayDate = todayDate.toISOString().split('T')[0];
+	const baseURL = `https://finnhub.io/api/v1/company-news?symbol=${ticker}&from=${todayDate}&to=${todayDate}&token=cdqn3niad3ifho9o8em0cdqn3niad3ifho9o8emg`;
+	const response = await fetch(baseURL);
+	return response.json();
+}
