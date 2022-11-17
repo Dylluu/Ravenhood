@@ -24,8 +24,9 @@ const TransactionForm = () => {
     const [isBuy, setisBuy] = useState(true);
     const [type, setType] = useState("Shares");
     const [amount, setAmount] = useState("");
-    const [finalPrice, setFinalPrice] = useState("")
+    // const [finalPrice, setFinalPrice] = useState("")
     const [finalCost, setFinalCost] = useState("")
+    const [finalAmount, setFinalAmount] = useState("")
     const [errors, setErrors] = useState({});
     const [isPlaced, setIsPlaced] = useState(false)
     const options = [
@@ -218,10 +219,10 @@ const TransactionForm = () => {
         if (createdTransaction) {
             // console.log(createdTransaction)
             await dispatch(transactionActions.getStockTransactionsByUserId(ticker))
-            setFinalPrice(price.toLocaleString("en-US", { style: "currency", currency: "USD" }))
-            setFinalCost((price * numberOfShares).toLocaleString("en-US", { style: "currency", currency: "USD" }))
+            // setFinalPrice(price.toLocaleString("en-US", { style: "currency", currency: "USD" }))
+            setFinalCost(dollarAmount)
             setIsPlaced(true)
-            // console.log("hi")
+            setFinalAmount(amount.toLocaleString(undefined, { maximumFractionDigits: 2 }))
         }
     }
 
@@ -277,12 +278,12 @@ const TransactionForm = () => {
                                         className="transaction-amount-input"
                                         type="number"
                                         value={amount}
-                                        onChange={(e) => { if (e.target.value.length < 8) setAmount(e.target.value) }}
                                         placeholder="$0.00"
                                         min="0"
                                         max="10000000"
+                                        step=".01"
                                         required
-                                        step="any"
+                                        onChange={(e) => { if (e.target.value.length < 8) setAmount(e.target.value) }}
                                     />
                                 </div>
                             )}
@@ -293,12 +294,12 @@ const TransactionForm = () => {
                                         className="transaction-amount-input"
                                         type="number"
                                         value={amount}
-                                        onChange={(e) => { if (e.target.value.length < 8) setAmount(e.target.value) }}
                                         placeholder="0"
                                         min="0"
                                         max="10000000"
-                                        required
                                         step="any"
+                                        required
+                                        onChange={(e) => { if (e.target.value.length < 8) setAmount(e.target.value) }}
                                     />
                                 </div>
                             )}
@@ -334,43 +335,146 @@ const TransactionForm = () => {
                 </div>
             )}
             {isPlaced && (
-                <div className="transaction-container">
-                    <div className="top-container confirmation-top-container">
-                        <div className="buy-sell-container">
-                            <div className="transaction-type">
-                                {`${ticker}`} Order Completed
+                <>
+                    {isBuy && (
+                        <div className="transaction-container">
+                            <div className="top-container confirmation-top-container">
+                                <div className="buy-sell-container">
+                                    <div className="transaction-type">
+                                        {`${ticker}`} Purchased!
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className={"transaction-confirmation-container-dollars"}>
-                        <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
-                            <div className="order-type">Shares</div>
-                            <div className="market-order">{`${amount}`}</div>
-                        </div>
-                        <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
-                            <div className="order-type">Total Cost</div>
-                            <div className="market-order">{`${finalCost}`}</div>
-                        </div>
-                        <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
-                            Your order to market buy {`${finalPrice}`} of {`${ticker}`} was completed
-                        </div>
-                    </div>
-                    {isGreen && (
-                        <div className="transaction-place-order-container">
-                            <button className="review-order-button" type="submit">Done</button>
+                            {type === "Shares" && (
+                                <div className={"transaction-confirmation-container-dollars"}>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Amount Invested</div>
+                                        <div className="market-order">{`${finalCost}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Shares Purchased</div>
+                                        <div className="market-order">{`${finalAmount}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        Your order to buy {`${finalAmount} shares`} of {`${ticker}`} is complete.
+                                    </div>
+                                </div>
+                            )}
+                            {type === "Dollars" && (
+                                <div className={"transaction-confirmation-container-dollars"}>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Amount Invested</div>
+                                        <div className="market-order">{`$${finalAmount}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Shares Purchased</div>
+                                        <div className="market-order">{`${finalCost}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        Your order to buy {`$${finalAmount} `} of {`${ticker}`} is complete.
+                                    </div>
+                                </div>
+                            )}
+                            {isGreen && (
+                                <div className="transaction-place-order-container">
+                                    <button
+                                        className="review-order-button"
+                                        type="submit"
+                                        onClick={(e) => {
+                                            setType("Shares")
+                                            setAmount('')
+                                            setIsPlaced(false)
+                                        }}
+                                    >Done</button>
+                                </div>
+                            )}
+                            {!isGreen && (
+                                <div className="transaction-place-order-container">
+                                    <button
+                                        className="review-order-button-red"
+                                        type="submit"
+                                        onClick={(e) => {
+                                            setType("Shares")
+                                            setAmount('')
+                                            setIsPlaced(false)
+                                        }}
+                                    >Done</button>
+                                </div>
+                            )}
+
                         </div>
                     )}
-                    {!isGreen && (
-                        <div className="transaction-place-order-container">
-                            <button
-                                className="review-order-button-red"
-                                type="submit"
-                                onClick={(e) => setIsPlaced(false)}
-                            >Done</button>
+                    {!isBuy && (
+                        <div className="transaction-container">
+                            <div className="top-container confirmation-top-container">
+                                <div className="buy-sell-container">
+                                    <div className="transaction-type">
+                                        {`${ticker}`} Sold
+                                    </div>
+                                </div>
+                            </div>
+                            {type === "Shares" && (
+                                <div className={"transaction-confirmation-container-dollars"}>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Shares Sold</div>
+                                        <div className="market-order">{`${finalAmount}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Total Credit</div>
+                                        <div className="market-order">{`${finalCost}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        Your order to sell {`${finalAmount} shares`} of {`${ticker}`} is complete.
+                                    </div>
+                                </div>
+                            )}
+                            {type === "Dollars" && (
+                                <div className={"transaction-confirmation-container-dollars"}>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Shares Sold</div>
+                                        <div className="market-order">{`${finalCost}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        <div className="order-type">Total Credit</div>
+                                        <div className="market-order">{`$${finalAmount}`}</div>
+                                    </div>
+                                    <div className="transaction-order-type-container transaction-form-divs transaction-confirmation-divs">
+                                        Your order to sell {`$${finalAmount}`} of {`${ticker}`} is complete.
+                                    </div>
+                                </div>
+                            )}
+                            {isGreen && (
+                                <div className="transaction-place-order-container">
+                                    <button
+                                        className="review-order-button"
+                                        type="submit"
+                                        onClick={(e) => {
+                                            setType("Shares")
+                                            setAmount('')
+                                            setIsPlaced(false)
+                                        }}
+                                    >Done</button>
+                                </div>
+                            )}
+                            {!isGreen && (
+                                <div className="transaction-place-order-container">
+                                    <button
+                                        className="review-order-button-red"
+                                        type="submit"
+                                        onClick={(e) => {
+                                            setType("Shares")
+                                            setAmount('')
+                                            setIsPlaced(false)
+                                        }}
+                                    >Done</button>
+                                </div>
+                            )}
+
                         </div>
                     )}
-                </div>
-            )}
+                </>
+            )
+            }
         </>
     );
 };

@@ -94,6 +94,17 @@ function Dashboard() {
 					</div>
 				</div>
 				<div className="dashboard-watchlists-wrapper">
+					<div className='watchlists-header-wrapper'
+					id='watchlists-header-wrapper-for-stocks'
+					>
+						<div className='watchlists-header-dashboard'
+						id='watchlists-header-dashboard-for-stocks'
+						>
+							<div className='watchlist-header-title'
+							id='watchlist-header-title-for-stocks'
+							>Stocks</div>
+						</div>
+					</div>
 					<div className="watchlists-header-wrapper">
 						<div className="watchlists-header-dashboard">
 							<div className="watchlist-header-title">Lists</div>
