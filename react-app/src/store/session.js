@@ -104,7 +104,7 @@ export const signUp = (first_name, last_name, email, password, buy_power) => asy
 
 export const thunkAddBuyPower = (data) => async dispatch => {
 	const response = await fetch(`/api/${data.id}/buypower`, {
-	  method: 'put',
+	  method: 'PUT',
 	  headers: {
 		'Content-Type': 'application/json'
 	  },
