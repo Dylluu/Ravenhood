@@ -49,7 +49,7 @@ function TopNaviagtion() {
                 onClick={() => {
                     if(menuOpen) handleMenuOpen()
                     history.push('/')
-                    // history.go(0)
+                    history.go(0)
                 }}
                 >
                     <span>Ravenhood</span>
