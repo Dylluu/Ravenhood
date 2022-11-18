@@ -1,11 +1,12 @@
 .transaction-container {
     /* position: sticky; */
     /* top: 100px; */
-    border: 2px solid #e6e9ee;
+    border: 1px solid #e6e9ee;
     /* min-height: fit-content;
     max-height: 447px; */
     max-width: 330px;
     min-width: 330px;
+    border-radius: 5px;
     box-sizing: border-box;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     /* margin: 100px; */

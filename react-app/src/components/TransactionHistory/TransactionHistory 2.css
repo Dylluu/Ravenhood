@@ -34,7 +34,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    box-sizing: border-box;
     width: 100%;
     /* margin-top: 40px; */
     /* border: solid 1px blue; */
@@ -48,14 +47,12 @@
     margin-top: 30px;
     margin-left: 10px;
     height: 500px;
-    overflow: hidden;
     /* border: solid 1px green; */
 }
 
 .transaction-history {
     display: flex;
     flex-direction: column;
-    padding-right: 10px;
     width: 690px;
     /* border: solid 1px pink; */
 }
@@ -106,13 +103,6 @@
 .transaction-history-label {
     font-size: 15px;
     font-weight: 700;
-}
-
-#transaction-history-company {
-    /* border: solid 1px red; */
-    max-width: 320px;
-    max-height: 20px;
-    overflow: hidden;
 }
 
 .transaction-history-date {

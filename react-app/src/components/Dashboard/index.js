@@ -23,9 +23,11 @@ function Dashboard() {
 	const [buyPowerOpen, setBuyPowerOpen] = useState(false);
 	const [todayNews, setTodayNews] = useState([]);
 	const user = useSelector((state) => state.session.user);
+
 	function thousandsSeparator(value) {
 		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
+
 	const dispatch = useDispatch();
 	const [add, setAdd] = useState(false);
 	const user_id = useSelector((state) => state.session.user.id);
