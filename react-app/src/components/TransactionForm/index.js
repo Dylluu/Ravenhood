@@ -64,14 +64,16 @@ const TransactionForm = () => {
     // console.log(currentUserBuyPower)
 
     const currentSharesOwned = useSelector((state) => {
-        let portfolio = state.portfolio.userPortfolio;
+        let portfolio = state?.portfolio?.userPortfolio;
         let sharesOwned;
         for (let [key, value] of Object.entries(portfolio)) {
             // console.log(`${key}: ${value}`)
-            if (value.symbol === `${ticker}`) {
+            if ((value.symbol).toString() === (`${ticker}`).toString()) {
+                // console.log("hiiii")
                 sharesOwned = (value.num_shares).toLocaleString('en-US', {
                     maximumFractionDigits: 10
                 })
+                break
             } else {
                 sharesOwned = 0
             }
@@ -81,15 +83,17 @@ const TransactionForm = () => {
     });
 
     const currentSharesinDollar = useSelector((state) => {
-        let portfolio = state.portfolio.userPortfolio;
+        let portfolio = state?.portfolio?.userPortfolio;
         let sharesOwned;
         for (let [key, value] of Object.entries(portfolio)) {
+            // console.log("value.symbol", value.symbol)
             // console.log(`${key}: ${value}`)
-            if (value.symbol === `${ticker}`) {
+            if ((value.symbol).toString() === `${ticker}`) {
                 sharesOwned = (value.num_shares * price).toLocaleString('en-US', {
                     style: 'currency',
                     currency: 'USD'
                 })
+                break
             } else {
                 sharesOwned = 0
             }
@@ -98,6 +102,7 @@ const TransactionForm = () => {
         return sharesOwned
     });
 
+    // console.log(ticker)
     // console.log("currentSharesOwned", currentSharesOwned)
     // console.log("currentSharesinDollar", currentSharesinDollar)
 
