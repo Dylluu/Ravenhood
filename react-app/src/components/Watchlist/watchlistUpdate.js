@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
-import { thunkGetAllWatchlist, thunkUpdateWatchlist } from '../../store/watchlist';
+import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkUpdateWatchlist } from '../../store/watchlist';
 
 const WatchlistForm = ({id, setShowModal, setOptions}) => {
   const dispatch = useDispatch()
@@ -23,11 +23,12 @@ const WatchlistForm = ({id, setShowModal, setOptions}) => {
     }
 
     await dispatch(thunkUpdateWatchlist(list))
+    await dispatch(thunkGetOneWatchlist(watchlistId))
     await dispatch(thunkGetAllWatchlist(user_id))
-    // history.push(`/watchlists/${watchlistId}`)
     setShowModal(false)
     setOptions(false)
-    window.location.replace(`/watchlists/${watchlistId}`);
+    history.push(`/watchlists/${watchlistId}`)
+    // window.location.replace(`/watchlists/${watchlistId}`);
   }
 
   return <div className='update-modal'
