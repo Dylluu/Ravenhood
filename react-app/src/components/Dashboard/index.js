@@ -54,17 +54,17 @@ function Dashboard() {
 		dispatch(thunkGetWholePortfolio(user_id));
 	}, [dispatch]);
 
-	// useEffect(() => {
-	// 	const news = async () => {
-	// 		try {
-	// 			const todayNews = await getTodayNews();
-	// 			setTodayNews(todayNews);
-	// 		} catch {
-	// 			setTodayNews([]);
-	// 		}
-	// 	};
-	// 	news();
-	// }, []);
+	useEffect(() => {
+		const news = async () => {
+			try {
+				const todayNews = await getTodayNews();
+				setTodayNews(todayNews);
+			} catch {
+				setTodayNews([]);
+			}
+		};
+		news();
+	}, []);
 
 	if (watchlist.allWatchlists) {
 		lists = Object.values(watchlist.allWatchlists);
