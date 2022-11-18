@@ -194,6 +194,7 @@
     height: 20px;
     font-size: 14px;
     font-weight: 650;
+    padding-top: 2px;
     /* border: solid 1px green; */
 }
 
@@ -350,7 +351,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 2px;
+    /* padding-top: 2px; */
     /* border: solid 1px red; */
 }
 
