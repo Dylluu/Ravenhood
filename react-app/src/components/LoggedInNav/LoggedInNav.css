@@ -98,7 +98,7 @@
     color: rgb(106, 114, 120);
     margin-left: 13px;
     margin-right: 8px;
-    padding-bottom: 5px;
+    /* padding-bottom: 0px; */
     /* border: solid 1px blue; */
 }
 

@@ -27,7 +27,7 @@ function Watchlist() {
 	const [add, setAdd] = useState(false);
 	const { watchlistId } = useParams();
 	const watchlist = useSelector((state) => state.watchlist);
-	const currWatchlist = useSelector((state) => state.watchlist.oneWatchlist.name)
+	const currWatchlist = useSelector((state) => state.watchlist.oneWatchlist?.name)
 	const user_id = useSelector((state) => state.session.user.id);
 	let stocks;
 	let lists;

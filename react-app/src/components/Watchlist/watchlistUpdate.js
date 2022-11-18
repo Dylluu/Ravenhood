@@ -27,8 +27,10 @@ const WatchlistForm = ({id}) => {
     history.push(`/watchlists/${watchlistId}`)
   }
 
-  return <div className='update-modal'>
-    <div className='update-modal-title'>Edit Form</div>
+  return <div className='update-modal'
+  onClick={(e) => e.stopPropagation()}
+  >
+    <div className='update-modal-title'>Edit List</div>
     <form className='update-modal-form' onSubmit={submitHandler}>
     <input
     type="text"
