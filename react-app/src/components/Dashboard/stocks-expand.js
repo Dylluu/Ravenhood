@@ -7,7 +7,7 @@ import testBird from '../../assets/testbird.png';
 import { thunkGetWholePortfolio } from '../../store/portfolio';
 import SmallStockGraph from '../SmallStockGraph';
 
-function WatchlistExpand({ list, id }) {
+function PortfolioExpand({ port, id }) {
 	const history = useHistory()
 	const dispatch = useDispatch();
 	const [expand, setExpand] = useState(true);
@@ -16,21 +16,16 @@ function WatchlistExpand({ list, id }) {
 	const portfolio = useSelector((state) => state.portfolio);
 	useEffect(
 		() => {
-			// dispatch(thunkGetAllWatchlist(user_id))
-			dispatch(thunkGetOneWatchlist(id));
-			dispatch(thunkGetAllStocks(id));
+			dispatch(thunkGetWholePortfolio)
 		},
 		[dispatch],
 		expand
 	);
 
-	let stocks;
-	let lists;
-	if (watchlist.allStocks) {
-		stocks = Object.values(watchlist.allStocks);
-	}
-	if (watchlist.oneWatchlists) {
-		lists = Object.values(watchlist.oneWatchlists);
+	let ports
+
+	if (portfolio.userPortfolio) {
+		ports = Object.values(portfolio.userPortfolio)
 	}
 
 	return (
@@ -43,16 +38,14 @@ function WatchlistExpand({ list, id }) {
 				>
 				<div className="watchlist-list">
 					<div className='watchlist-picture-and-navlink'>
-					<NavLink
-						to={`/watchlists/${list.id}`}
-						exact={true}
+					<div
 						className="watchlist-navlink"
 					>
 					<img class="watchlist-picture" src={testBird} />
-						{list.name}
-					</NavLink>
+						My Portfolio
 					</div>
-					{stocks &&<button
+					</div>
+					{port &&<button
 						class="watchlist-expand-button"
 						onClick={() => {
 							expand == false ? setExpand(true) : setExpand(false);
@@ -64,9 +57,7 @@ function WatchlistExpand({ list, id }) {
 				</div>
 				{expand && (
 					<div>
-						{/* there might be an error related to allStocks state */}
-						{stocks && stocks.map((stock) => {
-							if (parseInt(stock.watchlist_id) === parseInt(id)) {
+						{ports && ports.map((stock) => {
 								return (
 									<div className='watchlist-stocks-body-wrapper'
 									onClick={() => {
@@ -80,7 +71,6 @@ function WatchlistExpand({ list, id }) {
 									</div>
 									</div>
 								);
-							}
 						})}
 					</div>
 				)}
@@ -89,4 +79,4 @@ function WatchlistExpand({ list, id }) {
 	);
 }
 
-export default WatchlistExpand;
+export default PortfolioExpand;
