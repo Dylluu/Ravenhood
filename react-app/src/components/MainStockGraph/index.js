@@ -59,14 +59,14 @@ function MainStockGraph() {
 		// getting the price/percentage different from open price
 		if (percentDifference > 0) setPriceColor('#00c805');
 		else setPriceColor('#ff5404');
-	}, [chartColor, hoverPrice]);
+	}, [chartColor, hoverPrice, ticker]);
 
 	useEffect(() => {
 		let timeoutId;
 		async function getLatestPrice() {
 			try {
 				const data = await getStonks(ticker);
-				console.log(data);
+				// console.log(data);
 				const stonk = data.chart.result[0];
 				setPrevPrice(price);
 				setPrice(stonk.meta.regularMarketPrice.toFixed(2));
@@ -91,14 +91,14 @@ function MainStockGraph() {
 				setStartPrice(startPrice);
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
-					if (showOneDay) setSiteColor('green');
 					setChartColor(['#00c805', 'black']);
+					if (showOneDay) setSiteColor('green');
 				} else {
-					if (showOneDay) setSiteColor('red');
 					setChartColor(['#ff5404', 'black']);
+					if (showOneDay) setSiteColor('red');
 				}
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 			}
 			timeoutId = setTimeout(getLatestPrice, 6000);
 		}
@@ -112,7 +112,7 @@ function MainStockGraph() {
 
 	useEffect(() => {
 		dispatch(stockActions.cleanUpStockData());
-	}, []);
+	}, [ticker]);
 
 	// generate graph data point for open price,
 	// will trigger once open price has been set
@@ -171,7 +171,7 @@ function MainStockGraph() {
 											show: false
 										},
 										tooltip: {
-											offsetY: -220,
+											offsetY: -400,
 											formatter: function (val, opts) {
 												let time = new Date(val);
 												return time.toLocaleTimeString([], {

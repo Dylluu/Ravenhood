@@ -38,11 +38,16 @@
 
 .percentDifference{
     display: flex;
-    font-weight: 300;
 }
 
 .percentDifference >p{
-        padding: 0;
-        margin: 0;
-        font-weight: 300;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+.range-period {
+    color: black;
+    padding-left: 0.2rem;
+    font-weight: 400;
+    font-size: 14px;
 }

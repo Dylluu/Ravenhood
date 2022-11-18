@@ -5,8 +5,8 @@ import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import './LoggedInNav.css';
 import logoGreen from '../../assets/robinHoodFeatherGreen.png';
-import logoBlack from '../../assets/ravenhood-black.PNG'
-import logoPurple from '../../assets/ravenhood-purple.PNG'
+import logoBlack from '../../assets/ravenhood-black.PNG';
+import logoPurple from '../../assets/ravenhood-purple.PNG';
 import { TickerSymbols } from '../../utils/stocksSymbols';
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
@@ -76,7 +76,7 @@ function LoggedInNav() {
 	function handleMenuOpen() {
 		const accountButton = document.getElementById('account');
 		const accountDiv = document.getElementsByClassName('logged-in-nav-buttons');
-		if (!accountMenuOpen) {
+		if (!accountMenuOpen && accountButton && accountDiv) {
 			accountButton.classList.add('green-font');
 			accountDiv[0].removeAttribute('id');
 			accountDiv[0].style.borderBottom = 'solid 2px rgb(0, 200, 5)';
@@ -86,7 +86,7 @@ function LoggedInNav() {
 			//     e.stopPropagation()
 			// })
 		}
-		if (accountMenuOpen) {
+		if (accountMenuOpen && accountButton && accountDiv) {
 			accountButton.classList.remove('green-font');
 			accountDiv[0].style.borderBottom = 'solid 2px white';
 			accountDiv[0].setAttribute('id', 'logged-in-nav-buttons-hover');
@@ -107,7 +107,7 @@ function LoggedInNav() {
 	function handleWindowClick() {
 		const accountButton = document.getElementById('account');
 		const accountDiv = document.getElementsByClassName('logged-in-nav-buttons');
-		if (accountMenuOpen) {
+		if (accountMenuOpen && accountButton && accountDiv) {
 			accountButton.classList.remove('green-font');
 			accountDiv[0].style.borderBottom = 'solid 2px white';
 			accountDiv[0].setAttribute('id', 'logged-in-nav-buttons-hover');
@@ -152,6 +152,9 @@ function LoggedInNav() {
 								className="search-results"
 								key={result}
 								onClick={() => {
+									setSearch('');
+									setSearchResults([]);
+									setSearchOpen(false);
 									history.push(`/stocks/${result}`);
 									history.go(0);
 								}}
@@ -197,7 +200,12 @@ function LoggedInNav() {
 								</div>
 							</div>
 							<div className="account-menu-popout-middle">
-								<div className="account-menu-popout-middle-buttons">
+								<div className="account-menu-popout-middle-buttons"
+								onClick={() => {
+									history.push('/history')
+									handleMenuOpen()
+								}}
+								>
 									<i
 										className="fa-solid fa-clock-rotate-left"
 										id="history-icon"
@@ -209,9 +217,8 @@ function LoggedInNav() {
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
 								onClick={async () => {
-									history.push('/')
-									dispatch(logout())
-									.then(() => history.go(0))
+									history.push('/');
+									dispatch(logout()).then(() => history.go(0));
 									// dispatch(logout()).then(() => history.go(0));
 									// history.push('/')
 									// setTimeout(() => {history.go(0)}, 200)

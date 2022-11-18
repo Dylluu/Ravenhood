@@ -1,0 +1,121 @@
+.transaction-history-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    box-sizing: border-box;
+    width: 100%;
+    /* height: 500px; */
+    /* border: solid 1px red; */
+}
+
+.transaction-history-user-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 90px;
+    /* border: solid 1px blue; */
+    border-bottom: solid 1px rgb(224,224,232);
+}
+
+.transaction-history-name-inner {
+    display: flex;
+    box-sizing: border-box;
+    width: 1040px;
+    margin-left: 10px;
+    font-size: 28px;
+    font-weight: 500;
+    /* border: solid 1px red; */
+}
+
+.transaction-history-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    /* margin-top: 40px; */
+    /* border: solid 1px blue; */
+}
+
+.transaction-history-list-inner {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 1040px;
+    margin-top: 30px;
+    margin-left: 10px;
+    /* height: 500px; */
+    overflow: hidden;
+    /* border: solid 1px green; */
+}
+
+.transaction-history {
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+    width: 690px;
+    /* border: solid 1px pink; */
+}
+
+#first-transaction {
+    font-size: 13px;
+}
+
+#history-title {
+    font-size: 25px;
+    font-weight: 400;
+    height: fit-content;
+    padding-bottom: 15px;
+    border-bottom: solid 1px 	#C8C8C8;
+    /* border: solid 1px red; */
+}
+
+.each-transaction {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    /* border: solid 1px red; */
+    border-bottom: solid 1px 	#C8C8C8;
+}
+
+.each-transaction-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50%;
+    width: 100%;
+    /* border: solid 1px blue; */
+}
+
+.each-transaction-inner-left , .each-transaction-inner-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    /* border: solid 1px pink; */
+}
+
+.each-transaction-inner-right {
+    align-items: flex-end;
+}
+
+.transaction-history-label {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#transaction-history-company {
+    /* border: solid 1px red; */
+    max-width: 320px;
+    /* max-height: 20px; */
+    overflow: hidden;
+}
+
+.transaction-history-date {
+    font-size: 13px;
+    font-weight: 400;
+}

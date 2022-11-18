@@ -23,19 +23,31 @@ function StockDashBoard() {
 		const companyInfo = async () => {
 			const companyInfo = await GetCompanyOverview(ticker);
 			const stockInfo = await getStockVolume(ticker);
-			const companynews = await getTodayCompanyNews(ticker);
-			setCompanyNews(companynews);
 			setStockInfo(stockInfo);
 			setCompanyOverview(companyInfo);
 		};
 		companyInfo();
-	}, []);
+	}, [ticker]);
+
+	useEffect(() => {
+		const getComapanyNews = async () => {
+			try {
+				const companynews = await getTodayCompanyNews(ticker);
+				setCompanyNews(companynews);
+			} catch {
+				setCompanyNews([]);
+			}
+		};
+
+		getComapanyNews();
+	}, [ticker]);
 
 	let fiveNewsMax;
 	if (companyNews) {
 		fiveNewsMax =
 			companyNews.length > 5 ? companyNews.slice(0, 5) : companyNews;
 	}
+
 	if (!companyOverview) return null;
 
 	return (
@@ -48,9 +60,9 @@ function StockDashBoard() {
 					</div>
 					<div className="stock-dashboard-inner-left-borders">
 						<div className="stock-holding-wrapper"></div>
-						<div className="section-title"
-						id='about'
-						>About</div>
+						<div className="section-title" id="about">
+							About
+						</div>
 						<div id="company-description">{companyOverview.Description}</div>
 						<div className="section-title">Key statistics</div>
 						<KeyStatistics

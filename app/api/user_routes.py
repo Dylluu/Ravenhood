@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import User, db
 from app.forms import BuyPowerForm
@@ -16,6 +16,7 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
+
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
@@ -25,18 +26,22 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
-@user_routes.route('/<int:id>/buypower', methods=['PUT'])
+
+
+@user_routes.route("BP/<int:id>", methods=["PUT"])
 @login_required
-def add_buy_power(id):
+def editBuyPower(id):
     """
     Add buy power for current user
     """
     form = BuyPowerForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    user = User.query.get(id)
+    currUser = User.query.get(id)
+    print("WOWWWWWWW", currUser)
     if form.validate_on_submit():
-        user.buy_power += form.data['buy_power']
+        currUser.buy_power += form.data['buy_power']
+        print("HUHHHHH?", form.data['buy_power'])
         db.session.commit()
-        return user.to_dict()
+        return currUser.to_dict()
 # @user_routes.routes("/new", methods=["GET", "POST"])
 # def add_user():

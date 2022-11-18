@@ -8,9 +8,9 @@ const setUser = (user) => ({
 	payload: user
 });
 
-const updateUser = (user) => ({
+const updateUser = (BP) => ({
 	type: UPDATE_USER,
-	payload: user
+	payload: BP
 })
 
 const removeUser = () => ({
@@ -102,29 +102,36 @@ export const signUp = (first_name, last_name, email, password, buy_power) => asy
 	}
 };
 
-export const thunkAddBuyPower = (data) => async dispatch => {
-	const response = await fetch(`/api/${data.id}/buypower`, {
-	  method: 'put',
-	  headers: {
-		'Content-Type': 'application/json'
-	  },
-	  body: JSON.stringify(data)
+export const thunkAddBuyPower = (updateBuyPower, user_id) => async dispatch => {
+	// console.log("WORKING, ENTERED BP THUNK")
+	const response = await fetch(`/api/users/BP/${user_id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(updateBuyPower)
 	})
 
+	// console.log("WORKING", response)
+	// console.log(typeof (user_id))
+
 	if (response.ok) {
-	  const user = await response.json();
-	  dispatch(updateUser(user))
+		const updatedBuyingPower = await response.json();
+		dispatch(updateUser(updatedBuyingPower))
+		// console.log("RESPONSE OK", updatedBuyingPower)
+		return updatedBuyingPower
 	}
-  }
+}
 
 export default function reducer(state = initialState, action) {
+	const newState = { ...state }
 	switch (action.type) {
 		case SET_USER:
 			return { user: action.payload };
 		case UPDATE_USER:
-			const prevUser = {...state}
-			prevUser.session.user = action.payload
-			return {user: prevUser }
+			newState.user.buy_power = action.payload.buy_power
+			// console.log("TIRED", newState)
+			return newState
 		case REMOVE_USER:
 			return { user: null };
 		default:

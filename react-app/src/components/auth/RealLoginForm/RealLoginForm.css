@@ -154,9 +154,9 @@
     border: solid 2px black;
     border-radius: 75%;
     width: 14.75px;
-    height: 7px;
-    padding-left: 0.25px;
-    padding-bottom: 4px;
+    height: 13.75px;
+    /* padding-left: 0.25px; */
+    padding-bottom: 1px;
     margin-left: 12px;
     /* border: solid 1px red; */
 }
@@ -202,4 +202,8 @@ button {
         display: none;
         z-index: -1;
     }
+}
+
+#loading {
+    width: 15px;
 }

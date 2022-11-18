@@ -57,7 +57,7 @@ function MainStockPage({
 		const hover = siteColor == 'green' ? 'hover-green' : 'hover-red';
 		setHoverColor(hover);
 		setSelectedColor(color);
-	}, [siteColor]);
+	}, [siteColor, ticker]);
 	return (
 		<>
 			{showOneWeek && (

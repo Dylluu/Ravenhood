@@ -195,9 +195,13 @@ export async function getPortfolioPerformancedifference(portfolio) {
 		ownedStock.map(async (ticker) => await getStonk(ticker))
 	);
 
-	const dataLength = ownedStockData[0].chart.result[0].timestamp.length;
+	const dataLength = ownedStockData[0].chart.result[0].timestamp;
+	const TradingPeriodStartTime =
+		ownedStockData[0].chart.result[0].meta.tradingPeriods[0][0].start;
+	const TradingPeriodEndTime =
+		ownedStockData[0].chart.result[0].meta.tradingPeriods[0][0].end;
 	const portfolioArr = [];
-	for (let i = 0; i <= dataLength - 1; i++) {
+	for (let i = 0; i <= dataLength.length - 1; i++) {
 		let PortfolioTotal = 0;
 		ownedStockData.forEach((stock) => {
 			const key = stock.chart.result[0].meta.symbol;
@@ -207,5 +211,10 @@ export async function getPortfolioPerformancedifference(portfolio) {
 		});
 		portfolioArr[i] = PortfolioTotal;
 	}
-	return portfolioArr;
+	return {
+		portfolioArr,
+		dataLength,
+		TradingPeriodStartTime,
+		TradingPeriodEndTime
+	};
 }

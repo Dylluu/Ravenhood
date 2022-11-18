@@ -4,37 +4,28 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Dashboard.css';
 import testBird from '../../assets/testbird.png';
-import {
-	thunkGetAllStocks,
-	thunkGetOneWatchlist,
-	thunkGetAllWatchlist
-} from '../../store/watchlist';
+import { thunkGetWholePortfolio } from '../../store/portfolio';
 import SmallStockGraph from '../SmallStockGraph';
 
-function WatchlistExpand({ list, id }) {
+function PortfolioExpand({ port, id }) {
 	const history = useHistory()
 	const dispatch = useDispatch();
 	const [expand, setExpand] = useState(true);
 	const [menu, setMenu] = useState(false);
 	const user_id = useSelector((state) => state.session.user.id);
-	const watchlist = useSelector((state) => state.watchlist);
+	const portfolio = useSelector((state) => state.portfolio);
 	useEffect(
 		() => {
-			// dispatch(thunkGetAllWatchlist(user_id))
-			dispatch(thunkGetOneWatchlist(id));
-			dispatch(thunkGetAllStocks(id));
+			dispatch(thunkGetWholePortfolio)
 		},
 		[dispatch],
 		expand
 	);
 
-	let stocks;
-	let lists;
-	if (watchlist.allStocks) {
-		stocks = Object.values(watchlist.allStocks);
-	}
-	if (watchlist.oneWatchlists) {
-		lists = Object.values(watchlist.oneWatchlists);
+	let ports
+
+	if (portfolio.userPortfolio) {
+		ports = Object.values(portfolio.userPortfolio)
 	}
 
 	return (
@@ -46,17 +37,18 @@ function WatchlistExpand({ list, id }) {
 				onClick={() => setExpand(!expand)}
 				>
 				<div className="watchlist-list">
-					<div className='watchlist-picture-and-navlink'>
-					<NavLink
-						to={`/watchlists/${list.id}`}
-						exact={true}
+					<div className='watchlist-picture-and-navlink'
+					id='watchlist-pic-and-navlink-for-portfolio'
+					>
+					<div
 						className="watchlist-navlink"
+						id='watchlist-pic-and-navlink-for-portfolio'
 					>
 					<img class="watchlist-picture" src={testBird} />
-						{list.name}
-					</NavLink>
+						My Portfolio
 					</div>
-					{stocks &&<button
+					</div>
+					{port &&<button
 						class="watchlist-expand-button"
 						onClick={() => {
 							expand == false ? setExpand(true) : setExpand(false);
@@ -68,9 +60,7 @@ function WatchlistExpand({ list, id }) {
 				</div>
 				{expand && (
 					<div>
-						{/* there might be an error related to allStocks state */}
-						{stocks && stocks.map((stock) => {
-							if (parseInt(stock.watchlist_id) === parseInt(id)) {
+						{ports && ports.map((stock) => {
 								return (
 									<div className='watchlist-stocks-body-wrapper'
 									onClick={() => {
@@ -79,12 +69,18 @@ function WatchlistExpand({ list, id }) {
 									}}
 									>
 									<div className="watchlist-stocks-body">
-										<div id="expand-watchlist-symbol"> {stock.symbol}</div>
+										<div id="expand-watchlist-symbol">
+											<div>
+												{stock.symbol}
+											</div>
+											<div id="expand-watchlist-symbol-shares">
+												{stock.num_shares} Shares
+											</div>
+										</div>
 										<SmallStockGraph ticker={stock.symbol} graph={true} />
 									</div>
 									</div>
 								);
-							}
 						})}
 					</div>
 				)}
@@ -93,4 +89,4 @@ function WatchlistExpand({ list, id }) {
 	);
 }
 
-export default WatchlistExpand;
+export default PortfolioExpand;

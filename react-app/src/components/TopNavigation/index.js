@@ -21,8 +21,8 @@ function TopNaviagtion() {
         const menuDiv = document.getElementsByClassName('menu');
         const popout = document.getElementsByClassName('splash-popout');
 
-        if(!menuOpen) {
-            console.log('opening menu')
+        if (!menuOpen) {
+            // console.log('opening menu')
             menuTop.classList.add('top-transition');
             menuTop.classList.remove('top-transition2');
             menuBottom.classList.add('bottom-transition');
@@ -31,7 +31,7 @@ function TopNaviagtion() {
             popout[0].classList.add('splash-pop-transition');
             setMenuOpen(true);
         }
-        if(menuOpen){
+        if (menuOpen) {
             menuTop.classList.remove('top-transition');
             menuTop.classList.add('top-transition2');
             menuBottom.classList.add('bottom-transition2');
@@ -46,69 +46,69 @@ function TopNaviagtion() {
         <div className='nav-wrapper'>
             <div className='logo-wrapper'>
                 <div className='ravenhood'
-                onClick={() => {
-                    if(menuOpen) handleMenuOpen()
-                    history.push('/')
-                    history.go(0)
-                }}
+                    onClick={() => {
+                        if (menuOpen) handleMenuOpen()
+                        history.push('/')
+                        history.go(0)
+                    }}
                 >
                     <span>Ravenhood</span>
-                    <img id='logo' src={logo}/>
+                    <img id='logo' src={logo} />
                 </div>
             </div>
             <div className='middle-top-nav'>
                 <div className='middleTopWrapper'>
-                <span className='buttons-nav'>Invest</span>
-                <span className='buttons-nav'>Crypto</span>
-                <span className='buttons-nav'
-                onClick={() => history.push('/cash')}
-                >Cash Card</span>
-                <span className='buttons-nav'>Learn</span>
-                <span className='buttons-nav'>Snacks</span>
-                {!user && <span className='buttons-nav'>Support</span>}
-                {user && <span className='buttons-nav'
-                onClick={onLogout}
-                >Logout</span>}
+                    <span className='buttons-nav'>Invest</span>
+                    <span className='buttons-nav'>Crypto</span>
+                    <span className='buttons-nav'
+                        onClick={() => history.push('/cash')}
+                    >Cash Card</span>
+                    <span className='buttons-nav'>Learn</span>
+                    <span className='buttons-nav'>Snacks</span>
+                    {!user && <span className='buttons-nav'>Support</span>}
+                    {user && <span className='buttons-nav'
+                        onClick={onLogout}
+                    >Logout</span>}
                 </div>
             </div>
             <div className='login-signup-wrapper'>
                 <NavLink
-                to='/login'
-                id='login'
-                className='logsign-butt'>
+                    to='/login'
+                    id='login'
+                    className='logsign-butt'>
                     Log in
                 </NavLink>
-                    <NavLink to='/signup' id='sign-up' className='logsign-butt'>Sign up</NavLink>
+                <NavLink to='/signup' id='sign-up' className='logsign-butt'>Sign up</NavLink>
             </div>
             <div className='menu'
-            onClick={() => handleMenuOpen()}
+                onClick={() => handleMenuOpen()}
             >
                 <div id='top-menu-bar' className='menu-bar'></div>
                 <div id='bottom-menu-bar' className='menu-bar'></div>
             </div>
             <div className='splash-popout'>
-                        {/* <span className='popout-nav'>Invest</span>
+                {/* <span className='popout-nav'>Invest</span>
                         <span className='popout-nav'>Crypto</span> */}
-                        <span className='popout-nav'
-                        onClick={() => {
-                            handleMenuOpen()
-                            history.push('/cash')
-                        }}
-                        >Cash Card</span>
-                        <span className='popout-nav'
-                        onClick={() => {
-                            handleMenuOpen()
-                            history.push('/login')
-                        }}
-                        >Login</span>
-                        <span className='popout-nav'
-                        onClick={() => {
-                            handleMenuOpen()
-                            history.push('/signup')
-                        }}
-                        >Sign Up</span>
-                        {/* <span className='popout-nav'>Support</span> */}
-                    </div>
+                <span className='popout-nav'
+                    onClick={() => {
+                        handleMenuOpen()
+                        history.push('/cash')
+                    }}
+                >Cash Card</span>
+                <span className='popout-nav'
+                    onClick={() => {
+                        handleMenuOpen()
+                        history.push('/login')
+                    }}
+                >Login</span>
+                <span className='popout-nav'
+                    onClick={() => {
+                        handleMenuOpen()
+                        history.push('/signup')
+                    }}
+                >Sign Up</span>
+                {/* <span className='popout-nav'>Support</span> */}
+            </div>
         </div>
     )
 }
