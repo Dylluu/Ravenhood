@@ -21,13 +21,25 @@ function RealLoginForm() {
         const data = await dispatch(login(email, password));
         if (data) {
           setErrors(data);
-          console.log(errors, '------------------------')
+          // console.log(errors, '------------------------')
         }
       };
 
     useEffect(() => {
       if(Object.values(errors).length) setIsLoading(false)
     }, [errors])
+
+    useEffect(() => {
+      const logInText = document.getElementById('log-in-button-text');
+      const loadingCircle = document.getElementById('loading');
+      if(isLoading) {
+        logInText.classList.add('invisible');
+        loadingCircle.classList.remove('invisible')
+      } else {
+        logInText.classList.remove('invisible');
+        loadingCircle.classList.add('invisible')
+      }
+    } ,[isLoading])
 
     const demoLogin = async (e) => {
         e.preventDefault()
@@ -138,10 +150,12 @@ function RealLoginForm() {
                         >{errors.email ? errors.email : errors.password}</span>
                       </div>
                     )}
-                    {!isLoading && <button type='submit' id="log-in-form-button">Log in</button>}
-                    {isLoading && <button type='submit' id="log-in-form-button">
+                    <button type='submit' id="log-in-form-button">
+                      <span id="log-in-button-text">Log in</span>
+                      {<img alt="loading" id="loading" className='invisible' src={loadingCircle}/>}</button>
+                    {/* <button type='submit' id="log-in-form-button">
                       <img alt="loading" id="loading" src={loadingCircle}/>
-                      </button>}
+                      </button> */}
                     <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <NavLink to='/signup' className="demo-user-login">Create an account</NavLink></span>
                 </div>
             </form>

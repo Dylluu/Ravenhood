@@ -207,3 +207,8 @@ button {
 #loading {
     width: 15px;
 }
+
+.invisible {
+    display: none;
+    z-index: -1;
+}
