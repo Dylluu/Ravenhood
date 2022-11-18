@@ -127,7 +127,7 @@ function LoggedInNav() {
 				className="logged-in-feather"
 				onClick={() => {
 					history.push('/');
-					history.go(0);
+					// history.go(0);
 				}}
 			/>
 			<div className="logged-in-inner-wrapper">
@@ -213,15 +213,12 @@ function LoggedInNav() {
 									<span>Transaction History</span>
 								</div>
 							</div>
-							<div
+							<NavLink
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
+								to='/'
 								onClick={async () => {
-									history.push('/');
-									dispatch(logout()).then(() => history.go(0));
-									// dispatch(logout()).then(() => history.go(0));
-									// history.push('/')
-									// setTimeout(() => {history.go(0)}, 200)
+									dispatch(logout());
 								}}
 							>
 								<i
@@ -229,7 +226,7 @@ function LoggedInNav() {
 									id="logout-icon"
 								/>
 								<span>Logout</span>
-							</div>
+							</NavLink>
 						</div>
 					)}
 				</div>
