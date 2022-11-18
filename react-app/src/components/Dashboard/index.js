@@ -31,6 +31,15 @@ function Dashboard() {
 		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 
+	const currentUserBuyPower = useSelector((state) => {
+		let num = state?.session?.user?.buy_power;
+		let buyPower = num?.toLocaleString('en-US', {
+			style: 'currency',
+			currency: 'USD'
+		});
+		return buyPower;
+	});
+
 	const dispatch = useDispatch();
 	const [add, setAdd] = useState(false);
 	const user_id = useSelector((state) => state.session.user.id);
@@ -45,17 +54,17 @@ function Dashboard() {
 		dispatch(thunkGetWholePortfolio(user_id));
 	}, [dispatch]);
 
-	useEffect(() => {
-		const news = async () => {
-			try {
-				const todayNews = await getTodayNews();
-				setTodayNews(todayNews);
-			} catch {
-				setTodayNews([]);
-			}
-		};
-		news();
-	}, []);
+	// useEffect(() => {
+	// 	const news = async () => {
+	// 		try {
+	// 			const todayNews = await getTodayNews();
+	// 			setTodayNews(todayNews);
+	// 		} catch {
+	// 			setTodayNews([]);
+	// 		}
+	// 	};
+	// 	news();
+	// }, []);
 
 	if (watchlist.allWatchlists) {
 		lists = Object.values(watchlist.allWatchlists);
@@ -95,7 +104,7 @@ function Dashboard() {
 						<div className="buy-power-div">
 							<span id="buying-power">Buying Power</span>
 							<span id="buying-power-amount">
-								${thousandsSeparator(user.buy_power)}
+								{currentUserBuyPower}
 							</span>
 						</div>
 					</div>
@@ -109,14 +118,14 @@ function Dashboard() {
 								<CompanyNews news={eachNews} />
 							))}
 							{!maxNews && skeleton.map((skel) => (
-							<>
-							<Skeleton
-							style={{height: '20px', marginTop: '40px', width: '80%'}}
-							/>
-							<Skeleton
-							style={{height: '20px', marginTop: '20px', width: '60%', marginBottom: '20px'}}
-							/>
-							</>
+								<>
+									<Skeleton
+										style={{ height: '20px', marginTop: '40px', width: '80%' }}
+									/>
+									<Skeleton
+										style={{ height: '20px', marginTop: '20px', width: '60%', marginBottom: '20px' }}
+									/>
+								</>
 							))}
 						</div>
 					</div>

@@ -7,16 +7,21 @@
   justify-content: center;
   align-items: center;
   position: sticky;
+  min-height: 44px;
+  max-height: 44px;
+  max-width: 280px;
+  width: 280px;
+  min-width: 205px;
   /* top: 100px; */
-  height: 44px;
-  width: 192px;
+  /* height: 44px;
+  width: 192px; */
   border-radius: 25px;
   border: 1px solid #ff5404;
   color: #ff5404;
-  padding: 8% 20%;
-  margin: 3% 6%;
+  /* padding: 8% 20%; */
+  /* margin: 3% 6%; */
   font-size: 13px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .add-form {

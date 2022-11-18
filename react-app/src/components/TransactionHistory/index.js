@@ -12,6 +12,7 @@ function TransactionHistory() {
     const user = useSelector((state) => state.session.user);
     const userTransactions = useSelector((state) => state.transactions.allOfMyTransactions);
     let userTransactionsArray = Object.values(userTransactions);
+    // console.log("userTransactionsArray", userTransactionsArray)
 
     function parseTransactionDate(date) {
         let splitDate = date.split(' ');
@@ -50,8 +51,11 @@ function TransactionHistory() {
                                                 <span className="transaction-history-date">{parseTransactionDate(transaction.transaction_date)}</span>
                                             </div>
                                             <div className="each-transaction-inner-right">
-                                                <span className="transaction-history-label">${transaction.transaction_price}</span>
-                                                <span className="transaction-history-date">{transaction.num_shares} {transaction.num_shares == 1 ? 'share' : 'shares'}</span>
+                                                <span className="transaction-history-label">{transaction.transaction_price.toLocaleString('en-US', {
+                                                    style: 'currency',
+                                                    currency: 'USD'
+                                                })}</span>
+                                                <span className="transaction-history-date">{Math.abs(transaction.num_shares)} {transaction.num_shares == 1 ? 'share' : 'shares'}</span>
                                             </div>
                                         </div>
                                     </div>))}

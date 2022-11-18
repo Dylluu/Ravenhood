@@ -29,18 +29,18 @@ function StockDashBoard() {
 		companyInfo();
 	}, [ticker]);
 
-	useEffect(() => {
-		const getComapanyNews = async () => {
-			try {
-				const companynews = await getTodayCompanyNews(ticker);
-				setCompanyNews(companynews);
-			} catch {
-				setCompanyNews([]);
-			}
-		};
+	// useEffect(() => {
+	// 	const getComapanyNews = async () => {
+	// 		try {
+	// 			const companynews = await getTodayCompanyNews(ticker);
+	// 			setCompanyNews(companynews);
+	// 		} catch {
+	// 			setCompanyNews([]);
+	// 		}
+	// 	};
 
-		getComapanyNews();
-	}, [ticker]);
+	// 	getComapanyNews();
+	// }, [ticker]);
 
 	let fiveNewsMax;
 	if (companyNews) {
