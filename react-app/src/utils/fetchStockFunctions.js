@@ -160,7 +160,7 @@ export async function getStockVolume(ticker) {
 			0
 		);
 	} catch (TypeError) {
-		window.location.replace('error/badStock')
+		window.location.replace('/bad-stock')
 	}
 	const openPrice = data.chart.result[0].indicators.quote[0].open[0];
 	return [volume, openPrice];
