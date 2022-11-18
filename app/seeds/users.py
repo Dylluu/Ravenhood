@@ -13,12 +13,15 @@ def seed_users():
         email ='jarrod@gmail.com', password='password', first_name="Jarrod", last_name="Mishima", buy_power=100000)
     nhut = User(
         email='nhut@gmail.com', password='password', first_name="Nhut", last_name="Ngo", buy_power=100000)
+    rec_dummy = User(
+        email="thereccuser@gmail.com", password="dontgoherebro", first_name="Recc", last_name="User", buy_power=100000)
 
     db.session.add(demo)
     db.session.add(curtis)
     db.session.add(dylan)
     db.session.add(jarrod)
     db.session.add(nhut)
+    db.session.add(rec_dummy)
     db.session.commit()
 
 
