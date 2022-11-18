@@ -22,8 +22,8 @@ function PortfolioGraph({ portfolio }) {
 	});
 
 	// Price variables
-	const [price, setPrice] = useState(-1);
-	const [startPrice, setStartPrice] = useState(-1);
+	const [price, setPrice] = useState(0);
+	const [startPrice, setStartPrice] = useState(null);
 	const [hoverPrice, setHoverPrice] = useState(null);
 
 	// chart and price display color variables
@@ -65,7 +65,6 @@ function PortfolioGraph({ portfolio }) {
 	useEffect(() => {
 		let timeoutId;
 		const getCurrentStockValueData = async () => {
-			// .reduce((a, b) => a + b);
 			try {
 				const MarketValues = await getPortfolioPerformancedifference(
 					stockOwned
@@ -75,7 +74,6 @@ function PortfolioGraph({ portfolio }) {
 					endTime: MarketValues.TradingPeriodEndTime
 				});
 				const portfolioCurrentValue = portfolioValue.reduce((a, b) => a + b);
-				setStartPrice(portfolioCurrentValue);
 				let data = [
 					{
 						x: new Date(MarketValues.dataLength[0] * 1000),
@@ -90,12 +88,13 @@ function PortfolioGraph({ portfolio }) {
 						y: value
 					};
 				}
-				data = data.filter((timestamp) => timestamp.y !== 0);
-				setSeries({ data });
+				const filterData = data.filter((timestamp) => timestamp.y !== 0);
+				setSeries({ data: filterData });
 				let currentPrice =
 					MarketValues.portfolioArr[
 						MarketValues.portfolioArr.length - 1
 					].toFixed(2);
+				setStartPrice(portfolioCurrentValue);
 				setPrice(currentPrice);
 				if (portfolioCurrentValue - currentPrice < 0) {
 					setChartColor(['#00c805', 'black']);
@@ -107,16 +106,14 @@ function PortfolioGraph({ portfolio }) {
 			} catch (error) {
 				console.log(error);
 			}
-
-			timeoutId = setTimeout(getCurrentStockValueData, 10000);
 		};
 		if (stockOwned && Object.values(stockOwned).length)
 			getCurrentStockValueData();
 
-		return () => {
-			console.log('cleaned');
-			clearTimeout(timeoutId);
-		};
+		// return () => {
+		// 	// console.log('cleaned');
+		// 	clearTimeout(timeoutId);
+		// };
 	}, [stockOwned, portfolioValue]);
 
 	// generate graph data point for open price,
@@ -137,7 +134,7 @@ function PortfolioGraph({ portfolio }) {
 		setOpenPriceData({ data: dashedData });
 	}, [startPrice]);
 
-	if (!series.data.length) return null;
+	if (!series.data.length || !startPrice) return null;
 
 	return (
 		<div className="main-stock-page-wrapper">

@@ -126,59 +126,46 @@ function Dashboard() {
 					</div>
 					<div className="portfolio-list-body-wrapper">
 						<div className="watchlist-list-body">
-<<<<<<< HEAD
-	{
-		lists && (
-			<div className="watchlist-list-row">
-				{stocks && console.log('ports', stocks)}
-				{stocks && console.log('port', stocks[0])}
-				<PortfolioExpand port={stocks} id={user_id} />
-			</div>
-		)
-	}
-=======
-							{lists && <div className="watchlist-list-row">
-								{stocks && console.log('ports', stocks)}
-								{stocks && console.log('port', stocks[0])}
-								<PortfolioExpand port={stocks} id={user_id} />
-							</div>
-							}
->>>>>>> curtis
-						</div >
-					</div >
-		<div className="watchlists-header-wrapper">
-			<div className="watchlists-header-dashboard">
-				<div className="watchlist-header-title">Lists</div>
-				<button
-					className="watchlist-add-button"
-					onClick={() => {
-						add == false ? setAdd(true) : setAdd(false);
-					}}
-				>
-					+
-				</button>
-			</div>
-		</div>
-	{
-		add && (
-			<div>
-				<WatchlistForm add={add} setAdd={setAdd} />
-			</div>
-		)
-	}
-	<div className="watchlist-list-body-wrapper">
-		<div className="watchlist-list-body">
-			{lists &&
-				lists.map((list) => (
-					<div className="watchlist-list-row">
-						<WatchlistExpand list={list} id={list.id} />
+							{lists && (
+								<div className="watchlist-list-row">
+									{stocks && console.log('ports', stocks)}
+									{stocks && console.log('port', stocks[0])}
+									<PortfolioExpand port={stocks} id={user_id} />
+								</div>
+							)}
+						</div>
 					</div>
-				))}
+					<div className="watchlists-header-wrapper">
+						<div className="watchlists-header-dashboard">
+							<div className="watchlist-header-title">Lists</div>
+							<button
+								className="watchlist-add-button"
+								onClick={() => {
+									add == false ? setAdd(true) : setAdd(false);
+								}}
+							>
+								+
+							</button>
+						</div>
+					</div>
+					{add && (
+						<div>
+							<WatchlistForm add={add} setAdd={setAdd} />
+						</div>
+					)}
+					<div className="watchlist-list-body-wrapper">
+						<div className="watchlist-list-body">
+							{lists &&
+								lists.map((list) => (
+									<div className="watchlist-list-row">
+										<WatchlistExpand list={list} id={list.id} />
+									</div>
+								))}
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-				</div >
-			</div >
-		</div >
 	);
 }
 
