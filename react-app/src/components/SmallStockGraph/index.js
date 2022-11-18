@@ -69,7 +69,7 @@ export default function SmallStockGraph({ ticker, graph }) {
 
 			// get new stock price every minute
 			// 1000000
-			timeoutId = setTimeout(getLatestPrice, 5000);
+			timeoutId = setTimeout(getLatestPrice, 10000);
 		}
 
 		getLatestPrice();
@@ -156,8 +156,10 @@ export default function SmallStockGraph({ ticker, graph }) {
 						/>
 					</div>
 					<div className="watchlist-price-today">
-						<div id='watchlist-price-today'>${endPrice}</div>
-						<div style={{ color: chartColor }} id='watchlist-today'>{percentDifference}%</div>
+						<div id="watchlist-price-today">${endPrice}</div>
+						<div style={{ color: chartColor }} id="watchlist-today">
+							{percentDifference}%
+						</div>
 					</div>
 				</>
 			)}

@@ -37,7 +37,7 @@
 
 .stock-dashboard-graph-wrapper {
     display: flex;
-    min-height: 535px;
+    min-height: 540px;
     max-height: 610px;
     width: 100%;
     box-sizing: border-box;
