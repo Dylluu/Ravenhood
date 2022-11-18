@@ -76,8 +76,9 @@ export const thunkUpdateStockInPortfolio = (data) => async (dispatch) => {
 	}
 };
 
-export const thunkDeleteStockInPortfolio = (symbol) => async (dispatch) => {
-	const response = await fetch(`/api/portfolio/${symbol}`, {
+export const thunkDeleteStockInPortfolio = (id) => async (dispatch) => {
+	console.log("TICKER", id)
+	const response = await fetch(`/api/portfolio/${id}`, {
 		method: 'DELETE'
 	});
 	if (response.ok) {
