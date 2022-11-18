@@ -208,10 +208,11 @@ function LoggedInNav() {
 								</div>
 							</div>
 							<div className="account-menu-popout-middle">
-								<div className="account-menu-popout-middle-buttons"
+								<div
+									className="account-menu-popout-middle-buttons"
 									onClick={() => {
-										history.push('/history')
-										handleMenuOpen()
+										history.push('/history');
+										handleMenuOpen();
 									}}
 								>
 									<i
@@ -224,7 +225,7 @@ function LoggedInNav() {
 							<NavLink
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
-								to='/'
+								to="/"
 								onClick={async () => {
 									dispatch(logout());
 								}}

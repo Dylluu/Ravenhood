@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 const apikey = '3MO65OQ6CPMMNJTQ';
 const apikeyStockInfo = ['LHU9QYGE8G6XZO0T', '03A3G6JU0R69U3TN'];
@@ -153,14 +153,14 @@ export async function getStockVolume(ticker) {
 		`https://yahoo-finance-api.vercel.app/${ticker}`
 	);
 	const data = await response.json();
-	let volume
+	let volume;
 	try {
 		volume = data.chart.result[0].indicators.quote[0].volume.reduce(
 			(a, b) => a + b,
 			0
 		);
 	} catch (TypeError) {
-		window.location.replace('/bad-stock')
+		window.location.replace('/bad-stock');
 	}
 	const openPrice = data.chart.result[0].indicators.quote[0].open[0];
 	return [volume, openPrice];
@@ -209,12 +209,14 @@ export async function getPortfolioPerformancedifference(portfolio) {
 		ownedStockData[0].chart.result[0].meta.tradingPeriods[0][0].end;
 	const portfolioArr = [];
 	for (let i = 0; i <= dataLength.length - 1; i++) {
-		let PortfolioTotal = 0;
+		let PortfolioTotal = null;
 		ownedStockData.forEach((stock) => {
 			const key = stock.chart.result[0].meta.symbol;
 			const price =
-				stock.chart.result[0].indicators.quote[0].close[i] * portfolio[key];
-			PortfolioTotal += price;
+				stock.chart.result[0].indicators.quote[0].open[i] * portfolio[key];
+			if (price == 0 || isNaN(price)) {
+				PortfolioTotal = 0;
+			} else if (PortfolioTotal != 0) PortfolioTotal += price;
 		});
 		portfolioArr[i] = PortfolioTotal;
 	}
