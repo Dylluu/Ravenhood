@@ -23,6 +23,8 @@ function WatchlistAddList(symbol) {
   const user_id = useSelector((state) => state.session.user.id);
   const newLists = useSelector((state) => state.watchlist.AllWatchlists)
   let lists;
+  let stocks
+  let stockBool = false
 
   useEffect(
     () => {
@@ -34,7 +36,13 @@ function WatchlistAddList(symbol) {
 
   if (watchlist.allWatchlists) {
     lists = Object.values(watchlist.allWatchlists);
-  } const submitHandler = async (e) => {
+  }
+
+  if (watchlist.allStocks) {
+    stocks = Object.values(watchlist.allStocks)
+  }
+
+  const submitHandler = async (e) => {
     e.preventDefault()
     let data = {
       symbol: symbol.symbol,
@@ -57,7 +65,15 @@ function WatchlistAddList(symbol) {
           <div>
             {lists && lists.map((list) => (
               <div className='container'>
-                <input type="radio" id={list.id} name={'lists'} onChange={() => setAddListId(list.id)} value={list.id} />
+                <div hidden={true}>{stockBool = stocks.map(stock => {
+                  if (stock.symbol == symbol.symbol && stock.watchlist_id == list.id) {
+                    return 'i'
+                  } else {
+                    return 'o'
+                  }
+                  // at later date make more elegant solution by joining all stocks to their watchlists in the database.
+                })}</div>
+                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id} />
                 <label className='add-label' for={list.id}> {list.name}</label>
               </div>
             ))}

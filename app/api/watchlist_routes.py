@@ -89,6 +89,7 @@ def add_watchlist_stock(id):
 
   form = AddStockForm()
   form['csrf_token'].data = request.cookies['csrf_token']
+  
   if form.validate_on_submit():
     new_stock = WatchlistStocks(
       symbol = form.data['symbol'],
