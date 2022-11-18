@@ -10,7 +10,10 @@ function WatchlistFromModal({id}) {
     <>
       <button className='options-button' onClick={() => setShowModal(true)}>
         <div className='options-icon-text'>
-          <i class="fa-solid fa-gear"></i> Edit List
+          <i class="fa-solid fa-gear"
+          style={{paddingRight: '3px'}}
+          ></i>
+          <span>Edit List</span>
         </div>
 
         </button>

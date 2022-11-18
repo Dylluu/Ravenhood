@@ -8,13 +8,15 @@ function Options ({list, deleteWatchlist, id})  {
   const [options, setOptions] = useState(false)
 
   return <div class="list-container">
+    <div className='watchlist-pic-and-navlink'>
   <div class="watchlist-picture-holder">
     <img class="small-picture" src={testBird}/>
   </div>
-  <div></div>
+  {/* <div></div> */}
   <NavLink className="list-name" to={`/watchlists/${list.id}`} exact={true}>
     {list.name}
   </NavLink>
+  </div>
   <div>
     <button class="options-button"  onClick={() => {
       options==false ? setOptions(true):setOptions(false)

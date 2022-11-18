@@ -1,18 +1,31 @@
+.watchlist-main-container-wrapper {
+  display: flex;
+  justify-content: center;
+  min-width: 1020px;
+}
+
 .main-container {
   /* background-color: bisque; */
   display: flex;
   flex-direction:row;
+  justify-content: space-between;
   font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
-  left: 100px;
-  padding-top: 80px;
+  margin-top: 100px;
+  margin-left: 10px;
+  min-width: 1020px;
+  box-sizing: border-box;
+  /* border: solid 1px red; */
 }
 
+#watchlist-page-watchlist {
+  min-width: 276px;
+}
 
 .watchlist {
-  min-width: 350px;
-  width: 70%;
-  padding-right: 40px;
-
+  display: flex;
+  flex-direction: column;
+  min-width: 690px;
+  /* border: solid 1px blue; */
 }
 
 .picture-holder {
@@ -20,23 +33,30 @@
 }
 
 .picture {
-  width: 100px;
+  width: 70px;
 }
 
 .small-picture {
-  width: 50px
+  width: 40px;
+  margin-right: 10px;
 }
 
 .item-count {
   /* background-color: lavender; */
-
+  margin-top: -5px;
   opacity: 50%;
   font-size: 14px;
-  padding-left: 20px;
+}
+
+#watchlist-page-watchlist {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: sticky;
 }
 
 .watchlist-title {
-  padding-left: 20px;
+  font-size: 25px;
+  font-weight: 400;
+  padding-top: 15px;
 }
 
 .watchlist-header {
@@ -44,9 +64,8 @@
   /* background-color: red; */
   opacity: 50%;
   font-size: 14px;
-  padding-bottom: 4px;
+  padding-bottom: 15px;
   border-bottom: 1px solid silver;
-
 }
 
 
@@ -65,19 +84,32 @@
 }
 
 .watchlist-table {
-  padding-left: 20px;
+  /* padding-left: 20px; */
+  margin-top: 30px;
+  /* border: solid 1px red; */
 }
 
 .watchlist-data {
   display: flex;
+  align-items: center;
   /* background-color: greenyellow; */
+  height: 59px;
   font-size: 14px;
-  padding-top: 9px;
-  padding-bottom: 9px;
-  padding-right: 5px;
-  border-bottom: 1px solid silver;
-  border-right: 1px solid silver;
-  border-left: 1px solid silver;
+  /* padding-top: 9px; */
+  /* padding-bottom: 9px; */
+  /* padding-right: 5px; */
+  border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+  /* border-right: 1px solid silver;
+  border-left: 1px solid silver; */
+  cursor: pointer;
+}
+
+.watchlist-data:hover {
+  background-color:rgb(245,248,252);
+}
+
+.watchlist-data:hover .delete-button {
+  background-color: rgb(245,248,252);
 }
 
 .watchlist-select {
@@ -87,12 +119,25 @@
 }
 
 .name-column {
- width: 50%;
- font-weight: 700;
+ width: 40%;
+ /* font-weight: 700; */
+}
+
+#name-column {
+  font-weight: 550;
+  font-size: 13px;
+}
+
+#name-column-title {
+  margin-right: -5px;
 }
 
 .symbol-column {
   width: 20%;
+ }
+
+ #symbol-column {
+  font-size: 13px;
  }
 
  .price-column {
@@ -103,15 +148,39 @@
   width: 20%;
  }
 
+ #watchlist-list-row {
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+ }
+
+ .watchlist-pic-and-navlink:hover {
+    background-color: rgb(245,248,252);
+ }
+
  .list-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+  height: 60px;
+  width: 90%;
+  /* border: solid 1px red; */
+ }
 
+ .watchlist-pic-and-navlink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 90%;
+  overflow: hidden;
+  padding: 2px;
+  /* border: solid 1px green; */
  }
 
 .list-name {
-  padding-top: 4%;
+  /* padding-top: 4%; */
   /* width: 20px; */
   min-width: 50%
 }
@@ -184,22 +253,29 @@
   border: 1px solid rgb(227,233,237);
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   position: fixed;
-  width: 20px;
-  margin-right: 4000px;
+  background-color: white;
+  width: 100px;
+  height: 60px;
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-left: -90px;
+
+  /* margin-right: 4000px; */
 }
 
-.options-icon-text{
+/* .options-icon-text{
   width:100px;
-}
+} */
 
 .options-button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   font-size: 14px;
-  padding: 5px;
-  width: 90px;
+  /* padding: 5px; */
+  /* width: 90px; */
   /* padding-right: 20px; */
 }
 
@@ -214,8 +290,12 @@
   padding: 25px;
 }
 
+.delete-button {
+  font-size: 15px;
+}
+
 .fa-regular, .fa-solid{
-  padding-top: 4px;
+  /* padding-top: 4px; */
   font-size: 14px
 }
 
