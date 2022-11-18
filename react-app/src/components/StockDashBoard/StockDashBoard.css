@@ -1,7 +1,7 @@
 .stock-dashboard-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 90px;
     width: 100%;
     /* min-width: 1030px;
     max-width: 1440px;
@@ -74,8 +74,8 @@
 /* COMPANY INFO CSS */
 
 #Company-name {
-    font-weight: 600;
-    font-size: 1.5rem;
+    font-weight: 400;
+    font-size: 2rem;
     margin-bottom: 0.2rem;
 }
 

@@ -376,4 +376,11 @@
     /* border: solid 1px red; */
 }
 
+.watchlist-add-list-page {
+    /* border: solid 1px blue; */
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 /* Stock Portfolio End */
