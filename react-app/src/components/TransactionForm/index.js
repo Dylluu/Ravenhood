@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Redirect, useParams } from 'react-router-dom';
 import * as transactionActions from '../../store/transaction';
+import * as sessionActions from "../../store/session"
 import {
     thunkGetWholePortfolio,
     thunkAddStockToPortfolio,
@@ -132,42 +133,42 @@ const TransactionForm = () => {
     }
 
     const handleInputChange = (e) => {
-        console.log(type)
+        // console.log(type)
         if (e.target.value.length < 8) setAmount(e.target.value)
         if (!isBuy && type === "Shares") {
             if (e.target.value > sharesOwned) {
                 setInputErrors({ error: "Not Enough shares" })
-                console.log("e", amount, sharesOwned)
+                // console.log("e", amount, sharesOwned)
             } else {
                 setInputErrors("")
-                console.log("no e", amount, sharesOwned)
+                // console.log("no e", amount, sharesOwned)
             }
         }
         if (isBuy && type === "Shares") {
             if (e.target.value * price > buyingPowerInt) {
                 setInputErrors({ error: "Not Enough Funds" })
-                console.log("e", e.target.value * price, buyingPowerInt)
+                // console.log("e", e.target.value * price, buyingPowerInt)
             } else {
                 setInputErrors("")
-                console.log("no e", e.target.value * price, buyingPowerInt)
+                // console.log("no e", e.target.value * price, buyingPowerInt)
             }
         }
         if (!isBuy && type === "Dollars") {
             if (e.target.value / price > sharesOwned) {
                 setInputErrors({ error: "Not Enough Shares" })
-                console.log("e", e.target.value / price, sharesOwned)
+                // console.log("e", e.target.value / price, sharesOwned)
             } else {
                 setInputErrors("")
-                console.log("no e", e.target.value / price, sharesOwned)
+                // console.log("no e", e.target.value / price, sharesOwned)
             }
         }
         if (isBuy && type === "Dollars") {
             if (e.target.value > buyingPowerInt) {
                 setInputErrors({ error: "Not Enough Funds" })
-                console.log("e", e.target.value, buyingPowerInt)
+                // console.log("e", e.target.value, buyingPowerInt)
             } else {
                 setInputErrors("")
-                console.log("no e", e.target.value, buyingPowerInt)
+                // console.log("no e", e.target.value, buyingPowerInt)
             }
         }
     }
@@ -205,9 +206,15 @@ const TransactionForm = () => {
                 average_price: parseFloat(price)
             };
 
+            const updateBuyPower = {
+                buy_power: -(numberOfShares * parseFloat(price))
+            }
+
+            console.log("WORKING BP OBJ", updateBuyPower)
+
             let createdTransaction = null;
             let createdPortfolioTransaction = null;
-            console.log('transaction', transaction)
+            // console.log('transaction', transaction)
             if (transaction.is_purchase) {
                 createdTransaction = await dispatch(
                     transactionActions.createBuyTransaction(transaction)
@@ -216,8 +223,19 @@ const TransactionForm = () => {
                     // console.log(data)
                     if (data && data.errors) setErrors(data.errors);
                 });
+
+                const updatedUser = await dispatch(
+                    sessionActions.thunkAddBuyPower(updateBuyPower, user_id)
+                )
+
+                // .catch(async (res) => {
+                //     const data = await res.json();
+                //     console.log("DDDDDDDDD", data)
+                //     if (data && data.errors) setErrors(data.errors);
+                // });
+
                 for (let i = 0; i < Object.keys(portfolio).length; i++) {
-                    console.log('stock ticker', portfolio[i].symbol, i)
+                    // console.log('stock ticker', portfolio[i].symbol, i)
                     if (portfolio[i].symbol == ticker) {
                         createdPortfolioTransaction = await dispatch(
                             thunkUpdateStockInPortfolio(portfolioTrans)
@@ -229,7 +247,7 @@ const TransactionForm = () => {
                             thunkAddStockToPortfolio(portfolioTrans)
                         ).catch(async (res) => {
                             const data = await res.json();
-                            // console.log(data)
+                            console.log("ADD STOCK", data)
                             if (data && data.errors) setErrors(data.errors);
                         });
                         break
@@ -246,6 +264,11 @@ const TransactionForm = () => {
                     // console.log(data)
                     if (data && data.errors) setErrors(data.errors);
                 });
+
+                const updatedUser = await dispatch(
+                    sessionActions.thunkAddBuyPower(updateBuyPower, user_id)
+                )
+
                 for (let i = 0; i < Object.keys(portfolio).length; i++) {
                     if (portfolio[i].num_shares - numberOfShares === 0) {
                         createdPortfolioTransaction = await dispatch(
@@ -268,14 +291,17 @@ const TransactionForm = () => {
                 }
             }
 
+            console.log("BREAKKKKKKK1")
+
             if (transaction.is_purchase || !transaction.is_purchase) {
                 createdTransaction = 1
             }
-            // console.log(createdTransaction)
+            console.log("CC", createdTransaction)
             if (createdTransaction) {
                 // console.log(createdTransaction)
                 await dispatch(transactionActions.getStockTransactionsByUserId(ticker))
                 // setFinalPrice(price.toLocaleString("en-US", { style: "currency", currency: "USD" }))
+                console.log("BOOOOOOOOOO")
                 setFinalCost(dollarAmount)
                 setIsPlaced(true)
                 setFinalAmount(amount.toLocaleString(undefined, { maximumFractionDigits: 2 }))
@@ -283,6 +309,7 @@ const TransactionForm = () => {
         } else {
             console.log("error")
         }
+        console.log("BREAKKKKKKK2")
     }
 
     if (!currentUserBuyPower) return null;

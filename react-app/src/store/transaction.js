@@ -25,7 +25,7 @@ export const cleanUpTransactions = () => {
 }
 
 export const createBuyTransaction = (transaction) => async (dispatch) => {
-    console.log("buy", transaction)
+    // console.log("buy", transaction)
     const response = await fetch(`/api/stocks/${transaction.symbol}/buy`, {
         method: "POST",
         headers: {

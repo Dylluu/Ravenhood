@@ -77,7 +77,7 @@ function Dashboard() {
 		BloombergNews = todayNews.filter((news) => news.source == 'Bloomberg');
 	}
 
-	if (!todayNews.length) return null;
+	// if (!todayNews.length) return null;
 	return (
 		<div className="dashboard-wrapper">
 			<div className="dashboard-inner-wrapper">
@@ -123,15 +123,15 @@ function Dashboard() {
 						</div>
 					</div>
 					<div className="portfolio-list-body-wrapper">
-									<div className="watchlist-list-body">
-										{lists &&<div className="watchlist-list-row">
-													{stocks&& console.log('ports', stocks)}
-													{stocks&& console.log('port', stocks[0])}
-													<PortfolioExpand port={stocks} id={user_id}/>
-												</div>
-										}
-									</div>
-								</div>
+						<div className="watchlist-list-body">
+							{lists && <div className="watchlist-list-row">
+								{stocks && console.log('ports', stocks)}
+								{stocks && console.log('port', stocks[0])}
+								<PortfolioExpand port={stocks} id={user_id} />
+							</div>
+							}
+						</div>
+					</div>
 					<div className="watchlists-header-wrapper">
 						<div className="watchlists-header-dashboard">
 							<div className="watchlist-header-title">Lists</div>
