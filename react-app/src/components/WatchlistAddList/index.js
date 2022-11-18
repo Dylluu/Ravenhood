@@ -73,8 +73,8 @@ function WatchlistAddList(symbol) {
                   }
                   // at later date make more elegant solution by joining all stocks to their watchlists in the database.
                 })}</div>
-                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id} />
-                <label className='add-label' for={list.id}> {list.name}</label>
+                {list.id === user_id?<input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id} />:<div></div>}
+                {list.id === user_id?<label className='add-label' for={list.id}> {list.name}</label>: <div></div>}
               </div>
             ))}
           </div>
