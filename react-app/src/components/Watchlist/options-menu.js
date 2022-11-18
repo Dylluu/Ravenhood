@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import { useState} from 'react';
 import './watchlist.css'
 import testBird from '../../assets/testbird.png'
 import WatchlistFromModal from './edit-watchlist-model';
 function Options ({list, deleteWatchlist, id})  {
   const [options, setOptions] = useState(false)
+  const history = useHistory();
 
   useEffect(() => {
     if(options) window.addEventListener('click', handleOptions)
@@ -16,7 +17,9 @@ function Options ({list, deleteWatchlist, id})  {
   }
 
   return <div class="list-container">
-    <div className='watchlist-pic-and-navlink'>
+    <div className='watchlist-pic-and-navlink'
+    onClick={() => history.push(`/watchlists/${list.id}`)}
+    >
   <div class="watchlist-picture-holder">
     <img class="small-picture" src={testBird}/>
   </div>

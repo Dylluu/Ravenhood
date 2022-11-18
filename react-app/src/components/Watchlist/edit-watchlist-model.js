@@ -8,8 +8,13 @@ function WatchlistFromModal({id}) {
 
   return (
     <>
-      <button className='options-button' onClick={() => setShowModal(true)}>
-        <div className='options-icon-text'>
+      <button className='options-button' onClick={(e) => {
+        e.stopPropagation()
+        setShowModal(true)
+      }}>
+        <div className='options-icon-text'
+        // onClick={(e) => e.stopPropagation()}
+        >
           <i class="fa-solid fa-gear"
           style={{paddingRight: '3px'}}
           ></i>

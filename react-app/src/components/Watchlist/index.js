@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -60,18 +62,14 @@ function Watchlist() {
 	};
 
 	return (
+		<div className='watchlist-main-container-wrapper'>
 		<div class="main-container">
 			<div class="watchlist">
 				<div class="picture-holder">
 					<img class="picture" src={testBird} />
 				</div>
 				<div class="watchlist-title">
-					{lists && lists.map(list => {
-						if (list.id == watchlistId) {
-							return <h3>{list.name}</h3>
-						}
-					})}
-				{lists &&<h3>{}</h3>}
+					Watchlist Template
 				</div>
 				<div class="item-count">
 					{stocks && watchlist.allStocks ? (
@@ -90,8 +88,12 @@ function Watchlist() {
 				</div>
 				<div class="watchlist-table">
 					<div class="watchlist-header">
-						<div class="name-column">Name</div>
-						<div class="symbol-column">Symbol</div>
+						<div class="name-column"
+						id='name-column-title'
+						>Name</div>
+						<div class="symbol-column"
+						id='symbol-colu'
+						>Symbol</div>
 						<div class="price-column">Price</div>
 						<div class="today-column">Today</div>
 					</div>
@@ -102,19 +104,25 @@ function Watchlist() {
 							// eventually put name-column/symbol column in a navlink together
 							if (parseInt(stock.watchlist_id) === parseInt(watchlistId)) {
 								return (
-									<div class="watchlist-data">
-										<div class="name-column">
+									<div class="watchlist-data"
+									onClick={() => history.push(`/stocks/${stock.symbol}`)}
+									>
+										<div class="name-column"
+										id='name-column'
+										>
 											{TickerSymbols[stock.symbol].name}
 										</div>
 										{/* <div>{stock.watchlist_id} </div> */}
 										{/* <div> {stock.watchlist_id === watchlistId ? watchlistId :''}  </div> */}
-										<div class="symbol-column">{stock.symbol}</div>
+										<div class="symbol-column"
+										id='symbol-column'
+										>{stock.symbol}</div>
 										<SmallStockGraph ticker={stock.symbol} graph={false} />
 										<button
 											class="delete-button"
 											onClick={() => deleteStock(stock)}
 										>
-											X
+											<i class="fa-solid fa-xmark" />
 										</button>
 									</div>
 								);
@@ -123,17 +131,21 @@ function Watchlist() {
 					{/* <!-- button will delete the stock from the watchlist --> */}
 				</div>
 			</div>
-			<div class="watchlist-select">
-				<div class="watchlist-list-header">
-					<h2 class="list-title">Lists</h2>
+			<div class="dashboard-watchlists-wrapper"
+			id='watchlist-page-watchlist'
+			>
+				<div class="watchlists-header-wrapper">
+					<div class="watchlists-header-dashboard">
+						<div className='watchlist-header-title'>Lists</div>
 					<button
-						class="add-button"
+						class="watchlist-add-button"
 						onClick={() => {
 							add == false ? setAdd(true) : setAdd(false);
 						}}
 					>
 						+
 					</button>
+					</div>
 				</div>
 				{add && (
 					<div>
@@ -142,7 +154,9 @@ function Watchlist() {
 				)}
 				{lists &&
 					lists.map((list) => (
-						<div>
+						<div className='watchlist-list-row'
+						id='watchlist-list-row'
+						>
 							<Options
 								list={list}
 								deleteWatchlist={deleteWatchlist}
@@ -165,6 +179,7 @@ function Watchlist() {
           </div> */}
 				{/* <!-- this section will be looped to create different lists  --> */}
 			</div>
+		</div>
 		</div>
 	);
 }
