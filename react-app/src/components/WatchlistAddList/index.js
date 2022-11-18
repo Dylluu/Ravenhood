@@ -60,11 +60,21 @@ function WatchlistAddList(symbol) {
     <div className='watchlist-add-list-page'>
       <button className='add-list-button' onClick={() => add == false ? setAdd(true) : setAdd(false)}>Add to Lists</button>
       {add && <Modal>
-        <form className='add-form' onSubmit={submitHandler}>
-          <div className='add-form-title'>{`Add ${symbol.symbol} to your list `}</div>
+        <form className='add-form' onSubmit={submitHandler}
+        id='add-stock-to-list-form'
+        >
+          <div className='add-form-title'
+          id='add-form-title'
+          >
+            <span>{`Add ${symbol.symbol} To Your Lists`}</span>
+            <i className="fa-solid fa-xmark"
+            id='add-to-form-x'
+            onClick={() => setAdd(false)}
+            />
+            </div>
           <div>
             {lists && lists.map((list) => (
-              <div className='container'>
+              <div className='container' id='add-to-lists-input-container'>
                 <div hidden={true}>{stockBool = stocks.map(stock => {
                   if (stock.symbol == symbol.symbol && stock.watchlist_id == list.id) {
                     return 'i'
@@ -73,14 +83,20 @@ function WatchlistAddList(symbol) {
                   }
                   // at later date make more elegant solution by joining all stocks to their watchlists in the database.
                 })}</div>
-                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id} />
-                <label className='add-label' for={list.id}> {list.name}</label>
+                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id}
+                className='add-to-lists-radio'
+                />
+                <label className='add-label' for={list.id}
+                id='add-label'
+                > {list.name}</label>
               </div>
             ))}
           </div>
 
-          <button className="cancel-button" onClick={() => add == false ? setAdd(true) : setAdd(false)}>Cancel</button>
-          <button className='create-list-button' type="submit">Add List</button>
+          {/* <button className="cancel-button" onClick={() => add == false ? setAdd(true) : setAdd(false)}>Cancel</button> */}
+          <button className='create-list-button' type="submit"
+          id='add-to-lists-submit'
+          >Save Changes</button>
         </form>
 
       </Modal>}

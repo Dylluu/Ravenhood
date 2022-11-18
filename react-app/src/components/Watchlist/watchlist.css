@@ -205,7 +205,7 @@
 }
 
 .add-form-input {
-  width: 65%;
+  width: 190px;
   height: 35px;
   background-color: rgb(245,248,252);
   border-radius: 5px;
@@ -233,7 +233,7 @@
   color: rgb(0,200,5);
   height: 36px;
   width: 96px;
-  margin-right: 10px;
+  margin-right: 12px;
   /* padding: 8% 20%;
   margin: 3% 6%; */
   font-size: 13px;
@@ -311,15 +311,20 @@
 
 .update-modal-title {
   display: flex;
-  text-indent: 20px;
+  /* text-indent: 20px; */
+  justify-content: space-between;
+  align-items: center;
   margin-top: 20px;
   font-weight: 450;
+  width: 90%;
+  margin-left: 5%;
+  padding-left: 5px;
   /* border: solid 1px red; */
 }
 
 #update-modal-input {
   width: 200px;
-  height: 30px;
+  height: 40px;
   box-sizing: border-box;
   border: none;
   border-radius: 5px;
@@ -331,6 +336,7 @@
 #save-update-watchlist {
   box-sizing: border-box;
   width: 200px;
+  height: 40px;
   margin-bottom: -10px;
   margin-top: 15px;
   margin-bottom: 0px;
