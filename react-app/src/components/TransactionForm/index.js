@@ -281,7 +281,7 @@ const TransactionForm = () => {
                 setFinalAmount(amount.toLocaleString(undefined, { maximumFractionDigits: 2 }))
             }
         } else {
-            console.log(inputErrors)
+            console.log("error")
         }
     }
 
