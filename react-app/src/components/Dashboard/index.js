@@ -128,8 +128,8 @@ function Dashboard() {
 						<div className="watchlist-list-body">
 							{lists && (
 								<div className="watchlist-list-row">
-									{stocks && console.log('ports', stocks)}
-									{stocks && console.log('port', stocks[0])}
+									{/* {stocks && console.log('ports', stocks)} */}
+									{/* {stocks && console.log('port', stocks[0])} */}
 									<PortfolioExpand port={stocks} id={user_id} />
 								</div>
 							)}

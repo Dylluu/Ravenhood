@@ -66,7 +66,7 @@ function MainStockGraph() {
 		async function getLatestPrice() {
 			try {
 				const data = await getStonks(ticker);
-				console.log(data);
+				// console.log(data);
 				const stonk = data.chart.result[0];
 				setPrevPrice(price);
 				setPrice(stonk.meta.regularMarketPrice.toFixed(2));
@@ -98,7 +98,7 @@ function MainStockGraph() {
 					if (showOneDay) setSiteColor('red');
 				}
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 			}
 			timeoutId = setTimeout(getLatestPrice, 6000);
 		}

@@ -36,7 +36,7 @@ export const createBuyTransaction = (transaction) => async (dispatch) => {
 }
 
 export const createSellTransaction = (transaction) => async (dispatch) => {
-    console.log("sell", transaction)
+    // console.log("sell", transaction)
     const response = await fetch(`/api/stocks/${transaction.symbol}/sell`, {
         method: "POST",
         headers: {

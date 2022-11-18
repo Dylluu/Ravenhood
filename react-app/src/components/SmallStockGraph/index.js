@@ -64,7 +64,7 @@ export default function SmallStockGraph({ ticker, graph }) {
 					setChartColor('#5AC53B');
 				} else setChartColor('#fd5240');
 			} catch (error) {
-				console.log(error);
+				// console.log(error);
 			}
 
 			// get new stock price every minute

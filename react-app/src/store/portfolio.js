@@ -36,7 +36,7 @@ export const thunkGetWholePortfolio = (user_id) => async (dispatch) => {
 };
 
 export const thunkAddStockToPortfolio = (data) => async (dispatch) => {
-	console.log('mydata', data);
+	// console.log('mydata', data);
 	const response = await fetch(`/api/portfolio/${data.user_id}`, {
 		method: 'POST',
 		headers: {
@@ -51,7 +51,7 @@ export const thunkAddStockToPortfolio = (data) => async (dispatch) => {
 };
 
 export const thunkUpdateStockInPortfolio = (data) => async (dispatch) => {
-	console.log('mydata', data);
+	// console.log('mydata', data);
 	const response = await fetch(`/api/portfolio/${data.symbol}`, {
 		method: 'PUT',
 		headers: {
@@ -61,7 +61,7 @@ export const thunkUpdateStockInPortfolio = (data) => async (dispatch) => {
 	});
 	if (response.ok) {
 		const updateInPortfolio = await response.json();
-		console.log('THE UPDATE IS HERE', updateInPortfolio['portfolio'][0]);
+		// console.log('THE UPDATE IS HERE', updateInPortfolio['portfolio'][0]);
 		const newresp = await fetch(`/api/portfolio/${data.symbol}/redo`, {
 			method: 'PUT',
 			headers: {

@@ -112,13 +112,13 @@ export const thunkAddBuyPower = (updateBuyPower, user_id) => async dispatch => {
 		body: JSON.stringify(updateBuyPower)
 	})
 
-	console.log("WORKING", response)
-	console.log(typeof (user_id))
+	// console.log("WORKING", response)
+	// console.log(typeof (user_id))
 
 	if (response.ok) {
 		const updatedBuyingPower = await response.json();
 		dispatch(updateUser(updatedBuyingPower))
-		console.log("RESPONSE OK", updatedBuyingPower)
+		// console.log("RESPONSE OK", updatedBuyingPower)
 		return updatedBuyingPower
 	}
 }
@@ -130,7 +130,7 @@ export default function reducer(state = initialState, action) {
 			return { user: action.payload };
 		case UPDATE_USER:
 			newState.user.buy_power = action.payload.buy_power
-			console.log("TIRED", newState)
+			// console.log("TIRED", newState)
 			return newState
 		case REMOVE_USER:
 			return { user: null };
