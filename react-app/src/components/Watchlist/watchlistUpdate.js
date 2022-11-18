@@ -37,8 +37,12 @@ const WatchlistForm = ({id}) => {
     name="name"
     onChange={(e) => setName(e.target.value)}
     value={name}
+    id='update-modal-input'
+    placeholder='Update List Name'
     />
-    <button className='create-list-button' type="submit">Save</button>
+    <button
+    id='save-update-watchlist'
+    className='create-list-button' type="submit">Save</button>
     </form>
   </div>
 }
