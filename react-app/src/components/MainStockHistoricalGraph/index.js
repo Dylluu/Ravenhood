@@ -174,7 +174,7 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 								show: false
 							},
 							tooltip: {
-								offsetY: -220,
+								offsetY: -395,
 								formatter: function (val, opts) {
 									switch (type) {
 										case 'datetime':

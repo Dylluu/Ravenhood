@@ -5,8 +5,8 @@ import { logout } from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import './LoggedInNav.css';
 import logoGreen from '../../assets/robinHoodFeatherGreen.png';
-import logoBlack from '../../assets/ravenhood-black.PNG'
-import logoPurple from '../../assets/ravenhood-purple.PNG'
+import logoBlack from '../../assets/ravenhood-black.PNG';
+import logoPurple from '../../assets/ravenhood-purple.PNG';
 import { TickerSymbols } from '../../utils/stocksSymbols';
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
@@ -156,7 +156,7 @@ function LoggedInNav() {
 									setSearchResults([]);
 									setSearchOpen(false);
 									history.push(`/stocks/${result}`);
-									// history.go(0);
+									history.go(0);
 								}}
 							>
 								<span id="search-result-ticker">{result}</span>
@@ -212,9 +212,8 @@ function LoggedInNav() {
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
 								onClick={async () => {
-									history.push('/')
-									dispatch(logout())
-									// .then(() => history.go(0))
+									history.push('/');
+									dispatch(logout()).then(() => history.go(0));
 									// dispatch(logout()).then(() => history.go(0));
 									// history.push('/')
 									// setTimeout(() => {history.go(0)}, 200)

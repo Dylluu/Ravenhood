@@ -76,10 +76,12 @@ function PortfolioGraph() {
 				setStartPrice(startPrice);
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
-					if (showOneDay) setSiteColor('green');
+					// if (showOneDay) setSiteColor('green');
 					setChartColor(['#00c805', 'black']);
+					console.log('sdfsd');
 				} else {
-					if (showOneDay) setSiteColor('red');
+					// if (showOneDay) setSiteColor('red');
+					console.log('sdfsd');
 					setChartColor(['#ff5404', 'black']);
 				}
 			} catch (error) {

@@ -4,10 +4,11 @@
     border: 2px solid #e6e9ee;
     min-height: fit-content;
     max-height: 447px;
-    max-width: 330px;
-    min-width: 330px;
+    max-width: 328px;
+    min-width: 230px;
     box-sizing: border-box;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 0 1.2rem;
     /* margin: 100px; */
 }
 

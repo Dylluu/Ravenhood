@@ -91,11 +91,11 @@ function MainStockGraph() {
 				setStartPrice(startPrice);
 				let currentPrice = quote.open[quote.open.length - 1];
 				if (startPrice - currentPrice < 0) {
-					if (showOneDay) setSiteColor('green');
 					setChartColor(['#00c805', 'black']);
+					if (showOneDay) setSiteColor('green');
 				} else {
-					if (showOneDay) setSiteColor('red');
 					setChartColor(['#ff5404', 'black']);
+					if (showOneDay) setSiteColor('red');
 				}
 			} catch (error) {
 				console.log(error);
@@ -108,7 +108,7 @@ function MainStockGraph() {
 		return () => {
 			clearTimeout(timeoutId);
 		};
-	}, [ticker]);
+	}, [showOneDay]);
 
 	useEffect(() => {
 		dispatch(stockActions.cleanUpStockData());
@@ -130,7 +130,7 @@ function MainStockGraph() {
 			dashedData.push(data);
 		}
 		setOpenPriceData({ data: dashedData });
-	}, [openPrice, ticker]);
+	}, [openPrice]);
 
 	if (!series.data.length && !openPrice) return null;
 	return (
@@ -171,7 +171,7 @@ function MainStockGraph() {
 											show: false
 										},
 										tooltip: {
-											offsetY: -220,
+											offsetY: -400,
 											formatter: function (val, opts) {
 												let time = new Date(val);
 												return time.toLocaleTimeString([], {

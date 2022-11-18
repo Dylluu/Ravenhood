@@ -35,6 +35,7 @@
     box-sizing: border-box;
     flex-grow: 1;
     overflow: hidden;
+    /* border: 3px solid orange; */
 }
 
 .price {
