@@ -60,8 +60,18 @@ function WatchlistAddList(symbol) {
     <div className='watchlist-add-list-page'>
       <button className='add-list-button' onClick={() => add == false ? setAdd(true) : setAdd(false)}>Add to Lists</button>
       {add && <Modal>
-        <form className='add-form' onSubmit={submitHandler}>
-          <div className='add-form-title'>{`Add ${symbol.symbol} to your list `}</div>
+        <form className='add-form' onSubmit={submitHandler}
+        id='add-stock-to-list-form'
+        >
+          <div className='add-form-title'
+          id='add-form-title'
+          >
+            <span>{`Add ${symbol.symbol} To Your Lists`}</span>
+            <i className="fa-solid fa-xmark"
+            id='add-to-form-x'
+            onClick={() => setAdd(false)}
+            />
+            </div>
           <div>
             {lists && lists.map((list) => (
               <div className='container'>
@@ -79,8 +89,10 @@ function WatchlistAddList(symbol) {
             ))}
           </div>
 
-          <button className="cancel-button" onClick={() => add == false ? setAdd(true) : setAdd(false)}>Cancel</button>
-          <button className='create-list-button' type="submit">Add List</button>
+          {/* <button className="cancel-button" onClick={() => add == false ? setAdd(true) : setAdd(false)}>Cancel</button> */}
+          <button className='create-list-button' type="submit"
+          id='add-to-lists-submit'
+          >Save Changes</button>
         </form>
 
       </Modal>}
