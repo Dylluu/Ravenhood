@@ -277,8 +277,16 @@
 }
 
 #expand-watchlist-symbol {
+    display: flex;
+    flex-direction: column;
     font-size: 12px;
     font-weight: 650;
+}
+
+#expand-watchlist-symbol-shares {
+    font-size: 10px;
+    font-weight: 400;
+    padding-top: 4px;
 }
 
 .watchlist-price-today {

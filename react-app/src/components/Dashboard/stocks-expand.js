@@ -69,7 +69,14 @@ function PortfolioExpand({ port, id }) {
 									}}
 									>
 									<div className="watchlist-stocks-body">
-										<div id="expand-watchlist-symbol"> {stock.symbol}</div>
+										<div id="expand-watchlist-symbol">
+											<div>
+												{stock.symbol}
+											</div>
+											<div id="expand-watchlist-symbol-shares">
+												{stock.num_shares} Shares
+											</div>
+										</div>
 										<SmallStockGraph ticker={stock.symbol} graph={true} />
 									</div>
 									</div>

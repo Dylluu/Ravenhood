@@ -108,7 +108,7 @@ function PortfolioGraph({ portfolio }) {
 				console.log(error);
 			}
 
-			timeoutId = setTimeout(getCurrentStockValueData, 6000);
+			timeoutId = setTimeout(getCurrentStockValueData, 10000);
 		};
 		if (stockOwned && Object.values(stockOwned).length)
 			getCurrentStockValueData();
