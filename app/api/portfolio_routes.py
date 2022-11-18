@@ -89,34 +89,26 @@ def update_stock_redo(symbol):
     # db.session.commit()
     # # portfolio = Portfolio.query.filter_by(user_id = userId)
     portfolio = {'portfolio': [stock.to_dict() for stock in currStock]}
-    print ("ABOVE THE FUCKNG PORTFOLIO", portfolio)
-    print('THE FUCKING PORTFOLIO', portfolio['portfolio'][0]['num_shares'])
-    print('THE FUCKING PORTFOLIO2', portfolio['portfolio'][0]['average_price'])
     temp_num_shares = portfolio['portfolio'][0]['num_shares']
     temp_average_price =portfolio['portfolio'][0]['average_price']
     portfolio['portfolio'][0]['num_shares'] =float(temp_num_shares) + float(form.data['num_shares'])
     portfolio['portfolio'][0]['average_price'] =((float(temp_average_price)*float(temp_num_shares)) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(temp_num_shares) + float(form.data['num_shares']))
 
-    print("THE FUCKING PORTFOLIO FINALLY", portfolio)
     currStock.num_shares = portfolio['portfolio'][0]['num_shares']
     currStock.average_price = portfolio['portfolio'][0]['average_price']
     db.session.commit()
-    print( 'HATE =======>',currStock.num_shares)
     return portfolio
 
 
-@portfolio_routes.route('/<symbol>', methods=["DELETE"])
+@portfolio_routes.route('/<int:id>', methods=["DELETE"])
 
-def delete_stock(symbol):
+def delete_stock(id):
   """
   Query to delete a stock from a user's portfolio when it reaches zero shares.
   """
   form = PortfolioForm()
   form['csrf_token'].data = request.cookies['csrf_token']
-  currStock = Portfolio.query.filter_by(
-    symbol = form.data['symbol'],
-    user_id = form.data['user_id']
-  )
+  currStock = Portfolio.query.get(id)
   db.session.delete(currStock)
   db.session.commit()
   return dict(message=f"Sold all ${form.data['symbol']} shares")
