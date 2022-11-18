@@ -254,6 +254,15 @@ const TransactionForm = () => {
                         break
                     }
                 }
+                if (Object.keys(portfolio).length == 0) {
+                    createdPortfolioTransaction = await dispatch(
+                        thunkAddStockToPortfolio(portfolioTrans)
+                    ).catch(async (res) => {
+                        const data = await res.json();
+                        // console.log("ADD STOCK", data)
+                        if (data && data.errors) setErrors(data.errors);
+                    });
+                }
             }
 
             if (!transaction.is_purchase) {

@@ -58,9 +58,9 @@ function TopNaviagtion() {
             </div>
             <div className='middle-top-nav'>
                 <div className='middleTopWrapper'>
-                    <span className='buttons-nav'>Invest</span>
+                    <span className='buttons-nav' >Invest</span>
                     <span className='buttons-nav'>Crypto</span>
-                    <span className='buttons-nav'
+                    <span className='buttons-nav-cash'
                         onClick={() => history.push('/cash')}
                     >Cash Card</span>
                     <span className='buttons-nav'>Learn</span>
