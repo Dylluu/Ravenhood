@@ -24,9 +24,10 @@ const WatchlistForm = ({id, setShowModal, setOptions}) => {
 
     await dispatch(thunkUpdateWatchlist(list))
     await dispatch(thunkGetAllWatchlist(user_id))
-    history.push(`/watchlists/${watchlistId}`)
+    // history.push(`/watchlists/${watchlistId}`)
     setShowModal(false)
     setOptions(false)
+    window.location.replace(`/watchlists/${watchlistId}`);
   }
 
   return <div className='update-modal'
