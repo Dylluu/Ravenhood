@@ -124,7 +124,7 @@ const TransactionForm = () => {
     }
 
     // This is for finding the # of shares owned in the current page's state
-    let sharesOwned; // this return an integer
+    let sharesOwned;
     for (let [key, value] of Object.entries(portfolio)) {
         // console.log(`${key}: ${value}`)
         if (value.symbol === `${ticker}`) {
@@ -210,7 +210,7 @@ const TransactionForm = () => {
                 buy_power: -(numberOfShares * parseFloat(price))
             }
 
-            console.log("WORKING BP OBJ", updateBuyPower)
+            // console.log("WORKING BP OBJ", updateBuyPower)
 
             let createdTransaction = null;
             let createdPortfolioTransaction = null;
@@ -247,7 +247,7 @@ const TransactionForm = () => {
                             thunkAddStockToPortfolio(portfolioTrans)
                         ).catch(async (res) => {
                             const data = await res.json();
-                            console.log("ADD STOCK", data)
+                            // console.log("ADD STOCK", data)
                             if (data && data.errors) setErrors(data.errors);
                         });
                         break
@@ -291,25 +291,23 @@ const TransactionForm = () => {
                 }
             }
 
-            console.log("BREAKKKKKKK1")
+            // console.log("BREAKKKKKKK1")
 
             if (transaction.is_purchase || !transaction.is_purchase) {
                 createdTransaction = 1
             }
-            console.log("CC", createdTransaction)
+            // console.log("CC", createdTransaction)
             if (createdTransaction) {
                 // console.log(createdTransaction)
                 await dispatch(transactionActions.getStockTransactionsByUserId(ticker))
                 // setFinalPrice(price.toLocaleString("en-US", { style: "currency", currency: "USD" }))
-                console.log("BOOOOOOOOOO")
+                // console.log("BOOOOOOOOOO")
                 setFinalCost(dollarAmount)
                 setIsPlaced(true)
                 setFinalAmount(amount.toLocaleString(undefined, { maximumFractionDigits: 2 }))
             }
-        } else {
-            console.log("error")
         }
-        console.log("BREAKKKKKKK2")
+        // console.log("BREAKKKKKKK2")
     }
 
     if (!currentUserBuyPower) return null;
@@ -461,9 +459,16 @@ const TransactionForm = () => {
                                 )}
                             </div>
                         )}
-                        <div className="buying-power-container">
-                            {currentUserBuyPower} buying power available
-                        </div>
+                        {isBuy && (
+                            <div className="buying-power-container">
+                                {currentUserBuyPower} buying power available
+                            </div>
+                        )}
+                        {!isBuy && (
+                            <div className="buying-power-container">
+                                {sharesOwned} Shares Available
+                            </div>
+                        )}
                     </form>
                 </div>
             )}
