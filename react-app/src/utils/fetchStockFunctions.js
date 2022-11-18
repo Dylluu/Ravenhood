@@ -151,10 +151,15 @@ export async function getStockVolume(ticker) {
 		`https://yahoo-finance-api.vercel.app/${ticker}`
 	);
 	const data = await response.json();
-	const volume = data.chart.result[0].indicators.quote[0].volume.reduce(
-		(a, b) => a + b,
-		0
-	);
+	let volume
+	try {
+		volume = data.chart.result[0].indicators.quote[0].volume.reduce(
+			(a, b) => a + b,
+			0
+		);
+	} catch (TypeError) {
+		return 'hi'
+	}
 	const openPrice = data.chart.result[0].indicators.quote[0].open[0];
 	return [volume, openPrice];
 }

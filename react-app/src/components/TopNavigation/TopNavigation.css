@@ -59,13 +59,23 @@
     display: flex;
     align-items: center;
     height: 20px;
-    cursor: pointer;
+    cursor:default;
     /* border: solid 1px blue; */
 }
 
-.buttons-nav:hover {
-    color: rgb(0, 180, 5);
+.buttons-nav-cash {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    cursor:pointer
 }
+
+
+.buttons-nav-cash:hover {
+    color: rgb(0, 180, 5);
+
+}
+
 
 .login-signup-wrapper {
     display: flex;

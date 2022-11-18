@@ -92,7 +92,7 @@ def create_buy_transaction(symbol):
 @login_required
 def create_sell_transaction(symbol):
     """
-    Records the buy transaction
+    Records the sell transaction
     """
     # CurrentUser = current_user.id
     # LookupSymbol = symbol.upper()
