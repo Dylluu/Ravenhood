@@ -1,8 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 
-function PortfolioNoStockGraph({ tradingPeriods, setHoverPrice }) {
-	const [openPriceData, setOpenPriceData] = useState(null);
+async function getStonk() {
+	const response = await fetch(`https://yahoo-finance-api.vercel.app/TSLA`);
+	return response.json();
+}
+
+function PortfolioNoStockGraph({ setHoverPrice, setRangePeriod }) {
+	const [openPriceData, setOpenPriceData] = useState({
+		data: []
+	});
+	const [tradingPeriods, setTradingPeriods] = useState({});
+	useEffect(() => {
+		const getTradingPeriod = async () => {
+			const data = await getStonk();
+			const startTime = data.chart.result[0].meta.tradingPeriods[0][0].start;
+			const endTime = data.chart.result[0].meta.tradingPeriods[0][0].end;
+			setTradingPeriods({ startTime, endTime });
+		};
+		getTradingPeriod();
+	}, []);
+
 	// generate graph data point for open price,
 	// will trigger once open price has been set
 	useEffect(() => {
@@ -18,10 +36,11 @@ function PortfolioNoStockGraph({ tradingPeriods, setHoverPrice }) {
 			};
 			dashedData.push(data);
 		}
-		setOpenPriceData({ data: dashedData });
-	}, [startPrice]);
 
-	if (!openPriceData) return null;
+		setOpenPriceData({ data: dashedData });
+	}, [tradingPeriods]);
+
+	if (!openPriceData.data.length) return null;
 	return (
 		<Chart
 			options={{
@@ -32,7 +51,7 @@ function PortfolioNoStockGraph({ tradingPeriods, setHoverPrice }) {
 					},
 					events: {
 						mouseMove: function (event, chartContext, config) {
-							const points = series.data[config.dataPointIndex]?.y;
+							const points = openPriceData.data[config.dataPointIndex]?.y;
 							setHoverPrice(Number(points?.toFixed(2)));
 							setRangePeriod('');
 						},
