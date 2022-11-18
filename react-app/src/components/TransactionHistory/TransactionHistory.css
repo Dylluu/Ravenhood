@@ -55,6 +55,7 @@
 .transaction-history {
     display: flex;
     flex-direction: column;
+    padding-right: 10px;
     width: 690px;
     /* border: solid 1px pink; */
 }
