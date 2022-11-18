@@ -2,10 +2,10 @@
     /* position: sticky; */
     /* top: 100px; */
     border: 2px solid #e6e9ee;
-    min-height: fit-content;
-    max-height: 447px;
-    max-width: 328px;
-    min-width: 230px;
+    /* min-height: fit-content;
+    max-height: 447px; */
+    max-width: 330px;
+    min-width: 330px;
     box-sizing: border-box;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 0 1.2rem;
@@ -174,11 +174,14 @@
 }
 
 .transaction-place-order-container {
+    /* border: 3px solid pink; */
     min-height: 92px;
-    max-height: 92px;
+    /* max-height: 92px; */
+    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     box-sizing: border-box;
 }
 
@@ -246,6 +249,26 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+}
+
+.input-error {
+    /* border: 1px solid red; */
+    font-size: 13px;
+    font-weight: 600;
+    list-style: none;
+    padding: 0;
+}
+
+.input-error-container {
+    /* border: 1px solid blue; */
+    max-width: 280px;
+    width: 280px;
+    min-width: 206px;
+}
+
+.review-order-button-container-errors {
+    /* border: 1px solid turquoise; */
+    margin-bottom: 17.5px;
 }
 
 input::-webkit-outer-spin-button,

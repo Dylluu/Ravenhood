@@ -7,18 +7,18 @@ transaction_routes = Blueprint('new_user_transaction', __name__)
 
 
 
+# @transaction_routes.route('')
+# @login_required
+# def all_transactions():
+#     """
+#     Query for all transactions and returns them in a list of transaction dictionaries
+#     """
+#     transactions = UserTransactions.query.all()
+#     return {'allTransactions': [transaction.to_dict() for transaction in transactions]}
+
+
+
 @transaction_routes.route('')
-@login_required
-def all_transactions():
-    """
-    Query for all transactions and returns them in a list of transaction dictionaries
-    """
-    transactions = UserTransactions.query.all()
-    return {'allTransactions': [transaction.to_dict() for transaction in transactions]}
-
-
-
-@transaction_routes.route('/my-stocks')
 @login_required
 def transactions_by_user_id():
     """
@@ -34,7 +34,8 @@ def transactions_by_user_id():
     for transaction in transactions:
         transactions_dict[transaction.to_dict()["id"]] = transaction.to_dict()
 
-    return {'myTransactions': [transaction.to_dict() for transaction in transactions]}
+    return transactions_dict
+    # return {'myTransactions': [transaction.to_dict() for transaction in transactions]}
 
 
 

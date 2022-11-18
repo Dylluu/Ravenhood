@@ -12,15 +12,16 @@ const Transactions = () => {
     const sessionUser = useSelector(state => state.session.user);
     const transactions = useSelector(state => state.transactions)
 
-    let transactionsObj;
-    if (transactions) {
-        transactionsObj = Object.values(transactions.transactionsByUserId)
-        console.log(transactionsObj)
-    }
+    // let transactionsObj;
+    // if (transactions) {
+    //     transactionsObj = Object.values(transactions.transactionsByUserId)
+    //     console.log(transactionsObj)
+    // }
 
 
     useEffect(() => {
         dispatch(transactionActions.getStockTransactionsByUserId(ticker))
+        dispatch(transactionActions.getAllOfMyTransactions())
         return () => {
             dispatch(transactionActions.cleanUpTransactions());
         }
