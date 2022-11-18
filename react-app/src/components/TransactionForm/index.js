@@ -70,9 +70,7 @@ const TransactionForm = () => {
             // console.log(`${key}: ${value}`)
             if ((value.symbol).toString() === (`${ticker}`).toString()) {
                 // console.log("hiiii")
-                sharesOwned = (value.num_shares).toLocaleString('en-US', {
-                    maximumFractionDigits: 10
-                })
+                sharesOwned = (value.num_shares)
                 break
             } else {
                 sharesOwned = 0
@@ -180,12 +178,14 @@ const TransactionForm = () => {
         // console.log(type)
         if (e.target.value.length < 100) setAmount(e.target.value)
         if (!isBuy && type === "Shares") {
-            if (e.target.value > currentSharesOwned) {
+            if (e.target.value > parseFloat(currentSharesOwned)) {
                 setInputErrors({ error: "Not Enough shares" })
-                // console.log("e", amount, currentSharesOwned)
+                // console.log("e", amount, e.target.value, currentSharesOwned)
+                // console.log(isNaN(currentSharesOwned))
             } else {
                 setInputErrors("")
-                // console.log("no e", amount, sharesOwned)
+                // console.log("no e", amount, e.target.value, currentSharesOwned)
+                // console.log(isNaN(currentSharesOwned))
             }
         }
         if (isBuy && type === "Shares") {
@@ -198,12 +198,12 @@ const TransactionForm = () => {
             }
         }
         if (!isBuy && type === "Dollars") {
-            if (e.target.value / price > currentSharesOwned) {
+            if (e.target.value > parseFloat(currentSharesOwned * price).toFixed(2)) {
                 setInputErrors({ error: "Not Enough Shares" })
-                // console.log("e", e.target.value / price, currentSharesOwned)
+                console.log("e", e.target.value, parseFloat(currentSharesOwned * price).toFixed(2))
             } else {
                 setInputErrors("")
-                // console.log("no e", e.target.value / price, sharesOwned)
+                console.log("no e", e.target.value, parseFloat(currentSharesOwned * price).toFixed(2))
             }
         }
         if (isBuy && type === "Dollars") {
@@ -223,6 +223,7 @@ const TransactionForm = () => {
         if (!inputErrors) {
 
             let numberOfShares;
+
             if (isBuy && type === 'Shares') {
                 numberOfShares = parseFloat(amount).toFixed(6);
             } else if (!isBuy && type === 'Shares') {
@@ -231,8 +232,12 @@ const TransactionForm = () => {
                 let quantity = amount / price;
                 numberOfShares = parseFloat(quantity).toFixed(6);
             } else if (!isBuy && type === 'Dollars') {
-                let quantity = amount / price;
-                numberOfShares = -Math.abs(quantity).toFixed(6);
+                if (parseFloat(amount).toFixed(2) === parseFloat(currentSharesOwned * price).toFixed(2)) {
+                    numberOfShares = -Math.abs(currentSharesOwned)
+                } else {
+                    let quantity = amount / price;
+                    numberOfShares = -Math.abs(quantity).toFixed(6);
+                }
             }
 
             const transaction = {
@@ -360,8 +365,11 @@ const TransactionForm = () => {
                 // setFinalPrice(price.toLocaleString("en-US", { style: "currency", currency: "USD" }))
                 // console.log("BOOOOOOOOOO")
                 setFinalCost(dollarAmount)
+                // console.log(dollarAmount)
+                setFinalAmount((parseFloat(amount)).toLocaleString(undefined, { maximumFractionDigits: 2 }))
+                // console.log(typeof (amount))
+                // console.log((parseFloat(amount)).toLocaleString(undefined, { maximumFractionDigits: 2 }))
                 setIsPlaced(true)
-                setFinalAmount(amount.toLocaleString(undefined, { maximumFractionDigits: 2 }))
             }
         }
         // console.log("BREAKKKKKKK2")
@@ -523,7 +531,9 @@ const TransactionForm = () => {
                         )}
                         {!isBuy && isShares && (
                             <div className="buying-power-container">
-                                {currentSharesOwned} Shares Available
+                                {currentSharesOwned.toLocaleString('en-US', {
+                                    maximumFractionDigits: 6
+                                })} Shares Available
                             </div>
                         )}
                         {!isBuy && !isShares && (
