@@ -373,6 +373,9 @@ const TransactionForm = () => {
             }
         }
         // console.log("BREAKKKKKKK2")
+        dispatch(thunkGetWholePortfolio(user_id));
+        dispatch(transactionActions.getStockTransactionsByUserId(ticker));
+        dispatch(transactionActions.getAllOfMyTransactions());
     }
 
     if (!currentUserBuyPower) return null;
