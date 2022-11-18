@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
 import { thunkGetAllWatchlist, thunkUpdateWatchlist } from '../../store/watchlist';
 
-const WatchlistForm = ({id}) => {
+const WatchlistForm = ({id, setShowModal, setOptions}) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const  watchlistId  = id
@@ -25,6 +25,8 @@ const WatchlistForm = ({id}) => {
     await dispatch(thunkUpdateWatchlist(list))
     await dispatch(thunkGetAllWatchlist(user_id))
     history.push(`/watchlists/${watchlistId}`)
+    setShowModal(false)
+    setOptions(false)
   }
 
   return <div className='update-modal'
@@ -37,8 +39,15 @@ const WatchlistForm = ({id}) => {
     name="name"
     onChange={(e) => setName(e.target.value)}
     value={name}
+    id='update-modal-input'
+    placeholder='Update List Name'
+    autoComplete='off'
     />
-    <button className='create-list-button' type="submit">Save</button>
+    <button
+    id='save-update-watchlist'
+    className='create-list-button' type="submit"
+    // onClick={() => submitHandler()}
+    >Save</button>
     </form>
   </div>
 }

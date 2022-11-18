@@ -3,7 +3,7 @@ import { Modal } from '../../context/Modal';
 import './watchlist.css'
 import WatchlistForm from './watchlistUpdate';
 
-function WatchlistFromModal({id}) {
+function WatchlistFromModal({id, setOptions}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -24,7 +24,7 @@ function WatchlistFromModal({id}) {
         </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <WatchlistForm id ={id}/>
+          <WatchlistForm id ={id} setShowModal={setShowModal} setOptions={setOptions}/>
         </Modal>
       )}
     </>

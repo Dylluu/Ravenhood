@@ -275,6 +275,7 @@
   padding-top: 3px;
   padding-bottom: 3px;
   /* margin-top: 5px; */
+  border-radius: 5px;
   margin-left: -80px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   /* margin-right: 4000px; */
@@ -296,14 +297,47 @@
 }
 
 .update-modal {
-  padding: 25px;
+  /* padding: 25px; */
+  width: 270px;
 }
 
 .update-modal-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   padding: 25px;
+}
+
+.update-modal-title {
+  display: flex;
+  text-indent: 20px;
+  margin-top: 20px;
+  font-weight: 450;
+  /* border: solid 1px red; */
+}
+
+#update-modal-input {
+  width: 200px;
+  height: 30px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  text-indent: 8px;
+  background-color: rgb(245,248,252);
+  margin-top: -10px;
+}
+
+#save-update-watchlist {
+  box-sizing: border-box;
+  width: 200px;
+  margin-bottom: -10px;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+#modal-content {
+  border-radius: 5px;
 }
 
 .delete-button {
