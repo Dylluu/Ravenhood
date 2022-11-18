@@ -1,3 +1,5 @@
+import { useHistory } from "react-router-dom";
+
 const apikey = '3MO65OQ6CPMMNJTQ';
 const apikeyStockInfo = ['LHU9QYGE8G6XZO0T', '03A3G6JU0R69U3TN'];
 
@@ -158,7 +160,7 @@ export async function getStockVolume(ticker) {
 			0
 		);
 	} catch (TypeError) {
-		return 'hi'
+		window.location.replace('error/badStock')
 	}
 	const openPrice = data.chart.result[0].indicators.quote[0].open[0];
 	return [volume, openPrice];

@@ -81,6 +81,9 @@ function App() {
 					<LoggedInNav />
 					<TransactionHistory />
 				</Route>
+				<Route path='/error/badstock'>
+
+				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
 				</ProtectedRoute>
