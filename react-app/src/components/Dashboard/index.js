@@ -16,7 +16,7 @@ import {
 import { thunkGetWholePortfolio } from '../../store/portfolio';
 import { getTodayNews } from '../../utils/fetchStockFunctions';
 import CompanyNews from '../StockDashBoard/CompanyNews';
-
+import PortfolioGraph from '../PortfolioGraph';
 function Dashboard() {
 	const [buy_power, setBuyPower] = useState('');
 	const [buyPowerOpen, setBuyPowerOpen] = useState(false);
@@ -29,6 +29,7 @@ function Dashboard() {
 	const [add, setAdd] = useState(false);
 	const user_id = useSelector((state) => state.session.user.id);
 	const watchlist = useSelector((state) => state.watchlist);
+	const portfolio = useSelector((state) => state.portfolio.userPortfolio);
 	let lists;
 
 	useEffect(() => {
@@ -71,12 +72,14 @@ function Dashboard() {
 		BloombergNews = todayNews.filter((news) => news.source == 'Bloomberg');
 	}
 
-	if (!todayNews.length) return null;
+	if (!Object.values(portfolio)) return null;
 	return (
 		<div className="dashboard-wrapper">
 			<div className="dashboard-inner-wrapper">
 				<div className="dashboard-inner-left">
-					<div className="dashboard-graph-wrapper">PortfolioGraph</div>
+					<div className="dashboard-graph-wrapper">
+						<PortfolioGraph portfolio={portfolio} />{' '}
+					</div>
 					<div className="buying-power-wrapper">
 						<div className="buy-power-div">
 							<span id="buying-power">Buying Power</span>
