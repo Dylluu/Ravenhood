@@ -29,7 +29,9 @@ function Dashboard() {
 	const [add, setAdd] = useState(false);
 	const user_id = useSelector((state) => state.session.user.id);
 	const watchlist = useSelector((state) => state.watchlist);
+	const portfolio = useSelector((state) => state.portfolio)
 	let lists;
+	let stocks;
 
 	useEffect(() => {
 		dispatch(thunkGetAllWatchlist(user_id));
@@ -46,6 +48,9 @@ function Dashboard() {
 
 	if (watchlist.allWatchlists) {
 		lists = Object.values(watchlist.allWatchlists);
+	}
+	if (portfolio.userPortfolio) {
+		stocks = Object.values(portfolio.userPortfolio)
 	}
 
 	// useEffect(() => {window.addEventListener('scroll', () => {

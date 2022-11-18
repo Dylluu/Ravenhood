@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required
 from app.models import db, Portfolio
-
 from app.forms import PortfolioForm
+from sqlalchemy import and_, select
 
 
 portfolio_routes = Blueprint('portfolio', __name__)
@@ -51,12 +51,58 @@ def update_stock(symbol):
     symbol = form.data['symbol'],
     user_id = form.data['user_id']
   )
-  print(currStock)
+  print('the current stock',currStock)
   if form.validate_on_submit():
-    currStock['num_shares'] = float(currStock['num_shares']) + float(form.data['num_shares'])
-    currStock['average_price'] = ((float(currStock['average_price'])*float(currStock['num_shares'])) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(currStock['num_shares']) + float(form.data['num_shares']))
+    portfolio = {'portfolio': [stock.to_dict() for stock in currStock]}
+    temp_num_shares = portfolio['portfolio'][0]['num_shares']
+    temp_average_price =portfolio['portfolio'][0]['average_price']
+    portfolio['portfolio'][0]['num_shares'] =float(temp_num_shares) + float(form.data['num_shares'])
+    portfolio['portfolio'][0]['average_price'] =((float(temp_average_price)*float(temp_num_shares)) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(temp_num_shares) + float(form.data['num_shares']))
+
+    currStock.num_shares = portfolio['portfolio'][0]['num_shares']
+    currStock.average_price = portfolio['portfolio'][0]['average_price']
     db.session.commit()
-    return currStock.to_dict()
+    return portfolio
+
+
+@portfolio_routes.route('/<symbol>/redo', methods=["PUT"])
+@login_required
+def update_stock_redo(symbol):
+  """
+  Query to update a stock in the user's portfolio and mathmatically
+  update num shares and average price
+  """
+
+  data = request.get_json()
+  stock = Portfolio.query.get(data['id'])
+  stock.num_shares = data['num_shares']
+  stock.average_price = data['average_price']
+  db.session.commit()
+  return stock.to_dict()
+
+
+
+  print('the current stock',currStock)
+  if form.validate_on_submit():
+    # currStock['num_shares'] = float(currStock['num_shares']) + float(form.data['num_shares'])
+    # currStock['average_price'] = ((float(currStock['average_price'])*float(currStock['num_shares'])) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(currStock['num_shares']) + float(form.data['num_shares']))
+    # db.session.commit()
+    # # portfolio = Portfolio.query.filter_by(user_id = userId)
+    portfolio = {'portfolio': [stock.to_dict() for stock in currStock]}
+    print ("ABOVE THE FUCKNG PORTFOLIO", portfolio)
+    print('THE FUCKING PORTFOLIO', portfolio['portfolio'][0]['num_shares'])
+    print('THE FUCKING PORTFOLIO2', portfolio['portfolio'][0]['average_price'])
+    temp_num_shares = portfolio['portfolio'][0]['num_shares']
+    temp_average_price =portfolio['portfolio'][0]['average_price']
+    portfolio['portfolio'][0]['num_shares'] =float(temp_num_shares) + float(form.data['num_shares'])
+    portfolio['portfolio'][0]['average_price'] =((float(temp_average_price)*float(temp_num_shares)) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(temp_num_shares) + float(form.data['num_shares']))
+
+    print("THE FUCKING PORTFOLIO FINALLY", portfolio)
+    currStock.num_shares = portfolio['portfolio'][0]['num_shares']
+    currStock.average_price = portfolio['portfolio'][0]['average_price']
+    db.session.commit()
+    print( 'HATE =======>',currStock.num_shares)
+    return portfolio
 
 
 @portfolio_routes.route('/<symbol>', methods=["DELETE"])

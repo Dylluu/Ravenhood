@@ -10,7 +10,7 @@ class Portfolio(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     symbol = db.Column(db.String(6), nullable=False, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    num_shares = db.Column(db.Integer, nullable=False) #(integer places, decimal places)
+    num_shares = db.Column(db.Float, nullable=False) #(integer places, decimal places)
     average_price = db.Column(db.Float, nullable=False)
     transaction_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 

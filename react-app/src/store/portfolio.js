@@ -62,7 +62,18 @@ export const thunkUpdateStockInPortfolio = (data) => async (dispatch) => {
   })
   if (response.ok) {
     const updateInPortfolio = await response.json()
-    dispatch(updateStockInPortfolio(updateInPortfolio))
+    console.log("THE UPDATE IS HERE",updateInPortfolio['portfolio'][0])
+    const newresp = await fetch (`/api/portfolio/${data.symbol}/redo`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify(updateInPortfolio['portfolio'][0])
+    })
+    if (newresp.ok) {
+      const final = await newresp.json()
+      dispatch(updateStockInPortfolio(final))
+    }
   }
 }
 
@@ -90,7 +101,9 @@ const portfolio = (state = initialState, action) => {
       newState.userPortfolio[id-1] = action.payload
       return newState
     case UPDATE_STOCK_IN_PORTFOLIO:
-      newState.userPortfolio[action.payload.symbol] = action.payload
+      let num = action.payload['id'] -1
+      console.log("num",num)
+      newState.userPortfolio[num] = action.payload
       return newState
     case DELETE_STOCK_IN_PORTFOLIO:
       delete newState[action.symbol]
