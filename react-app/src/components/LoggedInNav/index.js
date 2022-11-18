@@ -127,7 +127,7 @@ function LoggedInNav() {
 				className="logged-in-feather"
 				onClick={() => {
 					history.push('/');
-					// history.go(0);
+					history.go(0);
 				}}
 			/>
 			<div className="logged-in-inner-wrapper">
@@ -200,7 +200,11 @@ function LoggedInNav() {
 								</div>
 							</div>
 							<div className="account-menu-popout-middle">
-								<div className="account-menu-popout-middle-buttons">
+								<div className="account-menu-popout-middle-buttons"
+								onClick={() => {
+									history.push('/history')
+								}}
+								>
 									<i
 										className="fa-solid fa-clock-rotate-left"
 										id="history-icon"
