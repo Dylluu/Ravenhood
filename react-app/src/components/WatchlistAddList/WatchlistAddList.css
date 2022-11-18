@@ -23,6 +23,7 @@
   /* padding: 20px; */
   justify-content: flex-start;
   align-items: flex-start;
+  padding-bottom: 5px;
 }
 
 .add-form-title {
