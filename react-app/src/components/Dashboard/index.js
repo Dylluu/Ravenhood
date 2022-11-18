@@ -126,24 +126,15 @@ function Dashboard() {
 					</div>
 					<div className="portfolio-list-body-wrapper">
 						<div className="watchlist-list-body">
-<<<<<<< HEAD
-	{
-		lists && (
-			<div className="watchlist-list-row">
-				{stocks && console.log('ports', stocks)}
-				{stocks && console.log('port', stocks[0])}
-				<PortfolioExpand port={stocks} id={user_id} />
-			</div>
-		)
-	}
-=======
-							{lists && <div className="watchlist-list-row">
-								{stocks && console.log('ports', stocks)}
-								{stocks && console.log('port', stocks[0])}
-								<PortfolioExpand port={stocks} id={user_id} />
-							</div>
-							}
->>>>>>> curtis
+								{
+									lists && (
+										<div className="watchlist-list-row">
+											{stocks && console.log('ports', stocks)}
+											{stocks && console.log('port', stocks[0])}
+											<PortfolioExpand port={stocks} id={user_id} />
+										</div>
+									)
+								}
 						</div >
 					</div >
 		<div className="watchlists-header-wrapper">
