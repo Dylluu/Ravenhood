@@ -13,11 +13,11 @@ function CashCard() {
             <div className="introducing-new-card-wrapper">
                 <div className='introducing-new-card-wrapper-left'>
                     <div className="introducing-new-card-title">
-                        Introducing the new Robinhood Cash Card
+                        Introducing the new Ravenhood Cash Card
                     </div>
                     <div className="introducing-new-card-detail">
 
-                        The debit card with weekly rewards that help you build investing habits. Offered by Robinhood Money, LLC.
+                        The debit card with weekly rewards that help you build investing habits. Offered by Ravenhood Money, LLC.
 
                     </div>
                     <div className="introducing-new-card-disclosure">

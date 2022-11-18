@@ -104,7 +104,7 @@ function RealLoginForm() {
             <img alt="loginFormImage" src={loginFormImage} className='login-form-image'/>
             <form onSubmit={onLogin} className="login-form-right">
                 <div className="login-form-right-inner">
-                    <span id="log-in-to-robinhood">Log in to Robinhood</span>
+                    <span id="log-in-to-robinhood">Log in to Ravenhood</span>
                     <span className="login-form-labels">Email</span>
                     <input
                     autoFocus
@@ -156,7 +156,7 @@ function RealLoginForm() {
                     {/* <button type='submit' id="log-in-form-button">
                       <img alt="loading" id="loading" src={loadingCircle}/>
                       </button> */}
-                    <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <NavLink to='/signup' className="demo-user-login">Create an account</NavLink></span>
+                    <span id='not-on-robinhood' className="login-form-labels">Not on Ravenhood? <NavLink to='/signup' className="demo-user-login">Create an account</NavLink></span>
                 </div>
             </form>
         </div>
