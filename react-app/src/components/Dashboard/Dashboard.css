@@ -188,7 +188,7 @@
 }
 .watchlist-header-title {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     width: 50px;
     height: 20px;
     font-size: 14px;
@@ -340,3 +340,22 @@
 } */
 
 /* Watchlist CSS End */
+
+
+/* Stock portfolio Begin */
+
+#watchlists-header-dashboard-for-stocks {
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-list-body-wrapper {
+    display: flex;
+    /* justify-content: center; */
+    box-sizing: border-box;
+    width: 100%;
+    /* margin-top: 10px; */
+    /* border: solid 1px red; */
+}
+
+/* Stock Portfolio End */

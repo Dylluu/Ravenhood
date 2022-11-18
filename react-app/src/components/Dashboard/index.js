@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Dashboard.css';
 import testBird from '../../assets/testbird.png';
+import PortfolioExpand from './stocks-expand';
 import WatchlistExpand from './watchlist-expand';
 import WatchlistForm from '../Watchlist/watchlistForm';
 import { thunkAddBuyPower } from '../../store/session';
@@ -116,9 +117,21 @@ function Dashboard() {
 								id="watchlist-header-title-for-stocks"
 							>
 								Stocks
+
 							</div>
+
 						</div>
 					</div>
+					<div className="portfolio-list-body-wrapper">
+									<div className="watchlist-list-body">
+										{lists &&<div className="watchlist-list-row">
+													{stocks&& console.log('ports', stocks)}
+													{stocks&& console.log('port', stocks[0])}
+													<PortfolioExpand port={stocks} id={user_id}/>
+												</div>
+										}
+									</div>
+								</div>
 					<div className="watchlists-header-wrapper">
 						<div className="watchlists-header-dashboard">
 							<div className="watchlist-header-title">Lists</div>

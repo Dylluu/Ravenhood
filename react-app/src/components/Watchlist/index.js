@@ -67,7 +67,12 @@ function Watchlist() {
 					<img class="picture" src={testBird} />
 				</div>
 				<div class="watchlist-title">
-					Watchlist Template
+					{lists && lists.map(list => {
+						if (list.id == watchlistId) {
+							return <h3>{list.name}</h3>
+						}
+					})}
+				{lists &&<h3>{}</h3>}
 				</div>
 				<div class="item-count">
 					{stocks && watchlist.allStocks ? (
