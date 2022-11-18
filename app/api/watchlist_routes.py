@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from flask import login_required
+from flask_login import login_required
 from app.models import Watchlist, WatchlistStocks, db
 
 from app.forms import WatchlistForm
