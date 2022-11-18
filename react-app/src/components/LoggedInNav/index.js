@@ -19,6 +19,14 @@ function LoggedInNav() {
 	const [searchOpen, setSearchOpen] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
 	const allSymbols = Object.keys(TickerSymbols);
+	const currentUserBuyPower = useSelector((state) => {
+		let num = state?.session?.user?.buy_power;
+		let buyPower = num?.toLocaleString('en-US', {
+			style: 'currency',
+			currency: 'USD'
+		});
+		return buyPower;
+	});
 
 	useEffect(() => {
 		// if(search.length === 1) {
@@ -192,7 +200,7 @@ function LoggedInNav() {
 										</div>
 										<div className="account-menu-popout-portfolio-buying">
 											<span className="account-menu-popout-dollars">
-												${thousandsSeparator(user.buy_power)}
+												{currentUserBuyPower}
 											</span>
 											<span className="portfolio-buying">Buying Power</span>
 										</div>
@@ -201,10 +209,10 @@ function LoggedInNav() {
 							</div>
 							<div className="account-menu-popout-middle">
 								<div className="account-menu-popout-middle-buttons"
-								onClick={() => {
-									history.push('/history')
-									handleMenuOpen()
-								}}
+									onClick={() => {
+										history.push('/history')
+										handleMenuOpen()
+									}}
 								>
 									<i
 										className="fa-solid fa-clock-rotate-left"
