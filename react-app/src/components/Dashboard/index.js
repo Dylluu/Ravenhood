@@ -18,8 +18,8 @@ import { thunkGetWholePortfolio } from '../../store/portfolio';
 import { getTodayNews } from '../../utils/fetchStockFunctions';
 import CompanyNews from '../StockDashBoard/CompanyNews';
 import PortfolioGraph from '../PortfolioGraph';
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 function Dashboard() {
 	const [buy_power, setBuyPower] = useState('');
@@ -36,7 +36,7 @@ function Dashboard() {
 	const user_id = useSelector((state) => state.session.user.id);
 	const watchlist = useSelector((state) => state.watchlist);
 	const portfolio = useSelector((state) => state.portfolio);
-	let skeleton = Array(20).fill(1)
+	let skeleton = Array(20).fill(1);
 	let lists;
 	let stocks;
 
@@ -45,17 +45,17 @@ function Dashboard() {
 		dispatch(thunkGetWholePortfolio(user_id));
 	}, [dispatch]);
 
-	useEffect(() => {
-		const news = async () => {
-			try {
-				const todayNews = await getTodayNews();
-				setTodayNews(todayNews);
-			} catch {
-				setTodayNews([]);
-			}
-		};
-		news();
-	}, []);
+	// useEffect(() => {
+	// 	const news = async () => {
+	// 		try {
+	// 			const todayNews = await getTodayNews();
+	// 			setTodayNews(todayNews);
+	// 		} catch {
+	// 			setTodayNews([]);
+	// 		}
+	// 	};
+	// 	news();
+	// }, []);
 
 	if (watchlist.allWatchlists) {
 		lists = Object.values(watchlist.allWatchlists);
@@ -108,16 +108,26 @@ function Dashboard() {
 							{BloombergNews?.map((eachNews) => (
 								<CompanyNews news={eachNews} />
 							))}
-							{!maxNews && skeleton.map((skel) => (
-							<>
-							<Skeleton
-							style={{height: '20px', marginTop: '40px', width: '80%'}}
-							/>
-							<Skeleton
-							style={{height: '20px', marginTop: '20px', width: '60%', marginBottom: '20px'}}
-							/>
-							</>
-							))}
+							{!maxNews &&
+								skeleton.map((skel) => (
+									<>
+										<Skeleton
+											style={{
+												height: '20px',
+												marginTop: '40px',
+												width: '80%'
+											}}
+										/>
+										<Skeleton
+											style={{
+												height: '20px',
+												marginTop: '20px',
+												width: '60%',
+												marginBottom: '20px'
+											}}
+										/>
+									</>
+								))}
 						</div>
 					</div>
 				</div>

@@ -200,11 +200,12 @@ function LoggedInNav() {
 								</div>
 							</div>
 							<div className="account-menu-popout-middle">
-								<div className="account-menu-popout-middle-buttons"
-								onClick={() => {
-									history.push('/history')
-									handleMenuOpen()
-								}}
+								<div
+									className="account-menu-popout-middle-buttons"
+									onClick={() => {
+										history.push('/history');
+										handleMenuOpen();
+									}}
 								>
 									<i
 										className="fa-solid fa-clock-rotate-left"
@@ -216,7 +217,7 @@ function LoggedInNav() {
 							<NavLink
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
-								to='/'
+								to="/"
 								onClick={async () => {
 									dispatch(logout());
 								}}
