@@ -59,7 +59,7 @@ function Watchlist() {
 	const deleteStock = async (stock) => {
 		await dispatch(thunkDeleteStocks(stock));
 		await dispatch(thunkGetAllStocks(watchlistId));
-		history.push(`/watchlists/${watchlistId}`);
+		// history.push(`/watchlists/${watchlistId}`);
 	};
 
 	return (
@@ -119,12 +119,15 @@ function Watchlist() {
 												id='symbol-column'
 											>{stock.symbol}</div>
 											<SmallStockGraph ticker={stock.symbol} graph={false} />
-											<button
+											{stock.watchlist_id !== 5 &&<button
 												class="delete-button"
-												onClick={() => deleteStock(stock)}
+												onClick={(e) =>{
+													e.stopPropagation()
+													deleteStock(stock)
+												}}
 											>
 												<i class="fa-solid fa-xmark" />
-											</button>
+											</button>}
 										</div>
 									);
 								}
