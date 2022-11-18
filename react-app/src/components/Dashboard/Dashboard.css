@@ -123,6 +123,7 @@
     justify-content: center;
     height: 50px;
     border-bottom: solid 1px rgb(224,224,232);
+    border-top: solid 1px rgb(224,224,232);
 }
 
 
@@ -347,6 +348,14 @@
 #watchlists-header-dashboard-for-stocks {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2px;
+    /* border: solid 1px red; */
+}
+
+#watchlist-pic-and-navlink-for-portfolio:hover {
+    background-color: rgb(245,248,252);
 }
 
 .portfolio-list-body-wrapper {

@@ -37,9 +37,12 @@ function PortfolioExpand({ port, id }) {
 				onClick={() => setExpand(!expand)}
 				>
 				<div className="watchlist-list">
-					<div className='watchlist-picture-and-navlink'>
+					<div className='watchlist-picture-and-navlink'
+					id='watchlist-pic-and-navlink-for-portfolio'
+					>
 					<div
 						className="watchlist-navlink"
+						id='watchlist-pic-and-navlink-for-portfolio'
 					>
 					<img class="watchlist-picture" src={testBird} />
 						My Portfolio
