@@ -129,15 +129,17 @@ function LoggedInNav() {
 
 	return (
 		<div className="logged-in-nav-wrapper">
+			<NavLink to='/'>
 			<img
 				alt="feather"
 				src={logoGreen}
 				className="logged-in-feather"
-				onClick={() => {
-					history.push('/');
-					history.go(0);
-				}}
+				// onClick={() => {
+				// 	history.push('/');
+				// 	history.go(0);
+				// }}
 			/>
+			</NavLink>
 			<div className="logged-in-inner-wrapper">
 				<div className="logged-in-search-bar-div">
 					<div className="search-bar-inner">
