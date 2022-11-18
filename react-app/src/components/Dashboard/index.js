@@ -76,7 +76,7 @@ function Dashboard() {
 		<div className="dashboard-wrapper">
 			<div className="dashboard-inner-wrapper">
 				<div className="dashboard-inner-left">
-					<div className="dashboard-graph-wrapper"></div>
+					<div className="dashboard-graph-wrapper">PortfolioGraph</div>
 					<div className="buying-power-wrapper">
 						<div className="buy-power-div">
 							<span id="buying-power">Buying Power</span>
