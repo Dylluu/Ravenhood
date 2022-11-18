@@ -60,9 +60,9 @@ def update_stock(symbol):
     portfolio['portfolio'][0]['average_price'] =((float(temp_average_price)*float(temp_num_shares)) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(temp_num_shares) + float(form.data['num_shares']))
 
     currStock.num_shares = portfolio['portfolio'][0]['num_shares']
-    if (currStock.num_shares > 0) {
+    if (currStock.num_shares > 0) :
       currStock.average_price = portfolio['portfolio'][0]['average_price']
-    }
+
 
     db.session.commit()
     return portfolio
