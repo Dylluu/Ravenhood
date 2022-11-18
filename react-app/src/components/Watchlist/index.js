@@ -27,6 +27,7 @@ function Watchlist() {
 	const [add, setAdd] = useState(false);
 	const { watchlistId } = useParams();
 	const watchlist = useSelector((state) => state.watchlist);
+	const currWatchlist = useSelector((state) => state.watchlist.oneWatchlist.name)
 	const user_id = useSelector((state) => state.session.user.id);
 	let stocks;
 	let lists;
@@ -69,7 +70,7 @@ function Watchlist() {
 						<img className="picture" src={testBird} />
 					</div>
 					<div className="watchlist-title">
-						Watchlist Template
+						{currWatchlist}
 					</div>
 					<div className="item-count">
 						{stocks && watchlist.allStocks ? (

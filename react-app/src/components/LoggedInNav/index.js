@@ -127,7 +127,7 @@ function LoggedInNav() {
 				className="logged-in-feather"
 				onClick={() => {
 					history.push('/');
-					// history.go(0);
+					history.go(0);
 				}}
 			/>
 			<div className="logged-in-inner-wrapper">
