@@ -280,25 +280,28 @@ const TransactionForm = () => {
                 )
 
                 for (let i = 0; i < Object.keys(portfolio).length; i++) {
-                    if (portfolio[i].num_shares + numberOfShares === 0 && portfolio[i].symbol == ticker) {
-                        setDeleted(true)
-                        createdPortfolioTransaction = await dispatch(
-                            thunkDeleteStockInPortfolio(portfolio[i].id)
-                        ).catch(async (res) => {
-                            const data = await res.json();
-                            // console.log(data)
-                            if (data && data.errors) setErrors(data.errors);
-                        });
-                        break
-                    } else if (portfolio[i].symbol == ticker) {
-                        createdPortfolioTransaction = await dispatch(
-                            thunkUpdateStockInPortfolio(portfolioTrans)
-                        ).catch(async (res) => {
-                            const data = await res.json();
-                            // console.log(data)
-                            if (data && data.errors) setErrors(data.errors);
-                        });
+                    if (portfolio[i].num_shares + numberOfShares >= 0) {
+                        if (portfolio[i].num_shares + numberOfShares === 0 && portfolio[i].symbol == ticker) {
+                            setDeleted(true)
+                            createdPortfolioTransaction = await dispatch(
+                                thunkDeleteStockInPortfolio(portfolio[i].id)
+                            ).catch(async (res) => {
+                                const data = await res.json();
+                                // console.log(data)
+                                if (data && data.errors) setErrors(data.errors);
+                            });
+                            break
+                        } else if (portfolio[i].symbol == ticker) {
+                            createdPortfolioTransaction = await dispatch(
+                                thunkUpdateStockInPortfolio(portfolioTrans)
+                            ).catch(async (res) => {
+                                const data = await res.json();
+                                // console.log(data)
+                                if (data && data.errors) setErrors(data.errors);
+                            });
+                        }
                     }
+
                 }
             }
 
