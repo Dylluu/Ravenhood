@@ -37,7 +37,7 @@ function Options ({list, deleteWatchlist, id})  {
     id='options-button'
     /></button>
     {options &&<div class="options-menu">
-      <WatchlistFromModal id = {id}/>
+      <WatchlistFromModal id = {id} setOptions={setOptions}/>
       <div>
         <div class="options-icon-text">
           <button class="options-button" onClick={() => deleteWatchlist(list)}>
