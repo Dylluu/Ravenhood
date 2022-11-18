@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import { login } from "../../../store/session";
 import './RealLoginForm.css';
 import loginFormImage from '../../../assets/loginFormImage.jpeg';
+import loadingCircle from '../../../assets/loadingCircle.gif';
 
 function RealLoginForm() {
     const [pwVisible, setPwVisible] = useState(false);
     const [errors, setErrors] = useState([]);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
     const onLogin = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
         const data = await dispatch(login(email, password));
         if (data) {
           setErrors(data);
@@ -22,9 +25,14 @@ function RealLoginForm() {
         }
       };
 
+    useEffect(() => {
+      if(Object.values(errors).length) setIsLoading(false)
+    }, [errors])
+
     const demoLogin = async (e) => {
         e.preventDefault()
         // console.log('demologin')
+        setIsLoading(true)
         await dispatch(login('demo@aa.io', 'password'));
         return <Redirect to='/' />
     }
@@ -130,7 +138,10 @@ function RealLoginForm() {
                         >{errors.email ? errors.email : errors.password}</span>
                       </div>
                     )}
-                    <button type='submit' id="log-in-form-button">Log in</button>
+                    {!isLoading && <button type='submit' id="log-in-form-button">Log in</button>}
+                    {isLoading && <button type='submit' id="log-in-form-button">
+                      <img alt="loading" id="loading" src={loadingCircle}/>
+                      </button>}
                     <span id='not-on-robinhood' className="login-form-labels">Not on Robinhood? <NavLink to='/signup' className="demo-user-login">Create an account</NavLink></span>
                 </div>
             </form>

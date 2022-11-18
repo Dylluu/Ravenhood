@@ -203,6 +203,7 @@ function LoggedInNav() {
 								<div className="account-menu-popout-middle-buttons"
 								onClick={() => {
 									history.push('/history')
+									handleMenuOpen()
 								}}
 								>
 									<i

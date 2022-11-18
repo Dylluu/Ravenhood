@@ -47,6 +47,7 @@ function StockDashBoard() {
 		fiveNewsMax =
 			companyNews.length > 5 ? companyNews.slice(0, 5) : companyNews;
 	}
+
 	if (!companyOverview) return null;
 
 	return (
