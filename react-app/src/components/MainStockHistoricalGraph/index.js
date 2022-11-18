@@ -10,13 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 const getRangePeriod = (range) => {
 	switch (range) {
 		case '1w':
-			return 'past week';
+			return 'Past week';
 		case '3m':
-			return 'past 3 months';
+			return 'Past 3 months';
 		case '1y':
-			return 'past year';
+			return 'Past year';
 		case '5y':
-			return 'past 5 years';
+			return 'Past 5 years';
 	}
 };
 function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
@@ -138,7 +138,7 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 				<p>
 					${priceDifference} ({percentDifference}%){' '}
 				</p>
-				<p style={{ color: 'gray', paddingLeft: '1rem' }}>{rangePeriod}</p>
+				<div className="range-period">{rangePeriod}</div>
 			</div>
 			<div className="graph-holder">
 				<Chart

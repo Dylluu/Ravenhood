@@ -17,7 +17,7 @@ import {
 import { thunkGetWholePortfolio } from '../../store/portfolio';
 import { getTodayNews } from '../../utils/fetchStockFunctions';
 import CompanyNews from '../StockDashBoard/CompanyNews';
-
+import PortfolioGraph from '../PortfolioGraph';
 function Dashboard() {
 	const [buy_power, setBuyPower] = useState('');
 	const [buyPowerOpen, setBuyPowerOpen] = useState(false);
@@ -30,7 +30,7 @@ function Dashboard() {
 	const [add, setAdd] = useState(false);
 	const user_id = useSelector((state) => state.session.user.id);
 	const watchlist = useSelector((state) => state.watchlist);
-	const portfolio = useSelector((state) => state.portfolio)
+	const portfolio = useSelector((state) => state.portfolio);
 	let lists;
 	let stocks;
 
@@ -55,7 +55,7 @@ function Dashboard() {
 		lists = Object.values(watchlist.allWatchlists);
 	}
 	if (portfolio.userPortfolio) {
-		stocks = Object.values(portfolio.userPortfolio)
+		stocks = Object.values(portfolio.userPortfolio);
 	}
 
 	// useEffect(() => {window.addEventListener('scroll', () => {
@@ -77,12 +77,14 @@ function Dashboard() {
 		BloombergNews = todayNews.filter((news) => news.source == 'Bloomberg');
 	}
 
-	if (!todayNews.length) return null;
+	if (!Object.values(portfolio.userPortfolio)) return null;
 	return (
 		<div className="dashboard-wrapper">
 			<div className="dashboard-inner-wrapper">
 				<div className="dashboard-inner-left">
-					<div className="dashboard-graph-wrapper">PortfolioGraph</div>
+					<div className="dashboard-graph-wrapper">
+						<PortfolioGraph portfolio={portfolio.userPortfolio} />{' '}
+					</div>
 					<div className="buying-power-wrapper">
 						<div className="buy-power-div">
 							<span id="buying-power">Buying Power</span>
@@ -117,21 +119,20 @@ function Dashboard() {
 								id="watchlist-header-title-for-stocks"
 							>
 								Stocks
-
 							</div>
-
 						</div>
 					</div>
 					<div className="portfolio-list-body-wrapper">
-									<div className="watchlist-list-body">
-										{lists &&<div className="watchlist-list-row">
-													{stocks&& console.log('ports', stocks)}
-													{stocks&& console.log('port', stocks[0])}
-													<PortfolioExpand port={stocks} id={user_id}/>
-												</div>
-										}
-									</div>
+						<div className="watchlist-list-body">
+							{lists && (
+								<div className="watchlist-list-row">
+									{stocks && console.log('ports', stocks)}
+									{stocks && console.log('port', stocks[0])}
+									<PortfolioExpand port={stocks} id={user_id} />
 								</div>
+							)}
+						</div>
+					</div>
 					<div className="watchlists-header-wrapper">
 						<div className="watchlists-header-dashboard">
 							<div className="watchlist-header-title">Lists</div>

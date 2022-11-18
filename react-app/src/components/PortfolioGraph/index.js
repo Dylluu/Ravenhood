@@ -1,15 +1,17 @@
 import { useEffect, useState, useMemo } from 'react';
-import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Chart from 'react-apexcharts';
 import { useDispatch, useSelector } from 'react-redux';
 import './PortfolioGraph.css';
 import { thunkGetWholePortfolio } from '../../store/portfolio';
+import { getPortfolioPerformancedifference } from '../../utils/fetchStockFunctions';
+import useSiteColorContext from '../../context/SiteColor';
 
-function PortfolioGraph() {
-	const sessionUser = useSelector((state) => state.session.user);
-	const portfolio = useSelector((state) => state.portfolio.userPortfolio);
-	const dispatch = useDispatch();
+function PortfolioGraph({ portfolio }) {
+	const { setSiteColor } = useSiteColorContext();
+	const [portfolioValue, setPortfolioValue] = useState(null);
+	const [stockOwned, setStockOwned] = useState(null);
+
 	// Data variables
 	const [series, setSeries] = useState({
 		data: []
@@ -19,15 +21,10 @@ function PortfolioGraph() {
 		data: []
 	});
 
-	// Display variable, to render graph depending on selection
-	const [showOneDay, setShowOneDay] = useState(true);
-
 	// Price variables
 	const [price, setPrice] = useState(-1);
 	const [startPrice, setStartPrice] = useState(-1);
-	const [prevPrice, setPrevPrice] = useState(-1);
 	const [hoverPrice, setHoverPrice] = useState(null);
-	const [openPrice, setOpenPrice] = useState(null);
 
 	// chart and price display color variables
 	const [chartColor, setChartColor] = useState(['#00c805']);
@@ -36,183 +33,205 @@ function PortfolioGraph() {
 	// trading period variable for graphing full day
 	const [tradingPeriods, setTradingPeriods] = useState({});
 
-	return <h1>portfolio graph</h1>;
-	// // set color depending on the current price
-	// const currPrice = hoverPrice ? hoverPrice : price;
-	// const percentDifference = (
-	// 	((currPrice - startPrice) / startPrice) *
-	// 	100
-	// ).toFixed(2);
-	// const priceDifference = (currPrice - startPrice).toFixed(2);
+	// Today Word
+	const [rangePeriod, setRangePeriod] = useState('Today');
 
-	// useEffect(() => {
-	// 	// getting the price/percentage different from open price
-	// 	if (percentDifference > 0) setPriceColor('#00c805');
-	// 	else setPriceColor('#ff5404');
-	// }, [chartColor, hoverPrice]);
+	// set color depending on the current price
+	const currPrice = hoverPrice ? hoverPrice : price;
+	const percentDifference = (
+		((currPrice - startPrice) / startPrice) *
+		100
+	).toFixed(2);
+	const priceDifference = (currPrice - startPrice).toFixed(2);
 
-	// useEffect(() => {
-	// 	let timeoutId;
-	// 	async function getLatestPrice() {
-	// 		try {
-	// 			const data = await getStonks(ticker);
-	// 			console.log(data);
-	// 			const stonk = data.chart.result[0];
-	// 			setPrevPrice(price);
-	// 			setPrice(stonk.meta.regularMarketPrice.toFixed(2));
+	useEffect(() => {
+		// getting the price/percentage different from open price
+		if (percentDifference > 0) setPriceColor('#00c805');
+		else setPriceColor('#ff5404');
+	}, [chartColor, hoverPrice]);
 
-	// 			// Setting prices values for graphs
-	// 			const quote = stonk.indicators.quote[0];
-	// 			const prices = stonk.timestamp.map((timestamp, index) => ({
-	// 				x: new Date(timestamp * 1000),
-	// 				y: quote.open[index]
-	// 			}));
+	useEffect(() => {
+		const stockOwned = {};
+		let portfolioValue;
+		const portfolioArr = Object.values(portfolio);
+		portfolioArr.forEach(
+			(stock) => (stockOwned[stock.symbol] = stock.num_shares)
+		);
+		portfolioValue = portfolioArr.map((a) => a.num_shares * a.average_price);
+		setStockOwned(stockOwned);
+		setPortfolioValue(portfolioValue);
+	}, [portfolio]);
 
-	// 			// get trading period data for dashed open price
-	// 			const startTime = stonk.meta.tradingPeriods[0][0].start;
-	// 			const endTime = stonk.meta.tradingPeriods[0][0].end;
-	// 			setTradingPeriods({ startTime, endTime });
-	// 			setOpenPrice(quote.open[0]);
+	useEffect(() => {
+		let timeoutId;
+		const getCurrentStockValueData = async () => {
+			// .reduce((a, b) => a + b);
+			try {
+				const MarketValues = await getPortfolioPerformancedifference(
+					stockOwned
+				);
+				setTradingPeriods({
+					startTime: MarketValues.TradingPeriodStartTime,
+					endTime: MarketValues.TradingPeriodEndTime
+				});
+				const portfolioCurrentValue = portfolioValue.reduce((a, b) => a + b);
+				setStartPrice(portfolioCurrentValue);
+				let data = [
+					{
+						x: new Date(MarketValues.dataLength[0] * 1000),
+						y: portfolioCurrentValue
+					}
+				];
+				for (let i = 1; i < MarketValues.dataLength.length; i++) {
+					const timestamp = MarketValues.dataLength[i];
+					const value = MarketValues.portfolioArr[i];
+					data[i] = {
+						x: new Date(timestamp * 1000),
+						y: value
+					};
+				}
+				data = data.filter((timestamp) => timestamp.y !== 0);
+				setSeries({ data });
+				let currentPrice =
+					MarketValues.portfolioArr[
+						MarketValues.portfolioArr.length - 1
+					].toFixed(2);
+				setPrice(currentPrice);
+				if (portfolioCurrentValue - currentPrice < 0) {
+					setChartColor(['#00c805', 'black']);
+					setSiteColor('green');
+				} else {
+					setChartColor(['#ff5404', 'black']);
+					setSiteColor('red');
+				}
+			} catch (error) {
+				console.log(error);
+			}
 
-	// 			setSeries({ data: prices });
-	// 			// Change chart color based on open and current price
-	// 			let startPrice = quote.open[0];
-	// 			setStartPrice(startPrice);
-	// 			let currentPrice = quote.open[quote.open.length - 1];
-	// 			if (startPrice - currentPrice < 0) {
-	// 				// if (showOneDay) setSiteColor('green');
-	// 				setChartColor(['#00c805', 'black']);
-	// 				console.log('sdfsd');
-	// 			} else {
-	// 				// if (showOneDay) setSiteColor('red');
-	// 				console.log('sdfsd');
-	// 				setChartColor(['#ff5404', 'black']);
-	// 			}
-	// 		} catch (error) {
-	// 			console.log(error);
-	// 		}
-	// 		timeoutId = setTimeout(getLatestPrice, 6000);
-	// 	}
+			timeoutId = setTimeout(getCurrentStockValueData, 6000);
+		};
+		if (stockOwned && Object.values(stockOwned).length)
+			getCurrentStockValueData();
 
-	// 	getLatestPrice();
+		return () => {
+			console.log('cleaned');
+			clearTimeout(timeoutId);
+		};
+	}, [stockOwned, portfolioValue]);
 
-	// 	return () => {
-	// 		clearTimeout(timeoutId);
-	// 	};
-	// }, [showOneDay]);
+	// generate graph data point for open price,
+	// will trigger once open price has been set
+	useEffect(() => {
+		const dashedData = [];
+		for (
+			let i = tradingPeriods.startTime;
+			i <= tradingPeriods.endTime;
+			i += 60
+		) {
+			const data = {
+				x: i * 1000,
+				y: startPrice
+			};
+			dashedData.push(data);
+		}
+		setOpenPriceData({ data: dashedData });
+	}, [startPrice]);
 
-	// useEffect(() => {
-	// 	dispatch(stockActions.cleanUpStockData());
-	// }, []);
+	if (!series.data.length) return null;
 
-	// // generate graph data point for open price,
-	// // will trigger once open price has been set
-	// useEffect(() => {
-	// 	const dashedData = [];
-	// 	for (
-	// 		let i = tradingPeriods.startTime;
-	// 		i <= tradingPeriods.endTime;
-	// 		i += 60
-	// 	) {
-	// 		const data = {
-	// 			x: i * 1000,
-	// 			y: openPrice
-	// 		};
-	// 		dashedData.push(data);
-	// 	}
-	// 	setOpenPriceData({ data: dashedData });
-	// }, [openPrice]);
-
-	// if (!series.data.length && !openPrice) return null;
-	// return (
-	// 	<div className="main-stock-page-wrapper">
-	// 		<div className="price">${hoverPrice ? hoverPrice : price}</div>
-	// 		<div className="graph-page-wrapper">
-	// 			{showOneDay && (
-	// 				<div id="chart">
-	// 					<div className="percentDifference" style={{ color: priceColor }}>
-	// 						<div>
-	// 							${priceDifference} ({percentDifference}%)
-	// 						</div>
-	// 					</div>
-	// 					<div className="graph-holder">
-	// 						<Chart
-	// 							options={{
-	// 								chart: {
-	// 									type: 'line',
-	// 									toolbar: {
-	// 										show: false
-	// 									},
-	// 									events: {
-	// 										mouseMove: function (event, chartContext, config) {
-	// 											const points = series.data[config.dataPointIndex]?.y;
-	// 											setHoverPrice(points?.toFixed(2));
-	// 										},
-	// 										mouseLeave: function () {
-	// 											setHoverPrice(null);
-	// 										}
-	// 									},
-	// 									zoom: {
-	// 										enabled: false
-	// 									}
-	// 								},
-	// 								xaxis: {
-	// 									type: 'datetime',
-	// 									labels: {
-	// 										show: false
-	// 									},
-	// 									tooltip: {
-	// 										offsetY: -220,
-	// 										formatter: function (val, opts) {
-	// 											let time = new Date(val);
-	// 											return time.toLocaleTimeString([], {
-	// 												hour: '2-digit',
-	// 												minute: '2-digit'
-	// 											});
-	// 										}
-	// 									}
-	// 								},
-	// 								yaxis: {
-	// 									show: false
-	// 								},
-	// 								grid: {
-	// 									show: false
-	// 								},
-	// 								stroke: {
-	// 									width: [2, 2],
-	// 									dashArray: [0, 10]
-	// 								},
-	// 								colors: chartColor,
-	// 								tooltip: {
-	// 									enabled: true,
-	// 									items: {
-	// 										display: 'none'
-	// 									},
-	// 									x: {
-	// 										show: false
-	// 									}
-	// 								},
-	// 								legend: {
-	// 									show: false
-	// 								}
-	// 							}}
-	// 							series={[series, openPriceData]}
-	// 							type="line"
-	// 							width="100%"
-	// 							height="100%"
-	// 						/>
-	// 					</div>
-	// 				</div>
-	// 			)}
-	// 			<MainStockPage
-	// 				setShowOneDay={setShowOneDay}
-	// 				setHoverPrice={setHoverPrice}
-	// 				hoverPrice={hoverPrice}
-	// 				showOneDay={showOneDay}
-	// 			/>
-	// 		</div>
-	// 	</div>
-	// );
+	return (
+		<div className="main-stock-page-wrapper">
+			<div className="price">
+				$
+				{hoverPrice
+					? parseFloat(hoverPrice).toLocaleString(undefined, {
+							maximumFractionDigits: 2
+					  })
+					: parseFloat(price).toLocaleString(undefined, {
+							maximumFractionDigits: 2
+					  })}
+			</div>
+			<div className="graph-page-wrapper">
+				<div id="chart">
+					<div className="percentDifference" style={{ color: priceColor }}>
+						<p>
+							${priceDifference} ({percentDifference}%)
+						</p>
+						<div className="range-period">{rangePeriod}</div>
+					</div>
+					<div className="graph-holder">
+						<Chart
+							options={{
+								chart: {
+									type: 'line',
+									toolbar: {
+										show: false
+									},
+									events: {
+										mouseMove: function (event, chartContext, config) {
+											const points = series.data[config.dataPointIndex]?.y;
+											setHoverPrice(Number(points?.toFixed(2)));
+											setRangePeriod('');
+										},
+										mouseLeave: function () {
+											setHoverPrice(null);
+											setRangePeriod('Today');
+										}
+									},
+									zoom: {
+										enabled: false
+									}
+								},
+								xaxis: {
+									type: 'datetime',
+									labels: {
+										show: false
+									},
+									tooltip: {
+										offsetY: -250,
+										formatter: function (val, opts) {
+											let time = new Date(val);
+											return time.toLocaleTimeString([], {
+												hour: '2-digit',
+												minute: '2-digit'
+											});
+										}
+									}
+								},
+								yaxis: {
+									show: false
+								},
+								grid: {
+									show: false
+								},
+								stroke: {
+									width: [2, 2],
+									dashArray: [0, 10]
+								},
+								colors: chartColor,
+								tooltip: {
+									enabled: true,
+									items: {
+										display: 'none'
+									},
+									x: {
+										show: false
+									}
+								},
+								legend: {
+									show: false
+								}
+							}}
+							series={[series, openPriceData]}
+							type="line"
+							width="100%"
+							height="100%"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default PortfolioGraph;
