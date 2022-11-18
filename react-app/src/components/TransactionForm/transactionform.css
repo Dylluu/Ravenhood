@@ -40,7 +40,7 @@
     min-height: 50px;
     max-height: 50px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     border-bottom: 2px solid #e6e9ee;
 }
 
@@ -59,7 +59,7 @@
     min-height: 50px;
     max-height: 50px;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     border-bottom: 2px solid #e6e9ee;
 }
 
@@ -146,13 +146,13 @@
 }
 
 .transaction-market-price-container {
-    font-weight: 600;
+    font-weight: 700;
     border-bottom: 1px solid #e6e9ee;
     box-sizing: border-box;
 }
 
 .transaction-estimated-cost-container {
-    font-weight: 600;
+    font-weight: 700;
     box-sizing: border-box;
 }
 
@@ -196,7 +196,7 @@
     font-size: 13px;
     background-color: #00c805;
     color: white;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .review-order-button:hover {
@@ -214,7 +214,7 @@
     font-size: 13px;
     background-color: #ff5404;
     color: white;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .review-order-button-red:hover {
@@ -234,7 +234,7 @@
 }
 
 .confirmation-top-container {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 15px;
 }
 
@@ -254,7 +254,7 @@
 .input-error {
     /* border: 1px solid red; */
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     list-style: none;
     padding: 0;
 }
@@ -271,7 +271,7 @@
     margin-bottom: 17.5px;
 }
 
-input::-webkit-outer-spin-button,
+/* input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -280,4 +280,3 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
     /* Firefox */
-}

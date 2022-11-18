@@ -8,7 +8,7 @@ class Portfolio(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    symbol = db.Column(db.String(6), nullable=False, unique=True)
+    symbol = db.Column(db.String(6), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     num_shares = db.Column(db.Float, nullable=False) #(integer places, decimal places)
     average_price = db.Column(db.Float, nullable=False)

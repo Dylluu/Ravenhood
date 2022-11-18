@@ -22,7 +22,7 @@ import Dashboard from './components/Dashboard';
 import Transactions from './components/Transaction';
 import WatchlistAddList from './components/WatchlistAddList';
 import TransactionHistory from './components/TransactionHistory';
-
+import BadStock from './components/BadStock';
 import StockDashBoard from './components/StockDashBoard';
 
 function App() {
@@ -80,6 +80,10 @@ function App() {
 				<Route path='/history'>
 					<LoggedInNav />
 					<TransactionHistory />
+				</Route>
+				<Route path='/bad-stock'>
+					<LoggedInNav />
+					<BadStock />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />

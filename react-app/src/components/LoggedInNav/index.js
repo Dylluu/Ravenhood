@@ -19,6 +19,14 @@ function LoggedInNav() {
 	const [searchOpen, setSearchOpen] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
 	const allSymbols = Object.keys(TickerSymbols);
+	const currentUserBuyPower = useSelector((state) => {
+		let num = state?.session?.user?.buy_power;
+		let buyPower = num?.toLocaleString('en-US', {
+			style: 'currency',
+			currency: 'USD'
+		});
+		return buyPower;
+	});
 
 	useEffect(() => {
 		// if(search.length === 1) {
@@ -127,7 +135,7 @@ function LoggedInNav() {
 				className="logged-in-feather"
 				onClick={() => {
 					history.push('/');
-					// history.go(0);
+					history.go(0);
 				}}
 			/>
 			<div className="logged-in-inner-wrapper">
@@ -192,7 +200,7 @@ function LoggedInNav() {
 										</div>
 										<div className="account-menu-popout-portfolio-buying">
 											<span className="account-menu-popout-dollars">
-												${thousandsSeparator(user.buy_power)}
+												{currentUserBuyPower}
 											</span>
 											<span className="portfolio-buying">Buying Power</span>
 										</div>
@@ -200,11 +208,12 @@ function LoggedInNav() {
 								</div>
 							</div>
 							<div className="account-menu-popout-middle">
-								<div className="account-menu-popout-middle-buttons"
-								onClick={() => {
-									history.push('/history')
-									handleMenuOpen()
-								}}
+								<div
+									className="account-menu-popout-middle-buttons"
+									onClick={() => {
+										history.push('/history');
+										handleMenuOpen();
+									}}
 								>
 									<i
 										className="fa-solid fa-clock-rotate-left"
@@ -216,7 +225,7 @@ function LoggedInNav() {
 							<NavLink
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
-								to='/'
+								to="/"
 								onClick={async () => {
 									dispatch(logout());
 								}}

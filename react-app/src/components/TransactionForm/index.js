@@ -63,6 +63,49 @@ const TransactionForm = () => {
     });
     // console.log(currentUserBuyPower)
 
+    const currentSharesOwned = useSelector((state) => {
+        let portfolio = state?.portfolio?.userPortfolio;
+        let sharesOwned;
+        for (let [key, value] of Object.entries(portfolio)) {
+            // console.log(`${key}: ${value}`)
+            if ((value.symbol).toString() === (`${ticker}`).toString()) {
+                // console.log("hiiii")
+                sharesOwned = (value.num_shares).toLocaleString('en-US', {
+                    maximumFractionDigits: 10
+                })
+                break
+            } else {
+                sharesOwned = 0
+            }
+        };
+
+        return sharesOwned
+    });
+
+    const currentSharesinDollar = useSelector((state) => {
+        let portfolio = state?.portfolio?.userPortfolio;
+        let sharesOwned;
+        for (let [key, value] of Object.entries(portfolio)) {
+            // console.log("value.symbol", value.symbol)
+            // console.log(`${key}: ${value}`)
+            if ((value.symbol).toString() === `${ticker}`) {
+                sharesOwned = (value.num_shares * price).toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                })
+                break
+            } else {
+                sharesOwned = 0
+            }
+        };
+
+        return sharesOwned
+    });
+
+    // console.log(ticker)
+    // console.log("currentSharesOwned", currentSharesOwned)
+    // console.log("currentSharesinDollar", currentSharesinDollar)
+
     const handleChange = (event) => {
         // console.log(event.target.value);
         setType(event.target.value);
@@ -125,21 +168,21 @@ const TransactionForm = () => {
     }
 
     // This is for finding the # of shares owned in the current page's state
-    let sharesOwned;
-    for (let [key, value] of Object.entries(portfolio)) {
-        // console.log(`${key}: ${value}`)
-        if (value.symbol === `${ticker}`) {
-            sharesOwned = value.num_shares
-        }
-    }
+    // let sharesOwned;
+    // for (let [key, value] of Object.entries(portfolio)) {
+    //     // console.log(`${key}: ${value}`)
+    //     if (value.symbol === `${ticker}`) {
+    //         sharesOwned = value.num_shares
+    //     }
+    // }
 
     const handleInputChange = (e) => {
         // console.log(type)
-        if (e.target.value.length < 8) setAmount(e.target.value)
+        if (e.target.value.length < 100) setAmount(e.target.value)
         if (!isBuy && type === "Shares") {
-            if (e.target.value > sharesOwned) {
+            if (e.target.value > currentSharesOwned) {
                 setInputErrors({ error: "Not Enough shares" })
-                // console.log("e", amount, sharesOwned)
+                // console.log("e", amount, currentSharesOwned)
             } else {
                 setInputErrors("")
                 // console.log("no e", amount, sharesOwned)
@@ -155,9 +198,9 @@ const TransactionForm = () => {
             }
         }
         if (!isBuy && type === "Dollars") {
-            if (e.target.value / price > sharesOwned) {
+            if (e.target.value / price > currentSharesOwned) {
                 setInputErrors({ error: "Not Enough Shares" })
-                // console.log("e", e.target.value / price, sharesOwned)
+                // console.log("e", e.target.value / price, currentSharesOwned)
             } else {
                 setInputErrors("")
                 // console.log("no e", e.target.value / price, sharesOwned)
@@ -280,25 +323,28 @@ const TransactionForm = () => {
                 )
 
                 for (let i = 0; i < Object.keys(portfolio).length; i++) {
-                    if (portfolio[i].num_shares + numberOfShares === 0 && portfolio[i].symbol == ticker) {
-                        setDeleted(true)
-                        createdPortfolioTransaction = await dispatch(
-                            thunkDeleteStockInPortfolio(portfolio[i].id)
-                        ).catch(async (res) => {
-                            const data = await res.json();
-                            // console.log(data)
-                            if (data && data.errors) setErrors(data.errors);
-                        });
-                        break
-                    } else if (portfolio[i].symbol == ticker) {
-                        createdPortfolioTransaction = await dispatch(
-                            thunkUpdateStockInPortfolio(portfolioTrans)
-                        ).catch(async (res) => {
-                            const data = await res.json();
-                            // console.log(data)
-                            if (data && data.errors) setErrors(data.errors);
-                        });
+                    if (portfolio[i].num_shares + numberOfShares >= 0) {
+                        if (portfolio[i].num_shares + numberOfShares === 0 && portfolio[i].symbol == ticker) {
+                            setDeleted(true)
+                            createdPortfolioTransaction = await dispatch(
+                                thunkDeleteStockInPortfolio(portfolio[i].id)
+                            ).catch(async (res) => {
+                                const data = await res.json();
+                                // console.log(data)
+                                if (data && data.errors) setErrors(data.errors);
+                            });
+                            break
+                        } else if (portfolio[i].symbol == ticker) {
+                            createdPortfolioTransaction = await dispatch(
+                                thunkUpdateStockInPortfolio(portfolioTrans)
+                            ).catch(async (res) => {
+                                const data = await res.json();
+                                // console.log(data)
+                                if (data && data.errors) setErrors(data.errors);
+                            });
+                        }
                     }
+
                 }
             }
 
@@ -475,9 +521,14 @@ const TransactionForm = () => {
                                 {currentUserBuyPower} buying power available
                             </div>
                         )}
-                        {!isBuy && (
+                        {!isBuy && isShares && (
                             <div className="buying-power-container">
-                                {sharesOwned} Shares Available
+                                {currentSharesOwned} Shares Available
+                            </div>
+                        )}
+                        {!isBuy && !isShares && (
+                            <div className="buying-power-container">
+                                {currentSharesinDollar} Available
                             </div>
                         )}
                     </form>

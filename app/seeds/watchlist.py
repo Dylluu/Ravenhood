@@ -11,11 +11,14 @@ def seed_watchlist():
         name='High Risk High Reward', user_id=1 )
     w4 = Watchlist(
         name='Money Moves', user_id=2 )
+    w5 = Watchlist(
+        name='Recommended Stocks', user_id=6)
 
     db.session.add(w1)
     db.session.add(w2)
     db.session.add(w3)
     db.session.add(w4)
+    db.session.add(w5)
     db.session.commit()
 
 

@@ -20,8 +20,7 @@
 }
 
 #robinHoodLogo {
-    position: absolute;
-    height: 80px;
+    height: 40px;
     left: 65px;
     top: 25px;
     /* border: solid 1px red; */
@@ -29,11 +28,11 @@
 
 .signup-form-left-text {
     display: flex;
-    margin-left: 65px;
+    margin-left: 45px;
     font-size: 70px;
     font-weight: 400;
     width: 75%;
-    margin-top: 160px;
+    margin-top: 100px;
     /* border: solid 1px red; */
 }
 
@@ -261,6 +260,23 @@ button {
     margin-top: -17px;
     margin-bottom: 20px;
     /* border: solid 1px red; */
+}
+
+.signup-logo-container {
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    height: 84px;
+    padding-top: 40px;
+    padding-left: 40px;
+
+}
+
+.signup-logo-text {
+    font-size: 24px;
+    padding-top: 5px;
+    padding-left: 5px;
+
 }
 
 #please-enter-first-name, #please-enter-last-name {

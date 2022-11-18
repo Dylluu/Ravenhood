@@ -9,6 +9,8 @@ import useSiteColorContext from '../../context/SiteColor';
 
 function PortfolioGraph({ portfolio }) {
 	const { setSiteColor } = useSiteColorContext();
+	const user_buypower = useSelector((state) => state.session.user.buy_power);
+	console.log(user_buypower);
 	const [portfolioValue, setPortfolioValue] = useState(null);
 	const [stockOwned, setStockOwned] = useState(null);
 
@@ -141,12 +143,15 @@ function PortfolioGraph({ portfolio }) {
 			<div className="price">
 				$
 				{hoverPrice
-					? parseFloat(hoverPrice).toLocaleString(undefined, {
+					? parseFloat(hoverPrice + user_buypower).toLocaleString(undefined, {
 							maximumFractionDigits: 2
 					  })
-					: parseFloat(price).toLocaleString(undefined, {
-							maximumFractionDigits: 2
-					  })}
+					: parseFloat(parseFloat(price) + user_buypower).toLocaleString(
+							undefined,
+							{
+								maximumFractionDigits: 2
+							}
+					  )}
 			</div>
 			<div className="graph-page-wrapper">
 				<div id="chart">

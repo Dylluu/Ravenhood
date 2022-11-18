@@ -6,6 +6,7 @@ import * as stockFunctions from '../../utils/fetchStockFunctions';
 import * as stockActions from '../../store/stocks';
 import useSiteColorContext from '../../context/SiteColor';
 import { useDispatch, useSelector } from 'react-redux';
+import flyingBird from '../../assets/flyingBird.gif';
 
 const getRangePeriod = (range) => {
 	switch (range) {
@@ -124,7 +125,12 @@ function MainStockHistoricalGraph({ setHoverPrice, range, hoverPrice }) {
 	if (APILimit)
 		return (
 			<div className="graph-loading-screen">
-				OOPS WE BROKE AND ONLY GOT 5 api request/minute
+				<div className="bad-stock-inner">
+					<img alt="flyingBird" src={flyingBird} id="flying-bird" />
+					<span id="bad-stock-text">
+						Yooo, chill out on the API, we only got 5 queries/minute.
+					</span>
+				</div>
 			</div>
 		);
 

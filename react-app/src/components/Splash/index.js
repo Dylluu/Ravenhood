@@ -264,7 +264,7 @@ function Splash() {
                     <div className='bottom-copyright'>
                         <span className='bottom-link-list'
                             style={{ flexDirection: 'row', alignSelf: 'flex-end' }}
-                        >© 2022 Robinhood. All rights reserved.</span>
+                        >© 2022 Ravenhood. All rights reserved.</span>
                     </div>
                 </div>
             </div>

@@ -35,6 +35,22 @@ def seed_watchlist_stocks():
         symbol='GOOGL', watchlist_id=4 )
     ws16 = WatchlistStocks(
         symbol='OXY', watchlist_id=4 )
+    wsr1 = WatchlistStocks(
+        symbol='TSLA', watchlist_id=5 )
+    wsr2 = WatchlistStocks(
+        symbol='AAPL', watchlist_id=5 )
+    wsr3 = WatchlistStocks(
+        symbol='NFLX', watchlist_id=5 )
+    wsr4 = WatchlistStocks(
+        symbol='GME', watchlist_id=5 )
+    wsr5 = WatchlistStocks(
+        symbol='AMZN', watchlist_id=5 )
+    wsr6 = WatchlistStocks(
+        symbol='NVDA', watchlist_id=5 )
+    wsr7 = WatchlistStocks(
+        symbol='AAPL', watchlist_id=5 )
+    wsr8 = WatchlistStocks(
+        symbol='AMD', watchlist_id=5)
 
 
     db.session.add(ws1)
@@ -53,6 +69,14 @@ def seed_watchlist_stocks():
     db.session.add(ws14)
     db.session.add(ws15)
     db.session.add(ws16)
+    db.session.add(wsr1)
+    db.session.add(wsr2)
+    db.session.add(wsr3)
+    db.session.add(wsr4)
+    db.session.add(wsr5)
+    db.session.add(wsr6)
+    db.session.add(wsr7)
+    db.session.add(wsr8)
     db.session.commit()
 
 

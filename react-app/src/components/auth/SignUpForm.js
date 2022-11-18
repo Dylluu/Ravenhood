@@ -5,6 +5,7 @@ import { signUp } from '../../store/session';
 import './SignUpForm.css';
 import robinHoodLogo from '../../assets/Robinhood-logo.png';
 import stockBlocks from '../../assets/stockBlocksGreen.png';
+import RavenhoodLogo from '../../assets/ravenhood-greenbackground.png'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -139,7 +140,11 @@ const SignUpForm = () => {
   return (
     <div className='signup-form-wrapper'>
       <div className='signup-form-left'>
-        <NavLink to='/'><img alt='robinHoodLogo' src={robinHoodLogo} id='robinHoodLogo' /></NavLink>
+        <div className='signup-logo-container'>
+          <div className='signup-logo-text'>Ravenhood</div>
+          <NavLink to='/'><img alt='robinHoodLogo' src={RavenhoodLogo} id='robinHoodLogo' /></NavLink>
+        </div>
+
         <p className='signup-form-left-text'>Get started with free stock on us</p>
         <span className='starting-buying-power'>New users will start with a buying power of $100,000 on signup. *</span>
         <img id='signup-form-stockblocks' alt='stockBlocks' src={stockBlocks} />
