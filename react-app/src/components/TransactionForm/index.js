@@ -137,19 +137,19 @@ const TransactionForm = () => {
         if (!isBuy && type === "Shares") {
             if (e.target.value > sharesOwned) {
                 setInputErrors({ error: "Not Enough shares" })
-                // console.log("e", amount, sharesOwned)
+                console.log("e", amount, sharesOwned)
             } else {
                 setInputErrors("")
-                // console.log("no e", amount, sharesOwned)
+                console.log("no e", amount, sharesOwned)
             }
         }
         if (isBuy && type === "Shares") {
             if (e.target.value * price > buyingPowerInt) {
                 setInputErrors({ error: "Not Enough Funds" })
-                // console.log("e", e.target.value * price, buyingPowerInt)
+                console.log("e", e.target.value * price, buyingPowerInt)
             } else {
                 setInputErrors("")
-                // console.log("no e", e.target.value * price, buyingPowerInt)
+                console.log("no e", e.target.value * price, buyingPowerInt)
             }
         }
         if (!isBuy && type === "Dollars") {
@@ -386,12 +386,22 @@ const TransactionForm = () => {
                                             </li>)}
                                     </ul>
                                 </div>
-                                <div className='review-order-button-container'>
-                                    <button
-                                        className="review-order-button"
-                                        type="submit"
-                                    >Review Order</button>
-                                </div>
+                                {!inputErrors.value && (
+                                    <div className='review-order-button-container-errors'>
+                                        <button
+                                            className="review-order-button"
+                                            type="submit"
+                                        >Review Order</button>
+                                    </div>
+                                )}
+                                {inputErrors.value && (
+                                    <div className='review-order-button-container'>
+                                        <button
+                                            className="review-order-button"
+                                            type="submit"
+                                        >Review Order</button>
+                                    </div>
+                                )}
                             </div>
                         )}
                         {!isGreen && (
