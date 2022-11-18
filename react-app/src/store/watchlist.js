@@ -164,11 +164,14 @@ export default function watchlist(state = initialState, action) {
     case POST_WATCHLIST:
       let newStateCreate = {...state}
       let id = action.payload.id
+      console.log('my id', id)
       newStateCreate.allWatchlists[id] = action.payload
       return newStateCreate
     case POST_STOCKS:
       let newStateCreateStocks = {...state}
       let stockId = action.payload.id
+      console.log('my id', stockId)
+      
       newStateCreateStocks.allStocks[stockId] = action.payload
       return newStateCreateStocks
     case UPDATE_WATCHLIST:

@@ -27,6 +27,7 @@ function WatchlistAddList(symbol) {
   useEffect(
     () => {
       dispatch(thunkGetAllWatchlist(user_id));
+      dispatch(thunkGetAllStocks(user_id))
     },
     [dispatch]
   );
