@@ -87,7 +87,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 85%;
+  padding-left: 5px;
   /* border: solid 1px blue; */
 }
 
@@ -107,7 +108,24 @@
 }
 
 #add-to-lists-submit {
-  width: 150px;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  width: 170px;
+  height: 40px;
+  margin-top: 15px;
+  margin-bottom: 17px;
 }
+
+#add-label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#add-to-lists-input-container {
+  max-width: 200px;
+  overflow: hidden;
+  margin-right: 20px;
+  /* border: solid 1px red; */
+}
+
+/* .add-to-lists-radio {
+  margin-left: -30px;
+} */

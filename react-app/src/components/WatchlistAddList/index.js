@@ -74,7 +74,7 @@ function WatchlistAddList(symbol) {
             </div>
           <div>
             {lists && lists.map((list) => (
-              <div className='container'>
+              <div className='container' id='add-to-lists-input-container'>
                 <div hidden={true}>{stockBool = stocks.map(stock => {
                   if (stock.symbol == symbol.symbol && stock.watchlist_id == list.id) {
                     return 'i'
@@ -83,8 +83,12 @@ function WatchlistAddList(symbol) {
                   }
                   // at later date make more elegant solution by joining all stocks to their watchlists in the database.
                 })}</div>
-                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id} />
-                <label className='add-label' for={list.id}> {list.name}</label>
+                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id}
+                className='add-to-lists-radio'
+                />
+                <label className='add-label' for={list.id}
+                id='add-label'
+                > {list.name}</label>
               </div>
             ))}
           </div>
