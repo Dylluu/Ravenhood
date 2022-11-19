@@ -140,10 +140,10 @@ const SignUpForm = () => {
   return (
     <div className='signup-form-wrapper'>
       <div className='signup-form-left'>
-        <div className='signup-logo-container'>
+        <NavLink to='/' className='signup-logo-container'>
           <div className='signup-logo-text'>Ravenhood</div>
-          <NavLink to='/'><img alt='robinHoodLogo' src={RavenhoodLogo} id='robinHoodLogo' /></NavLink>
-        </div>
+          <div><img alt='robinHoodLogo' src={RavenhoodLogo} id='robinHoodLogo' /></div>
+        </NavLink>
 
         <p className='signup-form-left-text'>Get started with free stock on us</p>
         <span className='starting-buying-power'>New users will start with a buying power of $100,000 on signup. *</span>

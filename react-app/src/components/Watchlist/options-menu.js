@@ -28,7 +28,7 @@ function Options ({list, deleteWatchlist, id})  {
     {list.name}
   </NavLink>
   </div>
-  <div>
+  {list.user_id !== 6 &&<div>
     <button className="options-button"
     onClick={(e) => {
       e.stopPropagation()
@@ -48,7 +48,7 @@ function Options ({list, deleteWatchlist, id})  {
         </div>
       </div>
     </div>}
-  </div>
+  </div>}
   </div>
 }
 

@@ -6,11 +6,11 @@ import './PortfolioGraph.css';
 import { thunkGetWholePortfolio } from '../../store/portfolio';
 import { getPortfolioPerformancedifference } from '../../utils/fetchStockFunctions';
 import useSiteColorContext from '../../context/SiteColor';
+import PortfolioNoStockGraph from '../PortfolioNoStockGraph';
 
 function PortfolioGraph({ portfolio }) {
 	const { setSiteColor } = useSiteColorContext();
 	const user_buypower = useSelector((state) => state.session.user.buy_power);
-	console.log(user_buypower);
 	const [portfolioValue, setPortfolioValue] = useState(null);
 	const [stockOwned, setStockOwned] = useState(null);
 
@@ -136,8 +136,8 @@ function PortfolioGraph({ portfolio }) {
 		setOpenPriceData({ data: dashedData });
 	}, [startPrice]);
 
-	if (!series.data.length || !startPrice) return null;
-
+	const show = Object.values(portfolio).length ? true : false;
+	const makeItGreen = show ? priceColor : '#00c805';
 	return (
 		<div className="main-stock-page-wrapper">
 			<div className="price">
@@ -155,80 +155,89 @@ function PortfolioGraph({ portfolio }) {
 			</div>
 			<div className="graph-page-wrapper">
 				<div id="chart">
-					<div className="percentDifference" style={{ color: priceColor }}>
+					<div className="percentDifference" style={{ color: makeItGreen }}>
 						<p>
-							${priceDifference} ({percentDifference}%)
+							${priceDifference} (
+							{isNaN(percentDifference) ? 0 : percentDifference}%)
 						</p>
 						<div className="range-period">{rangePeriod}</div>
 					</div>
 					<div className="graph-holder">
-						<Chart
-							options={{
-								chart: {
-									type: 'line',
-									toolbar: {
-										show: false
-									},
-									events: {
-										mouseMove: function (event, chartContext, config) {
-											const points = series.data[config.dataPointIndex]?.y;
-											setHoverPrice(Number(points?.toFixed(2)));
-											setRangePeriod('');
+						{show && (
+							<Chart
+								options={{
+									chart: {
+										type: 'line',
+										toolbar: {
+											show: false
 										},
-										mouseLeave: function () {
-											setHoverPrice(null);
-											setRangePeriod('Today');
+										events: {
+											mouseMove: function (event, chartContext, config) {
+												const points = series.data[config.dataPointIndex]?.y;
+												setHoverPrice(Number(points?.toFixed(2)));
+												setRangePeriod('');
+											},
+											mouseLeave: function () {
+												setHoverPrice(null);
+												setRangePeriod('Today');
+											}
+										},
+										zoom: {
+											enabled: false
 										}
 									},
-									zoom: {
-										enabled: false
-									}
-								},
-								xaxis: {
-									type: 'datetime',
-									labels: {
+									xaxis: {
+										type: 'datetime',
+										labels: {
+											show: false
+										},
+										tooltip: {
+											offsetY: -250,
+											formatter: function (val, opts) {
+												let time = new Date(val);
+												return time.toLocaleTimeString([], {
+													hour: '2-digit',
+													minute: '2-digit'
+												});
+											}
+										}
+									},
+									yaxis: {
 										show: false
 									},
+									grid: {
+										show: false
+									},
+									stroke: {
+										width: [2, 2],
+										dashArray: [0, 10]
+									},
+									colors: chartColor,
 									tooltip: {
-										offsetY: -250,
-										formatter: function (val, opts) {
-											let time = new Date(val);
-											return time.toLocaleTimeString([], {
-												hour: '2-digit',
-												minute: '2-digit'
-											});
+										enabled: true,
+										items: {
+											display: 'none'
+										},
+										x: {
+											show: false
 										}
-									}
-								},
-								yaxis: {
-									show: false
-								},
-								grid: {
-									show: false
-								},
-								stroke: {
-									width: [2, 2],
-									dashArray: [0, 10]
-								},
-								colors: chartColor,
-								tooltip: {
-									enabled: true,
-									items: {
-										display: 'none'
 									},
-									x: {
+									legend: {
 										show: false
 									}
-								},
-								legend: {
-									show: false
-								}
-							}}
-							series={[series, openPriceData]}
-							type="line"
-							width="100%"
-							height="100%"
-						/>
+								}}
+								series={[series, openPriceData]}
+								type="line"
+								width="100%"
+								height="100%"
+							/>
+						)}
+						{!show && (
+							<PortfolioNoStockGraph
+								setHoverPrice={setHoverPrice}
+								setRangePeriod={setRangePeriod}
+							/>
+						)}
 					</div>
 				</div>
 			</div>

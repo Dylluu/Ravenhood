@@ -24,6 +24,7 @@ const WatchlistForm = ({add, setAdd}) => {
 
     await dispatch(thunkPostWatchlist(list))
     await dispatch(thunkGetAllWatchlist(user_id))
+    setAdd(false)
     // history.push(`/watchlists/${watchlistId}`)
   }
 
@@ -36,6 +37,7 @@ const WatchlistForm = ({add, setAdd}) => {
       onChange={(e) => setName(e.target.value)}
       value={name}
       placeholder='List Name'
+      required
       />
       <div className='add-button-holder'>
         <button className='cancel-button' onClick={() => {

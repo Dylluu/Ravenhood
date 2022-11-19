@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './watchlist.css'
-import { thunkGetAllWatchlist, thunkUpdateWatchlist } from '../../store/watchlist';
+import { thunkGetAllWatchlist, thunkGetOneWatchlist, thunkUpdateWatchlist } from '../../store/watchlist';
 
 const WatchlistForm = ({id, setShowModal, setOptions}) => {
   const dispatch = useDispatch()
@@ -23,16 +23,27 @@ const WatchlistForm = ({id, setShowModal, setOptions}) => {
     }
 
     await dispatch(thunkUpdateWatchlist(list))
+    await dispatch(thunkGetOneWatchlist(watchlistId))
     await dispatch(thunkGetAllWatchlist(user_id))
-    history.push(`/watchlists/${watchlistId}`)
     setShowModal(false)
     setOptions(false)
+    history.push(`/watchlists/${watchlistId}`)
+    // window.location.replace(`/watchlists/${watchlistId}`);
   }
 
   return <div className='update-modal'
   onClick={(e) => e.stopPropagation()}
   >
-    <div className='update-modal-title'>Edit List</div>
+    <div className='update-modal-title'>
+      <span>Edit List</span>
+      <i className="fa-solid fa-xmark"
+            id='add-to-form-x'
+            onClick={() => {
+              setShowModal(false)
+              setOptions(false)
+            }}
+            />
+      </div>
     <form className='update-modal-form' onSubmit={submitHandler}>
     <input
     type="text"
