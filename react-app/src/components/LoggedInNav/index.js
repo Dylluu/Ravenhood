@@ -10,6 +10,7 @@ import logoPurple from '../../assets/ravenhood-purple.PNG';
 import { TickerSymbols } from '../../utils/stocksSymbols';
 import { cleanUpPortfolioState } from '../../store/portfolio';
 import { cleanWatchList } from '../../store/watchlist';
+import { cleanUpTransactions } from '../../store/transaction';
 
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
@@ -137,10 +138,10 @@ function LoggedInNav() {
 					alt="feather"
 					src={logoGreen}
 					className="logged-in-feather"
-					// onClick={() => {
-					// 	history.push('/');
-					// 	history.go(0);
-					// }}
+				// onClick={() => {
+				// 	history.push('/');
+				// 	history.go(0);
+				// }}
 				/>
 			</NavLink>
 			<div className="logged-in-inner-wrapper">
@@ -234,6 +235,7 @@ function LoggedInNav() {
 								onClick={() => {
 									dispatch(cleanWatchList());
 									dispatch(cleanUpPortfolioState());
+									dispatch(cleanUpTransactions())
 									dispatch(logout());
 								}}
 							>
