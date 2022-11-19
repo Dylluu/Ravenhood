@@ -57,7 +57,8 @@ def update_stock(symbol):
     temp_num_shares = portfolio['portfolio'][0]['num_shares']
     temp_average_price =portfolio['portfolio'][0]['average_price']
     portfolio['portfolio'][0]['num_shares'] =float(temp_num_shares) + float(form.data['num_shares'])
-    portfolio['portfolio'][0]['average_price'] =((float(temp_average_price)*float(temp_num_shares)) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(temp_num_shares) + float(form.data['num_shares']))
+    if (float(form.data['num_shares'] > 0)):
+      portfolio['portfolio'][0]['average_price'] =((float(temp_average_price)*float(temp_num_shares)) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(temp_num_shares) + float(form.data['num_shares']))
 
     currStock.num_shares = portfolio['portfolio'][0]['num_shares']
     if (currStock.num_shares > 0) :
@@ -95,6 +96,7 @@ def update_stock_redo(symbol):
     temp_num_shares = portfolio['portfolio'][0]['num_shares']
     temp_average_price =portfolio['portfolio'][0]['average_price']
     portfolio['portfolio'][0]['num_shares'] =float(temp_num_shares) + float(form.data['num_shares'])
+    print("HEREEEEEEEEEE",float(form.data['num_shares']))
     if (float(form.data['num_shares'] > 0)):
       portfolio['portfolio'][0]['average_price'] =((float(temp_average_price)*float(temp_num_shares)) + (float(form.data['average_price'])*(abs(float(form.data['num_shares'])))))/(float(temp_num_shares) + float(form.data['num_shares']))
 
