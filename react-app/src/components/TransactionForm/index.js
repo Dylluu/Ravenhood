@@ -66,16 +66,22 @@ const TransactionForm = () => {
     const currentSharesOwned = useSelector((state) => {
         let portfolio = state?.portfolio?.userPortfolio;
         let sharesOwned;
-        for (let [key, value] of Object.entries(portfolio)) {
-            // console.log(`${key}: ${value}`)
-            if ((value.symbol).toString() === (`${ticker}`).toString()) {
-                // console.log("hiiii")
-                sharesOwned = (value.num_shares)
-                break
-            } else {
-                sharesOwned = 0
-            }
-        };
+        // console.log("def", portfolio)
+        if (Object.values(portfolio).length) {
+            for (let [key, value] of Object.entries(portfolio)) {
+                // console.log(`${key}: ${value}`)
+                // console.log("Abc")
+                if ((value.symbol).toString() === (`${ticker}`).toString()) {
+                    // console.log("hiiii")
+                    sharesOwned = (value.num_shares)
+                    break
+                } else {
+                    sharesOwned = 0
+                }
+            };
+        } else {
+            sharesOwned = 0
+        }
 
         return sharesOwned
     });
@@ -83,19 +89,27 @@ const TransactionForm = () => {
     const currentSharesinDollar = useSelector((state) => {
         let portfolio = state?.portfolio?.userPortfolio;
         let sharesOwned;
-        for (let [key, value] of Object.entries(portfolio)) {
-            // console.log("value.symbol", value.symbol)
-            // console.log(`${key}: ${value}`)
-            if ((value.symbol).toString() === `${ticker}`) {
-                sharesOwned = (value.num_shares * price).toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD'
-                })
-                break
-            } else {
-                sharesOwned = 0
-            }
-        };
+
+        if (Object.values(portfolio).length) {
+            for (let [key, value] of Object.entries(portfolio)) {
+                // console.log("value.symbol", value.symbol)
+                // console.log(`${key}: ${value}`)
+                if ((value.symbol).toString() === `${ticker}`) {
+                    sharesOwned = (value.num_shares * price).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD'
+                    })
+                    break
+                } else {
+                    sharesOwned = 0
+                }
+            };
+        } else {
+            sharesOwned = (0).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            })
+        }
 
         return sharesOwned
     });
@@ -200,10 +214,10 @@ const TransactionForm = () => {
         if (!isBuy && type === "Dollars") {
             if (e.target.value > parseFloat(currentSharesOwned * price).toFixed(2)) {
                 setInputErrors({ error: "Not Enough Shares" })
-                console.log("e", e.target.value, parseFloat(currentSharesOwned * price).toFixed(2))
+                // console.log("e", e.target.value, parseFloat(currentSharesOwned * price).toFixed(2))
             } else {
                 setInputErrors("")
-                console.log("no e", e.target.value, parseFloat(currentSharesOwned * price).toFixed(2))
+                // console.log("no e", e.target.value, parseFloat(currentSharesOwned * price).toFixed(2))
             }
         }
         if (isBuy && type === "Dollars") {
@@ -284,7 +298,9 @@ const TransactionForm = () => {
                 // });
 
                 for (let i = 0; i < Object.keys(portfolio).length; i++) {
-                    // console.log('stock ticker', portfolio[i].symbol, i)
+                    console.log('stock ticker', portfolio[i].symbol, i)
+                    console.log("portfolio", portfolio)
+                    console.log("portfolio[i]", portfolio[i])
                     if (portfolio[i].symbol == ticker) {
                         createdPortfolioTransaction = await dispatch(
                             thunkUpdateStockInPortfolio(portfolioTrans)
@@ -327,19 +343,53 @@ const TransactionForm = () => {
                     sessionActions.thunkAddBuyPower(updateBuyPower, user_id)
                 )
 
-                for (let i = 0; i < Object.keys(portfolio).length; i++) {
-                    if (portfolio[i].num_shares + numberOfShares >= 0) {
-                        if (portfolio[i].num_shares + numberOfShares === 0 && portfolio[i].symbol == ticker) {
+                // for (let i = 0; i < Object.keys(portfolio).length; i++) {
+                //     console.log('stock ticker', portfolio[i].num_shares, i)
+                //     console.log("portfolio", portfolio)
+                //     console.log("portfolio[i]", portfolio[i])
+                //     if (portfolio[i].num_shares + numberOfShares >= 0) {
+                //         if (portfolio[i].num_shares + numberOfShares === 0 && portfolio[i].symbol == ticker) {
+                //             setDeleted(true)
+                //             createdPortfolioTransaction = await dispatch(
+                //                 thunkDeleteStockInPortfolio(portfolio[i].id)
+                //             ).catch(async (res) => {
+                //                 const data = await res.json();
+                //                 // console.log(data)
+                //                 if (data && data.errors) setErrors(data.errors);
+                //             });
+                //             break
+                //         } else if (portfolio[i].symbol == ticker) {
+                //             createdPortfolioTransaction = await dispatch(
+                //                 thunkUpdateStockInPortfolio(portfolioTrans)
+                //             ).catch(async (res) => {
+                //                 const data = await res.json();
+                //                 // console.log(data)
+                //                 if (data && data.errors) setErrors(data.errors);
+                //             });
+                //         }
+                //     }
+
+                // }
+
+                for (let values of Object.values(portfolio)) {
+                    console.log('num_shares', values.num_shares)
+                    console.log("portfolio", portfolio)
+                    console.log("values", values)
+                    if (values.num_shares + numberOfShares >= 0) {
+                        console.log("first if")
+                        if (values.num_shares + numberOfShares === 0 && values?.symbol == ticker) {
+                            console.log("second if")
                             setDeleted(true)
                             createdPortfolioTransaction = await dispatch(
-                                thunkDeleteStockInPortfolio(portfolio[i].id)
+                                thunkDeleteStockInPortfolio(values.id)
                             ).catch(async (res) => {
                                 const data = await res.json();
                                 // console.log(data)
                                 if (data && data.errors) setErrors(data.errors);
                             });
                             break
-                        } else if (portfolio[i].symbol == ticker) {
+                        } else if (values?.symbol == ticker) {
+                            console.log("else if")
                             createdPortfolioTransaction = await dispatch(
                                 thunkUpdateStockInPortfolio(portfolioTrans)
                             ).catch(async (res) => {
@@ -348,8 +398,9 @@ const TransactionForm = () => {
                                 if (data && data.errors) setErrors(data.errors);
                             });
                         }
+                    } else {
+                        console.log("NEVER WENT IN")
                     }
-
                 }
             }
 
@@ -534,7 +585,7 @@ const TransactionForm = () => {
                         )}
                         {!isBuy && isShares && (
                             <div className="buying-power-container">
-                                {currentSharesOwned.toLocaleString('en-US', {
+                                {currentSharesOwned?.toLocaleString('en-US', {
                                     maximumFractionDigits: 6
                                 })} Shares Available
                             </div>
