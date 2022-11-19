@@ -120,7 +120,7 @@
     min-width: 136px;
     max-width: 136px;
     font-size: 13px;
-    opacity: 50%;
+    /* opacity: 50%; */
     background-color: #f4f8fb;
     border: 0;
     border-radius: 5px;
@@ -130,7 +130,7 @@
     box-sizing: border-box;
 }
 
-.transaction-amount-input:hover {
+/* .transaction-amount-input:hover {
     background-color: white;
     border: 1px solid #e6e9ee;
     box-sizing: border-box;
@@ -143,7 +143,7 @@
     border: 1px solid #00c805;
     box-sizing: border-box;
     opacity: 100%;
-}
+} */
 
 .transaction-market-price-container {
     font-weight: 700;
