@@ -8,6 +8,9 @@ import logoGreen from '../../assets/robinHoodFeatherGreen.png';
 import logoBlack from '../../assets/ravenhood-black.PNG';
 import logoPurple from '../../assets/ravenhood-purple.PNG';
 import { TickerSymbols } from '../../utils/stocksSymbols';
+import { cleanUpPortfolioState } from '../../store/portfolio';
+import { cleanWatchList } from '../../store/watchlist';
+
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
 function LoggedInNav() {
@@ -129,16 +132,16 @@ function LoggedInNav() {
 
 	return (
 		<div className="logged-in-nav-wrapper">
-			<NavLink to='/'>
-			<img
-				alt="feather"
-				src={logoGreen}
-				className="logged-in-feather"
-				// onClick={() => {
-				// 	history.push('/');
-				// 	history.go(0);
-				// }}
-			/>
+			<NavLink to="/">
+				<img
+					alt="feather"
+					src={logoGreen}
+					className="logged-in-feather"
+					// onClick={() => {
+					// 	history.push('/');
+					// 	history.go(0);
+					// }}
+				/>
 			</NavLink>
 			<div className="logged-in-inner-wrapper">
 				<div className="logged-in-search-bar-div">
@@ -228,7 +231,9 @@ function LoggedInNav() {
 								className="account-menu-popout-middle-buttons"
 								id="account-menu-popout-logout"
 								to="/"
-								onClick={async () => {
+								onClick={() => {
+									dispatch(cleanWatchList());
+									dispatch(cleanUpPortfolioState());
 									dispatch(logout());
 								}}
 							>

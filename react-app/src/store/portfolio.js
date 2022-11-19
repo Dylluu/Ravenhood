@@ -4,6 +4,7 @@ const GET_WHOLE_PORTFOLIO = 'portfolio/GET_WHOLE_PORTFOLIO';
 const ADD_STOCK_TO_PORTFOLIO = 'portfolio/ADD_STOCK_TO_PORTFOLIO';
 const UPDATE_STOCK_IN_PORTFOLIO = 'portfolio/UPDATE_STOCK_IN_PORTFOLIO';
 const DELETE_STOCK_IN_PORTFOLIO = 'portfolio/DELETE_STOCK_IN_PORTFOLIO';
+const CLEAN_PORTFOLIO = 'portfolio/CLEAN_PORTFOLIO';
 
 const getWholePortfolio = (payload) => ({
 	type: GET_WHOLE_PORTFOLIO,
@@ -23,6 +24,10 @@ const updateStockInPortfolio = (payload) => ({
 const deleteStockInPortfolio = (payload) => ({
 	type: DELETE_STOCK_IN_PORTFOLIO,
 	payload
+});
+
+export const cleanUpPortfolioState = () => ({
+	type: CLEAN_PORTFOLIO
 });
 
 export const thunkGetWholePortfolio = (user_id) => async (dispatch) => {
@@ -77,7 +82,7 @@ export const thunkUpdateStockInPortfolio = (data) => async (dispatch) => {
 };
 
 export const thunkDeleteStockInPortfolio = (id) => async (dispatch) => {
-	console.log("TICKER", id)
+	console.log('TICKER', id);
 	const response = await fetch(`/api/portfolio/${id}`, {
 		method: 'DELETE'
 	});
@@ -105,6 +110,9 @@ const portfolio = (state = initialState, action) => {
 			return newState;
 		case DELETE_STOCK_IN_PORTFOLIO:
 			delete newState[action.symbol];
+			return newState;
+		case CLEAN_PORTFOLIO:
+			newState.userPortfolio = {};
 			return newState;
 		default:
 			return state;
