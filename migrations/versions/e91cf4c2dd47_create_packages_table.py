@@ -44,7 +44,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     if environment == "production":
-        op.execute(f"ALTER TABLE id SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE portfolio SET SCHEMA {SCHEMA};")
     op.create_table('user_transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=6), nullable=False),
