@@ -1,7 +1,8 @@
+from app.models import db, Portfolio, environment, SCHEMA
 """create packages table
 
 Revision ID: e91cf4c2dd47
-Revises: 
+Revises:
 Create Date: 2022-11-19 12:52:00.021478
 
 """
@@ -30,6 +31,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('portfolio',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=6), nullable=False),
@@ -40,6 +43,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE id SET SCHEMA {SCHEMA};")
     op.create_table('user_transactions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=6), nullable=False),
@@ -51,6 +56,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE user_transactions SET SCHEMA {SCHEMA};")
     op.create_table('watchlists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=40), nullable=False),
@@ -58,6 +65,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE watchlists SET SCHEMA {SCHEMA};")
     op.create_table('watchlist_stocks',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('symbol', sa.String(length=7), nullable=False),
@@ -65,6 +74,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['watchlist_id'], ['watchlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE watchlist_stocks SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
