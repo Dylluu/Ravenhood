@@ -5,6 +5,7 @@ Revises:
 Create Date: 2022-11-18 12:21:51.902824
 
 """
+from app.models import db, Portfolio, environment, SCHEMA
 from alembic import op
 import sqlalchemy as sa
 

@@ -96,6 +96,7 @@ const transactions = (state = initialState, action) => {
 
         case CLEAN_UP_TRANSACTIONS:
             newState.currentStockTransactionsByUserId = {}
+            newState.allOfMyTransactions = {}
             return newState
 
         case GET_ALL_OF_MY_TRANSACTIONS:
