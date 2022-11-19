@@ -36,7 +36,7 @@ function TransactionHistory() {
                 <div className="transaction-history-list-inner">
                     <div className="transaction-history">
                         {userTransactionsArray.length == 0 && <span id="first-transaction">When you have your first transaction, it will show up here.</span>}
-                        {userTransactionsArray.length &&
+                        {userTransactionsArray.length > 0 &&
                             <>
                                 <span id="history-title">History</span>
                                 {userTransactionsArray.map((transaction) => (
