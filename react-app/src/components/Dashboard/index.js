@@ -45,7 +45,7 @@ function Dashboard() {
 	const user_id = useSelector((state) => state.session.user.id);
 	const watchlist = useSelector((state) => state.watchlist);
 	const portfolio = useSelector((state) => state.portfolio);
-	let skeleton = Array(20).fill(1);
+	let skeleton = Array(35).fill(1);
 	let lists;
 	let stocks;
 

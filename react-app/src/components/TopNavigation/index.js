@@ -89,12 +89,12 @@ function TopNaviagtion() {
             <div className='splash-popout'>
                 {/* <span className='popout-nav'>Invest</span>
                         <span className='popout-nav'>Crypto</span> */}
-                {/* <span className='popout-nav'
+                <span className='popout-nav'
                     onClick={() => {
                         handleMenuOpen()
                         history.push('/cash')
                     }}
-                >Cash Card</span> */}
+                >Cash Card</span>
                 <span className='popout-nav'
                     onClick={() => {
                         handleMenuOpen()
