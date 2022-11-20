@@ -56,11 +56,14 @@
     align-items: center;
 }
 
-.introducing-new-card-button:hover {
+/* .introducing-new-card-button:hover {
     opacity: 75%;
-}
+} */
 
 .join-waitlist-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     width: 167px;
     height: 44px;

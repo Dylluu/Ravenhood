@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import "./cashcard.css"
 import robinhoodCashCardLogo2 from "../../assets/robinhood-cash-card-logo-2.JPG"
 import robinhoodCashCardLogo3 from "../../assets/cash-card-logo-3.JPG"
@@ -20,13 +21,13 @@ function CashCard() {
                         The debit card with weekly rewards that help you build investing habits. Offered by Ravenhood Money, LLC.
 
                     </div>
-                    <div className="introducing-new-card-disclosure">
+                    {/* <div className="introducing-new-card-disclosure">
                         <span>
                             View disclosures
                         </span>
-                    </div>
+                    </div> */}
                     <div className="introducing-new-card-button">
-                        <button className='join-waitlist-button'>Join waitlist</button>
+                        <NavLink to='/signup' className='join-waitlist-button'>Join Waitlist</NavLink>
                     </div>
                 </div>
                 <div className='introducing-new-card-wrapper-right'>
