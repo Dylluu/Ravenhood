@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useHistory, NavLink } from 'react-router-dom';
 import './Splash.css';
-import repoImage from '../../assets/repo.png';
+import repoImage from '../../assets/ravenHoodRepo.png';
 import linkedInLogo from '../../assets/linkedinLogo.png';
 import gitHubLogo from '../../assets/gitLogo.png';
 import stockBlocks from '../../assets/stockBlocks.png';
@@ -272,6 +272,7 @@ function Splash() {
                                     <span>Stock Details</span>
                                     <span>Watchlist</span>
                                     <span>Stock Search</span>
+                                    <span>Transactions</span>
                                 </div>
                             </div>
                         </div>

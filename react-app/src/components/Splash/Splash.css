@@ -258,8 +258,8 @@
     display: flex;
     /* align-items: center; */
     justify-content: space-between;
-    height: 65%;
-    width: 86%;
+    height: 67%;
+    width: 81%;
     font-size: 30px;
     /* border: solid 1px red; */
     /* border-bottom: solid 1px black; */
@@ -306,7 +306,7 @@
     flex-direction: column;
     align-self: flex-start;
     max-width: 30%;
-    font-size: 35px;
+    font-size: 40px;
     color: white;
     /* border: solid 1px red; */
 }
@@ -494,7 +494,7 @@
         margin-top: -10px;
     }
     .api-button {
-        width: 130px;
+        width: 200px;
         border-radius: 24px;
         margin-top: -5px;
     }
