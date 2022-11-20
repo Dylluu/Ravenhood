@@ -53,7 +53,7 @@ function Watchlist() {
 	const deleteWatchlist = async (list) => {
 		await dispatch(thunkDeleteWatchlist(list.id));
 		await dispatch(thunkGetAllWatchlist(user_id));
-		history.push(`/watchlists/${watchlistId}`);
+		history.push(`/watchlists/5`);
 	};
 
 	const deleteStock = async (stock) => {
