@@ -311,7 +311,7 @@
     /* border: solid 1px red; */
 }
 
-#team-card2 {
+#team-card2, #team-card3, #team-card4 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

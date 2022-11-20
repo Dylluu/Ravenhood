@@ -6,11 +6,14 @@ import repoImage from '../../assets/repo.png';
 import linkedInLogo from '../../assets/linkedinLogo.png';
 import gitHubLogo from '../../assets/gitLogo.png';
 import stockBlocks from '../../assets/stockBlocks.png';
+import teamCard3 from '../../assets/team-card-3.png';
+import teamCard4 from '../../assets/team-card-4.png';
 
 function Splash() {
     const [scrollNum, setScrollNum] = useState(1);
     const [menuOpen, setMenuOpen] = useState(true);
     const [locked, setLocked] = useState(false);
+
     const history = useHistory();
     function unlock() {
         setLocked(false)
@@ -20,7 +23,7 @@ function Splash() {
         window.scroll({ top: (splashFirst[0].offsetHeight + 60), behavior: 'smooth' })
         if (!locked) {
             setLocked(true);
-            setTimeout(unlock, 500);
+            setTimeout(unlock, 550);
             if (scrollNum < 4) {
                 const scrollDiv = document.getElementsByClassName('team-scroll');
                 const backButton = document.getElementById('scroll-back');
@@ -42,7 +45,7 @@ function Splash() {
         window.scroll({ top: (splashFirst[0].offsetHeight + 60), behavior: 'smooth' })
         if (!locked) {
             setLocked(true);
-            setTimeout(unlock, 500);
+            setTimeout(unlock, 550);
             if (scrollNum > 1) {
                 const scrollDiv = document.getElementsByClassName('team-scroll');
                 const nextButton = document.getElementById('scroll-forward');
@@ -137,18 +140,44 @@ function Splash() {
                             <div className='team-card2-inner-bottom'>
                                 <div className='api-card-title'>Yahoo Finance API</div>
                                 <div className='api-card-title2'>
-                                    <p>This application utilizes stock data from the Yahoo Finance API, a RESTFUL API platform that makes financial data easily accessible to everyone.</p>
+                                    <p>This application utilizes intra-day stock data from the Yahoo Finance API, a RESTFUL API platform that makes financial data easily accessible to everyone.</p>
                                     <a target='_blank' href='https://yahoo-finance-api.vercel.app/'>
-                                        <div className='api-button'>Link to API</div>
+                                        <div className='api-button'>Link to Yahoo Finance</div>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div className='team-card'>
-                            Tech Stack
+                        <div className='team-card' id='team-card3'>
+                        <div className='team-card2-inner'>
+                                <img
+                                style={{width: '100%', objectFit: 'cover', borderTopRightRadius: '25px', borderTopLeftRadius: '25px'}}
+                                alt='stockBlocks' src={teamCard3}/>
+                            </div>
+                            <div className='team-card2-inner-bottom'>
+                                <div className='api-card-title'>Alpha Vantage API</div>
+                                <div className='api-card-title2'>
+                                    <p>Historical stock data is fetched from Alpha Vantage, an API that provides enterprise-grade market data for assets ranging from stocks and ETFs to cryptocurrencies.</p>
+                                    <a target='_blank' href='https://www.alphavantage.co/#page-top'>
+                                        <div className='api-button'>Link to Alpha Vantage</div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div className='team-card'>
-                            Features List
+                        <div className='team-card' id='team-card4'>
+                        <div className='team-card2-inner'>
+                                <img
+                                style={{width: '100%', objectFit: 'cover', borderTopRightRadius: '25px', borderTopLeftRadius: '25px'}}
+                                alt='stockBlocks' src={teamCard4}/>
+                            </div>
+                            <div className='team-card2-inner-bottom'>
+                                <div className='api-card-title'>Finnhub Stock API</div>
+                                <div className='api-card-title2'>
+                                    <p>Stock and company news is provided by Finnhub, an institutional-grade, realtime API for stocks, forex, and cryptocurrencies.</p>
+                                    <a target='_blank' href='https://finnhub.io/'>
+                                        <div className='api-button'>Link to Finnhub</div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
