@@ -5,12 +5,15 @@ const StockCurrentPrice = createContext();
 
 export function StockCurrentPriceProvider({ children }) {
 	const [priceContext, setPriceContext] = useState(-1);
+	const [portfolioValue, setPortfolioWorth] = useState(0);
 
 	return (
 		<StockCurrentPrice.Provider
 			value={{
 				priceContext,
-				setPriceContext
+				setPriceContext,
+				portfolioValue,
+				setPortfolioWorth
 			}}
 		>
 			{children}

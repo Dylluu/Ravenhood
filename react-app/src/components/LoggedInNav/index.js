@@ -11,10 +11,12 @@ import { TickerSymbols } from '../../utils/stocksSymbols';
 import { cleanUpPortfolioState } from '../../store/portfolio';
 import { cleanWatchList } from '../../store/watchlist';
 import { cleanUpTransactions } from '../../store/transaction';
+import useStockPriceContext from '../../context/stockCurrentPrice';
 
 // import logoBlack from '../../assets/robinHoodFeatherBlack.png';
 
 function LoggedInNav() {
+	const { portfolioValue } = useStockPriceContext();
 	const history = useHistory();
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
@@ -138,10 +140,10 @@ function LoggedInNav() {
 					alt="feather"
 					src={logoGreen}
 					className="logged-in-feather"
-				// onClick={() => {
-				// 	history.push('/');
-				// 	history.go(0);
-				// }}
+					// onClick={() => {
+					// 	history.push('/');
+					// 	history.go(0);
+					// }}
 				/>
 			</NavLink>
 			<div className="logged-in-inner-wrapper">
@@ -201,7 +203,9 @@ function LoggedInNav() {
 									</div>
 									<div className="account-menu-popout-amounts">
 										<div className="account-menu-popout-portfolio-buying">
-											<span className="account-menu-popout-dollars">$0.00</span>
+											<span className="account-menu-popout-dollars">
+												${portfolioValue}
+											</span>
 											<span className="portfolio-buying">Portfolio Value</span>
 										</div>
 										<div className="account-menu-popout-portfolio-buying">
@@ -235,7 +239,7 @@ function LoggedInNav() {
 								onClick={() => {
 									dispatch(cleanWatchList());
 									dispatch(cleanUpPortfolioState());
-									dispatch(cleanUpTransactions())
+									dispatch(cleanUpTransactions());
 									dispatch(logout());
 								}}
 							>

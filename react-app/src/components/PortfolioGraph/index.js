@@ -6,10 +6,12 @@ import './PortfolioGraph.css';
 import { thunkGetWholePortfolio } from '../../store/portfolio';
 import { getPortfolioPerformancedifference } from '../../utils/fetchStockFunctions';
 import useSiteColorContext from '../../context/SiteColor';
+import useStockPriceContext from '../../context/stockCurrentPrice';
 import PortfolioNoStockGraph from '../PortfolioNoStockGraph';
 
 function PortfolioGraph({ portfolio }) {
 	const { setSiteColor } = useSiteColorContext();
+	const { setPortfolioWorth } = useStockPriceContext();
 	const user_buypower = useSelector((state) => state.session.user.buy_power);
 	const [portfolioValue, setPortfolioValue] = useState(null);
 	const [stockOwned, setStockOwned] = useState(null);
@@ -97,6 +99,7 @@ function PortfolioGraph({ portfolio }) {
 						MarketValues.portfolioArr.length - 1
 					].toFixed(2);
 				setStartPrice(portfolioCurrentValue);
+				setPortfolioWorth(portfolioCurrentValue);
 				setPrice(currentPrice);
 				if (portfolioCurrentValue - currentPrice < 0) {
 					setChartColor(['#00c805', 'black']);
