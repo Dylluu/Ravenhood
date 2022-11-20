@@ -12,7 +12,7 @@ function TransactionHistory() {
     const user = useSelector((state) => state.session.user);
     const userTransactions = useSelector((state) => state.transactions.allOfMyTransactions);
     let userTransactionsArray = Object.values(userTransactions);
-    // console.log("userTransactionsArray", userTransactionsArray)
+    const userTransactionsReversed = userTransactionsArray.reverse();
 
     function parseTransactionDate(date) {
         let splitDate = date.split(' ');
@@ -39,7 +39,7 @@ function TransactionHistory() {
                         {userTransactionsArray.length > 0 &&
                             <>
                                 <span id="history-title">History</span>
-                                {userTransactionsArray.map((transaction) => (
+                                {userTransactionsReversed.map((transaction) => (
                                     <div className="each-transaction"
                                         key={transaction.id}
                                     >
