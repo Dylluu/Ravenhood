@@ -99,7 +99,7 @@ function PortfolioGraph({ portfolio }) {
 						MarketValues.portfolioArr.length - 1
 					].toFixed(2);
 				setStartPrice(portfolioCurrentValue);
-				setPortfolioWorth(portfolioCurrentValue);
+				setPortfolioWorth(filterData[filterData.length - 1].y.toFixed(2));
 				setPrice(currentPrice);
 				if (portfolioCurrentValue - currentPrice < 0) {
 					setChartColor(['#00c805', 'black']);
