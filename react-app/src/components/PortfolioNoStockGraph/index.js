@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import useStockPriceContext from '../../context/stockCurrentPrice';
 
 async function getStonk() {
 	const response = await fetch(`https://yahoo-finance-api.vercel.app/TSLA`);
@@ -7,6 +8,7 @@ async function getStonk() {
 }
 
 function PortfolioNoStockGraph({ setHoverPrice, setRangePeriod }) {
+	const { setPortfolioWorth } = useStockPriceContext();
 	const [openPriceData, setOpenPriceData] = useState({
 		data: []
 	});
@@ -38,6 +40,7 @@ function PortfolioNoStockGraph({ setHoverPrice, setRangePeriod }) {
 		}
 
 		setOpenPriceData({ data: dashedData });
+		setPortfolioWorth(0);
 	}, [tradingPeriods]);
 
 	if (!openPriceData.data.length) return null;
