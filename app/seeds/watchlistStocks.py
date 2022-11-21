@@ -7,8 +7,6 @@ def seed_watchlist_stocks():
         symbol='TSLA', watchlist_id=1 )
     ws2 = WatchlistStocks(
         symbol='AAPL', watchlist_id=1 )
-    ws3 = WatchlistStocks(
-        symbol='NFLX', watchlist_id=1 )
     ws4 = WatchlistStocks(
         symbol='GME', watchlist_id=1 )
     ws5 = WatchlistStocks(
@@ -53,7 +51,6 @@ def seed_watchlist_stocks():
 
     db.session.add(ws1)
     db.session.add(ws2)
-    db.session.add(ws3)
     db.session.add(ws4)
     db.session.add(ws5)
     db.session.add(ws6)
