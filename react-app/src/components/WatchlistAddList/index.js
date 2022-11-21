@@ -12,6 +12,7 @@ import {
 } from '../../store/watchlist';
 import { useParams } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
+import SiteColorContext from "../../context/SiteColor";
 // import WatchlistFromModal from '../Watchlist/edit-watchlist-model';
 
 function WatchlistAddList(symbol) {
@@ -22,9 +23,17 @@ function WatchlistAddList(symbol) {
   const watchlist = useSelector((state) => state.watchlist);
   const user_id = useSelector((state) => state.session.user.id);
   const newLists = useSelector((state) => state.watchlist.AllWatchlists)
+  const { siteColor } = SiteColorContext()
   let lists;
   let stocks
   let stockBool = false
+  let isGreen;
+
+  if (siteColor === "green") {
+    isGreen = true
+  } else if (siteColor === "red") {
+    isGreen = false
+  }
 
   useEffect(
     () => {
@@ -58,20 +67,25 @@ function WatchlistAddList(symbol) {
 
   return (
     <div className='watchlist-add-list-page'>
-      <button className='add-list-button' onClick={() => add == false ? setAdd(true) : setAdd(false)}>Add to Lists</button>
+      {isGreen && (
+        <button className='add-list-button-green' onClick={() => add == false ? setAdd(true) : setAdd(false)}>Add to Lists</button>
+      )}
+      {!isGreen && (
+        <button className='add-list-button-red' onClick={() => add == false ? setAdd(true) : setAdd(false)}>Add to Lists</button>
+      )}
       {add && <Modal>
         <form className='add-form' onSubmit={submitHandler}
-        id='add-stock-to-list-form'
+          id='add-stock-to-list-form'
         >
           <div className='add-form-title'
-          id='add-form-title'
+            id='add-form-title'
           >
             <span>{`Add ${symbol.symbol} To Your Lists`}</span>
             <i className="fa-solid fa-xmark"
-            id='add-to-form-x'
-            onClick={() => setAdd(false)}
+              id='add-to-form-x'
+              onClick={() => setAdd(false)}
             />
-            </div>
+          </div>
           <div>
             {lists && lists.map((list) => (
               <div className='container' id='add-to-lists-input-container'>
@@ -83,20 +97,28 @@ function WatchlistAddList(symbol) {
                   }
                   // at later date make more elegant solution by joining all stocks to their watchlists in the database.
                 })}</div>
-                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i')? true : false} onChange={() => setAddListId(list.id)} value={list.id}
-                className='add-to-lists-radio'
+                <input type="radio" id={list.id} name={'lists'} disabled={stockBool.includes('i') ? true : false} onChange={() => setAddListId(list.id)} value={list.id}
+                  className='add-to-lists-radio'
                 />
                 <label className='add-label' for={list.id}
-                id='add-label'
+                  id='add-label'
                 > {list.name}</label>
               </div>
             ))}
           </div>
 
           {/* <button className="cancel-button" onClick={() => add == false ? setAdd(true) : setAdd(false)}>Cancel</button> */}
-          <button className='create-list-button' type="submit"
-          id='add-to-lists-submit'
-          >Save Changes</button>
+          {isGreen && (
+            <button className='create-list-button-green' type="submit"
+              id='add-to-lists-submit'
+            >Save Changes</button>
+          )}
+          {!isGreen && (
+            <button className='create-list-button-red' type="submit"
+              id='add-to-lists-submit'
+            >Save Changes</button>
+          )}
+
         </form>
 
       </Modal>}

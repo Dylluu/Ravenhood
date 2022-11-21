@@ -7,9 +7,9 @@
 .main-container {
   /* background-color: bisque; */
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content: space-between;
-  font-family: Capsule Sans Text,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-family: Capsule Sans Text, -apple-system, BlinkMacSystemFont, sans-serif;
   margin-top: 100px;
   margin-left: 10px;
   min-width: 1020px;
@@ -105,22 +105,22 @@
 }
 
 .watchlist-data:hover {
-  background-color:rgb(245,248,252);
+  background-color: rgb(245, 248, 252);
 }
 
 .watchlist-data:hover .delete-button {
-  background-color: rgb(245,248,252);
+  background-color: rgb(245, 248, 252);
 }
 
 .watchlist-select {
 
-  border: 1px solid rgb(227,233,237);
+  border: 1px solid rgb(227, 233, 237);
   width: 40%;
 }
 
 .name-column {
- width: 40%;
- /* font-weight: 700; */
+  width: 40%;
+  /* font-weight: 700; */
 }
 
 #name-column {
@@ -134,32 +134,32 @@
 
 .symbol-column {
   width: 20%;
- }
+}
 
- #symbol-column {
+#symbol-column {
   font-size: 13px;
- }
+}
 
- .price-column {
+.price-column {
   width: 20%;
- }
+}
 
- .today-column {
+.today-column {
   width: 20%;
- }
+}
 
- #watchlist-list-row {
+#watchlist-list-row {
   display: flex;
   justify-content: center;
   font-size: 13px;
   cursor: pointer;
- }
+}
 
- .watchlist-pic-and-navlink:hover {
-    background-color: rgb(245,248,252);
- }
+.watchlist-pic-and-navlink:hover {
+  background-color: rgb(245, 248, 252);
+}
 
- .list-container {
+.list-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -167,9 +167,9 @@
   height: 60px;
   width: 90%;
   /* border: solid 1px red; */
- }
+}
 
- .watchlist-pic-and-navlink {
+.watchlist-pic-and-navlink {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -177,7 +177,7 @@
   overflow: hidden;
   padding: 2px;
   /* border: solid 1px green; */
- }
+}
 
 .list-name {
   /* padding-top: 4%; */
@@ -191,8 +191,9 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
 .list-title {
-  color: rgb(0,0,0);
+  color: rgb(0, 0, 0);
   font-weight: 700;
   border-left: 5px;
 }
@@ -207,7 +208,7 @@
 .add-form-input {
   width: 190px;
   height: 35px;
-  background-color: rgb(245,248,252);
+  background-color: rgb(245, 248, 252);
   border-radius: 5px;
   border: none;
   margin-bottom: 10px;
@@ -219,8 +220,11 @@
 
 }
 
-.delete-button:hover, .options-button:hover, .add-button:hover {
-  color: rgb(69, 211, 69);;
+.delete-button:hover,
+.options-button:hover,
+.add-button:hover {
+  color: rgb(69, 211, 69);
+  ;
 }
 
 .add-button {
@@ -229,8 +233,8 @@
 
 .cancel-button {
   border-radius: 25px;
-  border: 1px solid rgb(0,200,5);
-  color: rgb(0,200,5);
+  border: 1px solid rgb(0, 200, 5);
+  color: rgb(0, 200, 5);
   height: 36px;
   width: 96px;
   margin-right: 12px;
@@ -240,10 +244,24 @@
   font-weight: 600;
 }
 
-.create-list-button {
+.create-list-button-green {
   border-radius: 25px;
-  border: 1px solid rgb(0,200,5);
-  background-color: rgb(0,200,5);
+  border: 1px solid rgb(0, 200, 5);
+  background-color: rgb(0, 200, 5);
+  color: white;
+  /* padding: 8% 20%;
+  margin: 3% 6%; */
+  height: 36px;
+  width: 96px;
+  font-size: 13px;
+  font-weight: 600;
+
+}
+
+.create-list-button-red {
+  border-radius: 25px;
+  border: 1px solid #ff5404;
+  background-color: #ff5404;
   color: white;
   /* padding: 8% 20%;
   margin: 3% 6%; */
@@ -263,7 +281,7 @@
 }
 
 .options-menu {
-  border: 1px solid rgb(227,233,237);
+  border: 1px solid rgb(227, 233, 237);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -329,7 +347,7 @@
   border: none;
   border-radius: 5px;
   text-indent: 8px;
-  background-color: rgb(245,248,252);
+  background-color: rgb(245, 248, 252);
   margin-top: -10px;
 }
 
@@ -350,7 +368,8 @@
   font-size: 15px;
 }
 
-.fa-regular, .fa-solid{
+.fa-regular,
+.fa-solid {
   /* padding-top: 4px; */
   font-size: 14px
 }

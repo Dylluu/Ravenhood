@@ -2,7 +2,7 @@
   font-family: Capsule Sans Text, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.add-list-button {
+.add-list-button-red {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,6 +18,28 @@
   border-radius: 25px;
   border: 1px solid #ff5404;
   color: #ff5404;
+  /* padding: 8% 20%; */
+  /* margin: 3% 6%; */
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.add-list-button-green {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  min-height: 44px;
+  max-height: 44px;
+  max-width: 280px;
+  width: 280px;
+  min-width: 205px;
+  /* top: 100px; */
+  /* height: 44px;
+  width: 192px; */
+  border-radius: 25px;
+  border: 1px solid #00b405;
+  color: #00b405;
   /* padding: 8% 20%; */
   /* margin: 3% 6%; */
   font-size: 13px;
@@ -104,7 +126,7 @@
 }
 
 #add-to-form-x:hover {
-  background-color: rgb(245,248,252);
+  background-color: rgb(245, 248, 252);
 }
 
 #add-to-lists-submit {
