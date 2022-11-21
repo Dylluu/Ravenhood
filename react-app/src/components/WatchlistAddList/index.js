@@ -88,7 +88,8 @@ function WatchlistAddList(symbol) {
           </div>
           <div>
             {lists && lists.map((list) => (
-              <div className='container' id='add-to-lists-input-container'>
+              <>
+              {list.user_id == user_id && (<div className='container' id='add-to-lists-input-container'>
                 <div hidden={true}>{stockBool = stocks.map(stock => {
                   if (stock.symbol == symbol.symbol && stock.watchlist_id == list.id) {
                     return 'i'
@@ -103,7 +104,8 @@ function WatchlistAddList(symbol) {
                 <label className='add-label' for={list.id}
                   id='add-label'
                 > {list.name}</label>
-              </div>
+              </div>)}
+              </>
             ))}
           </div>
 
