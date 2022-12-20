@@ -25,6 +25,8 @@ function TransactionHistory() {
         // console.log(TickerSymbols)
     }, [dispatch])
 
+    if(!userTransactions) return null;
+
     return (
         <div className="transaction-history-wrapper">
             <div className="transaction-history-user-name">
@@ -47,7 +49,7 @@ function TransactionHistory() {
                                             <div className="each-transaction-inner-left">
                                                 <span className="transaction-history-label"
                                                     id="transaction-history-company"
-                                                >{TickerSymbols.TickerSymbols[transaction.symbol].name} {transaction.is_purchase ? 'Buy' : 'Sell'}</span>
+                                                >{TickerSymbols?.TickerSymbols[transaction.symbol]?.name} {transaction.is_purchase ? 'Buy' : 'Sell'}</span>
                                                 <span className="transaction-history-date">{parseTransactionDate(transaction.transaction_date)}</span>
                                             </div>
                                             <div className="each-transaction-inner-right">

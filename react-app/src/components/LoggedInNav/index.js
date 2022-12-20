@@ -35,25 +35,6 @@ function LoggedInNav() {
 	});
 
 	useEffect(() => {
-		// if(search.length === 1) {
-		//     let matches = [];
-		//     setSearchOpen(true)
-		//     function handleSearchOne (search) {
-		//         for(let i = 0; i < allSymbols.length; i++){
-		//             let count = 0;
-		//             if(allSymbols[i].startsWith(search.toUpperCase()) && allSymbols[i].length < 2){
-		//                 matches.push(allSymbols[i])
-		//             }
-		//         }
-		//         setSearchResults(matches)
-		//     }
-		//     handleSearchOne(search)
-		// }
-		// const searchBar = document.getElementById('search-stock');
-		// searchBar.addEventListener('focusout', () => {
-		// 	setSearchOpen(false)
-		// })
-
 		if (search.length > 0) {
 			let matches = [];
 			setSearchOpen(true);
