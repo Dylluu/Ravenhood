@@ -33,7 +33,7 @@
 
 .dashboard-graph-wrapper {
     display: flex;
-    height: 373px;
+    max-height: 373px;
     width: 100%;
     box-sizing: border-box;
     border-bottom: solid 1px rgb(224, 224, 232);
