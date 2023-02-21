@@ -7,6 +7,7 @@ import testBird from '../../assets/testbird.png';
 import PortfolioExpand from './stocks-expand';
 import WatchlistExpand from './watchlist-expand';
 import WatchlistForm from '../Watchlist/watchlistForm';
+import BadStock from '../BadStock/index';
 import { thunkAddBuyPower } from '../../store/session';
 import {
 	thunkGetAllStocks,
@@ -98,7 +99,8 @@ function Dashboard() {
 			<div className="dashboard-inner-wrapper">
 				<div className="dashboard-inner-left">
 					<div className="dashboard-graph-wrapper">
-						<PortfolioGraph portfolio={portfolio.userPortfolio} />{' '}
+						{/* <PortfolioGraph portfolio={portfolio.userPortfolio} />{' '} */}
+						<BadStock />
 					</div>
 					<div className="buying-power-wrapper">
 						<div className="buy-power-div">

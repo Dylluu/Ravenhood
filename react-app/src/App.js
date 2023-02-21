@@ -66,8 +66,10 @@ function App() {
 					<SignUpForm />
 				</Route>
 				<Route path="/stocks/:ticker">
+					{/* <LoggedInNav />
+					<StockDashBoard /> */}
 					<LoggedInNav />
-					<StockDashBoard />
+					<BadStock />
 				</Route>
 				<Route path="/cash">
 					<TopNaviagtion />

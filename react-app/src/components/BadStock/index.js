@@ -10,7 +10,7 @@ function BadStock () {
         <div className='bad-stock-wrapper'>
             <div className='bad-stock-inner'>
             <img alt='flyingBird' src={flyingBird} id='flying-bird'/>
-            <span id='bad-stock-text'>Sorry, the Yahoo API does not have data for this stock.</span>
+            <span id='bad-stock-text'>The Yahoo Finance API has recently shut down, we are currently working on implementing a new API</span>
             </div>
         </div>
     )
